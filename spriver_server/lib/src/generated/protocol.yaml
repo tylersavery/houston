@@ -1,0 +1,10 @@
+asset:
+  - getUploadDescription:
+  - verifyUpload:
+example:
+  - hello:
+movie:
+  - list:
+  - retrieve:
+  - save:
+  - delete:
