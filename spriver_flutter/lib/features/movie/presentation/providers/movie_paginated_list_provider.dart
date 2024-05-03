@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:spriver_flutter/config/constants.dart';
 import 'package:spriver_flutter/features/movie/domain/usecases/movie_list_usecase.dart';
 import 'package:spriver_flutter/features/movie/presentation/providers/movie_paginated_list_state.dart';
 
@@ -8,11 +9,11 @@ part 'movie_paginated_list_provider.g.dart';
 class MoviePaginatedList extends _$MoviePaginatedList {
   @override
   MoviePaginatedListState build() {
-    load(page: 1, limit: 1);
+    load(page: 1);
     return MoviePaginatedListStateInitial();
   }
 
-  Future<void> load({required int page, required int limit}) async {
+  Future<void> load({required int page, int limit = Constants.defaultPaginationLimit}) async {
     state = MoviePaginatedListStateLoading();
     final result = await ref.read(movieListUseCaseProvider)(MovieListParams(page: page, limit: limit));
 

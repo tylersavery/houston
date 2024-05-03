@@ -14,20 +14,19 @@ class MoviePaginatedListWidget extends BaseComponent {
   @override
   Widget body(BuildContext context, WidgetRef ref) {
     final provider = ref.read(moviePaginatedListProvider.notifier);
-    final result = ref.watch(moviePaginatedListProvider);
+    final state = ref.watch(moviePaginatedListProvider);
 
-    switch (result) {
+    switch (state) {
       case MoviePaginatedListStateLoading():
         return const Loader();
       case MoviePaginatedListStateSuccess():
-        final movies = result.data.results;
         return Column(
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: movies.length,
+                itemCount: state.data.results.length,
                 itemBuilder: (context, index) {
-                  final movie = movies[index];
+                  final movie = state.data.results[index];
                   return MovieListTileWidget(movie: movie);
                 },
               ),
@@ -37,17 +36,22 @@ class MoviePaginatedListWidget extends BaseComponent {
               children: [
                 AppButton(
                   label: "Previous",
-                  onPressed: result.data.page > 1
+                  icon: Icons.chevron_left,
+                  type: AppButtonType.Text,
+                  onPressed: state.data.page > 1
                       ? () {
-                          provider.load(page: result.data.page - 1, limit: result.data.limit);
+                          provider.load(page: state.data.page - 1, limit: state.data.limit);
                         }
                       : null,
                 ),
                 AppButton(
                   label: "Next",
-                  onPressed: result.data.canLoadMore
+                  type: AppButtonType.Text,
+                  icon: Icons.chevron_right,
+                  iconTrails: true,
+                  onPressed: state.data.canLoadMore
                       ? () {
-                          provider.load(page: result.data.page + 1, limit: result.data.limit);
+                          provider.load(page: state.data.page + 1, limit: state.data.limit);
                         }
                       : null,
                 ),
@@ -57,7 +61,7 @@ class MoviePaginatedListWidget extends BaseComponent {
         );
       case MoviePaginatedListStateFailure():
         return Center(
-          child: Text(result.error),
+          child: Text(state.error),
         );
       default:
         return const SizedBox.shrink();

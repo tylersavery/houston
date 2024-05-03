@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spriver_flutter/core/widgets/base_screen.dart';
 import 'package:spriver_flutter/core/widgets/loader.dart';
+import 'package:spriver_flutter/features/movie/domain/extensions/movie_extension.dart';
 import 'package:spriver_flutter/features/movie/presentation/screens/movie_edit_screen.dart';
 import 'package:spriver_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import 'package:spriver_flutter/features/movie/presentation/providers/movie_detail_provider.dart';
@@ -25,7 +26,7 @@ class MovieDetailScreen extends BaseScreen {
       ),
       data: (movie) {
         return AppBar(
-          title: Text(movie.title),
+          title: Text(movie.label),
           actions: [
             IconButton(
               onPressed: () async {

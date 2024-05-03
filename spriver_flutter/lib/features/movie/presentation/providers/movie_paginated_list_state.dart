@@ -8,6 +8,7 @@ class MoviePaginatedListStateLoading extends MoviePaginatedListState {}
 
 class MoviePaginatedListStateSuccess extends MoviePaginatedListState {
   final MovieList data;
+
   MoviePaginatedListStateSuccess({required this.data});
 }
 

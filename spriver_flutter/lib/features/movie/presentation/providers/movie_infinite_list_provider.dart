@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:spriver_client/spriver_client.dart';
+import 'package:spriver_flutter/config/constants.dart';
 import 'package:spriver_flutter/core/utils/debugger_utils.dart';
 import 'package:spriver_flutter/features/movie/domain/extensions/movie_list_extension.dart';
 import 'package:spriver_flutter/features/movie/domain/usecases/movie_list_usecase.dart';
@@ -15,7 +16,7 @@ class MovieInfiniteListProvider {
     });
   }
 
-  Future<void> fetchPage({required int page, int limit = 1}) async {
+  Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
     final result = await ref.read(movieListUseCaseProvider)(MovieListParams(page: page, limit: limit));
 
     result.fold((failure) {
