@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:spriver_flutter/core/utils/show_snackbar.dart';
+import 'package:spriver_flutter/core/utils/toast_utils.dart';
 import 'package:spriver_flutter/features/asset/domain/providers/asset_repository_provider.dart';
 
 class UploadImageWidget extends ConsumerWidget {
@@ -48,7 +48,7 @@ class UploadImageWidget extends ConsumerWidget {
                     final result = await ref.read(assetRepositoryProvider).uploadImage(image: image);
 
                     result.fold((failure) {
-                      showSnackBar(context, failure.message);
+                      Toast.message(context, failure.message);
                     }, (url) {
                       onComplete(url);
                     });

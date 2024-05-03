@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:spriver_client/spriver_client.dart';
 import 'package:spriver_flutter/core/error/exceptions.dart';
-import 'package:spriver_flutter/core/utils/strings.dart';
+import 'package:spriver_flutter/core/utils/string_utils.dart';
 
 abstract interface class AssetDataSource {
   Future<String> uploadImage(XFile image);

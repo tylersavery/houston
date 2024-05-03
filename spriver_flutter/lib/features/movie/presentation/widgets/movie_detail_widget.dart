@@ -11,6 +11,7 @@ class MovieDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -22,7 +23,9 @@ class MovieDetailWidget extends StatelessWidget {
         if (movie.imageUrl.isNotEmpty)
           Image.network(
             movie.imageUrl,
-            width: double.infinity,
+            width: 200,
+            height: 200,
+            fit: BoxFit.contain,
           ),
       ],
     );

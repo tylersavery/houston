@@ -11,9 +11,9 @@ class MovieRespositoryImpl implements MovieRepository {
   const MovieRespositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, List<Movie>>> list() async {
+  Future<Either<Failure, MovieList>> list({required int page, required int limit}) async {
     try {
-      return right(await dataSource.list());
+      return right(await dataSource.list(page: page, limit: limit));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

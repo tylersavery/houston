@@ -10,9 +10,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:spriver_client/src/protocol/movie.dart' as _i3;
-import 'package:serverpod_auth_client/module.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:spriver_client/src/protocol/movie_list.dart' as _i3;
+import 'package:spriver_client/src/protocol/movie.dart' as _i4;
+import 'package:serverpod_auth_client/module.dart' as _i5;
+import 'protocol.dart' as _i6;
 
 /// {@category Endpoint}
 class EndpointAsset extends _i1.EndpointRef {
@@ -56,22 +57,30 @@ class EndpointMovie extends _i1.EndpointRef {
   @override
   String get name => 'movie';
 
-  _i2.Future<List<_i3.Movie>> list() =>
-      caller.callServerEndpoint<List<_i3.Movie>>(
+  _i2.Future<_i3.MovieList> list({
+    required int page,
+    required int limit,
+    String? orderBy,
+  }) =>
+      caller.callServerEndpoint<_i3.MovieList>(
         'movie',
         'list',
-        {},
+        {
+          'page': page,
+          'limit': limit,
+          'orderBy': orderBy,
+        },
       );
 
-  _i2.Future<_i3.Movie?> retrieve(int id) =>
-      caller.callServerEndpoint<_i3.Movie?>(
+  _i2.Future<_i4.Movie?> retrieve(int id) =>
+      caller.callServerEndpoint<_i4.Movie?>(
         'movie',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i3.Movie> save(_i3.Movie movie) =>
-      caller.callServerEndpoint<_i3.Movie>(
+  _i2.Future<_i4.Movie> save(_i4.Movie movie) =>
+      caller.callServerEndpoint<_i4.Movie>(
         'movie',
         'save',
         {'movie': movie},
@@ -86,10 +95,10 @@ class EndpointMovie extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i4.Caller(client);
+    auth = _i5.Caller(client);
   }
 
-  late final _i4.Caller auth;
+  late final _i5.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -101,7 +110,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i6.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,

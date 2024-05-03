@@ -2,8 +2,42 @@ import 'package:serverpod/serverpod.dart';
 import 'package:spriver_server/src/generated/protocol.dart';
 
 class MovieEndpoint extends Endpoint {
-  Future<List<Movie>> list(Session session) async {
-    return await Movie.db.find(session);
+  Future<MovieList> list(
+    Session session, {
+    required int page,
+    required int limit,
+    String? orderBy,
+  }) async {
+    final count = await Movie.db.count(session);
+
+    final results = await Movie.db.find(
+      session,
+      limit: limit,
+      offset: (page * limit) - limit,
+      orderBy: orderBy != null
+          ? (t) {
+              switch (orderBy.replaceAll("-", "")) {
+                case 'id':
+                  return t.id;
+                case 'title':
+                  return t.title;
+                case 'year':
+                  return t.year;
+                default:
+                  return t.id;
+              }
+            }
+          : null,
+      orderDescending: orderBy != null ? orderBy.contains('-') : false,
+    );
+
+    return MovieList(
+      count: count,
+      numPages: (count / limit).ceil(),
+      page: page,
+      results: results,
+      limit: limit,
+    );
   }
 
   Future<Movie?> retrieve(Session session, int id) async {

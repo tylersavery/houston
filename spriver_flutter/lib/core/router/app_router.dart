@@ -1,56 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:spriver_flutter/app.dart';
 import 'package:spriver_flutter/core/providers/current_user_provider.dart';
-import 'package:spriver_flutter/features/auth/presentation/pages/login_page.dart';
-import 'package:spriver_flutter/features/auth/presentation/pages/register_page.dart';
-import 'package:spriver_flutter/features/auth/presentation/pages/verification_page.dart';
-import 'package:spriver_flutter/features/movie/presentation/pages/movie_detail_page.dart';
-import 'package:spriver_flutter/features/movie/presentation/pages/movie_edit_page.dart';
-import 'package:spriver_flutter/features/movie/presentation/pages/movie_list_page.dart';
+import 'package:spriver_flutter/core/widgets/navigation/dashboard.dart';
+import 'package:spriver_flutter/features/auth/presentation/screens/login_screen.dart';
+import 'package:spriver_flutter/features/auth/presentation/screens/register_screen.dart';
+import 'package:spriver_flutter/features/auth/presentation/screens/verification_screen.dart';
+import 'package:spriver_flutter/features/movie/presentation/movie_routes.dart';
 
 part 'app_router.g.dart';
-
-final routerKey = GlobalKey<NavigatorState>(debugLabel: 'routerKey');
 
 @riverpod
 GoRouter router(RouterRef ref) {
   return GoRouter(
-    navigatorKey: routerKey,
-    initialLocation: LoginPage.route(),
+    navigatorKey: rootNavigatorKey,
+    initialLocation: LoginScreen.route(),
     routes: [
       GoRoute(
-        path: LoginPage.route(),
-        builder: (context, state) => const LoginPage(),
+        path: LoginScreen.route(),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
-        path: RegisterPage.route(),
-        builder: (context, state) => const RegisterPage(),
+        path: RegisterScreen.route(),
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
-        path: VerificationPage.route(),
-        builder: (context, state) => const VerificationPage(),
+        path: VerificationScreen.route(),
+        builder: (context, state) => const VerificationScreen(),
       ),
-      GoRoute(
-        path: MovieListPage.route(),
-        builder: (context, state) => const MovieListPage(),
-      ),
-      GoRoute(
-        path: MovieEditPage.routeNew(),
-        builder: (context, _) => const MovieEditPage(),
-      ),
-      GoRoute(
-        path: MovieEditPage.route(),
-        builder: (context, state) => MovieEditPage(
-          movieId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
-      ),
-      GoRoute(
-        path: MovieDetailPage.route(),
-        builder: (context, state) => MovieDetailPage(
-          movieId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
-      ),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return Dashboard(navigationShell: navigationShell);
+        },
+        branches: [
+          MovieRoutes.branch,
+          //::HOUSTON_INSERT_ROUTE::
+        ],
+      )
     ],
     errorPageBuilder: (context, state) => const MaterialPage(
       child: Scaffold(
@@ -63,14 +50,14 @@ GoRouter router(RouterRef ref) {
       final userState = ref.read(currentUserProvider);
 
       final publicRoutes = [
-        LoginPage.route(),
-        RegisterPage.route(),
-        VerificationPage.route(),
+        LoginScreen.route(),
+        RegisterScreen.route(),
+        VerificationScreen.route(),
       ];
 
       if (!publicRoutes.contains(state.matchedLocation)) {
         if (userState is CurrentUserStateInitial) {
-          return LoginPage.route();
+          return LoginScreen.route();
         }
       }
 

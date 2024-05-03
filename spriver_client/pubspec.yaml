@@ -7,3 +7,6 @@ environment:
 dependencies:
   serverpod_client: 1.2.6
   serverpod_auth_client: 1.2.6
+  serverpod_auth_shared_flutter: 1.2.6
+  serverpod_auth_email_flutter: 1.2.6
+

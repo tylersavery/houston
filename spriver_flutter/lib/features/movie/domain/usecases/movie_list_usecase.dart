@@ -6,15 +6,22 @@ import 'package:spriver_flutter/core/usecase/usecase.dart';
 import 'package:spriver_flutter/features/movie/domain/providers/movie_repository_provider.dart';
 import 'package:spriver_flutter/features/movie/domain/repositories/movie_repository.dart';
 
-class MovieListUseCase implements UseCase<List<Movie>, NoParams> {
+class MovieListUseCase implements UseCase<MovieList, MovieListParams> {
   final MovieRepository movieRepository;
 
   const MovieListUseCase(this.movieRepository);
 
   @override
-  Future<Either<Failure, List<Movie>>> call(NoParams _) async {
-    return await movieRepository.list();
+  Future<Either<Failure, MovieList>> call(MovieListParams params) async {
+    return await movieRepository.list(page: params.page, limit: params.limit);
   }
+}
+
+class MovieListParams {
+  final int page;
+  final int limit;
+
+  MovieListParams({required this.page, required this.limit});
 }
 
 final movieListUseCaseProvider = Provider<MovieListUseCase>(

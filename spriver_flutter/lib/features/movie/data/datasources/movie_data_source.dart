@@ -3,7 +3,7 @@ import 'package:spriver_client/spriver_client.dart';
 import 'package:spriver_flutter/core/error/exceptions.dart';
 
 abstract interface class MovieDataSource {
-  Future<List<Movie>> list();
+  Future<MovieList> list({required int page, required int limit});
   Future<Movie> retrieve(int id);
   Future<Movie> save(Movie movie);
   Future<void> delete(int id);
@@ -16,9 +16,9 @@ class MovieDataSourceImpl implements MovieDataSource {
   MovieDataSourceImpl(this.client, this.sessionManager);
 
   @override
-  Future<List<Movie>> list() async {
+  Future<MovieList> list({required int page, required int limit}) async {
     try {
-      return await client.movie.list();
+      return await client.movie.list(page: page, limit: limit, orderBy: 'id');
     } catch (e) {
       throw ServerException(e.toString());
     }

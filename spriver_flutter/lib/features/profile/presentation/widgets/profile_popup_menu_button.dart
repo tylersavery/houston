@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spriver_flutter/core/providers/current_user_provider.dart';
+import 'package:spriver_flutter/core/utils/dialog_utils.dart';
 import 'package:spriver_flutter/features/auth/presentation/providers/auth_provider.dart';
 
 class ProfilePopupMenuButton extends ConsumerWidget {
@@ -21,8 +22,17 @@ class ProfilePopupMenuButton extends ConsumerWidget {
             PopupMenuItem(child: Text(state.user.username)),
             PopupMenuItem(
               child: const Text("Log Out"),
-              onTap: () {
-                ref.read(authProvider.notifier).logout();
+              onTap: () async {
+                final confirmed = await ConfirmDialog.show(
+                  title: "Logout",
+                  body: "Are you sure you want to logout?",
+                  confirmText: "Logout",
+                  destructive: true,
+                );
+
+                if (confirmed == true) {
+                  ref.read(authProvider.notifier).logout();
+                }
               },
             ),
           ];

@@ -10,12 +10,12 @@
 library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'example.dart' as _i2;
-import 'movie.dart' as _i3;
-import 'package:spriver_client/src/protocol/movie.dart' as _i4;
+import 'movie.dart' as _i2;
+import 'movie_list.dart' as _i3;
+import 'protocol.dart' as _i4;
 import 'package:serverpod_auth_client/module.dart' as _i5;
-export 'example.dart';
 export 'movie.dart';
+export 'movie_list.dart';
 export 'client.dart';
 
 class Protocol extends _i1.SerializationManager {
@@ -36,17 +36,17 @@ class Protocol extends _i1.SerializationManager {
     if (customConstructors.containsKey(t)) {
       return customConstructors[t]!(data, this) as T;
     }
-    if (t == _i2.Example) {
-      return _i2.Example.fromJson(data, this) as T;
+    if (t == _i2.Movie) {
+      return _i2.Movie.fromJson(data, this) as T;
     }
-    if (t == _i3.Movie) {
-      return _i3.Movie.fromJson(data, this) as T;
+    if (t == _i3.MovieList) {
+      return _i3.MovieList.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i2.Example?>()) {
-      return (data != null ? _i2.Example.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i2.Movie?>()) {
+      return (data != null ? _i2.Movie.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i3.Movie?>()) {
-      return (data != null ? _i3.Movie.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i3.MovieList?>()) {
+      return (data != null ? _i3.MovieList.fromJson(data, this) : null) as T;
     }
     if (t == List<_i4.Movie>) {
       return (data as List).map((e) => deserialize<_i4.Movie>(e)).toList()
@@ -65,11 +65,11 @@ class Protocol extends _i1.SerializationManager {
     if (className != null) {
       return 'serverpod_auth.$className';
     }
-    if (data is _i2.Example) {
-      return 'Example';
-    }
-    if (data is _i3.Movie) {
+    if (data is _i2.Movie) {
       return 'Movie';
+    }
+    if (data is _i3.MovieList) {
+      return 'MovieList';
     }
     return super.getClassNameForObject(data);
   }
@@ -80,11 +80,11 @@ class Protocol extends _i1.SerializationManager {
       data['className'] = data['className'].substring(15);
       return _i5.Protocol().deserializeByClassName(data);
     }
-    if (data['className'] == 'Example') {
-      return deserialize<_i2.Example>(data['data']);
-    }
     if (data['className'] == 'Movie') {
-      return deserialize<_i3.Movie>(data['data']);
+      return deserialize<_i2.Movie>(data['data']);
+    }
+    if (data['className'] == 'MovieList') {
+      return deserialize<_i3.MovieList>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

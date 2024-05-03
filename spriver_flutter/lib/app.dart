@@ -4,6 +4,9 @@ import 'package:spriver_flutter/core/providers/current_user_provider.dart';
 import 'package:spriver_flutter/core/router/app_router.dart';
 import 'package:spriver_flutter/features/auth/presentation/providers/auth_provider.dart';
 
+GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 class App extends ConsumerStatefulWidget {
   const App({super.key});
 
@@ -31,6 +34,7 @@ class _AppState extends ConsumerState<App> {
     return MaterialApp.router(
       title: 'Clean Serverpod',
       theme: ThemeData.dark(),
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
       debugShowCheckedModeBanner: false,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,

@@ -10,6 +10,8 @@ dependencies:
   serverpod: 1.2.6
   serverpod_auth_server: 1.2.6
   serverpod_cloud_storage_s3: 1.2.6
+  spriver_shared: 
+    path: ../spriver_shared
 
 dev_dependencies:
   lints: ^3.0.0
