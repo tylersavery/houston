@@ -9,14 +9,18 @@ import 'package:mason/mason.dart' as mason;
 
 Future<void> scaffoldFeature({
   String? name,
-  bool runPostGenerator = true,
-  bool updateRoutes = true,
-  bool updateNavigation = true,
+  bool? updateRoutes,
+  bool? updateNavigation,
+  bool? runPostGenerator,
 }) async {
   name ??= ask(
     "Feature Name:",
     required: true,
   );
+
+  updateRoutes ?? confirm("Update Routes?", defaultValue: true);
+  updateNavigation ?? confirm("Update Navigation?", defaultValue: true);
+  runPostGenerator ?? confirm("Run Post Generator?", defaultValue: true);
 
   name = snakeCase(name);
 
@@ -33,7 +37,7 @@ Future<void> scaffoldFeature({
   final flutterParentDir = "${FileUtils.flutterDir}/lib/features";
   final flutterGeneratedPath = "$flutterParentDir/$name";
 
-  final flutterFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/feature");
+  final flutterFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/flutter_feature");
 
   final flutterFeatureGenerator = await mason.MasonGenerator.fromBrick(flutterFeatureBrick);
 
@@ -46,7 +50,7 @@ Future<void> scaffoldFeature({
 
   final routerPath = "${FileUtils.flutterDir}/lib/core/router/app_router.dart";
 
-  if (updateRoutes) {
+  if (updateRoutes == true) {
     await FileUtils.insertTextInFile(
       path: routerPath,
       value: "import 'package:${Constants.appName}_flutter/features/${snakeCase(name)}/routes.dart';",
@@ -62,7 +66,7 @@ Future<void> scaffoldFeature({
 
   final dashboardPath = "${FileUtils.flutterDir}/core/widgets/navigation/dashboard.dart";
 
-  if (updateNavigation) {
+  if (updateNavigation == true) {
     await FileUtils.insertTextInFileAtToken(
       path: dashboardPath,
       token: Constants.dashboardTabInsertToken,
@@ -104,7 +108,7 @@ Future<void> scaffoldFeature({
 
   print(green("$name app generated at `$flutterGeneratedPath`"));
 
-  if (runPostGenerator) {
+  if (runPostGenerator == true) {
     print(white("Running generate function in flutter project..."));
 
     final args = "packages pub run build_runner build --delete-conflicting-outputs".split(" ");

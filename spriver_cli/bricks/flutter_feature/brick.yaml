@@ -1,0 +1,15 @@
+name: feature
+description: Scaffold for feature
+version: 0.1.0+1
+vars:
+  project:
+    type: string
+    description: Name of project - for import statements mostly
+    default: spriver_flutter
+    prompt: Project name?
+
+  name:
+    type: string
+    description: Name of feature
+    default: cool_feature
+    prompt: New feature name?

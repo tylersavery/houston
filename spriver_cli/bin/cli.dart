@@ -3,13 +3,14 @@ import 'package:dcli/dcli.dart';
 import 'package:spriver_cli/scaffold_feature.dart';
 
 Future<void> main(List<String> args) async {
-  // scaffoldFeature(
-  //   name: "album",
-  //   runPostGenerator: true,
-  //   updateNavigation: true,
-  //   updateRoutes: true,
-  // );
-  // return;
+  scaffoldFeature(
+    name: "food",
+    runPostGenerator: false,
+    updateNavigation: false,
+    updateRoutes: false,
+  );
+
+  return;
   for (;;) {
     final line = ask('${green('houston')}${blue('::')}');
     if (line.isNotEmpty) {
