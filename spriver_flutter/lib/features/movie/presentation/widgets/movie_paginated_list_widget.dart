@@ -5,7 +5,7 @@ import 'package:spriver_flutter/core/widgets/base_component.dart';
 import 'package:spriver_flutter/core/widgets/loader.dart';
 import 'package:spriver_flutter/features/movie/domain/extensions/movie_list_extension.dart';
 import 'package:spriver_flutter/features/movie/presentation/providers/movie_paginated_list_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/providers/movie_paginated_list_state.dart';
+import 'package:spriver_flutter/features/movie/presentation/state/movie_paginated_list_state.dart';
 import 'package:spriver_flutter/features/movie/presentation/widgets/movie_list_tile_widget.dart';
 
 class MoviePaginatedListWidget extends BaseComponent {

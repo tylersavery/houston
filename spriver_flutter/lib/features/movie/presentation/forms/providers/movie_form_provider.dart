@@ -4,7 +4,7 @@ import 'package:spriver_flutter/features/movie/domain/usecases/delete_movie_usec
 import 'package:spriver_flutter/features/movie/domain/usecases/movie_retrieve_usecase.dart';
 import 'package:spriver_flutter/features/movie/domain/usecases/movie_save_usecase.dart';
 import 'package:spriver_flutter/features/movie/presentation/providers/movie_detail_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/forms/providers/movie_form_state.dart';
+import 'package:spriver_flutter/features/movie/presentation/forms/state/movie_form_state.dart';
 import 'package:spriver_flutter/features/movie/presentation/providers/movie_infinite_list_provider.dart';
 
 part 'movie_form_provider.g.dart';

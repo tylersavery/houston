@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spriver_flutter/config/constants.dart';
 import 'package:spriver_flutter/features/movie/domain/usecases/movie_list_usecase.dart';
-import 'package:spriver_flutter/features/movie/presentation/providers/movie_paginated_list_state.dart';
+import 'package:spriver_flutter/features/movie/presentation/state/movie_paginated_list_state.dart';
 
 part 'movie_paginated_list_provider.g.dart';
 

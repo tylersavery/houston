@@ -1,0 +1,10 @@
+name: food
+properties:
+  -
+    name: name
+    type: char
+    max_length: 100
+    ui_heading: 1
+  -
+    name: created_at
+    type: datetime
