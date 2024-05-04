@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:spriver_flutter/core/common/entities/user.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
+import '../../../../core/common/entities/user.dart';
+import '../../../../core/error/failures.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failure, bool>> registerWithEmailPassword({

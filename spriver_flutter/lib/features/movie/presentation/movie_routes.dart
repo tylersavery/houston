@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_detail_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_edit_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_list_screen.dart';
+import 'screens/movie_detail_screen.dart';
+import 'screens/movie_edit_screen.dart';
+import 'screens/movie_list_screen.dart';
 
 class MovieRoutes {
   static const String namespace = "/food";

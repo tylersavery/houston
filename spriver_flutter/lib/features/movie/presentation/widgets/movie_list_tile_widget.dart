@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_detail_screen.dart';
+import '../screens/movie_detail_screen.dart';
 
 class MovieListTileWidget extends StatelessWidget {
   final Movie movie;

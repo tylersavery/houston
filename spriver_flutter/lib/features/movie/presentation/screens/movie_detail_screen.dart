@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spriver_flutter/core/widgets/base_screen.dart';
-import 'package:spriver_flutter/core/widgets/loader.dart';
-import 'package:spriver_flutter/features/movie/domain/extensions/movie_extension.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_edit_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_list_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/providers/movie_detail_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/forms/providers/movie_form_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/widgets/movie_detail_widget.dart';
+import '../../../../core/widgets/base_screen.dart';
+import '../../../../core/widgets/loader.dart';
+import '../../domain/extensions/movie_extension.dart';
+import 'movie_edit_screen.dart';
+import 'movie_list_screen.dart';
+import '../providers/movie_detail_provider.dart';
+import '../forms/providers/movie_form_provider.dart';
+import '../widgets/movie_detail_widget.dart';
 
 class MovieDetailScreen extends BaseScreen {
   final int movieId;

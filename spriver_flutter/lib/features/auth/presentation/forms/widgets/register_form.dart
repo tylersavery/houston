@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spriver_flutter/core/widgets/loader.dart';
-import 'package:spriver_flutter/core/utils/toast_utils.dart';
-import 'package:spriver_flutter/features/auth/presentation/screens/login_screen.dart';
-import 'package:spriver_flutter/features/auth/presentation/screens/verification_screen.dart';
-import 'package:spriver_flutter/features/auth/presentation/providers/auth_provider.dart';
-import 'package:spriver_flutter/features/auth/presentation/providers/auth_state.dart';
-import 'package:spriver_flutter/features/auth/presentation/forms/providers/register_form_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_list_screen.dart';
+import '../../../../../core/widgets/loader.dart';
+import '../../../../../core/utils/toast_utils.dart';
+import '../../screens/login_screen.dart';
+import '../../screens/verification_screen.dart';
+import '../../providers/auth_provider.dart';
+import '../../providers/auth_state.dart';
+import '../providers/register_form_provider.dart';
+import '../../../../movie/presentation/screens/movie_list_screen.dart';
 
 class RegisterForm extends ConsumerWidget {
   const RegisterForm({super.key});

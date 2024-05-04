@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spriver_flutter/core/providers/current_user_provider.dart';
-import 'package:spriver_flutter/core/router/app_router.dart';
-import 'package:spriver_flutter/features/auth/presentation/providers/auth_provider.dart';
+import 'core/providers/current_user_provider.dart';
+import 'core/router/app_router.dart';
+import 'features/auth/presentation/providers/auth_provider.dart';
 
 GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();

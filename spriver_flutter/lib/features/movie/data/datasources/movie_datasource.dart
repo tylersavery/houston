@@ -1,6 +1,7 @@
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/core/error/exceptions.dart';
+
+import '../../../../core/error/exceptions.dart';
 
 abstract interface class MovieDataSource {
   Future<MovieList> list({required int page, required int limit});

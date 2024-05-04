@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spriver_flutter/core/widgets/base_component.dart';
-import 'package:spriver_flutter/core/widgets/navigation/main_drawer.dart';
+import '../base_component.dart';
+import 'main_drawer.dart';
 
 class Dashboard extends BaseComponent {
   final StatefulNavigationShell navigationShell;

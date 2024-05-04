@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spriver_flutter/core/widgets/base_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/screens/movie_edit_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/forms/providers/movie_form_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/widgets/movie_infinite_list_widget.dart';
-import 'package:spriver_flutter/features/movie/presentation/widgets/movie_paginated_list_widget.dart';
-import 'package:spriver_flutter/features/profile/presentation/widgets/profile_popup_menu_button.dart';
+import '../../../../core/widgets/base_screen.dart';
+import 'movie_edit_screen.dart';
+import '../forms/providers/movie_form_provider.dart';
+import '../widgets/movie_paginated_list_widget.dart';
 
 class MovieListScreen extends BaseScreen {
   static String route() => "/movies";

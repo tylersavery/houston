@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spriver_flutter/core/common/entities/user.dart';
+import '../common/entities/user.dart';
 
 part 'current_user_provider.g.dart';
 

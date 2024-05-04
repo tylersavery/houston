@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
+import '../../../../core/error/failures.dart';
 
 abstract interface class MovieRepository {
   Future<Either<Failure, MovieList>> list({required int page, required int limit});

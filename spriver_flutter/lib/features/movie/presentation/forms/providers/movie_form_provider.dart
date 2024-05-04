@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spriver_flutter/features/movie/domain/usecases/delete_movie_usecase.dart';
-import 'package:spriver_flutter/features/movie/domain/usecases/movie_retrieve_usecase.dart';
-import 'package:spriver_flutter/features/movie/domain/usecases/movie_save_usecase.dart';
-import 'package:spriver_flutter/features/movie/presentation/providers/movie_detail_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/forms/state/movie_form_state.dart';
-import 'package:spriver_flutter/features/movie/presentation/providers/movie_infinite_list_provider.dart';
+import '../../../domain/usecases/delete_movie_usecase.dart';
+import '../../../domain/usecases/movie_retrieve_usecase.dart';
+import '../../../domain/usecases/movie_save_usecase.dart';
+import '../../providers/movie_detail_provider.dart';
+import '../state/movie_form_state.dart';
+import '../../providers/movie_infinite_list_provider.dart';
 
 part 'movie_form_provider.g.dart';
 

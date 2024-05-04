@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/core/error/exceptions.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
-import 'package:spriver_flutter/features/movie/data/datasources/movie_data_source.dart';
-import 'package:spriver_flutter/features/movie/domain/repositories/movie_repository.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../datasources/movie_datasource.dart';
+import '../../domain/repositories/movie_repository.dart';
 
 class MovieRespositoryImpl implements MovieRepository {
   final MovieDataSource dataSource;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spriver_flutter/features/auth/domain/usecases/user_register_usecase.dart';
-import 'package:spriver_flutter/features/auth/presentation/providers/auth_provider.dart';
+import '../../../domain/usecases/user_register_usecase.dart';
+import '../../providers/auth_provider.dart';
 
 class RegisterFormProvider {
   final Ref ref;

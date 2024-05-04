@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
-import 'package:spriver_flutter/core/usecase/usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/providers/auth_repository_provider.dart';
-import 'package:spriver_flutter/features/auth/domain/repositories/auth_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../providers/auth_repository_provider.dart';
+import '../repositories/auth_repository.dart';
 
 class UserRegisterUseCase implements UseCase<bool, UserRegisterParams> {
   final AuthRepository authRepository;

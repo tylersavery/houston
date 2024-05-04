@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spriver_flutter/core/providers/current_user_provider.dart';
-import 'package:spriver_flutter/core/utils/dialog_utils.dart';
-import 'package:spriver_flutter/features/auth/presentation/providers/auth_provider.dart';
+import '../../../../core/providers/current_user_provider.dart';
+import '../../../../core/utils/dialog_utils.dart';
+import '../../../auth/presentation/providers/auth_provider.dart';
 
 class ProfilePopupMenuButton extends ConsumerWidget {
   const ProfilePopupMenuButton({

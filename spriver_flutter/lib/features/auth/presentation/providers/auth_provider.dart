@@ -1,13 +1,13 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spriver_flutter/core/providers/current_user_provider.dart';
-import 'package:spriver_flutter/core/providers/session_manager_provider.dart';
-import 'package:spriver_flutter/core/usecase/usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/usecases/current_user_usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/usecases/user_confirm_registration_usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/usecases/user_login_usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/usecases/user_logout_usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/usecases/user_register_usecase.dart';
-import 'package:spriver_flutter/features/auth/presentation/providers/auth_state.dart';
+import '../../../../core/providers/current_user_provider.dart';
+import '../../../../core/providers/session_manager_provider.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../domain/usecases/current_user_usecase.dart';
+import '../../domain/usecases/user_confirm_registration_usecase.dart';
+import '../../domain/usecases/user_login_usecase.dart';
+import '../../domain/usecases/user_logout_usecase.dart';
+import '../../domain/usecases/user_register_usecase.dart';
+import 'auth_state.dart';
 
 part 'auth_provider.g.dart';
 

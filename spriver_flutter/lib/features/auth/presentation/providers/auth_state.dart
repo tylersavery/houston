@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:spriver_flutter/core/common/entities/user.dart';
+import '../../../../core/common/entities/user.dart';
 
 @immutable
 sealed class AuthState {

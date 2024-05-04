@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:spriver_flutter/core/common/entities/user.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
-import 'package:spriver_flutter/core/usecase/usecase.dart';
-import 'package:spriver_flutter/features/auth/domain/providers/auth_repository_provider.dart';
-import 'package:spriver_flutter/features/auth/domain/repositories/auth_repository.dart';
+import '../../../../core/common/entities/user.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../providers/auth_repository_provider.dart';
+import '../repositories/auth_repository.dart';
 
 class UserLoginUseCase implements UseCase<User, UserLoginParams> {
   final AuthRepository authRepository;

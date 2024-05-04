@@ -1,7 +1,7 @@
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/core/error/exceptions.dart';
-import 'package:spriver_flutter/features/auth/data/models/user_model.dart';
+import '../../../../core/error/exceptions.dart';
+import '../models/user_model.dart';
 
 abstract interface class AuthDataSource {
   UserModel? currentUser();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spriver_flutter/core/utils/screen_utils.dart';
+import '../utils/screen_utils.dart';
 
 abstract class BaseComponent extends ConsumerWidget {
   const BaseComponent({super.key});

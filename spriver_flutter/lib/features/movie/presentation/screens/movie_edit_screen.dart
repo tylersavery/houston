@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spriver_flutter/core/utils/toast_utils.dart';
-import 'package:spriver_flutter/core/widgets/base_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/forms/providers/movie_form_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/forms/widgets/movie_form.dart';
+import '../../../../core/utils/toast_utils.dart';
+import '../../../../core/widgets/base_screen.dart';
+import '../forms/providers/movie_form_provider.dart';
+import '../forms/widgets/movie_form.dart';
 
 class MovieEditScreen extends BaseScreen {
   final int? movieId;

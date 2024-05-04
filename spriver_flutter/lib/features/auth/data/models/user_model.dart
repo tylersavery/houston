@@ -1,4 +1,4 @@
-import 'package:spriver_flutter/core/common/entities/user.dart';
+import '../../../../core/common/entities/user.dart';
 
 class UserModel extends User {
   const UserModel({

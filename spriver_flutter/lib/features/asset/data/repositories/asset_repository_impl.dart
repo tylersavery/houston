@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:spriver_flutter/core/error/exceptions.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
-import 'package:spriver_flutter/features/asset/data/datasources/asset_data_source.dart';
-import 'package:spriver_flutter/features/asset/domain/repositories/asset_repository.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../datasources/asset_data_source.dart';
+import '../../domain/repositories/asset_repository.dart';
 
 class AssetRepositoryImpl implements AssetRepository {
   final AssetDataSource dataSource;

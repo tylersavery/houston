@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spriver_flutter/core/theme/buttons.dart';
-import 'package:spriver_flutter/core/widgets/base_component.dart';
-import 'package:spriver_flutter/core/widgets/loader.dart';
-import 'package:spriver_flutter/features/movie/domain/extensions/movie_list_extension.dart';
-import 'package:spriver_flutter/features/movie/presentation/providers/movie_paginated_list_provider.dart';
-import 'package:spriver_flutter/features/movie/presentation/state/movie_paginated_list_state.dart';
-import 'package:spriver_flutter/features/movie/presentation/widgets/movie_list_tile_widget.dart';
+import '../../../../core/theme/buttons.dart';
+import '../../../../core/widgets/base_component.dart';
+import '../../../../core/widgets/loader.dart';
+import '../../domain/extensions/movie_list_extension.dart';
+import '../providers/movie_paginated_list_provider.dart';
+import '../state/movie_paginated_list_state.dart';
+import 'movie_list_tile_widget.dart';
 
 class MoviePaginatedListWidget extends BaseComponent {
   const MoviePaginatedListWidget({super.key});

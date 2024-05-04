@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/features/movie/domain/usecases/movie_retrieve_usecase.dart';
+import '../../domain/usecases/movie_retrieve_usecase.dart';
 
 part 'movie_detail_provider.g.dart';
 

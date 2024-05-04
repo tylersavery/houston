@@ -1,10 +1,10 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
-import 'package:spriver_flutter/core/usecase/usecase.dart';
-import 'package:spriver_flutter/features/movie/domain/providers/movie_repository_provider.dart';
-import 'package:spriver_flutter/features/movie/domain/repositories/movie_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../providers/movie_repository_provider.dart';
+import '../repositories/movie_repository.dart';
 
 class MovieSaveUseCase implements UseCase<Movie, SaveMovieParams> {
   final MovieRepository movieRepository;

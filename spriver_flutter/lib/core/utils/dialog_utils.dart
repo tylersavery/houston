@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:spriver_flutter/app.dart';
-import 'package:spriver_flutter/core/theme/buttons.dart';
-import 'package:spriver_flutter/core/theme/theme.dart';
+import '../../app.dart';
+import '../theme/buttons.dart';
+import '../theme/theme.dart';
 
 class InfoDialog {
   static Future<bool?> show({

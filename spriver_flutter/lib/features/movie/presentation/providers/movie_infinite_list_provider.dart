@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:spriver_client/spriver_client.dart';
-import 'package:spriver_flutter/config/constants.dart';
-import 'package:spriver_flutter/core/utils/debugger_utils.dart';
-import 'package:spriver_flutter/features/movie/domain/extensions/movie_list_extension.dart';
-import 'package:spriver_flutter/features/movie/domain/usecases/movie_list_usecase.dart';
+import '../../../../config/constants.dart';
+import '../../../../core/utils/debugger_utils.dart';
+import '../../domain/extensions/movie_list_extension.dart';
+import '../../domain/usecases/movie_list_usecase.dart';
 
 class MovieInfiniteListProvider {
   final Ref ref;

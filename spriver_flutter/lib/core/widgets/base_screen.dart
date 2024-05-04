@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spriver_flutter/core/utils/screen_utils.dart';
-import 'package:spriver_flutter/core/widgets/navigation/main_drawer.dart';
+import '../utils/screen_utils.dart';
+import 'navigation/main_drawer.dart';
 
 abstract class BaseScreen extends ConsumerWidget {
   final double verticalPadding;

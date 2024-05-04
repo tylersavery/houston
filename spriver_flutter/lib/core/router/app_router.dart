@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spriver_flutter/app.dart';
-import 'package:spriver_flutter/core/providers/current_user_provider.dart';
-import 'package:spriver_flutter/core/widgets/navigation/dashboard.dart';
-import 'package:spriver_flutter/features/auth/presentation/screens/login_screen.dart';
-import 'package:spriver_flutter/features/auth/presentation/screens/register_screen.dart';
-import 'package:spriver_flutter/features/auth/presentation/screens/verification_screen.dart';
-import 'package:spriver_flutter/features/movie/presentation/movie_routes.dart';
+import '../../app.dart';
+import '../providers/current_user_provider.dart';
+import '../widgets/navigation/dashboard.dart';
+import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/register_screen.dart';
+import '../../features/auth/presentation/screens/verification_screen.dart';
+import '../../features/movie/presentation/movie_routes.dart';
 
 part 'app_router.g.dart';
 

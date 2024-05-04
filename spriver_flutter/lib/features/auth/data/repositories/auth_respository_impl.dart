@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:spriver_flutter/core/common/entities/user.dart';
-import 'package:spriver_flutter/core/error/exceptions.dart';
-import 'package:spriver_flutter/core/error/failures.dart';
-import 'package:spriver_flutter/features/auth/data/datasources/auth_data_source.dart';
-import 'package:spriver_flutter/features/auth/domain/repositories/auth_repository.dart';
+import '../../../../core/common/entities/user.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../datasources/auth_data_source.dart';
+import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDataSource dataSource;

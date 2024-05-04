@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:spriver_flutter/core/utils/toast_utils.dart';
-import 'package:spriver_flutter/features/asset/domain/providers/asset_repository_provider.dart';
+import '../../../../core/utils/toast_utils.dart';
+import '../../domain/providers/asset_repository_provider.dart';
 
 class UploadImageWidget extends ConsumerWidget {
   final String url;
