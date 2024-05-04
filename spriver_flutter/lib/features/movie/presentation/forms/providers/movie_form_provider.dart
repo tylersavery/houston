@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/usecases/delete_movie_usecase.dart';
+import '../../../domain/usecases/movie_delete_usecase.dart';
 import '../../../domain/usecases/movie_retrieve_usecase.dart';
 import '../../../domain/usecases/movie_save_usecase.dart';
 import '../../providers/movie_detail_provider.dart';
