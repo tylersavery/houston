@@ -14,8 +14,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}FormState {
   static {{#pascalCase}}{{name}}{{/pascalCase}} get initial{{#pascalCase}}{{name}}{{/pascalCase}} {
     return {{#pascalCase}}{{name}}{{/pascalCase}}(
       id: null,
-      {{#flutterEmptyParams}}{{{.}}},
-      {{/flutterEmptyParams}});
+      {{#emptyParams}}{{{.}}},
+      {{/emptyParams}});
   }
 
   factory {{#pascalCase}}{{name}}{{/pascalCase}}FormState.initial() {

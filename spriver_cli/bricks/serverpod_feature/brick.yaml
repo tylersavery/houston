@@ -1,5 +1,5 @@
 name: feature
-description: Scaffold for flutter feature
+description: Scaffold for serverpod feature
 version: 0.1.0+1
 vars:
   name:

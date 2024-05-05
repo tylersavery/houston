@@ -7,7 +7,7 @@ import '../../domain/usecases/{{#snakeCase}}{{name}}{{/snakeCase}}_save_usecase.
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
 import '../state/{{#snakeCase}}{{name}}{{/snakeCase}}_form_state.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider.dart';
-{{#flutterFormProviderImports}}{{{.}}}{{/flutterFormProviderImports}}
+{{#formProviderImports}}{{{.}}}{{/formProviderImports}}
 
 part '{{#snakeCase}}{{name}}{{/snakeCase}}_form_provider.g.dart';
 
@@ -19,11 +19,11 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
   }
 
   final formKey = GlobalKey<FormState>();
-  {{#flutterFormControllers}}{{{.}}}
-  {{/flutterFormControllers}}
+  {{#formControllers}}{{{.}}}
+  {{/formControllers}}
 
-  {{#flutterFormValidators}}{{{.}}}
-  {{/flutterFormValidators}}
+  {{#formValidators}}{{{.}}}
+  {{/formValidators}}
 
   Future<void> load(int {{#camelCase}}{{name}}{{/camelCase}}Id) async {
     final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RetrieveUseCaseProvider)(Retrieve{{#pascalCase}}{{name}}{{/pascalCase}}Params(id: {{#camelCase}}{{name}}{{/camelCase}}Id));
@@ -40,8 +40,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
   }
 
   void _refreshControllers() {
-    {{#flutterFormControllerRefreshers}}{{{.}}}
-    {{/flutterFormControllerRefreshers}}
+    {{#formControllerRefreshers}}{{{.}}}
+    {{/formControllerRefreshers}}
   }
 
   void reset() {
@@ -49,8 +49,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
     _refreshControllers();
   }
 
-  {{#flutterFormSetters}}{{{.}}}
-  {{/flutterFormSetters}}
+  {{#formSetters}}{{{.}}}
+  {{/formSetters}}
 
   Future<bool> submit() async {
     if (!formKey.currentState!.validate()) {
@@ -59,8 +59,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
     }
 
     final {{#camelCase}}{{name}}{{/camelCase}} = state.{{#camelCase}}{{name}}{{/camelCase}}.copyWith(
-      {{#flutterFormControllerSetters}}{{{.}}},
-      {{/flutterFormControllerSetters}}
+      {{#formControllerSetters}}{{{.}}},
+      {{/formControllerSetters}}
     );
 
     state = state.loading();

@@ -16,7 +16,7 @@ class FileUtils {
     return Directory("$houstonRoot/${appName}_flutter").path;
   }
 
-  static String get serverDir {
+  static String get serverpodDir {
     return Directory("$houstonRoot/${appName}_server").path;
   }
 

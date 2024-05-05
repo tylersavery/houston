@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-{{#flutterFormImports}}{{{.}}}
-{{/flutterFormImports}}
+{{#formImports}}{{{.}}}
+{{/formImports}}
 import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_form_provider.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}FormWidget extends ConsumerWidget {
@@ -25,7 +25,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}FormWidget extends ConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(state.error!),
             ),
-            {{#flutterFormInputs}}{{{.}}}{{/flutterFormInputs}}
+            {{#formInputs}}{{{.}}}{{/formInputs}}
           //TODO: Foreign Key Selector
           if (isEditing)
             Padding(
