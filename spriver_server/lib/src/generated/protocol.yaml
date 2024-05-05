@@ -3,6 +3,11 @@ asset:
   - verifyUpload:
 example:
   - hello:
+food:
+  - list:
+  - retrieve:
+  - save:
+  - delete:
 movie:
   - list:
   - retrieve:

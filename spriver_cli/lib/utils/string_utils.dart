@@ -20,3 +20,9 @@ String titleCase(String string) {
 
   return rc.titleCase;
 }
+
+String paramCase(String string) {
+  ReCase rc = ReCase(string);
+
+  return rc.paramCase;
+}

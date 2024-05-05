@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/usecases/movie_delete_usecase.dart';
-import '../../../domain/usecases/movie_retrieve_usecase.dart';
-import '../../../domain/usecases/movie_save_usecase.dart';
-import '../../providers/movie_detail_provider.dart';
+import '../../domain/usecases/movie_delete_usecase.dart';
+import '../../domain/usecases/movie_retrieve_usecase.dart';
+import '../../domain/usecases/movie_save_usecase.dart';
+import 'movie_detail_provider.dart';
 import '../state/movie_form_state.dart';
-import '../../providers/movie_infinite_list_provider.dart';
+import 'movie_infinite_list_provider.dart';
 
 part 'movie_form_provider.g.dart';
 

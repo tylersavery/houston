@@ -12,9 +12,13 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/module.dart' as _i3;
-import 'movie.dart' as _i4;
-import 'movie_list.dart' as _i5;
-import 'protocol.dart' as _i6;
+import 'food.dart' as _i4;
+import 'food_list.dart' as _i5;
+import 'movie.dart' as _i6;
+import 'movie_list.dart' as _i7;
+import 'protocol.dart' as _i8;
+export 'food.dart';
+export 'food_list.dart';
 export 'movie.dart';
 export 'movie_list.dart';
 
@@ -28,6 +32,74 @@ class Protocol extends _i1.SerializationManagerServer {
   static final Protocol _instance = Protocol._();
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
+    _i2.TableDefinition(
+      name: 'food',
+      dartName: 'Food',
+      schema: 'public',
+      module: 'spriver',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'food_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'name',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'price',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: false,
+          dartType: 'double',
+        ),
+        _i2.ColumnDefinition(
+          name: 'description',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'calories',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'imageUrl',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'food_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
     _i2.TableDefinition(
       name: 'movie',
       dartName: 'Movie',
@@ -91,20 +163,36 @@ class Protocol extends _i1.SerializationManagerServer {
     if (customConstructors.containsKey(t)) {
       return customConstructors[t]!(data, this) as T;
     }
-    if (t == _i4.Movie) {
-      return _i4.Movie.fromJson(data, this) as T;
+    if (t == _i4.Food) {
+      return _i4.Food.fromJson(data, this) as T;
     }
-    if (t == _i5.MovieList) {
-      return _i5.MovieList.fromJson(data, this) as T;
+    if (t == _i5.FoodList) {
+      return _i5.FoodList.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i4.Movie?>()) {
-      return (data != null ? _i4.Movie.fromJson(data, this) : null) as T;
+    if (t == _i6.Movie) {
+      return _i6.Movie.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i5.MovieList?>()) {
-      return (data != null ? _i5.MovieList.fromJson(data, this) : null) as T;
+    if (t == _i7.MovieList) {
+      return _i7.MovieList.fromJson(data, this) as T;
     }
-    if (t == List<_i6.Movie>) {
-      return (data as List).map((e) => deserialize<_i6.Movie>(e)).toList()
+    if (t == _i1.getType<_i4.Food?>()) {
+      return (data != null ? _i4.Food.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i5.FoodList?>()) {
+      return (data != null ? _i5.FoodList.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i6.Movie?>()) {
+      return (data != null ? _i6.Movie.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i7.MovieList?>()) {
+      return (data != null ? _i7.MovieList.fromJson(data, this) : null) as T;
+    }
+    if (t == List<_i8.Food>) {
+      return (data as List).map((e) => deserialize<_i8.Food>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i8.Movie>) {
+      return (data as List).map((e) => deserialize<_i8.Movie>(e)).toList()
           as dynamic;
     }
     try {
@@ -123,10 +211,16 @@ class Protocol extends _i1.SerializationManagerServer {
     if (className != null) {
       return 'serverpod_auth.$className';
     }
-    if (data is _i4.Movie) {
+    if (data is _i4.Food) {
+      return 'Food';
+    }
+    if (data is _i5.FoodList) {
+      return 'FoodList';
+    }
+    if (data is _i6.Movie) {
       return 'Movie';
     }
-    if (data is _i5.MovieList) {
+    if (data is _i7.MovieList) {
       return 'MovieList';
     }
     return super.getClassNameForObject(data);
@@ -138,11 +232,17 @@ class Protocol extends _i1.SerializationManagerServer {
       data['className'] = data['className'].substring(15);
       return _i3.Protocol().deserializeByClassName(data);
     }
+    if (data['className'] == 'Food') {
+      return deserialize<_i4.Food>(data['data']);
+    }
+    if (data['className'] == 'FoodList') {
+      return deserialize<_i5.FoodList>(data['data']);
+    }
     if (data['className'] == 'Movie') {
-      return deserialize<_i4.Movie>(data['data']);
+      return deserialize<_i6.Movie>(data['data']);
     }
     if (data['className'] == 'MovieList') {
-      return deserialize<_i5.MovieList>(data['data']);
+      return deserialize<_i7.MovieList>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -162,8 +262,10 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.Movie:
-        return _i4.Movie.t;
+      case _i4.Food:
+        return _i4.Food.t;
+      case _i6.Movie:
+        return _i6.Movie.t;
     }
     return null;
   }

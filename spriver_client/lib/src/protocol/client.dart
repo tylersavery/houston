@@ -10,10 +10,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:spriver_client/src/protocol/movie_list.dart' as _i3;
-import 'package:spriver_client/src/protocol/movie.dart' as _i4;
-import 'package:serverpod_auth_client/module.dart' as _i5;
-import 'protocol.dart' as _i6;
+import 'package:spriver_client/src/protocol/food_list.dart' as _i3;
+import 'package:spriver_client/src/protocol/food.dart' as _i4;
+import 'package:spriver_client/src/protocol/movie_list.dart' as _i5;
+import 'package:spriver_client/src/protocol/movie.dart' as _i6;
+import 'package:serverpod_auth_client/module.dart' as _i7;
+import 'protocol.dart' as _i8;
 
 /// {@category Endpoint}
 class EndpointAsset extends _i1.EndpointRef {
@@ -51,18 +53,61 @@ class EndpointExample extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointFood extends _i1.EndpointRef {
+  EndpointFood(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'food';
+
+  _i2.Future<_i3.FoodList> list({
+    required int page,
+    required int limit,
+    String? orderBy,
+  }) =>
+      caller.callServerEndpoint<_i3.FoodList>(
+        'food',
+        'list',
+        {
+          'page': page,
+          'limit': limit,
+          'orderBy': orderBy,
+        },
+      );
+
+  _i2.Future<_i4.Food?> retrieve(int id) =>
+      caller.callServerEndpoint<_i4.Food?>(
+        'food',
+        'retrieve',
+        {'id': id},
+      );
+
+  _i2.Future<_i4.Food> save(_i4.Food food) =>
+      caller.callServerEndpoint<_i4.Food>(
+        'food',
+        'save',
+        {'food': food},
+      );
+
+  _i2.Future<void> delete(int id) => caller.callServerEndpoint<void>(
+        'food',
+        'delete',
+        {'id': id},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointMovie extends _i1.EndpointRef {
   EndpointMovie(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'movie';
 
-  _i2.Future<_i3.MovieList> list({
+  _i2.Future<_i5.MovieList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i3.MovieList>(
+      caller.callServerEndpoint<_i5.MovieList>(
         'movie',
         'list',
         {
@@ -72,15 +117,15 @@ class EndpointMovie extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i4.Movie?> retrieve(int id) =>
-      caller.callServerEndpoint<_i4.Movie?>(
+  _i2.Future<_i6.Movie?> retrieve(int id) =>
+      caller.callServerEndpoint<_i6.Movie?>(
         'movie',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i4.Movie> save(_i4.Movie movie) =>
-      caller.callServerEndpoint<_i4.Movie>(
+  _i2.Future<_i6.Movie> save(_i6.Movie movie) =>
+      caller.callServerEndpoint<_i6.Movie>(
         'movie',
         'save',
         {'movie': movie},
@@ -95,10 +140,10 @@ class EndpointMovie extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i5.Caller(client);
+    auth = _i7.Caller(client);
   }
 
-  late final _i5.Caller auth;
+  late final _i7.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -110,7 +155,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i6.Protocol(),
+          _i8.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -118,6 +163,7 @@ class Client extends _i1.ServerpodClient {
         ) {
     asset = EndpointAsset(this);
     example = EndpointExample(this);
+    food = EndpointFood(this);
     movie = EndpointMovie(this);
     modules = _Modules(this);
   }
@@ -125,6 +171,8 @@ class Client extends _i1.ServerpodClient {
   late final EndpointAsset asset;
 
   late final EndpointExample example;
+
+  late final EndpointFood food;
 
   late final EndpointMovie movie;
 
@@ -134,6 +182,7 @@ class Client extends _i1.ServerpodClient {
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'asset': asset,
         'example': example,
+        'food': food,
         'movie': movie,
       };
 

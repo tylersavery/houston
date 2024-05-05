@@ -9,9 +9,10 @@ import 'package:mason/mason.dart' as mason;
 
 Future<void> scaffoldFeature({
   String? name,
+  bool? runPostGenerator,
+  bool? runPostFormatter,
   bool? updateRoutes,
   bool? updateNavigation,
-  bool? runPostGenerator,
 }) async {
   name ??= ask(
     "Feature Name:",
@@ -82,29 +83,46 @@ Future<void> scaffoldFeature({
     );
   }
 
-  //   print("Formatting files");
-  // final filePaths = [
-  //   "$appGeneratedPath/components/${name}_card.dart",
-  //   "$appGeneratedPath/components/${name}_form.dart",
-  //   "$appGeneratedPath/components/${name}_list_tile.dart",
-  //   "$appGeneratedPath/components/${name}_list.dart",
-  //   "$appGeneratedPath/models/$name.dart",
-  //   "$appGeneratedPath/providers/${name}_detail_provider.dart",
-  //   "$appGeneratedPath/providers/${name}_form_provider.dart",
-  //   "$appGeneratedPath/providers/${name}_list_provider.dart",
-  //   "$appGeneratedPath/screens/${name}_list_screen.dart",
-  //   "$appGeneratedPath/screens/${name}_detail_screen.dart",
-  //   "$appGeneratedPath/services/${name}_rest_service.dart",
-  //   "$appGeneratedPath/services/${name}_db_service.dart",
-  //   "$appGeneratedPath/routes.dart",
-  //   routerPath,
-  //   dashboardPath,
-  // ];
+  if (runPostFormatter == true) {
+    final filePrefix = snakeCase(name);
 
-  // for (final filePath in filePaths) {
-  //   print(filePath);
-  //   await Process.start("dart", ["format", filePath]);
-  // }
+    print("Formatting Files...");
+    final filePaths = [
+      "$flutterGeneratedPath/data/datasources/${filePrefix}_datasource.dart",
+      "$flutterGeneratedPath/data/repositories/${filePrefix}_repository.dart",
+      "$flutterGeneratedPath/domain/extensions/${filePrefix}_extension.dart",
+      "$flutterGeneratedPath/domain/extensions/${filePrefix}_list_extension.dart",
+      "$flutterGeneratedPath/domain/providers/${filePrefix}_datasource_provider.dart",
+      "$flutterGeneratedPath/domain/providers/${filePrefix}_repository_provider.dart",
+      "$flutterGeneratedPath/domain/repositories/${filePrefix}_repository.dart",
+      "$flutterGeneratedPath/domain/usecases/${filePrefix}_delete_usecase.dart",
+      "$flutterGeneratedPath/domain/usecases/${filePrefix}_list_usecase.dart",
+      "$flutterGeneratedPath/domain/usecases/${filePrefix}_retrieve_usecase.dart",
+      "$flutterGeneratedPath/domain/usecases/${filePrefix}_save_usecase.dart",
+      "$flutterGeneratedPath/presentation/providers/${filePrefix}_detail_provider.dart",
+      "$flutterGeneratedPath/presentation/providers/${filePrefix}_form_provider.dart",
+      "$flutterGeneratedPath/presentation/providers/${filePrefix}_infinite_list_provider.dart",
+      "$flutterGeneratedPath/presentation/providers/${filePrefix}_paginated_list_provider.dart",
+      "$flutterGeneratedPath/presentation/screens/${filePrefix}_detail_screen.dart",
+      "$flutterGeneratedPath/presentation/screens/${filePrefix}_edit_screen.dart",
+      "$flutterGeneratedPath/presentation/screens/${filePrefix}_list_screen.dart",
+      "$flutterGeneratedPath/presentation/state/${filePrefix}_form_state.dart",
+      "$flutterGeneratedPath/presentation/state/${filePrefix}_paginated_list_state.dart",
+      "$flutterGeneratedPath/presentation/widgets/${filePrefix}_detail_widget.dart",
+      "$flutterGeneratedPath/presentation/widgets/${filePrefix}_form_widget.dart",
+      "$flutterGeneratedPath/presentation/widgets/${filePrefix}_infinite_list_widget.dart",
+      "$flutterGeneratedPath/presentation/widgets/${filePrefix}_list_tile_widget.dart",
+      "$flutterGeneratedPath/presentation/widgets/${filePrefix}_paginated_list_widget.dart",
+      "$flutterGeneratedPath/presentation/${filePrefix}_routes.dart",
+      routerPath,
+      dashboardPath,
+    ];
+
+    for (final filePath in filePaths) {
+      await Process.start("dart", ["format", filePath]);
+    }
+    print("Formatted.");
+  }
 
   print(green("$name app generated at `$flutterGeneratedPath`"));
 

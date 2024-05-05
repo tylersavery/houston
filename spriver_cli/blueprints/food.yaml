@@ -5,6 +5,20 @@ properties:
     type: char
     max_length: 100
     ui_heading: 1
+  - 
+    name: price
+    type: double
   -
-    name: created_at
+    name: description
+    type: text
+  -
+    name: calories
+    type: int
+  -
+    name: imageUrl
+    type: url
+    image: true
+  -
+    name: createdAt
     type: datetime
+  

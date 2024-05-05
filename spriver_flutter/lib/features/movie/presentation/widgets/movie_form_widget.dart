@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../asset/presentation/widgets/upload_file_widget.dart';
+import '../../../asset/presentation/widgets/upload_image_widget.dart';
 import '../providers/movie_form_provider.dart';
 
 class MovieFormWidget extends ConsumerWidget {

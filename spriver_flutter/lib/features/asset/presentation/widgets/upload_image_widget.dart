@@ -13,7 +13,7 @@ class UploadImageWidget extends ConsumerWidget {
     super.key,
     required this.url,
     required this.onComplete,
-    this.label = 'File',
+    this.label = 'Image',
   });
 
   @override

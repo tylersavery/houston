@@ -7,7 +7,7 @@ import '../../domain/extensions/movie_extension.dart';
 import 'movie_edit_screen.dart';
 import 'movie_list_screen.dart';
 import '../providers/movie_detail_provider.dart';
-import '../forms/providers/movie_form_provider.dart';
+import '../providers/movie_form_provider.dart';
 import '../widgets/movie_detail_widget.dart';
 
 class MovieDetailScreen extends BaseScreen {

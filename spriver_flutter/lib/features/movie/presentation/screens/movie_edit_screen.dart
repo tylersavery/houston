@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/toast_utils.dart';
 import '../../../../core/widgets/base_screen.dart';
-import '../forms/providers/movie_form_provider.dart';
-import '../forms/widgets/movie_form.dart';
+import '../providers/movie_form_provider.dart';
+import '../widgets/movie_form_widget.dart';
 
 class MovieEditScreen extends BaseScreen {
   final int? movieId;
 
-  static String route([int? movieId]) => "/movies/edit/${movieId ?? ':id'}";
-  static String routeNew() => "/movies/new";
+  static String route([int? movieId]) => "/movie/edit/${movieId ?? ':id'}";
+  static String routeNew() => "/movie/new";
 
   const MovieEditScreen({
     super.key,

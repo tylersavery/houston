@@ -6,6 +6,7 @@ Future<void> main(List<String> args) async {
   scaffoldFeature(
     name: "food",
     runPostGenerator: false,
+    runPostFormatter: true,
     updateNavigation: false,
     updateRoutes: false,
   );

@@ -5,8 +5,8 @@ import 'screens/movie_edit_screen.dart';
 import 'screens/movie_list_screen.dart';
 
 class MovieRoutes {
-  static const String namespace = "/food";
-  static final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "Food Shell");
+  static const String namespace = "/movies";
+  static final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "Movie Shell");
 
   static StatefulShellBranch branch = StatefulShellBranch(
     navigatorKey: shellNavigatorKey,
