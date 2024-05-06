@@ -36,7 +36,7 @@ jobs:
           aws-region: us-west-2
 
       - name: Create passwords file
-        working-directory: spriver_server
+        working-directory: houston_server
         shell: bash
         env:
           SERVERPOD_PASSWORDS: ${{ secrets.SERVERPOD_PASSWORDS }}
@@ -46,19 +46,19 @@ jobs:
           ls config/
 
       - name: Get Dart packages
-        working-directory: spriver_server
+        working-directory: houston_server
         run: dart pub get
 
       - name: Compile server
-        working-directory: spriver_server
+        working-directory: houston_server
         run: dart compile kernel bin/main.dart
 
       - name: Create CodeDeploy Deployment
         id: deploy
         env:
-          PROJECT_NAME: spriver
-          AWS_NAME: spriver
-          DEPLOYMENT_BUCKET: spriver-deployment-4653262
+          PROJECT_NAME: houston
+          AWS_NAME: houston
+          DEPLOYMENT_BUCKET: houston-deployment-4653262
           TARGET: ${{ github.event.inputs.target }}
         run: |
           # Deploy server to AWS

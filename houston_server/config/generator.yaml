@@ -1,0 +1,5 @@
+type: server
+
+client_package_path: ../houston_client
+# extraClasses:
+#   - package:houston_shared/models/movie_list_result.dart:MovieListResult

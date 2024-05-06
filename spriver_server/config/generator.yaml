@@ -1,5 +1,0 @@
-type: server
-
-client_package_path: ../spriver_client
-# extraClasses:
-#   - package:spriver_shared/models/movie_list_result.dart:MovieListResult

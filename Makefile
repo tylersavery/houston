@@ -2,19 +2,19 @@
 
 
 server_run:
-	cd spriver_server && dart bin/main.dart
+	cd houston_server && dart bin/main.dart
 
 server_gen:
-	cd spriver_server && serverpod generate
+	cd houston_server && serverpod generate
 
 create_migration:
-	cd spriver_server && serverpod create-migration
+	cd houston_server && serverpod create-migration
 
 migrate:
-	cd spriver_server && dart run bin/main.dart --role maintenance --apply-migrations
+	cd houston_server && dart run bin/main.dart --role maintenance --apply-migrations
 
 init:
-	cd spriver_server && docker-compose up -d
+	cd houston_server && docker-compose up -d
 
 destroy:
-	cd spriver_server && docker compose down -v
+	cd houston_server && docker compose down -v

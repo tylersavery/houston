@@ -1,0 +1,10 @@
+import 'package:fpdart/fpdart.dart';
+import 'package:houston_client/houston_client.dart';
+import '../../../../core/error/failures.dart';
+
+abstract interface class MovieRepository {
+  Future<Either<Failure, MovieList>> list({required int page, required int limit});
+  Future<Either<Failure, Movie>> retrieve(int id);
+  Future<Either<Failure, Movie>> save(Movie movie);
+  Future<Either<Failure, void>> delete(int id);
+}
