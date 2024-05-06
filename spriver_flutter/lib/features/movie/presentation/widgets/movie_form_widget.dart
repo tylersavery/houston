@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../asset/presentation/widgets/upload_image_widget.dart';
+
 import '../providers/movie_form_provider.dart';
 
 class MovieFormWidget extends ConsumerWidget {
@@ -26,32 +27,26 @@ class MovieFormWidget extends ConsumerWidget {
             ),
           TextFormField(
             controller: provider.titleController,
-            decoration: const InputDecoration(
-              label: Text("Title"),
-            ),
             validator: provider.titleValidator,
+            decoration: const InputDecoration(label: Text("Title")),
           ),
           TextFormField(
             controller: provider.yearController,
-            decoration: const InputDecoration(
-              label: Text("Year"),
-            ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-            ],
             validator: provider.yearValidator,
+            decoration: const InputDecoration(label: Text("Year")),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
             child: UploadImageWidget(
               url: state.movie.imageUrl,
-              label: "Movie Poster Image",
+              label: "Image Url",
               onComplete: (url) {
                 provider.setImageUrl(url);
               },
             ),
           ),
+
+          //TODO: Foreign Key Selector
           if (isEditing)
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -65,7 +60,7 @@ class MovieFormWidget extends ConsumerWidget {
                     }
                   }
                 },
-                child: const Text("Delete"),
+                child: const Text("Delete Movie"),
               ),
             ),
         ],

@@ -14,9 +14,12 @@ class MovieFormState {
   static Movie get initialMovie {
     return Movie(
       id: null,
-      title: '',
+      uid: "",
+      title: "",
       year: 0,
-      imageUrl: '',
+      imageUrl: "",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     );
   }
 

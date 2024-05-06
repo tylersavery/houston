@@ -6,12 +6,12 @@ Future<void> main(List<String> args) async {
   scaffoldFeature(
     name: "food",
     generateServerpod: true,
-    generateMigrations: false,
-    runMigrations: false,
     generateFlutter: true,
+    generateMigrations: true,
+    runMigrations: true,
     updateRoutes: false,
     updateNavigation: false,
-    runPostGenerator: false,
+    runPostGenerator: true,
     runPostFormatter: true,
   );
 

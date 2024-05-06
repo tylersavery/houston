@@ -16,9 +16,7 @@ class MovieListTileWidget extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text(movie.title),
-        subtitle: Text(
-          movie.year.toString(),
-        ),
+        subtitle: Text(movie.year.toString()),
         onTap: () {
           context.push(MovieDetailScreen.route(movie.id));
         },

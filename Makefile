@@ -1,4 +1,6 @@
 
+
+
 server_run:
 	cd spriver_server && dart bin/main.dart
 
@@ -10,3 +12,9 @@ create_migration:
 
 migrate:
 	cd spriver_server && dart run bin/main.dart --role maintenance --apply-migrations
+
+init:
+	cd spriver_server && docker-compose up -d
+
+destroy:
+	cd spriver_server && docker compose down -v

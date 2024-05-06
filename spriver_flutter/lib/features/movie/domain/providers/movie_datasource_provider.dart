@@ -5,6 +5,7 @@ import '../../data/datasources/movie_datasource.dart';
 
 final movieDataSourceProvider = Provider<MovieDataSource>(
   (ref) {
-    return MovieDataSourceImpl(ref.read(clientProvider), ref.read(sessionManagerProvider));
+    return MovieDataSourceImpl(
+        ref.read(clientProvider), ref.read(sessionManagerProvider));
   },
 );

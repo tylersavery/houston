@@ -7,7 +7,7 @@ import 'movie_edit_screen.dart';
 import '../providers/movie_form_provider.dart';
 
 class MovieListScreen extends BaseScreen {
-  static String route() => "/movies";
+  static String route() => "/movie";
 
   const MovieListScreen({super.key, super.includeMainDrawer = true});
 

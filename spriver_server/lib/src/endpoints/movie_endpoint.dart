@@ -1,5 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import 'package:spriver_server/src/generated/protocol.dart';
+import 'package:spriver_server/src/utils/strings.dart';
 
 class MovieEndpoint extends Endpoint {
   Future<MovieList> list(
@@ -19,10 +20,6 @@ class MovieEndpoint extends Endpoint {
               switch (orderBy.replaceAll("-", "")) {
                 case 'id':
                   return t.id;
-                case 'title':
-                  return t.title;
-                case 'year':
-                  return t.year;
                 default:
                   return t.id;
               }
@@ -45,10 +42,41 @@ class MovieEndpoint extends Endpoint {
   }
 
   Future<Movie> save(Session session, Movie movie) async {
-    return await (movie.id != null ? Movie.db.updateRow(session, movie) : Movie.db.insertRow(session, movie));
+    if (movie.id != null) {
+      final existingMovie = await Movie.db.findById(session, movie.id!);
+
+      if (existingMovie != null) {
+        return await Movie.db.updateRow(
+          session,
+          movie.copyWith(
+            uid: existingMovie.uid,
+            createdAt: existingMovie.createdAt,
+            updatedAt: DateTime.now(),
+          ),
+        );
+      }
+    }
+
+    final uid = await _uniqueUid(session);
+    return await Movie.db.insertRow(
+      session,
+      movie.copyWith(uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
+    );
   }
 
   Future<void> delete(Session session, int id) async {
     await Movie.db.deleteWhere(session, where: (row) => row.id.equals(id));
+  }
+
+  Future<String> _uniqueUid(Session session) async {
+    late String uid;
+
+    while (true) {
+      uid = generateRandomString(8);
+      final unique = (await Movie.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      if (unique) {
+        return uid;
+      }
+    }
   }
 }

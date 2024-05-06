@@ -15,6 +15,12 @@
           "dartType": "int?"
         },
         {
+          "name": "uid",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
           "name": "name",
           "columnType": 0,
           "isNullable": false,
@@ -46,6 +52,12 @@
         },
         {
           "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        },
+        {
+          "name": "updatedAt",
           "columnType": 4,
           "isNullable": false,
           "dartType": "DateTime"
@@ -82,6 +94,12 @@
           "dartType": "int?"
         },
         {
+          "name": "uid",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
           "name": "title",
           "columnType": 0,
           "isNullable": false,
@@ -98,6 +116,18 @@
           "columnType": 0,
           "isNullable": false,
           "dartType": "String"
+        },
+        {
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        },
+        {
+          "name": "updatedAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
         }
       ],
       "foreignKeys": [],
@@ -126,10 +156,6 @@
     {
       "module": "serverpod_auth",
       "version": "20240115074239642"
-    },
-    {
-      "module": "spriver",
-      "version": "20240415013555407"
     }
   ],
   "migrationApiVersion": 1

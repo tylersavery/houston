@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:spriver_flutter/features/movie/domain/providers/movie_repository_provider.dart';
+import '../../../../core/utils/validation_utils.dart';
+import '../../domain/providers/movie_repository_provider.dart';
 import 'movie_detail_provider.dart';
 import '../state/movie_form_state.dart';
 import 'movie_infinite_list_provider.dart';
@@ -18,24 +19,10 @@ class MovieForm extends _$MovieForm {
   final titleController = TextEditingController();
   final yearController = TextEditingController();
 
-  String? titleValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Title Required";
-    }
-    return null;
-  }
-
-  String? yearValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Year Required";
-    }
-
-    if (int.tryParse(value) == null) {
-      return "Invalid Year";
-    }
-
-    return null;
-  }
+  String? titleValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Title");
+  String? yearValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Year");
 
   Future<void> load(int movieId) async {
     final result = await ref.read(movieRepositoryProvider).retrieve(movieId);
@@ -56,15 +43,15 @@ class MovieForm extends _$MovieForm {
     yearController.text = state.movie.year.toString();
   }
 
-  void setImageUrl(String imageUrl) {
-    state = state.updateMovie(
-      state.movie.copyWith(imageUrl: imageUrl),
-    );
-  }
-
   void reset() {
     state = MovieFormState.initial();
     _refreshControllers();
+  }
+
+  void setImageUrl(String value) {
+    state = state.updateMovie(
+      state.movie.copyWith(imageUrl: value),
+    );
   }
 
   Future<bool> submit() async {
@@ -75,7 +62,7 @@ class MovieForm extends _$MovieForm {
 
     final movie = state.movie.copyWith(
       title: titleController.text,
-      year: int.parse(yearController.text),
+      year: int.tryParse(yearController.text) ?? 0,
     );
 
     state = state.loading();
@@ -101,7 +88,8 @@ class MovieForm extends _$MovieForm {
 
   Future<bool> delete() async {
     if (state.movie.id != null) {
-      final result = await ref.read(movieRepositoryProvider).delete(state.movie.id!);
+      final result =
+          await ref.read(movieRepositoryProvider).delete(state.movie.id!);
 
       return result.fold((failure) {
         state = state.failure(failure.message);

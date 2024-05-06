@@ -1,8 +1,9 @@
 ### TODO
 
-
-[ ] uuid / unique id
+[ ] rename project
+[x] uuid / unique id / other auto fields
 [ ] allow icon to be set
+[ ] sortable fields dynamic 
 [ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)
 [ ] image choosing for macos
 [x] ui heading / subtitles / etc.
@@ -12,3 +13,4 @@
 [ ] validate blueprint (auto gen fields aren't used)
 [ ] blueprint meta: allow removing autogen fields
 [ ] fix yaml config for types (ie char/string etc. ) make dart like
+[ ] routes get from namespace

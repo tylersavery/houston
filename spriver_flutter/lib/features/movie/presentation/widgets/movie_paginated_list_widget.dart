@@ -40,7 +40,9 @@ class MoviePaginatedListWidget extends BaseComponent {
                   type: AppButtonType.Text,
                   onPressed: state.data.page > 1
                       ? () {
-                          provider.load(page: state.data.page - 1, limit: state.data.limit);
+                          provider.load(
+                              page: state.data.page - 1,
+                              limit: state.data.limit);
                         }
                       : null,
                 ),
@@ -51,7 +53,9 @@ class MoviePaginatedListWidget extends BaseComponent {
                   iconTrails: true,
                   onPressed: state.data.canLoadMore
                       ? () {
-                          provider.load(page: state.data.page + 1, limit: state.data.limit);
+                          provider.load(
+                              page: state.data.page + 1,
+                              limit: state.data.limit);
                         }
                       : null,
                 ),
