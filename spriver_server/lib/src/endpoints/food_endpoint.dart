@@ -19,8 +19,6 @@ class FoodEndpoint extends Endpoint {
               switch (orderBy.replaceAll("-", "")) {
                 case 'id':
                   return t.id;
-                case 'name':
-                  return t.name;
                 default:
                   return t.id;
               }

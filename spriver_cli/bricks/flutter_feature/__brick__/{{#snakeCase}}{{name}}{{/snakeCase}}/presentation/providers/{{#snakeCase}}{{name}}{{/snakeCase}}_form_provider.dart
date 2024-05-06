@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/utils/validation_utils.dart';
-import '../../domain/usecases/{{#snakeCase}}{{name}}{{/snakeCase}}_delete_usecase.dart';
-import '../../domain/usecases/{{#snakeCase}}{{name}}{{/snakeCase}}_retrieve_usecase.dart';
-import '../../domain/usecases/{{#snakeCase}}{{name}}{{/snakeCase}}_save_usecase.dart';
+import '../../domain/providers/{{#camelCase}}{{name}}{{/camelCase}}_repository_provider.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
 import '../state/{{#snakeCase}}{{name}}{{/snakeCase}}_form_state.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider.dart';
@@ -26,7 +24,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
   {{/formValidators}}
 
   Future<void> load(int {{#camelCase}}{{name}}{{/camelCase}}Id) async {
-    final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RetrieveUseCaseProvider)(Retrieve{{#pascalCase}}{{name}}{{/pascalCase}}Params(id: {{#camelCase}}{{name}}{{/camelCase}}Id));
+    final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RepositoryProvider).retrieve({{#camelCase}}{{name}}{{/camelCase}}Id);
 
     result.fold(
       (failure) {
@@ -65,9 +63,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
 
     state = state.loading();
 
-    final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}SaveUseCaseProvider)(
-      Save{{#pascalCase}}{{name}}{{/pascalCase}}Params({{#camelCase}}{{name}}{{/camelCase}}: {{#camelCase}}{{name}}{{/camelCase}}),
-    );
+    final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RepositoryProvider).save({{#camelCase}}{{name}}{{/camelCase}});
 
     return result.fold(
       (failure) {
@@ -88,8 +84,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
 
   Future<bool> delete() async {
     if (state.{{#camelCase}}{{name}}{{/camelCase}}.id != null) {
-      final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}DeleteUseCaseProvider)(Delete{{#pascalCase}}{{name}}{{/pascalCase}}Params(id: state.{{#camelCase}}{{name}}{{/camelCase}}.id!));
-
+      final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RepositoryProvider).delete(state.{{#camelCase}}{{name}}{{/camelCase}}.id!);
+    
       return result.fold((failure) {
         state = state.failure(failure.message);
         return false;

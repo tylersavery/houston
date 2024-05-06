@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../domain/usecases/movie_delete_usecase.dart';
-import '../../domain/usecases/movie_retrieve_usecase.dart';
-import '../../domain/usecases/movie_save_usecase.dart';
+import 'package:spriver_flutter/features/movie/domain/providers/movie_repository_provider.dart';
 import 'movie_detail_provider.dart';
 import '../state/movie_form_state.dart';
 import 'movie_infinite_list_provider.dart';
@@ -40,7 +38,7 @@ class MovieForm extends _$MovieForm {
   }
 
   Future<void> load(int movieId) async {
-    final result = await ref.read(movieRetrieveUseCaseProvider)(RetrieveMovieParams(id: movieId));
+    final result = await ref.read(movieRepositoryProvider).retrieve(movieId);
 
     result.fold(
       (failure) {
@@ -82,9 +80,7 @@ class MovieForm extends _$MovieForm {
 
     state = state.loading();
 
-    final result = await ref.read(movieSaveUseCaseProvider)(
-      SaveMovieParams(movie: movie),
-    );
+    final result = await ref.read(movieRepositoryProvider).save(movie);
 
     return result.fold(
       (failure) {
@@ -105,7 +101,7 @@ class MovieForm extends _$MovieForm {
 
   Future<bool> delete() async {
     if (state.movie.id != null) {
-      final result = await ref.read(movieDeleteUseCaseProvider)(DeleteMovieParams(id: state.movie.id!));
+      final result = await ref.read(movieRepositoryProvider).delete(state.movie.id!);
 
       return result.fold((failure) {
         state = state.failure(failure.message);

@@ -3,5 +3,5 @@ class: {{#pascalCase}}{{name}}{{/pascalCase}}
 table: {{#snakeCase}}{{name}}{{/snakeCase}}
 
 fields:
-    {{#fields}}{{{.}}}
-    {{/fields}}
+{{#modelFields}}{{{.}}}
+{{/modelFields}}

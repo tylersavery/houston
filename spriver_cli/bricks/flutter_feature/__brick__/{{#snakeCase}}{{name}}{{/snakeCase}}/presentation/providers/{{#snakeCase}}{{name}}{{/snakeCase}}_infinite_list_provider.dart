@@ -4,7 +4,7 @@ import 'package:spriver_client/spriver_client.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
 import '../../domain/extensions/{{#snakeCase}}{{name}}{{/snakeCase}}_list_extension.dart';
-import '../../domain/usecases/{{#snakeCase}}{{name}}{{/snakeCase}}_list_usecase.dart';
+import '../../domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_provider.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider {
   final Ref ref;
@@ -17,7 +17,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider {
   }
 
   Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}ListUseCaseProvider)({{#pascalCase}}{{name}}{{/pascalCase}}ListParams(page: page, limit: limit));
+    final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RepositoryProvider).list(page: page, limit: limit);
 
     result.fold((failure) {
       pagingController.error = failure.message;

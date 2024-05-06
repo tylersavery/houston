@@ -18,15 +18,16 @@ class Dashboard extends BaseComponent {
         NavigationBar(
           selectedIndex: navigationShell.currentIndex,
           onDestinationSelected: (index) {
-            navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+            navigationShell.goBranch(index,
+                initialLocation: index == navigationShell.currentIndex);
           },
           destinations: const [
             NavigationDestination(
               label: "Movies",
-              icon: Icon(Icons.food_bank),
+              icon: Icon(Icons.movie),
             ),
             NavigationDestination(
-              label: "Album",
+              label: "Food",
               icon: Icon(Icons.star),
             ),
             //::HOUSTON_INSERT_TAB::
@@ -58,17 +59,18 @@ class Dashboard extends BaseComponent {
                   labelType: NavigationRailLabelType.all,
                   destinations: const [
                     NavigationRailDestination(
-                      label: Text("Food"),
-                      icon: Icon(Icons.food_bank),
+                      label: Text("Movie"),
+                      icon: Icon(Icons.movie),
                     ),
                     NavigationRailDestination(
-                      label: Text("Album"),
+                      label: Text("Food"),
                       icon: Icon(Icons.star),
                     ),
                     //::HOUSTON_INSERT_NAV::
                   ],
                   onDestinationSelected: (index) {
-                    navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+                    navigationShell.goBranch(index,
+                        initialLocation: index == navigationShell.currentIndex);
                   },
                 ),
               ),

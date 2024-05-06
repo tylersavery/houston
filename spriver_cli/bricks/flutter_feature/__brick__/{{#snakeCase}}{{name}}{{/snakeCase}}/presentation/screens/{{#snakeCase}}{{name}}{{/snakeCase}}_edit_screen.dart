@@ -9,9 +9,9 @@ import '../widgets/{{#snakeCase}}{{name}}{{/snakeCase}}_form_widget.dart';
 class {{#pascalCase}}{{name}}{{/pascalCase}}EditScreen extends BaseScreen {
   final int? {{#camelCase}}{{name}}{{/camelCase}}Id;
   {{=<% %>=}}
-  static String route([int? <% #camelCase %><%name%><% /camelCase %>Id]) => "/<% #paramsCase %><%name%><% /paramsCase %>/edit/${<% #camelCase %><%name%><% /camelCase %>Id ?? ':id'}";
+  static String route([int? <% #camelCase %><%name%><% /camelCase %>Id]) => "/<% #paramCase %><%name%><% /paramCase %>/edit/${<% #camelCase %><%name%><% /camelCase %>Id ?? ':id'}";
   <%={{ }}=%>
-  static String routeNew() => "/{{#paramsCase}}{{name}}{{/paramsCase}}/new";
+  static String routeNew() => "/{{#paramCase}}{{name}}{{/paramCase}}/new";
 
   const {{#pascalCase}}{{name}}{{/pascalCase}}EditScreen({
     super.key,

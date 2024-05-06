@@ -1,3 +1,4 @@
+import 'package:spriver_flutter/features/food/presentation/food_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -35,6 +36,7 @@ GoRouter router(RouterRef ref) {
         },
         branches: [
           MovieRoutes.branch,
+          FoodRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],
       )

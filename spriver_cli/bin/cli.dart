@@ -5,12 +5,14 @@ import 'package:spriver_cli/scaffold_feature.dart';
 Future<void> main(List<String> args) async {
   scaffoldFeature(
     name: "food",
-    generateServerpod: true,
-    generateFlutter: false,
-    runPostGenerator: false,
+    generateServerpod: false,
+    generateMigrations: false,
+    runMigrations: false,
+    generateFlutter: true,
+    updateRoutes: true,
+    updateNavigation: true,
+    runPostGenerator: true,
     runPostFormatter: true,
-    updateNavigation: false,
-    updateRoutes: false,
   );
 
   return;

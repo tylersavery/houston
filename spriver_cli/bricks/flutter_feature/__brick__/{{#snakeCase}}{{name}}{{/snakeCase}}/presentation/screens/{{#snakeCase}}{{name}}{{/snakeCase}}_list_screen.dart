@@ -7,7 +7,7 @@ import '{{#snakeCase}}{{name}}{{/snakeCase}}_edit_screen.dart';
 import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_form_provider.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}ListScreen extends BaseScreen {
-  static String route() => "/{{#paramsCase}}{{name}}{{/paramsCase}}";
+  static String route() => "/{{#paramCase}}{{name}}{{/paramCase}}";
 
   const {{#pascalCase}}{{name}}{{/pascalCase}}ListScreen({super.key, super.includeMainDrawer = true});
 

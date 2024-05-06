@@ -1,0 +1,9 @@
+
+class: {{#pascalCase}}{{name}}{{/pascalCase}}List
+
+fields:
+  page: int
+  count: int
+  numPages: int
+  limit: int
+  results: List<{{#pascalCase}}{{name}}{{/pascalCase}}>

@@ -7,7 +7,7 @@ part of 'movie_paginated_list_provider.dart';
 // **************************************************************************
 
 String _$moviePaginatedListHash() =>
-    r'23a438bcd49f016caf648a87bcf4de91026646a5';
+    r'f64c2218dcd574f33e0428b3e53798b1eb9fc621';
 
 /// See also [MoviePaginatedList].
 @ProviderFor(MoviePaginatedList)

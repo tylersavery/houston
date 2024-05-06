@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:spriver_client/spriver_client.dart';
+import 'package:spriver_flutter/features/movie/domain/providers/movie_repository_provider.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
 import '../../domain/extensions/movie_list_extension.dart';
-import '../../domain/usecases/movie_list_usecase.dart';
 
 class MovieInfiniteListProvider {
   final Ref ref;
@@ -17,7 +17,7 @@ class MovieInfiniteListProvider {
   }
 
   Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result = await ref.read(movieListUseCaseProvider)(MovieListParams(page: page, limit: limit));
+    final result = await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
 
     result.fold((failure) {
       pagingController.error = failure.message;

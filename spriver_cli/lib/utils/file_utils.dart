@@ -102,7 +102,7 @@ class FileUtils {
     String text = await f.readAsString();
 
     if (preventDuplicates && _textExists(text, duplicateLookup ?? value)) {
-      print(orange("text already exists in file"));
+      print(grey("String already exists in file. Skipping."));
       return;
     }
 
