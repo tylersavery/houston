@@ -21,7 +21,4 @@ properties:
     name: imageUrl
     type: url
     image: true
-  -
-    name: createdAt
-    type: datetime
   

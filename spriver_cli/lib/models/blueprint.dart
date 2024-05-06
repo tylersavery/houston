@@ -23,7 +23,33 @@ class Blueprint {
   }
 
   factory Blueprint.fromYaml(YamlMap data) {
-    final properties = data['properties'].map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p)).toList();
+    //TODO: allow auto fields to be omitted (metadata)
+
+    final List<BlueprintProperty> properties = [
+      BlueprintProperty(
+        name: "uid",
+        type: 'string',
+        allowBlank: false,
+        allowNull: false,
+      ),
+    ];
+
+    properties.addAll(data['properties'].map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p)).toList());
+
+    properties.addAll([
+      BlueprintProperty(
+        name: "createdAt",
+        type: 'datetime',
+        allowBlank: false,
+        allowNull: false,
+      ),
+      BlueprintProperty(
+        name: "updatedAt",
+        type: 'datetime',
+        allowBlank: false,
+        allowNull: false,
+      ),
+    ]);
 
     return Blueprint(
       name: data['name'],

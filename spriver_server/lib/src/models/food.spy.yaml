@@ -3,9 +3,11 @@ class: Food
 table: food
 
 fields:
+  uid: String
   name: String
   price: double
   description: String
   calories: int
   imageUrl: String
   createdAt: DateTime
+  updatedAt: DateTime

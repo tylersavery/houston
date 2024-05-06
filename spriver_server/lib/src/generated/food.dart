@@ -14,22 +14,26 @@ import 'package:serverpod_serialization/serverpod_serialization.dart';
 abstract class Food extends _i1.TableRow {
   Food._({
     int? id,
+    required this.uid,
     required this.name,
     required this.price,
     required this.description,
     required this.calories,
     required this.imageUrl,
     required this.createdAt,
+    required this.updatedAt,
   }) : super(id);
 
   factory Food({
     int? id,
+    required String uid,
     required String name,
     required double price,
     required String description,
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _FoodImpl;
 
   factory Food.fromJson(
@@ -38,6 +42,7 @@ abstract class Food extends _i1.TableRow {
   ) {
     return Food(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
+      uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
       price:
           serializationManager.deserialize<double>(jsonSerialization['price']),
@@ -49,12 +54,16 @@ abstract class Food extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['imageUrl']),
       createdAt: serializationManager
           .deserialize<DateTime>(jsonSerialization['createdAt']),
+      updatedAt: serializationManager
+          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
   static final t = FoodTable();
 
   static const db = FoodRepository._();
+
+  String uid;
 
   String name;
 
@@ -68,28 +77,34 @@ abstract class Food extends _i1.TableRow {
 
   DateTime createdAt;
 
+  DateTime updatedAt;
+
   @override
   _i1.Table get table => t;
 
   Food copyWith({
     int? id,
+    String? uid,
     String? name,
     double? price,
     String? description,
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'uid': uid,
       'name': name,
       'price': price,
       'description': description,
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -98,12 +113,14 @@ abstract class Food extends _i1.TableRow {
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
+      'uid': uid,
       'name': name,
       'price': price,
       'description': description,
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 
@@ -111,12 +128,14 @@ abstract class Food extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       if (id != null) 'id': id,
+      'uid': uid,
       'name': name,
       'price': price,
       'description': description,
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -129,6 +148,9 @@ abstract class Food extends _i1.TableRow {
     switch (columnName) {
       case 'id':
         id = value;
+        return;
+      case 'uid':
+        uid = value;
         return;
       case 'name':
         name = value;
@@ -147,6 +169,9 @@ abstract class Food extends _i1.TableRow {
         return;
       case 'createdAt':
         createdAt = value;
+        return;
+      case 'updatedAt':
+        updatedAt = value;
         return;
       default:
         throw UnimplementedError();
@@ -300,46 +325,58 @@ class _Undefined {}
 class _FoodImpl extends Food {
   _FoodImpl({
     int? id,
+    required String uid,
     required String name,
     required double price,
     required String description,
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
+    required DateTime updatedAt,
   }) : super._(
           id: id,
+          uid: uid,
           name: name,
           price: price,
           description: description,
           calories: calories,
           imageUrl: imageUrl,
           createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
   Food copyWith({
     Object? id = _Undefined,
+    String? uid,
     String? name,
     double? price,
     String? description,
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return Food(
       id: id is int? ? id : this.id,
+      uid: uid ?? this.uid,
       name: name ?? this.name,
       price: price ?? this.price,
       description: description ?? this.description,
       calories: calories ?? this.calories,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
 
 class FoodTable extends _i1.Table {
   FoodTable({super.tableRelation}) : super(tableName: 'food') {
+    uid = _i1.ColumnString(
+      'uid',
+      this,
+    );
     name = _i1.ColumnString(
       'name',
       this,
@@ -364,7 +401,13 @@ class FoodTable extends _i1.Table {
       'createdAt',
       this,
     );
+    updatedAt = _i1.ColumnDateTime(
+      'updatedAt',
+      this,
+    );
   }
+
+  late final _i1.ColumnString uid;
 
   late final _i1.ColumnString name;
 
@@ -378,15 +421,19 @@ class FoodTable extends _i1.Table {
 
   late final _i1.ColumnDateTime createdAt;
 
+  late final _i1.ColumnDateTime updatedAt;
+
   @override
   List<_i1.Column> get columns => [
         id,
+        uid,
         name,
         price,
         description,
         calories,
         imageUrl,
         createdAt,
+        updatedAt,
       ];
 }
 

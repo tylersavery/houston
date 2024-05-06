@@ -57,6 +57,13 @@ Future<void> scaffoldFeature({
 
     print(green("Serverpod Code Scaffolded."));
 
+    print(white("Running Serverpod Client Generator..."));
+
+    final args = "generate".split(" ");
+    final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
+    await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+    print(green("Client Code Generated."));
+
     if (generateMigrations == true) {
       print(white("Generating Serverpod Migrations..."));
 

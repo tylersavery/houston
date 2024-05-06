@@ -9,7 +9,6 @@ class BlueprintProperty {
   final dynamic defaultValue;
   final bool allowBlank;
   final bool allowNull;
-  final String module;
   final int? uiHeading;
   final bool uiDescription;
   final bool isImage;
@@ -19,8 +18,7 @@ class BlueprintProperty {
     required this.type,
     required this.allowBlank,
     required this.allowNull,
-    required this.module,
-    required this.isImage,
+    this.isImage = false,
     this.maxLength,
     this.defaultValue,
     this.uiHeading,
@@ -53,7 +51,6 @@ class BlueprintProperty {
       allowBlank: data['blank'] ?? false,
       allowNull: data['null'] ?? false,
       defaultValue: data['default'],
-      module: module,
       uiHeading: data['uiHeading'],
       isImage: data['image'] ?? false,
       uiDescription: data['uiDescription'] == true,
@@ -69,6 +66,14 @@ class BlueprintProperty {
   }
 
   String? get flutterEmptyParam {
+    if (name == 'uid') {
+      return '""';
+    }
+
+    if (name == 'createdAt' || name == "updatedAt") {
+      return "DateTime.now()";
+    }
+
     if (!allowNull) {
       final defaultValueString = defaultValue.toString();
 

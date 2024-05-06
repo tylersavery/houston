@@ -1,0 +1,16 @@
+name: movie
+properties:
+  -
+    name: title
+    type: char
+    maxLength: 100
+    uiHeading: 1
+  - 
+    name: year
+    type: int
+    uiHeading: 2
+  -
+    name: imageUrl
+    type: url
+    image: true
+  

@@ -9,20 +9,27 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'package:serverpod_serialization/serverpod_serialization.dart';
 
 abstract class Movie extends _i1.TableRow {
   Movie._({
     int? id,
+    required this.uid,
     required this.title,
     required this.year,
     required this.imageUrl,
+    required this.createdAt,
+    required this.updatedAt,
   }) : super(id);
 
   factory Movie({
     int? id,
+    required String uid,
     required String title,
     required int year,
     required String imageUrl,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _MovieImpl;
 
   factory Movie.fromJson(
@@ -31,11 +38,16 @@ abstract class Movie extends _i1.TableRow {
   ) {
     return Movie(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
+      uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       title:
           serializationManager.deserialize<String>(jsonSerialization['title']),
       year: serializationManager.deserialize<int>(jsonSerialization['year']),
       imageUrl: serializationManager
           .deserialize<String>(jsonSerialization['imageUrl']),
+      createdAt: serializationManager
+          .deserialize<DateTime>(jsonSerialization['createdAt']),
+      updatedAt: serializationManager
+          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -43,28 +55,40 @@ abstract class Movie extends _i1.TableRow {
 
   static const db = MovieRepository._();
 
+  String uid;
+
   String title;
 
   int year;
 
   String imageUrl;
 
+  DateTime createdAt;
+
+  DateTime updatedAt;
+
   @override
   _i1.Table get table => t;
 
   Movie copyWith({
     int? id,
+    String? uid,
     String? title,
     int? year,
     String? imageUrl,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'uid': uid,
       'title': title,
       'year': year,
       'imageUrl': imageUrl,
+      'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -73,9 +97,12 @@ abstract class Movie extends _i1.TableRow {
   Map<String, dynamic> toJsonForDatabase() {
     return {
       'id': id,
+      'uid': uid,
       'title': title,
       'year': year,
       'imageUrl': imageUrl,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 
@@ -83,9 +110,12 @@ abstract class Movie extends _i1.TableRow {
   Map<String, dynamic> allToJson() {
     return {
       if (id != null) 'id': id,
+      'uid': uid,
       'title': title,
       'year': year,
       'imageUrl': imageUrl,
+      'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -99,6 +129,9 @@ abstract class Movie extends _i1.TableRow {
       case 'id':
         id = value;
         return;
+      case 'uid':
+        uid = value;
+        return;
       case 'title':
         title = value;
         return;
@@ -107,6 +140,12 @@ abstract class Movie extends _i1.TableRow {
         return;
       case 'imageUrl':
         imageUrl = value;
+        return;
+      case 'createdAt':
+        createdAt = value;
+        return;
+      case 'updatedAt':
+        updatedAt = value;
         return;
       default:
         throw UnimplementedError();
@@ -260,34 +299,50 @@ class _Undefined {}
 class _MovieImpl extends Movie {
   _MovieImpl({
     int? id,
+    required String uid,
     required String title,
     required int year,
     required String imageUrl,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) : super._(
           id: id,
+          uid: uid,
           title: title,
           year: year,
           imageUrl: imageUrl,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
   Movie copyWith({
     Object? id = _Undefined,
+    String? uid,
     String? title,
     int? year,
     String? imageUrl,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return Movie(
       id: id is int? ? id : this.id,
+      uid: uid ?? this.uid,
       title: title ?? this.title,
       year: year ?? this.year,
       imageUrl: imageUrl ?? this.imageUrl,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
 
 class MovieTable extends _i1.Table {
   MovieTable({super.tableRelation}) : super(tableName: 'movie') {
+    uid = _i1.ColumnString(
+      'uid',
+      this,
+    );
     title = _i1.ColumnString(
       'title',
       this,
@@ -300,7 +355,17 @@ class MovieTable extends _i1.Table {
       'imageUrl',
       this,
     );
+    createdAt = _i1.ColumnDateTime(
+      'createdAt',
+      this,
+    );
+    updatedAt = _i1.ColumnDateTime(
+      'updatedAt',
+      this,
+    );
   }
+
+  late final _i1.ColumnString uid;
 
   late final _i1.ColumnString title;
 
@@ -308,12 +373,19 @@ class MovieTable extends _i1.Table {
 
   late final _i1.ColumnString imageUrl;
 
+  late final _i1.ColumnDateTime createdAt;
+
+  late final _i1.ColumnDateTime updatedAt;
+
   @override
   List<_i1.Column> get columns => [
         id,
+        uid,
         title,
         year,
         imageUrl,
+        createdAt,
+        updatedAt,
       ];
 }
 

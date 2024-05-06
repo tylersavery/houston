@@ -13,22 +13,26 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 abstract class Food extends _i1.SerializableEntity {
   Food._({
     this.id,
+    required this.uid,
     required this.name,
     required this.price,
     required this.description,
     required this.calories,
     required this.imageUrl,
     required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Food({
     int? id,
+    required String uid,
     required String name,
     required double price,
     required String description,
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _FoodImpl;
 
   factory Food.fromJson(
@@ -37,6 +41,7 @@ abstract class Food extends _i1.SerializableEntity {
   ) {
     return Food(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
+      uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
       price:
           serializationManager.deserialize<double>(jsonSerialization['price']),
@@ -48,6 +53,8 @@ abstract class Food extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['imageUrl']),
       createdAt: serializationManager
           .deserialize<DateTime>(jsonSerialization['createdAt']),
+      updatedAt: serializationManager
+          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -55,6 +62,8 @@ abstract class Food extends _i1.SerializableEntity {
   /// database or if it has been fetched from the database. Otherwise,
   /// the id will be null.
   int? id;
+
+  String uid;
 
   String name;
 
@@ -68,25 +77,31 @@ abstract class Food extends _i1.SerializableEntity {
 
   DateTime createdAt;
 
+  DateTime updatedAt;
+
   Food copyWith({
     int? id,
+    String? uid,
     String? name,
     double? price,
     String? description,
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
+    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
+      'uid': uid,
       'name': name,
       'price': price,
       'description': description,
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
+      'updatedAt': updatedAt.toJson(),
     };
   }
 }
@@ -96,40 +111,48 @@ class _Undefined {}
 class _FoodImpl extends Food {
   _FoodImpl({
     int? id,
+    required String uid,
     required String name,
     required double price,
     required String description,
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
+    required DateTime updatedAt,
   }) : super._(
           id: id,
+          uid: uid,
           name: name,
           price: price,
           description: description,
           calories: calories,
           imageUrl: imageUrl,
           createdAt: createdAt,
+          updatedAt: updatedAt,
         );
 
   @override
   Food copyWith({
     Object? id = _Undefined,
+    String? uid,
     String? name,
     double? price,
     String? description,
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return Food(
       id: id is int? ? id : this.id,
+      uid: uid ?? this.uid,
       name: name ?? this.name,
       price: price ?? this.price,
       description: description ?? this.description,
       calories: calories ?? this.calories,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

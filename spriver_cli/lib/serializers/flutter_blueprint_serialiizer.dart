@@ -24,6 +24,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formProviderImports {
     final List<String> importStrings = [];
     for (final p in properties) {
+      if (Constants.hiddenFields.contains(p.name)) {
+        continue;
+      }
+
       if (!Constants.primitives.contains(p.type) && p.type.toLowerCase() != "profile") {
         importStrings.add("import '../../${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
       }
@@ -35,6 +39,9 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formControllers {
     final List<String> items = [];
     for (final property in properties) {
+      if (Constants.hiddenFields.contains(property.name)) {
+        continue;
+      }
       if (Constants.formElementTypes.contains(property.type)) {
         items.add("final ${camelCase(property.name)}Controller = TextEditingController();");
       }
@@ -46,6 +53,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     final List<String> items = [];
 
     for (final property in properties) {
+      if (Constants.hiddenFields.contains(property.name)) {
+        continue;
+      }
+
       if (Constants.formElementTypes.contains(property.type)) {
         if (!property.allowNull) {
           items.add(
@@ -60,6 +71,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     final List<String> items = [];
 
     for (final property in properties) {
+      if (Constants.hiddenFields.contains(property.name)) {
+        continue;
+      }
+
       if (!Constants.formElementTypes.contains(property.type)) {
         if (property.name == 'createdAt' || property.name == 'updatedAt') {
           continue;
@@ -81,6 +96,9 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formControllerRefreshers {
     final List<String> items = [];
     for (final property in properties) {
+      if (Constants.hiddenFields.contains(property.name)) {
+        continue;
+      }
       if (Constants.formElementTypes.contains(property.type)) {
         if (property.isStringish) {
           items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)};");
@@ -95,6 +113,9 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formControllerSetters {
     final List<String> items = [];
     for (final property in properties) {
+      if (Constants.hiddenFields.contains(property.name)) {
+        continue;
+      }
       if (Constants.formElementTypes.contains(property.type)) {
         if (property.isStringish) {
           items.add("${camelCase(property.name)}: ${camelCase(property.name)}Controller.text");
@@ -115,6 +136,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     bool includeButton = false;
     bool includeImageUploader = false;
     for (final p in properties) {
+      if (Constants.hiddenFields.contains(p.name)) {
+        continue;
+      }
+
       if (!Constants.primitives.contains(p.type) && p.type.toLowerCase() != "profile") {
         importStrings.add("import '../../${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
         importStrings.add("import '../../${snakeCase(p.type)}/components/${snakeCase(p.type)}_list.dart';");
@@ -138,6 +163,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formInputs {
     final List<String> items = [];
     for (final property in properties) {
+      if (Constants.hiddenFields.contains(property.name)) {
+        continue;
+      }
+
       if (Constants.formElementTypes.contains(property.type)) {
         final value = property.type == 'text'
             ? """
