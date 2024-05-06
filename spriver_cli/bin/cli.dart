@@ -9,9 +9,9 @@ Future<void> main(List<String> args) async {
     generateMigrations: false,
     runMigrations: false,
     generateFlutter: true,
-    updateRoutes: true,
-    updateNavigation: true,
-    runPostGenerator: true,
+    updateRoutes: false,
+    updateNavigation: false,
+    runPostGenerator: false,
     runPostFormatter: true,
   );
 

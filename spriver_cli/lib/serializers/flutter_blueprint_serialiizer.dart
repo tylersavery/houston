@@ -1,4 +1,5 @@
 import 'package:spriver_cli/constants.dart';
+import 'package:spriver_cli/models/blueprint_property.dart';
 import 'package:spriver_cli/serializers/blueprint_serializer.dart';
 import 'package:spriver_cli/utils/string_utils.dart';
 import 'package:collection/collection.dart';
@@ -203,6 +204,43 @@ ListTile(
     return items;
   }
 
+  // Quality of Life
+
+  String _uiPropertyFormatted(BlueprintProperty property) {
+    final name = camelCase(property.name);
+    if (property.isStringish) {
+      return name;
+    }
+    return '$name.toString()';
+  }
+
+  String? get uiHeading1 {
+    final property = properties.firstWhereOrNull((p) => p.uiHeading == 1);
+
+    if (property != null) {
+      return _uiPropertyFormatted(property);
+    }
+    return null;
+  }
+
+  String? get uiHeading2 {
+    final property = properties.firstWhereOrNull((p) => p.uiHeading == 2);
+
+    if (property != null) {
+      return _uiPropertyFormatted(property);
+    }
+    return null;
+  }
+
+  String? get uiDescription {
+    final property = properties.firstWhereOrNull((p) => p.uiDescription);
+
+    if (property != null) {
+      return _uiPropertyFormatted(property);
+    }
+    return null;
+  }
+
   @override
   Map<String, dynamic> serialize() {
     return {
@@ -215,7 +253,10 @@ ListTile(
       'formControllerSetters': formControllerSetters,
       'formSetters': formSetters,
       'formImports': formImports,
-      'formInputs': formInputs
+      'formInputs': formInputs,
+      'uiHeading1': uiHeading1,
+      'uiHeading2': uiHeading2,
+      'uiDescription': uiDescription,
     };
   }
 }

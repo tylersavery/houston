@@ -11,6 +11,7 @@ class BlueprintProperty {
   final bool allowNull;
   final String module;
   final int? uiHeading;
+  final bool uiDescription;
   final bool isImage;
 
   const BlueprintProperty({
@@ -23,6 +24,7 @@ class BlueprintProperty {
     this.maxLength,
     this.defaultValue,
     this.uiHeading,
+    this.uiDescription = false,
   });
 
   factory BlueprintProperty.fromYaml(YamlMap data) {
@@ -47,13 +49,14 @@ class BlueprintProperty {
     return BlueprintProperty(
       name: data['name'],
       type: type.toString().toLowerCase(),
-      maxLength: data['max_length'],
+      maxLength: data['maxLength'],
       allowBlank: data['blank'] ?? false,
       allowNull: data['null'] ?? false,
       defaultValue: data['default'],
       module: module,
-      uiHeading: data['ui_heading'],
+      uiHeading: data['uiHeading'],
       isImage: data['image'] ?? false,
+      uiDescription: data['uiDescription'] == true,
     );
   }
 

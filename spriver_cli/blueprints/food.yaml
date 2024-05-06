@@ -3,14 +3,17 @@ properties:
   -
     name: name
     type: char
-    max_length: 100
-    ui_heading: 1
+    maxLength: 100
+    uiHeading: 1
   - 
     name: price
     type: double
+    uiHeading: 2
+
   -
     name: description
     type: text
+    uiDescription: true
   -
     name: calories
     type: int
