@@ -102,12 +102,12 @@ class EndpointMovie extends _i1.EndpointRef {
   @override
   String get name => 'movie';
 
-  _i2.Future<_i5.MovieList> list({
+  _i2.Future<_i5.MovieDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i5.MovieList>(
+      caller.callServerEndpoint<_i5.MovieDTOList>(
         'movie',
         'list',
         {
@@ -117,15 +117,15 @@ class EndpointMovie extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i6.Movie?> retrieve(int id) =>
-      caller.callServerEndpoint<_i6.Movie?>(
+  _i2.Future<_i6.MovieDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i6.MovieDTO?>(
         'movie',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i6.Movie> save(_i6.Movie movie) =>
-      caller.callServerEndpoint<_i6.Movie>(
+  _i2.Future<_i6.MovieDTO> save(_i6.MovieDTO movie) =>
+      caller.callServerEndpoint<_i6.MovieDTO>(
         'movie',
         'save',
         {'movie': movie},

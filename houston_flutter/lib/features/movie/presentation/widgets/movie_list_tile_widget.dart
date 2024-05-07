@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:houston_client/houston_client.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import '../screens/movie_detail_screen.dart';
 
 class MovieListTileWidget extends StatelessWidget {

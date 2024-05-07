@@ -12,8 +12,8 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import 'protocol.dart' as _i2;
 import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class MovieList extends _i1.SerializableEntity {
-  MovieList._({
+abstract class MovieDTOList extends _i1.SerializableEntity {
+  MovieDTOList._({
     required this.page,
     required this.count,
     required this.numPages,
@@ -21,26 +21,26 @@ abstract class MovieList extends _i1.SerializableEntity {
     required this.results,
   });
 
-  factory MovieList({
+  factory MovieDTOList({
     required int page,
     required int count,
     required int numPages,
     required int limit,
-    required List<_i2.Movie> results,
-  }) = _MovieListImpl;
+    required List<_i2.MovieDTO> results,
+  }) = _MovieDTOListImpl;
 
-  factory MovieList.fromJson(
+  factory MovieDTOList.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return MovieList(
+    return MovieDTOList(
       page: serializationManager.deserialize<int>(jsonSerialization['page']),
       count: serializationManager.deserialize<int>(jsonSerialization['count']),
       numPages:
           serializationManager.deserialize<int>(jsonSerialization['numPages']),
       limit: serializationManager.deserialize<int>(jsonSerialization['limit']),
       results: serializationManager
-          .deserialize<List<_i2.Movie>>(jsonSerialization['results']),
+          .deserialize<List<_i2.MovieDTO>>(jsonSerialization['results']),
     );
   }
 
@@ -52,14 +52,14 @@ abstract class MovieList extends _i1.SerializableEntity {
 
   int limit;
 
-  List<_i2.Movie> results;
+  List<_i2.MovieDTO> results;
 
-  MovieList copyWith({
+  MovieDTOList copyWith({
     int? page,
     int? count,
     int? numPages,
     int? limit,
-    List<_i2.Movie>? results,
+    List<_i2.MovieDTO>? results,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -84,13 +84,13 @@ abstract class MovieList extends _i1.SerializableEntity {
   }
 }
 
-class _MovieListImpl extends MovieList {
-  _MovieListImpl({
+class _MovieDTOListImpl extends MovieDTOList {
+  _MovieDTOListImpl({
     required int page,
     required int count,
     required int numPages,
     required int limit,
-    required List<_i2.Movie> results,
+    required List<_i2.MovieDTO> results,
   }) : super._(
           page: page,
           count: count,
@@ -100,14 +100,14 @@ class _MovieListImpl extends MovieList {
         );
 
   @override
-  MovieList copyWith({
+  MovieDTOList copyWith({
     int? page,
     int? count,
     int? numPages,
     int? limit,
-    List<_i2.Movie>? results,
+    List<_i2.MovieDTO>? results,
   }) {
-    return MovieList(
+    return MovieDTOList(
       page: page ?? this.page,
       count: count ?? this.count,
       numPages: numPages ?? this.numPages,

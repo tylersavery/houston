@@ -10,8 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Movie extends _i1.SerializableEntity {
-  Movie._({
+abstract class MovieDTO extends _i1.SerializableEntity {
+  MovieDTO._({
     this.id,
     required this.uid,
     required this.title,
@@ -21,7 +21,7 @@ abstract class Movie extends _i1.SerializableEntity {
     required this.updatedAt,
   });
 
-  factory Movie({
+  factory MovieDTO({
     int? id,
     required String uid,
     required String title,
@@ -29,13 +29,13 @@ abstract class Movie extends _i1.SerializableEntity {
     required String imageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _MovieImpl;
+  }) = _MovieDTOImpl;
 
-  factory Movie.fromJson(
+  factory MovieDTO.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return Movie(
+    return MovieDTO(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       title:
@@ -67,7 +67,7 @@ abstract class Movie extends _i1.SerializableEntity {
 
   DateTime updatedAt;
 
-  Movie copyWith({
+  MovieDTO copyWith({
     int? id,
     String? uid,
     String? title,
@@ -92,8 +92,8 @@ abstract class Movie extends _i1.SerializableEntity {
 
 class _Undefined {}
 
-class _MovieImpl extends Movie {
-  _MovieImpl({
+class _MovieDTOImpl extends MovieDTO {
+  _MovieDTOImpl({
     int? id,
     required String uid,
     required String title,
@@ -112,7 +112,7 @@ class _MovieImpl extends Movie {
         );
 
   @override
-  Movie copyWith({
+  MovieDTO copyWith({
     Object? id = _Undefined,
     String? uid,
     String? title,
@@ -121,7 +121,7 @@ class _MovieImpl extends Movie {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return Movie(
+    return MovieDTO(
       id: id is int? ? id : this.id,
       uid: uid ?? this.uid,
       title: title ?? this.title,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_client/houston_client.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import '../../../../core/widgets/base_component.dart';
 import '../../../../core/widgets/infinite_list_widget.dart';
 import '../providers/movie_infinite_list_provider.dart';

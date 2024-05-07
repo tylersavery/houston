@@ -3,15 +3,15 @@ import 'package:houston_server/src/generated/protocol.dart';
 import 'package:houston_server/src/utils/strings.dart';
 
 class MovieEndpoint extends Endpoint {
-  Future<MovieList> list(
+  Future<MovieDTOList> list(
     Session session, {
     required int page,
     required int limit,
     String? orderBy,
   }) async {
-    final count = await Movie.db.count(session);
+    final count = await MovieDTO.db.count(session);
 
-    final results = await Movie.db.find(
+    final results = await MovieDTO.db.find(
       session,
       limit: limit,
       offset: (page * limit) - limit,
@@ -28,7 +28,7 @@ class MovieEndpoint extends Endpoint {
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
     );
 
-    return MovieList(
+    return MovieDTOList(
       count: count,
       numPages: (count / limit).ceil(),
       page: page,
@@ -37,16 +37,16 @@ class MovieEndpoint extends Endpoint {
     );
   }
 
-  Future<Movie?> retrieve(Session session, int id) async {
-    return await Movie.db.findById(session, id);
+  Future<MovieDTO?> retrieve(Session session, int id) async {
+    return await MovieDTO.db.findById(session, id);
   }
 
-  Future<Movie> save(Session session, Movie movie) async {
+  Future<MovieDTO> save(Session session, MovieDTO movie) async {
     if (movie.id != null) {
-      final existingMovie = await Movie.db.findById(session, movie.id!);
+      final existingMovie = await MovieDTO.db.findById(session, movie.id!);
 
       if (existingMovie != null) {
-        return await Movie.db.updateRow(
+        return await MovieDTO.db.updateRow(
           session,
           movie.copyWith(
             uid: existingMovie.uid,
@@ -58,14 +58,14 @@ class MovieEndpoint extends Endpoint {
     }
 
     final uid = await _uniqueUid(session);
-    return await Movie.db.insertRow(
+    return await MovieDTO.db.insertRow(
       session,
       movie.copyWith(uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
     );
   }
 
   Future<void> delete(Session session, int id) async {
-    await Movie.db.deleteWhere(session, where: (row) => row.id.equals(id));
+    await MovieDTO.db.deleteWhere(session, where: (row) => row.id.equals(id));
   }
 
   Future<String> _uniqueUid(Session session) async {
@@ -73,7 +73,7 @@ class MovieEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await Movie.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await MovieDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
       if (unique) {
         return uid;
       }

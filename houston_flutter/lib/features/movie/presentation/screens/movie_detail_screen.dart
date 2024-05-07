@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/base_screen.dart';
 import '../../../../core/widgets/loader.dart';
-import '../../domain/extensions/movie_extension.dart';
 import 'movie_edit_screen.dart';
 import 'movie_list_screen.dart';
 import '../providers/movie_detail_provider.dart';
@@ -13,8 +12,7 @@ import '../widgets/movie_detail_widget.dart';
 class MovieDetailScreen extends BaseScreen {
   final int movieId;
 
-  static String route([int? movieId]) =>
-      "${MovieListScreen.route()}/${movieId ?? ':id'}";
+  static String route([int? movieId]) => "${MovieListScreen.route()}/${movieId ?? ':id'}";
 
   const MovieDetailScreen({super.key, required this.movieId});
 

@@ -11,8 +11,8 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class Movie extends _i1.TableRow {
-  Movie._({
+abstract class MovieDTO extends _i1.TableRow {
+  MovieDTO._({
     int? id,
     required this.uid,
     required this.title,
@@ -22,7 +22,7 @@ abstract class Movie extends _i1.TableRow {
     required this.updatedAt,
   }) : super(id);
 
-  factory Movie({
+  factory MovieDTO({
     int? id,
     required String uid,
     required String title,
@@ -30,13 +30,13 @@ abstract class Movie extends _i1.TableRow {
     required String imageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _MovieImpl;
+  }) = _MovieDTOImpl;
 
-  factory Movie.fromJson(
+  factory MovieDTO.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return Movie(
+    return MovieDTO(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       title:
@@ -51,9 +51,9 @@ abstract class Movie extends _i1.TableRow {
     );
   }
 
-  static final t = MovieTable();
+  static final t = MovieDTOTable();
 
-  static const db = MovieRepository._();
+  static const db = MovieDTORepository._();
 
   String uid;
 
@@ -70,7 +70,7 @@ abstract class Movie extends _i1.TableRow {
   @override
   _i1.Table get table => t;
 
-  Movie copyWith({
+  MovieDTO copyWith({
     int? id,
     String? uid,
     String? title,
@@ -153,9 +153,9 @@ abstract class Movie extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Movie>> find(
+  static Future<List<MovieDTO>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -164,8 +164,8 @@ abstract class Movie extends _i1.TableRow {
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Movie>(
-      where: where != null ? where(Movie.t) : null,
+    return session.db.find<MovieDTO>(
+      where: where != null ? where(MovieDTO.t) : null,
       limit: limit,
       offset: offset,
       orderBy: orderBy,
@@ -177,17 +177,17 @@ abstract class Movie extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Movie?> findSingleRow(
+  static Future<MovieDTO?> findSingleRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findSingleRow<Movie>(
-      where: where != null ? where(Movie.t) : null,
+    return session.db.findSingleRow<MovieDTO>(
+      where: where != null ? where(MovieDTO.t) : null,
       offset: offset,
       orderBy: orderBy,
       orderDescending: orderDescending,
@@ -197,21 +197,21 @@ abstract class Movie extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Movie?> findById(
+  static Future<MovieDTO?> findById(
     _i1.Session session,
     int id,
   ) async {
-    return session.db.findById<Movie>(id);
+    return session.db.findById<MovieDTO>(id);
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<MovieTable> where,
+    required _i1.WhereExpressionBuilder<MovieDTOTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Movie>(
-      where: where(Movie.t),
+    return session.db.delete<MovieDTO>(
+      where: where(MovieDTO.t),
       transaction: transaction,
     );
   }
@@ -219,7 +219,7 @@ abstract class Movie extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
-    Movie row, {
+    MovieDTO row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteRow(
@@ -231,7 +231,7 @@ abstract class Movie extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
-    Movie row, {
+    MovieDTO row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.update(
@@ -244,7 +244,7 @@ abstract class Movie extends _i1.TableRow {
       'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
-    Movie row, {
+    MovieDTO row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.insert(
@@ -256,39 +256,39 @@ abstract class Movie extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Movie>(
-      where: where != null ? where(Movie.t) : null,
+    return session.db.count<MovieDTO>(
+      where: where != null ? where(MovieDTO.t) : null,
       limit: limit,
       useCache: useCache,
       transaction: transaction,
     );
   }
 
-  static MovieInclude include() {
-    return MovieInclude._();
+  static MovieDTOInclude include() {
+    return MovieDTOInclude._();
   }
 
-  static MovieIncludeList includeList({
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+  static MovieDTOIncludeList includeList({
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<MovieTable>? orderBy,
+    _i1.OrderByBuilder<MovieDTOTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<MovieTable>? orderByList,
-    MovieInclude? include,
+    _i1.OrderByListBuilder<MovieDTOTable>? orderByList,
+    MovieDTOInclude? include,
   }) {
-    return MovieIncludeList._(
+    return MovieDTOIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(Movie.t),
+      orderBy: orderBy?.call(MovieDTO.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(Movie.t),
+      orderByList: orderByList?.call(MovieDTO.t),
       include: include,
     );
   }
@@ -296,8 +296,8 @@ abstract class Movie extends _i1.TableRow {
 
 class _Undefined {}
 
-class _MovieImpl extends Movie {
-  _MovieImpl({
+class _MovieDTOImpl extends MovieDTO {
+  _MovieDTOImpl({
     int? id,
     required String uid,
     required String title,
@@ -316,7 +316,7 @@ class _MovieImpl extends Movie {
         );
 
   @override
-  Movie copyWith({
+  MovieDTO copyWith({
     Object? id = _Undefined,
     String? uid,
     String? title,
@@ -325,7 +325,7 @@ class _MovieImpl extends Movie {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return Movie(
+    return MovieDTO(
       id: id is int? ? id : this.id,
       uid: uid ?? this.uid,
       title: title ?? this.title,
@@ -337,8 +337,8 @@ class _MovieImpl extends Movie {
   }
 }
 
-class MovieTable extends _i1.Table {
-  MovieTable({super.tableRelation}) : super(tableName: 'movie') {
+class MovieDTOTable extends _i1.Table {
+  MovieDTOTable({super.tableRelation}) : super(tableName: 'movie') {
     uid = _i1.ColumnString(
       'uid',
       this,
@@ -389,22 +389,22 @@ class MovieTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use MovieTable.t instead.')
-MovieTable tMovie = MovieTable();
+@Deprecated('Use MovieDTOTable.t instead.')
+MovieDTOTable tMovieDTO = MovieDTOTable();
 
-class MovieInclude extends _i1.IncludeObject {
-  MovieInclude._();
+class MovieDTOInclude extends _i1.IncludeObject {
+  MovieDTOInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Movie.t;
+  _i1.Table get table => MovieDTO.t;
 }
 
-class MovieIncludeList extends _i1.IncludeList {
-  MovieIncludeList._({
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+class MovieDTOIncludeList extends _i1.IncludeList {
+  MovieDTOIncludeList._({
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -412,33 +412,33 @@ class MovieIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(Movie.t);
+    super.where = where?.call(MovieDTO.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Movie.t;
+  _i1.Table get table => MovieDTO.t;
 }
 
-class MovieRepository {
-  const MovieRepository._();
+class MovieDTORepository {
+  const MovieDTORepository._();
 
-  Future<List<Movie>> find(
+  Future<List<MovieDTO>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<MovieTable>? orderBy,
+    _i1.OrderByBuilder<MovieDTOTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<MovieTable>? orderByList,
+    _i1.OrderByListBuilder<MovieDTOTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Movie>(
-      where: where?.call(Movie.t),
-      orderBy: orderBy?.call(Movie.t),
-      orderByList: orderByList?.call(Movie.t),
+    return session.dbNext.find<MovieDTO>(
+      where: where?.call(MovieDTO.t),
+      orderBy: orderBy?.call(MovieDTO.t),
+      orderByList: orderByList?.call(MovieDTO.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -446,90 +446,90 @@ class MovieRepository {
     );
   }
 
-  Future<Movie?> findFirstRow(
+  Future<MovieDTO?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? offset,
-    _i1.OrderByBuilder<MovieTable>? orderBy,
+    _i1.OrderByBuilder<MovieDTOTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<MovieTable>? orderByList,
+    _i1.OrderByListBuilder<MovieDTOTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Movie>(
-      where: where?.call(Movie.t),
-      orderBy: orderBy?.call(Movie.t),
-      orderByList: orderByList?.call(Movie.t),
+    return session.dbNext.findFirstRow<MovieDTO>(
+      where: where?.call(MovieDTO.t),
+      orderBy: orderBy?.call(MovieDTO.t),
+      orderByList: orderByList?.call(MovieDTO.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<Movie?> findById(
+  Future<MovieDTO?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Movie>(
+    return session.dbNext.findById<MovieDTO>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<Movie>> insert(
+  Future<List<MovieDTO>> insert(
     _i1.Session session,
-    List<Movie> rows, {
+    List<MovieDTO> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Movie>(
+    return session.dbNext.insert<MovieDTO>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<Movie> insertRow(
+  Future<MovieDTO> insertRow(
     _i1.Session session,
-    Movie row, {
+    MovieDTO row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Movie>(
+    return session.dbNext.insertRow<MovieDTO>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<Movie>> update(
+  Future<List<MovieDTO>> update(
     _i1.Session session,
-    List<Movie> rows, {
-    _i1.ColumnSelections<MovieTable>? columns,
+    List<MovieDTO> rows, {
+    _i1.ColumnSelections<MovieDTOTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Movie>(
+    return session.dbNext.update<MovieDTO>(
       rows,
-      columns: columns?.call(Movie.t),
+      columns: columns?.call(MovieDTO.t),
       transaction: transaction,
     );
   }
 
-  Future<Movie> updateRow(
+  Future<MovieDTO> updateRow(
     _i1.Session session,
-    Movie row, {
-    _i1.ColumnSelections<MovieTable>? columns,
+    MovieDTO row, {
+    _i1.ColumnSelections<MovieDTOTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Movie>(
+    return session.dbNext.updateRow<MovieDTO>(
       row,
-      columns: columns?.call(Movie.t),
+      columns: columns?.call(MovieDTO.t),
       transaction: transaction,
     );
   }
 
   Future<List<int>> delete(
     _i1.Session session,
-    List<Movie> rows, {
+    List<MovieDTO> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Movie>(
+    return session.dbNext.delete<MovieDTO>(
       rows,
       transaction: transaction,
     );
@@ -537,10 +537,10 @@ class MovieRepository {
 
   Future<int> deleteRow(
     _i1.Session session,
-    Movie row, {
+    MovieDTO row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Movie>(
+    return session.dbNext.deleteRow<MovieDTO>(
       row,
       transaction: transaction,
     );
@@ -548,23 +548,23 @@ class MovieRepository {
 
   Future<List<int>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<MovieTable> where,
+    required _i1.WhereExpressionBuilder<MovieDTOTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Movie>(
-      where: where(Movie.t),
+    return session.dbNext.deleteWhere<MovieDTO>(
+      where: where(MovieDTO.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<MovieTable>? where,
+    _i1.WhereExpressionBuilder<MovieDTOTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Movie>(
-      where: where?.call(Movie.t),
+    return session.dbNext.count<MovieDTO>(
+      where: where?.call(MovieDTO.t),
       limit: limit,
       transaction: transaction,
     );

@@ -1,4 +1,4 @@
-import 'package:houston_client/houston_client.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 
 class MovieFormState {
   final Movie movie;

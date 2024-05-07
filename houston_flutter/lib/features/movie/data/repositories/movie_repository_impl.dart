@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:houston_client/houston_client.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
+import 'package:houston_flutter/features/movie/data/mappers/movie_mapper.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../datasources/movie_datasource.dart';
@@ -12,16 +13,20 @@ class MovieRespositoryImpl implements MovieRepository {
   const MovieRespositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, PaginatedResponse<Movie>>> list({required int page, required int limit}) async {
+  Future<Either<Failure, PaginatedResponse<Movie>>> list({
+    required int page,
+    required int limit,
+  }) async {
     try {
-      final result = await dataSource.list(page: page, limit: limit);
+      final movieDtoList = await dataSource.list(page: page, limit: limit);
+
       return right(
         PaginatedResponse<Movie>(
-          page: result.page,
-          count: result.count,
-          numPages: result.numPages,
-          limit: result.limit,
-          results: result.results,
+          page: movieDtoList.page,
+          count: movieDtoList.count,
+          numPages: movieDtoList.numPages,
+          limit: movieDtoList.limit,
+          results: MovieMapper.listToModel(movieDtoList.results),
         ),
       );
     } on ServerException catch (e) {
@@ -32,7 +37,8 @@ class MovieRespositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, Movie>> retrieve(int id) async {
     try {
-      return right(await dataSource.retrieve(id));
+      final movieDto = await dataSource.retrieve(id);
+      return right(MovieMapper.toModel(movieDto));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
@@ -41,7 +47,8 @@ class MovieRespositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, Movie>> save(Movie movie) async {
     try {
-      return right(await dataSource.save(movie));
+      final movieDto = await dataSource.save(MovieMapper.toDto(movie));
+      return right(MovieMapper.toModel(movieDto));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
@@ -50,7 +57,8 @@ class MovieRespositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, void>> delete(int id) async {
     try {
-      return right(await dataSource.delete(id));
+      await dataSource.delete(id);
+      return right(null);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

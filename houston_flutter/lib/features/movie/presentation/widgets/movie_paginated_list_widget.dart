@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/widgets/base_component.dart';
 import '../../../../core/widgets/loader.dart';
-import '../../domain/extensions/movie_list_extension.dart';
 import '../providers/movie_paginated_list_provider.dart';
 import '../state/movie_paginated_list_state.dart';
 import 'movie_list_tile_widget.dart';
@@ -40,9 +39,7 @@ class MoviePaginatedListWidget extends BaseComponent {
                   type: AppButtonType.Text,
                   onPressed: state.data.page > 1
                       ? () {
-                          provider.load(
-                              page: state.data.page - 1,
-                              limit: state.data.limit);
+                          provider.load(page: state.data.page - 1, limit: state.data.limit);
                         }
                       : null,
                 ),
@@ -53,9 +50,7 @@ class MoviePaginatedListWidget extends BaseComponent {
                   iconTrails: true,
                   onPressed: state.data.canLoadMore
                       ? () {
-                          provider.load(
-                              page: state.data.page + 1,
-                              limit: state.data.limit);
+                          provider.load(page: state.data.page + 1, limit: state.data.limit);
                         }
                       : null,
                 ),

@@ -1,9 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:houston_client/houston_client.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
-import '../../domain/extensions/movie_list_extension.dart';
 import '../../domain/providers/movie_repository_provider.dart';
 
 class MovieInfiniteListProvider {

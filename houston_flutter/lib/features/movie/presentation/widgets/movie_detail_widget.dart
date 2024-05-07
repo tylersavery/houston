@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:houston_client/houston_client.dart';
-import '../../domain/extensions/movie_extension.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 
 class MovieDetailWidget extends StatelessWidget {
   final Movie movie;

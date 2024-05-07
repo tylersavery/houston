@@ -114,7 +114,7 @@ class Protocol extends _i1.SerializationManagerServer {
     ),
     _i2.TableDefinition(
       name: 'movie',
-      dartName: 'Movie',
+      dartName: 'MovieDTO',
       schema: 'public',
       module: 'houston',
       columns: [
@@ -199,11 +199,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i5.FoodList) {
       return _i5.FoodList.fromJson(data, this) as T;
     }
-    if (t == _i6.Movie) {
-      return _i6.Movie.fromJson(data, this) as T;
+    if (t == _i6.MovieDTO) {
+      return _i6.MovieDTO.fromJson(data, this) as T;
     }
-    if (t == _i7.MovieList) {
-      return _i7.MovieList.fromJson(data, this) as T;
+    if (t == _i7.MovieDTOList) {
+      return _i7.MovieDTOList.fromJson(data, this) as T;
     }
     if (t == _i1.getType<_i4.Food?>()) {
       return (data != null ? _i4.Food.fromJson(data, this) : null) as T;
@@ -211,18 +211,18 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i5.FoodList?>()) {
       return (data != null ? _i5.FoodList.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i6.Movie?>()) {
-      return (data != null ? _i6.Movie.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i6.MovieDTO?>()) {
+      return (data != null ? _i6.MovieDTO.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i7.MovieList?>()) {
-      return (data != null ? _i7.MovieList.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i7.MovieDTOList?>()) {
+      return (data != null ? _i7.MovieDTOList.fromJson(data, this) : null) as T;
     }
     if (t == List<_i8.Food>) {
       return (data as List).map((e) => deserialize<_i8.Food>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i8.Movie>) {
-      return (data as List).map((e) => deserialize<_i8.Movie>(e)).toList()
+    if (t == List<_i8.MovieDTO>) {
+      return (data as List).map((e) => deserialize<_i8.MovieDTO>(e)).toList()
           as dynamic;
     }
     try {
@@ -247,11 +247,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i5.FoodList) {
       return 'FoodList';
     }
-    if (data is _i6.Movie) {
-      return 'Movie';
+    if (data is _i6.MovieDTO) {
+      return 'MovieDTO';
     }
-    if (data is _i7.MovieList) {
-      return 'MovieList';
+    if (data is _i7.MovieDTOList) {
+      return 'MovieDTOList';
     }
     return super.getClassNameForObject(data);
   }
@@ -268,11 +268,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'FoodList') {
       return deserialize<_i5.FoodList>(data['data']);
     }
-    if (data['className'] == 'Movie') {
-      return deserialize<_i6.Movie>(data['data']);
+    if (data['className'] == 'MovieDTO') {
+      return deserialize<_i6.MovieDTO>(data['data']);
     }
-    if (data['className'] == 'MovieList') {
-      return deserialize<_i7.MovieList>(data['data']);
+    if (data['className'] == 'MovieDTOList') {
+      return deserialize<_i7.MovieDTOList>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -294,8 +294,8 @@ class Protocol extends _i1.SerializationManagerServer {
     switch (t) {
       case _i4.Food:
         return _i4.Food.t;
-      case _i6.Movie:
-        return _i6.Movie.t;
+      case _i6.MovieDTO:
+        return _i6.MovieDTO.t;
     }
     return null;
   }

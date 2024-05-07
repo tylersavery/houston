@@ -259,7 +259,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'movie': _i1.ParameterDescription(
               name: 'movie',
-              type: _i1.getType<_i7.Movie>(),
+              type: _i1.getType<_i7.MovieDTO>(),
               nullable: false,
             )
           },
