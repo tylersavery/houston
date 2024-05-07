@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_client/houston_client.dart';
+import 'package:houston_flutter/core/models/paginated_response.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../datasources/movie_datasource.dart';
@@ -11,9 +12,18 @@ class MovieRespositoryImpl implements MovieRepository {
   const MovieRespositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, MovieList>> list({required int page, required int limit}) async {
+  Future<Either<Failure, PaginatedResponse<Movie>>> list({required int page, required int limit}) async {
     try {
-      return right(await dataSource.list(page: page, limit: limit));
+      final result = await dataSource.list(page: page, limit: limit);
+      return right(
+        PaginatedResponse<Movie>(
+          page: result.page,
+          count: result.count,
+          numPages: result.numPages,
+          limit: result.limit,
+          results: result.results,
+        ),
+      );
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
