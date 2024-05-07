@@ -1,4 +1,5 @@
 import 'package:houston_client/houston_client.dart';
+import 'package:houston_flutter/core/models/paginated_response.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListState {}
 
@@ -7,7 +8,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListStateInitial extends {{
 class {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListStateLoading extends {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListState {}
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListStateSuccess extends {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListState {
-  final {{#pascalCase}}{{name}}{{/pascalCase}}List data;
+  final PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}> data;
 
   {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListStateSuccess({required this.data});
 }
