@@ -7,10 +7,10 @@ Future<void> main(List<String> args) async {
     name: "food",
     generateServerpod: false,
     generateFlutter: true,
-    generateMigrations: true,
+    generateMigrations: false,
     runMigrations: false,
-    updateRoutes: false,
-    updateNavigation: false,
+    updateRoutes: true,
+    updateNavigation: true,
     runPostGenerator: true,
     runPostFormatter: true,
   );

@@ -9,7 +9,7 @@ properties:
     name: price
     type: double
     uiHeading: 2
-
+    orderable: true
   -
     name: description
     type: text
@@ -17,6 +17,7 @@ properties:
   -
     name: calories
     type: int
+    orderable: true
   -
     name: imageUrl
     type: url

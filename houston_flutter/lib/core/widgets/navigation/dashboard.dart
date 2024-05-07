@@ -26,6 +26,7 @@ class Dashboard extends BaseComponent {
               label: "Movies",
               icon: Icon(Icons.movie),
             ),
+
             NavigationDestination(
               label: "Food",
               icon: Icon(Icons.star),
@@ -62,6 +63,7 @@ class Dashboard extends BaseComponent {
                       label: Text("Movie"),
                       icon: Icon(Icons.movie),
                     ),
+
                     NavigationRailDestination(
                       label: Text("Food"),
                       icon: Icon(Icons.star),

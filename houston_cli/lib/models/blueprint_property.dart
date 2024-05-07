@@ -12,6 +12,7 @@ class BlueprintProperty {
   final int? uiHeading;
   final bool uiDescription;
   final bool isImage;
+  final bool orderable;
 
   const BlueprintProperty({
     required this.name,
@@ -23,6 +24,7 @@ class BlueprintProperty {
     this.defaultValue,
     this.uiHeading,
     this.uiDescription = false,
+    this.orderable = false,
   });
 
   factory BlueprintProperty.fromYaml(YamlMap data) {
@@ -54,6 +56,7 @@ class BlueprintProperty {
       uiHeading: data['uiHeading'],
       isImage: data['image'] ?? false,
       uiDescription: data['uiDescription'] == true,
+      orderable: data['orderable'] == true,
     );
   }
 

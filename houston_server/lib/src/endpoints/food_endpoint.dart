@@ -22,6 +22,11 @@ class FoodEndpoint extends Endpoint {
                   return t.createdAt;
                 case 'updatedAt':
                   return t.updatedAt;
+                case 'price':
+	return t.price;
+                case 'calories':
+	return t.calories;
+                
                 default:
                   return t.id;
               }

@@ -81,6 +81,20 @@ Future<void> scaffoldFeature({
       await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
       print(green("Migration Complete."));
     }
+
+    if (runPostFormatter == true) {
+      final filePrefix = snakeCase(name);
+
+      print(white("Formatting Serverpod Files..."));
+      final filePaths = [
+        "$serverpodParentDir/endpoints/${filePrefix}_endpoint.dart",
+      ];
+
+      for (final filePath in filePaths) {
+        await Process.start("dart", ["format", filePath]);
+      }
+      print(green("Files Formatted."));
+    }
   }
 
   if (generateFlutter == true) {

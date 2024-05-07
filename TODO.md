@@ -4,8 +4,6 @@
 
 [x] uuid / unique id / other auto fields
 
-[ ] allow icon to be set
-
 [ ] sortable fields dynamic 
 
 [ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)

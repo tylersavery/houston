@@ -22,6 +22,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
                   return t.createdAt;
                 case 'updatedAt':
                   return t.updatedAt;
+                {{#additionalOrdering}}{{{.}}}
+                {{/additionalOrdering}}
                 default:
                   return t.id;
               }
