@@ -1,4 +1,5 @@
 import 'package:dcli/dcli.dart';
+import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:yaml/yaml.dart';
 
@@ -68,6 +69,55 @@ class BlueprintProperty {
     return ['int', 'double'].contains(type);
   }
 
+  String _modelAnnotationValueToString(Map<String, dynamic> kv) {
+    final v = kv[kv.keys.first];
+    if (v.toString().contains("ToJson")) {
+      return '${kv.keys.first}: $v';
+    }
+
+    if (v.runtimeType == String) {
+      return '${kv.keys.first}: "$v"';
+    }
+    return '${kv.keys.first}: $v';
+  }
+
+  List<Map<String, dynamic>> get _modelAnnotations {
+    final List<Map<String, dynamic>> values = [];
+    if (snakeCase(name) != camelCase(name)) {
+      values.add({'name': snakeCase(name)});
+    }
+
+    if (defaultValue != null) {
+      values.add({"defaultValue": defaultValue});
+    }
+
+    if (!Constants.primitives.contains(type)) {
+      values.add({"toJson": "${type}ToJson"});
+    }
+
+    if (name == "created_at") {
+      values.add({"includeToJson": false});
+    }
+
+    return values;
+  }
+
+  String get _modelAnnotation {
+    final values = _modelAnnotations;
+
+    if (values.isNotEmpty) {
+      return '@JsonKey(${values.map((item) => _modelAnnotationValueToString(item)).toList().join(", ")}) ';
+    }
+
+    return '';
+  }
+
+  String get modelField {
+    final value =
+        "$_modelAnnotation${allowNull == true && defaultValue == null ? '' : 'required '}$dartTypeAsString${allowNull ? '?' : ''} ${camelCase(name)},";
+    return value;
+  }
+
   String? get flutterEmptyParam {
     if (name == 'uid') {
       return '""';
@@ -135,5 +185,17 @@ class BlueprintProperty {
       default:
         return 'dynamic';
     }
+  }
+
+  Map<String, dynamic> serialize() {
+    return {
+      'name': name,
+      'type': type,
+      'maxLength': maxLength,
+      'default': defaultValue,
+      'allowBlank': allowBlank,
+      'allowNull': allowNull,
+      'modelField': modelField,
+    };
   }
 }

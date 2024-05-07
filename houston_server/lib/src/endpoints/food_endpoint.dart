@@ -3,15 +3,15 @@ import 'package:houston_server/src/generated/protocol.dart';
 import 'package:houston_server/src/utils/strings.dart';
 
 class FoodEndpoint extends Endpoint {
-  Future<FoodList> list(
+  Future<FoodDTOList> list(
     Session session, {
     required int page,
     required int limit,
     String? orderBy,
   }) async {
-    final count = await Food.db.count(session);
+    final count = await FoodDTO.db.count(session);
 
-    final results = await Food.db.find(
+    final results = await FoodDTO.db.find(
       session,
       limit: limit,
       offset: (page * limit) - limit,
@@ -23,10 +23,10 @@ class FoodEndpoint extends Endpoint {
                 case 'updatedAt':
                   return t.updatedAt;
                 case 'price':
-	return t.price;
+                  return t.price;
                 case 'calories':
-	return t.calories;
-                
+                  return t.calories;
+
                 default:
                   return t.id;
               }
@@ -35,7 +35,7 @@ class FoodEndpoint extends Endpoint {
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
     );
 
-    return FoodList(
+    return FoodDTOList(
       count: count,
       numPages: (count / limit).ceil(),
       page: page,
@@ -44,16 +44,16 @@ class FoodEndpoint extends Endpoint {
     );
   }
 
-  Future<Food?> retrieve(Session session, int id) async {
-    return await Food.db.findById(session, id);
+  Future<FoodDTO?> retrieve(Session session, int id) async {
+    return await FoodDTO.db.findById(session, id);
   }
 
-  Future<Food> save(Session session, Food food) async {
+  Future<FoodDTO> save(Session session, FoodDTO food) async {
     if (food.id != null) {
-      final existingFood = await Food.db.findById(session, food.id!);
+      final existingFood = await FoodDTO.db.findById(session, food.id!);
 
       if (existingFood != null) {
-        return await Food.db.updateRow(
+        return await FoodDTO.db.updateRow(
           session,
           food.copyWith(
             uid: existingFood.uid,
@@ -65,14 +65,15 @@ class FoodEndpoint extends Endpoint {
     }
 
     final uid = await _uniqueUid(session);
-    return await Food.db.insertRow(
+    return await FoodDTO.db.insertRow(
       session,
-      food.copyWith(uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
+      food.copyWith(
+          uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
     );
   }
 
   Future<void> delete(Session session, int id) async {
-    await Food.db.deleteWhere(session, where: (row) => row.id.equals(id));
+    await FoodDTO.db.deleteWhere(session, where: (row) => row.id.equals(id));
   }
 
   Future<String> _uniqueUid(Session session) async {
@@ -80,7 +81,9 @@ class FoodEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await Food.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await FoodDTO.db
+              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+          null;
       if (unique) {
         return uid;
       }

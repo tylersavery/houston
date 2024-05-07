@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:houston_client/houston_client.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 import '../screens/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_screen.dart';
- {{^uiHeading1}}
-import '../../domain/extensions/{{#snakeCase}}{{name}}{{/snakeCase}}_extension.dart';
-{{/uiHeading1}}
+
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget extends StatelessWidget {
   final {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}};

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:houston_client/houston_client.dart';
-import '../../domain/extensions/{{#snakeCase}}{{name}}{{/snakeCase}}_extension.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}DetailWidget extends StatelessWidget {
   final {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}};

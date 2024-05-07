@@ -12,8 +12,8 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import 'protocol.dart' as _i2;
 import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class FoodList extends _i1.SerializableEntity {
-  FoodList._({
+abstract class FoodDTOList extends _i1.SerializableEntity {
+  FoodDTOList._({
     required this.page,
     required this.count,
     required this.numPages,
@@ -21,26 +21,26 @@ abstract class FoodList extends _i1.SerializableEntity {
     required this.results,
   });
 
-  factory FoodList({
+  factory FoodDTOList({
     required int page,
     required int count,
     required int numPages,
     required int limit,
-    required List<_i2.Food> results,
-  }) = _FoodListImpl;
+    required List<_i2.FoodDTO> results,
+  }) = _FoodDTOListImpl;
 
-  factory FoodList.fromJson(
+  factory FoodDTOList.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return FoodList(
+    return FoodDTOList(
       page: serializationManager.deserialize<int>(jsonSerialization['page']),
       count: serializationManager.deserialize<int>(jsonSerialization['count']),
       numPages:
           serializationManager.deserialize<int>(jsonSerialization['numPages']),
       limit: serializationManager.deserialize<int>(jsonSerialization['limit']),
       results: serializationManager
-          .deserialize<List<_i2.Food>>(jsonSerialization['results']),
+          .deserialize<List<_i2.FoodDTO>>(jsonSerialization['results']),
     );
   }
 
@@ -52,14 +52,14 @@ abstract class FoodList extends _i1.SerializableEntity {
 
   int limit;
 
-  List<_i2.Food> results;
+  List<_i2.FoodDTO> results;
 
-  FoodList copyWith({
+  FoodDTOList copyWith({
     int? page,
     int? count,
     int? numPages,
     int? limit,
-    List<_i2.Food>? results,
+    List<_i2.FoodDTO>? results,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -84,13 +84,13 @@ abstract class FoodList extends _i1.SerializableEntity {
   }
 }
 
-class _FoodListImpl extends FoodList {
-  _FoodListImpl({
+class _FoodDTOListImpl extends FoodDTOList {
+  _FoodDTOListImpl({
     required int page,
     required int count,
     required int numPages,
     required int limit,
-    required List<_i2.Food> results,
+    required List<_i2.FoodDTO> results,
   }) : super._(
           page: page,
           count: count,
@@ -100,14 +100,14 @@ class _FoodListImpl extends FoodList {
         );
 
   @override
-  FoodList copyWith({
+  FoodDTOList copyWith({
     int? page,
     int? count,
     int? numPages,
     int? limit,
-    List<_i2.Food>? results,
+    List<_i2.FoodDTO>? results,
   }) {
-    return FoodList(
+    return FoodDTOList(
       page: page ?? this.page,
       count: count ?? this.count,
       numPages: numPages ?? this.numPages,

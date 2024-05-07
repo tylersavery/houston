@@ -11,8 +11,8 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class Food extends _i1.TableRow {
-  Food._({
+abstract class FoodDTO extends _i1.TableRow {
+  FoodDTO._({
     int? id,
     required this.uid,
     required this.name,
@@ -24,7 +24,7 @@ abstract class Food extends _i1.TableRow {
     required this.updatedAt,
   }) : super(id);
 
-  factory Food({
+  factory FoodDTO({
     int? id,
     required String uid,
     required String name,
@@ -34,13 +34,13 @@ abstract class Food extends _i1.TableRow {
     required String imageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _FoodImpl;
+  }) = _FoodDTOImpl;
 
-  factory Food.fromJson(
+  factory FoodDTO.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return Food(
+    return FoodDTO(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
@@ -59,9 +59,9 @@ abstract class Food extends _i1.TableRow {
     );
   }
 
-  static final t = FoodTable();
+  static final t = FoodDTOTable();
 
-  static const db = FoodRepository._();
+  static const db = FoodDTORepository._();
 
   String uid;
 
@@ -82,7 +82,7 @@ abstract class Food extends _i1.TableRow {
   @override
   _i1.Table get table => t;
 
-  Food copyWith({
+  FoodDTO copyWith({
     int? id,
     String? uid,
     String? name,
@@ -179,9 +179,9 @@ abstract class Food extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<Food>> find(
+  static Future<List<FoodDTO>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? limit,
     int? offset,
     _i1.Column? orderBy,
@@ -190,8 +190,8 @@ abstract class Food extends _i1.TableRow {
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<Food>(
-      where: where != null ? where(Food.t) : null,
+    return session.db.find<FoodDTO>(
+      where: where != null ? where(FoodDTO.t) : null,
       limit: limit,
       offset: offset,
       orderBy: orderBy,
@@ -203,17 +203,17 @@ abstract class Food extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<Food?> findSingleRow(
+  static Future<FoodDTO?> findSingleRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? offset,
     _i1.Column? orderBy,
     bool orderDescending = false,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findSingleRow<Food>(
-      where: where != null ? where(Food.t) : null,
+    return session.db.findSingleRow<FoodDTO>(
+      where: where != null ? where(FoodDTO.t) : null,
       offset: offset,
       orderBy: orderBy,
       orderDescending: orderDescending,
@@ -223,21 +223,21 @@ abstract class Food extends _i1.TableRow {
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<Food?> findById(
+  static Future<FoodDTO?> findById(
     _i1.Session session,
     int id,
   ) async {
-    return session.db.findById<Food>(id);
+    return session.db.findById<FoodDTO>(id);
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
   static Future<int> delete(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<FoodTable> where,
+    required _i1.WhereExpressionBuilder<FoodDTOTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Food>(
-      where: where(Food.t),
+    return session.db.delete<FoodDTO>(
+      where: where(FoodDTO.t),
       transaction: transaction,
     );
   }
@@ -245,7 +245,7 @@ abstract class Food extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
   static Future<bool> deleteRow(
     _i1.Session session,
-    Food row, {
+    FoodDTO row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.deleteRow(
@@ -257,7 +257,7 @@ abstract class Food extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
   static Future<bool> update(
     _i1.Session session,
-    Food row, {
+    FoodDTO row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.update(
@@ -270,7 +270,7 @@ abstract class Food extends _i1.TableRow {
       'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
   static Future<void> insert(
     _i1.Session session,
-    Food row, {
+    FoodDTO row, {
     _i1.Transaction? transaction,
   }) async {
     return session.db.insert(
@@ -282,39 +282,39 @@ abstract class Food extends _i1.TableRow {
   @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
   static Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? limit,
     bool useCache = true,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Food>(
-      where: where != null ? where(Food.t) : null,
+    return session.db.count<FoodDTO>(
+      where: where != null ? where(FoodDTO.t) : null,
       limit: limit,
       useCache: useCache,
       transaction: transaction,
     );
   }
 
-  static FoodInclude include() {
-    return FoodInclude._();
+  static FoodDTOInclude include() {
+    return FoodDTOInclude._();
   }
 
-  static FoodIncludeList includeList({
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+  static FoodDTOIncludeList includeList({
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<FoodTable>? orderBy,
+    _i1.OrderByBuilder<FoodDTOTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<FoodTable>? orderByList,
-    FoodInclude? include,
+    _i1.OrderByListBuilder<FoodDTOTable>? orderByList,
+    FoodDTOInclude? include,
   }) {
-    return FoodIncludeList._(
+    return FoodDTOIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(Food.t),
+      orderBy: orderBy?.call(FoodDTO.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(Food.t),
+      orderByList: orderByList?.call(FoodDTO.t),
       include: include,
     );
   }
@@ -322,8 +322,8 @@ abstract class Food extends _i1.TableRow {
 
 class _Undefined {}
 
-class _FoodImpl extends Food {
-  _FoodImpl({
+class _FoodDTOImpl extends FoodDTO {
+  _FoodDTOImpl({
     int? id,
     required String uid,
     required String name,
@@ -346,7 +346,7 @@ class _FoodImpl extends Food {
         );
 
   @override
-  Food copyWith({
+  FoodDTO copyWith({
     Object? id = _Undefined,
     String? uid,
     String? name,
@@ -357,7 +357,7 @@ class _FoodImpl extends Food {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return Food(
+    return FoodDTO(
       id: id is int? ? id : this.id,
       uid: uid ?? this.uid,
       name: name ?? this.name,
@@ -371,8 +371,8 @@ class _FoodImpl extends Food {
   }
 }
 
-class FoodTable extends _i1.Table {
-  FoodTable({super.tableRelation}) : super(tableName: 'food') {
+class FoodDTOTable extends _i1.Table {
+  FoodDTOTable({super.tableRelation}) : super(tableName: 'food') {
     uid = _i1.ColumnString(
       'uid',
       this,
@@ -437,22 +437,22 @@ class FoodTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use FoodTable.t instead.')
-FoodTable tFood = FoodTable();
+@Deprecated('Use FoodDTOTable.t instead.')
+FoodDTOTable tFoodDTO = FoodDTOTable();
 
-class FoodInclude extends _i1.IncludeObject {
-  FoodInclude._();
+class FoodDTOInclude extends _i1.IncludeObject {
+  FoodDTOInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => Food.t;
+  _i1.Table get table => FoodDTO.t;
 }
 
-class FoodIncludeList extends _i1.IncludeList {
-  FoodIncludeList._({
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+class FoodDTOIncludeList extends _i1.IncludeList {
+  FoodDTOIncludeList._({
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -460,33 +460,33 @@ class FoodIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(Food.t);
+    super.where = where?.call(FoodDTO.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => Food.t;
+  _i1.Table get table => FoodDTO.t;
 }
 
-class FoodRepository {
-  const FoodRepository._();
+class FoodDTORepository {
+  const FoodDTORepository._();
 
-  Future<List<Food>> find(
+  Future<List<FoodDTO>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<FoodTable>? orderBy,
+    _i1.OrderByBuilder<FoodDTOTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<FoodTable>? orderByList,
+    _i1.OrderByListBuilder<FoodDTOTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<Food>(
-      where: where?.call(Food.t),
-      orderBy: orderBy?.call(Food.t),
-      orderByList: orderByList?.call(Food.t),
+    return session.dbNext.find<FoodDTO>(
+      where: where?.call(FoodDTO.t),
+      orderBy: orderBy?.call(FoodDTO.t),
+      orderByList: orderByList?.call(FoodDTO.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -494,90 +494,90 @@ class FoodRepository {
     );
   }
 
-  Future<Food?> findFirstRow(
+  Future<FoodDTO?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? offset,
-    _i1.OrderByBuilder<FoodTable>? orderBy,
+    _i1.OrderByBuilder<FoodDTOTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<FoodTable>? orderByList,
+    _i1.OrderByListBuilder<FoodDTOTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<Food>(
-      where: where?.call(Food.t),
-      orderBy: orderBy?.call(Food.t),
-      orderByList: orderByList?.call(Food.t),
+    return session.dbNext.findFirstRow<FoodDTO>(
+      where: where?.call(FoodDTO.t),
+      orderBy: orderBy?.call(FoodDTO.t),
+      orderByList: orderByList?.call(FoodDTO.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<Food?> findById(
+  Future<FoodDTO?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<Food>(
+    return session.dbNext.findById<FoodDTO>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<Food>> insert(
+  Future<List<FoodDTO>> insert(
     _i1.Session session,
-    List<Food> rows, {
+    List<FoodDTO> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<Food>(
+    return session.dbNext.insert<FoodDTO>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<Food> insertRow(
+  Future<FoodDTO> insertRow(
     _i1.Session session,
-    Food row, {
+    FoodDTO row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<Food>(
+    return session.dbNext.insertRow<FoodDTO>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<Food>> update(
+  Future<List<FoodDTO>> update(
     _i1.Session session,
-    List<Food> rows, {
-    _i1.ColumnSelections<FoodTable>? columns,
+    List<FoodDTO> rows, {
+    _i1.ColumnSelections<FoodDTOTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<Food>(
+    return session.dbNext.update<FoodDTO>(
       rows,
-      columns: columns?.call(Food.t),
+      columns: columns?.call(FoodDTO.t),
       transaction: transaction,
     );
   }
 
-  Future<Food> updateRow(
+  Future<FoodDTO> updateRow(
     _i1.Session session,
-    Food row, {
-    _i1.ColumnSelections<FoodTable>? columns,
+    FoodDTO row, {
+    _i1.ColumnSelections<FoodDTOTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<Food>(
+    return session.dbNext.updateRow<FoodDTO>(
       row,
-      columns: columns?.call(Food.t),
+      columns: columns?.call(FoodDTO.t),
       transaction: transaction,
     );
   }
 
   Future<List<int>> delete(
     _i1.Session session,
-    List<Food> rows, {
+    List<FoodDTO> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<Food>(
+    return session.dbNext.delete<FoodDTO>(
       rows,
       transaction: transaction,
     );
@@ -585,10 +585,10 @@ class FoodRepository {
 
   Future<int> deleteRow(
     _i1.Session session,
-    Food row, {
+    FoodDTO row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<Food>(
+    return session.dbNext.deleteRow<FoodDTO>(
       row,
       transaction: transaction,
     );
@@ -596,23 +596,23 @@ class FoodRepository {
 
   Future<List<int>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<FoodTable> where,
+    required _i1.WhereExpressionBuilder<FoodDTOTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<Food>(
-      where: where(Food.t),
+    return session.dbNext.deleteWhere<FoodDTO>(
+      where: where(FoodDTO.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<FoodTable>? where,
+    _i1.WhereExpressionBuilder<FoodDTOTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<Food>(
-      where: where?.call(Food.t),
+    return session.dbNext.count<FoodDTO>(
+      where: where?.call(FoodDTO.t),
       limit: limit,
       transaction: transaction,
     );

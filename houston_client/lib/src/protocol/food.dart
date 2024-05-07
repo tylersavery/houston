@@ -10,8 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Food extends _i1.SerializableEntity {
-  Food._({
+abstract class FoodDTO extends _i1.SerializableEntity {
+  FoodDTO._({
     this.id,
     required this.uid,
     required this.name,
@@ -23,7 +23,7 @@ abstract class Food extends _i1.SerializableEntity {
     required this.updatedAt,
   });
 
-  factory Food({
+  factory FoodDTO({
     int? id,
     required String uid,
     required String name,
@@ -33,13 +33,13 @@ abstract class Food extends _i1.SerializableEntity {
     required String imageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _FoodImpl;
+  }) = _FoodDTOImpl;
 
-  factory Food.fromJson(
+  factory FoodDTO.fromJson(
     Map<String, dynamic> jsonSerialization,
     _i1.SerializationManager serializationManager,
   ) {
-    return Food(
+    return FoodDTO(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
@@ -79,7 +79,7 @@ abstract class Food extends _i1.SerializableEntity {
 
   DateTime updatedAt;
 
-  Food copyWith({
+  FoodDTO copyWith({
     int? id,
     String? uid,
     String? name,
@@ -108,8 +108,8 @@ abstract class Food extends _i1.SerializableEntity {
 
 class _Undefined {}
 
-class _FoodImpl extends Food {
-  _FoodImpl({
+class _FoodDTOImpl extends FoodDTO {
+  _FoodDTOImpl({
     int? id,
     required String uid,
     required String name,
@@ -132,7 +132,7 @@ class _FoodImpl extends Food {
         );
 
   @override
-  Food copyWith({
+  FoodDTO copyWith({
     Object? id = _Undefined,
     String? uid,
     String? name,
@@ -143,7 +143,7 @@ class _FoodImpl extends Food {
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
-    return Food(
+    return FoodDTO(
       id: id is int? ? id : this.id,
       uid: uid ?? this.uid,
       name: name ?? this.name,

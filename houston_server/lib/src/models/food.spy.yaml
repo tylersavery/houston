@@ -1,4 +1,4 @@
-class: Food
+class: FoodDTO
 
 table: food
 

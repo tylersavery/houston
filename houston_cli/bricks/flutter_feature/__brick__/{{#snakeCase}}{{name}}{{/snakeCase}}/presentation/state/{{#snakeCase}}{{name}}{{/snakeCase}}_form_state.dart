@@ -1,4 +1,4 @@
-import 'package:houston_client/houston_client.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}FormState {
   final {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}};

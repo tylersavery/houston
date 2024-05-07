@@ -3,15 +3,15 @@ import 'package:houston_server/src/generated/protocol.dart';
 import 'package:houston_server/src/utils/strings.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}List> list(
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTOList> list(
     Session session, {
     required int page,
     required int limit,
     String? orderBy,
   }) async {
-    final count = await {{#pascalCase}}{{name}}{{/pascalCase}}.db.count(session);
+    final count = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.count(session);
 
-    final results = await {{#pascalCase}}{{name}}{{/pascalCase}}.db.find(
+    final results = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.find(
       session,
       limit: limit,
       offset: (page * limit) - limit,
@@ -32,7 +32,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
     );
 
-    return {{#pascalCase}}{{name}}{{/pascalCase}}List(
+    return {{#pascalCase}}{{name}}{{/pascalCase}}DTOList(
       count: count,
       numPages: (count / limit).ceil(),
       page: page,
@@ -41,16 +41,16 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
     );
   }
 
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}?> retrieve(Session session, int id) async {
-    return await {{#pascalCase}}{{name}}{{/pascalCase}}.db.findById(session, id);
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO?> retrieve(Session session, int id) async {
+    return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findById(session, id);
   }
 
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> save(Session session, {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}}) async {
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> save(Session session, {{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}}) async {
     if ({{#camelCase}}{{name}}{{/camelCase}}.id != null) {
-      final existing{{#pascalCase}}{{name}}{{/pascalCase}} = await {{#pascalCase}}{{name}}{{/pascalCase}}.db.findById(session, {{#camelCase}}{{name}}{{/camelCase}}.id!);
+      final existing{{#pascalCase}}{{name}}{{/pascalCase}} = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findById(session, {{#camelCase}}{{name}}{{/camelCase}}.id!);
 
       if (existing{{#pascalCase}}{{name}}{{/pascalCase}} != null) {
-        return await {{#pascalCase}}{{name}}{{/pascalCase}}.db.updateRow(
+        return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.updateRow(
           session,
           {{#camelCase}}{{name}}{{/camelCase}}.copyWith(
             uid: existing{{#pascalCase}}{{name}}{{/pascalCase}}.uid,
@@ -62,14 +62,14 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
     }
 
     final uid = await _uniqueUid(session);
-    return await {{#pascalCase}}{{name}}{{/pascalCase}}.db.insertRow(
+    return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.insertRow(
       session,
       {{#camelCase}}{{name}}{{/camelCase}}.copyWith(uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
     );
   }
 
   Future<void> delete(Session session, int id) async {
-    await {{#pascalCase}}{{name}}{{/pascalCase}}.db.deleteWhere(session, where: (row) => row.id.equals(id));
+    await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.deleteWhere(session, where: (row) => row.id.equals(id));
   }
 
   Future<String> _uniqueUid(Session session) async {
@@ -77,7 +77,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await {{#pascalCase}}{{name}}{{/pascalCase}}.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
       if (unique) {
         return uid;
       }

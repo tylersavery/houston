@@ -59,12 +59,12 @@ class EndpointFood extends _i1.EndpointRef {
   @override
   String get name => 'food';
 
-  _i2.Future<_i3.FoodList> list({
+  _i2.Future<_i3.FoodDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i3.FoodList>(
+      caller.callServerEndpoint<_i3.FoodDTOList>(
         'food',
         'list',
         {
@@ -74,15 +74,15 @@ class EndpointFood extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i4.Food?> retrieve(int id) =>
-      caller.callServerEndpoint<_i4.Food?>(
+  _i2.Future<_i4.FoodDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i4.FoodDTO?>(
         'food',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i4.Food> save(_i4.Food food) =>
-      caller.callServerEndpoint<_i4.Food>(
+  _i2.Future<_i4.FoodDTO> save(_i4.FoodDTO food) =>
+      caller.callServerEndpoint<_i4.FoodDTO>(
         'food',
         'save',
         {'food': food},

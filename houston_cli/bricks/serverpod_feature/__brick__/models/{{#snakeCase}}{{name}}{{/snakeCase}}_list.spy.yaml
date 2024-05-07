@@ -1,9 +1,9 @@
 
-class: {{#pascalCase}}{{name}}{{/pascalCase}}List
+class: {{#pascalCase}}{{name}}{{/pascalCase}}DTOList
 
 fields:
   page: int
   count: int
   numPages: int
   limit: int
-  results: List<{{#pascalCase}}{{name}}{{/pascalCase}}>
+  results: List<{{#pascalCase}}{{name}}{{/pascalCase}}DTO>

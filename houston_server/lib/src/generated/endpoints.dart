@@ -169,7 +169,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'food': _i1.ParameterDescription(
               name: 'food',
-              type: _i1.getType<_i6.Food>(),
+              type: _i1.getType<_i6.FoodDTO>(),
               nullable: false,
             )
           },

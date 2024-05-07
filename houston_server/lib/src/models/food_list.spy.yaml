@@ -1,9 +1,9 @@
 
-class: FoodList
+class: FoodDTOList
 
 fields:
   page: int
   count: int
   numPages: int
   limit: int
-  results: List<Food>
+  results: List<FoodDTO>

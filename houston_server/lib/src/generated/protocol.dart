@@ -34,7 +34,7 @@ class Protocol extends _i1.SerializationManagerServer {
   static final List<_i2.TableDefinition> targetTableDefinitions = [
     _i2.TableDefinition(
       name: 'food',
-      dartName: 'Food',
+      dartName: 'FoodDTO',
       schema: 'public',
       module: 'houston',
       columns: [
@@ -193,11 +193,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (customConstructors.containsKey(t)) {
       return customConstructors[t]!(data, this) as T;
     }
-    if (t == _i4.Food) {
-      return _i4.Food.fromJson(data, this) as T;
+    if (t == _i4.FoodDTO) {
+      return _i4.FoodDTO.fromJson(data, this) as T;
     }
-    if (t == _i5.FoodList) {
-      return _i5.FoodList.fromJson(data, this) as T;
+    if (t == _i5.FoodDTOList) {
+      return _i5.FoodDTOList.fromJson(data, this) as T;
     }
     if (t == _i6.MovieDTO) {
       return _i6.MovieDTO.fromJson(data, this) as T;
@@ -205,11 +205,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i7.MovieDTOList) {
       return _i7.MovieDTOList.fromJson(data, this) as T;
     }
-    if (t == _i1.getType<_i4.Food?>()) {
-      return (data != null ? _i4.Food.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i4.FoodDTO?>()) {
+      return (data != null ? _i4.FoodDTO.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i5.FoodList?>()) {
-      return (data != null ? _i5.FoodList.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i5.FoodDTOList?>()) {
+      return (data != null ? _i5.FoodDTOList.fromJson(data, this) : null) as T;
     }
     if (t == _i1.getType<_i6.MovieDTO?>()) {
       return (data != null ? _i6.MovieDTO.fromJson(data, this) : null) as T;
@@ -217,8 +217,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i7.MovieDTOList?>()) {
       return (data != null ? _i7.MovieDTOList.fromJson(data, this) : null) as T;
     }
-    if (t == List<_i8.Food>) {
-      return (data as List).map((e) => deserialize<_i8.Food>(e)).toList()
+    if (t == List<_i8.FoodDTO>) {
+      return (data as List).map((e) => deserialize<_i8.FoodDTO>(e)).toList()
           as dynamic;
     }
     if (t == List<_i8.MovieDTO>) {
@@ -241,11 +241,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (className != null) {
       return 'serverpod_auth.$className';
     }
-    if (data is _i4.Food) {
-      return 'Food';
+    if (data is _i4.FoodDTO) {
+      return 'FoodDTO';
     }
-    if (data is _i5.FoodList) {
-      return 'FoodList';
+    if (data is _i5.FoodDTOList) {
+      return 'FoodDTOList';
     }
     if (data is _i6.MovieDTO) {
       return 'MovieDTO';
@@ -262,11 +262,11 @@ class Protocol extends _i1.SerializationManagerServer {
       data['className'] = data['className'].substring(15);
       return _i3.Protocol().deserializeByClassName(data);
     }
-    if (data['className'] == 'Food') {
-      return deserialize<_i4.Food>(data['data']);
+    if (data['className'] == 'FoodDTO') {
+      return deserialize<_i4.FoodDTO>(data['data']);
     }
-    if (data['className'] == 'FoodList') {
-      return deserialize<_i5.FoodList>(data['data']);
+    if (data['className'] == 'FoodDTOList') {
+      return deserialize<_i5.FoodDTOList>(data['data']);
     }
     if (data['className'] == 'MovieDTO') {
       return deserialize<_i6.MovieDTO>(data['data']);
@@ -292,8 +292,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.Food:
-        return _i4.Food.t;
+      case _i4.FoodDTO:
+        return _i4.FoodDTO.t;
       case _i6.MovieDTO:
         return _i6.MovieDTO.t;
     }

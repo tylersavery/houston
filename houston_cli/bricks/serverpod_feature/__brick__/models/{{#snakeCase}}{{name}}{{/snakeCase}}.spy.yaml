@@ -1,4 +1,4 @@
-class: {{#pascalCase}}{{name}}{{/pascalCase}}
+class: {{#pascalCase}}{{name}}{{/pascalCase}}DTO
 
 table: {{#snakeCase}}{{name}}{{/snakeCase}}
 

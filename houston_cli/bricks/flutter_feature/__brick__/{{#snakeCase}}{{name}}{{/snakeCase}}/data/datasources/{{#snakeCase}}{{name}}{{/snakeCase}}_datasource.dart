@@ -4,9 +4,9 @@ import 'package:houston_client/houston_client.dart';
 import '../../../../core/error/exceptions.dart';
 
 abstract interface class {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}List> list({required int page, required int limit});
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> retrieve(int id);
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> save({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}});
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTOList> list({required int page, required int limit});
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> retrieve(int id);
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> save({{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}});
   Future<void> delete(int id);
 }
 
@@ -18,7 +18,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl implements {{#pascalC
   {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl(this.client, this.sessionManager);
 
   @override
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}List> list({required int page, required int limit}) async {
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTOList> list({required int page, required int limit}) async {
     try {
       return await client.{{#camelCase}}{{name}}{{/camelCase}}.list(page: page, limit: limit, orderBy: 'id');
     } catch (e) {
@@ -27,7 +27,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl implements {{#pascalC
   }
 
   @override
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> retrieve(int id) async {
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> retrieve(int id) async {
     final result = await client.{{#camelCase}}{{name}}{{/camelCase}}.retrieve(id);
     if (result == null) {
       throw const ServerException("Not Found");
@@ -36,7 +36,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl implements {{#pascalC
   }
 
   @override
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> save({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}}) async {
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> save({{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}}) async {
     try {
       return await client.{{#camelCase}}{{name}}{{/camelCase}}.save({{#camelCase}}{{name}}{{/camelCase}});
     } catch (e) {

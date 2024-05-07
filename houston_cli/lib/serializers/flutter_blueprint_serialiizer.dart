@@ -7,6 +7,18 @@ import 'package:collection/collection.dart';
 class FlutterBlueprintSerializer extends BlueprintSerializer {
   const FlutterBlueprintSerializer({required super.blueprint});
 
+  // Models
+  List<String> get toJsonFunctions {
+    final List<String> items = [];
+
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        items.add("int ${property.type}ToJson(${pascalCase(property.type)} ${property.name}) => ${property.name}.id;");
+      }
+    }
+    return items;
+  }
+
   // Form State
   List<String> get emptyParams {
     final List<String> items = [];
@@ -270,10 +282,32 @@ ListTile(
     return null;
   }
 
+  // Model Mapper
+
+  List<String> get dtoToModelFields {
+    final List<String> items = [];
+    for (final property in properties) {
+      items.add("${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)},");
+    }
+
+    return items;
+  }
+
+  List<String> get modelToDtoFields {
+    final List<String> items = [];
+    for (final property in properties) {
+      items.add("${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)},");
+    }
+
+    return items;
+  }
+
   @override
   Map<String, dynamic> serialize() {
     return {
       'name': name,
+      'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
+      'toJsonFunctions': toJsonFunctions,
       'emptyParams': emptyParams,
       'formProviderImports': formProviderImports,
       'formControllers': formControllers,
@@ -286,6 +320,8 @@ ListTile(
       'uiHeading1': uiHeading1,
       'uiHeading2': uiHeading2,
       'uiDescription': uiDescription,
+      'dtoToModelFields': dtoToModelFields,
+      'modelToDtoFields': modelToDtoFields,
     };
   }
 }

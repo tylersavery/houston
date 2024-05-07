@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/buttons.dart';
 import '../../../../core/widgets/base_component.dart';
 import '../../../../core/widgets/loader.dart';
-import '../../domain/extensions/{{#snakeCase}}{{name}}{{/snakeCase}}_list_extension.dart';
 import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_paginated_list_provider.dart';
 import '../state/{{#snakeCase}}{{name}}{{/snakeCase}}_paginated_list_state.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_list_tile_widget.dart';

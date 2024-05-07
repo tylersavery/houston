@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/base_screen.dart';
 import '../../../../core/widgets/loader.dart';
-import '../../domain/extensions/{{#snakeCase}}{{name}}{{/snakeCase}}_extension.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_edit_screen.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_list_screen.dart';
 import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';

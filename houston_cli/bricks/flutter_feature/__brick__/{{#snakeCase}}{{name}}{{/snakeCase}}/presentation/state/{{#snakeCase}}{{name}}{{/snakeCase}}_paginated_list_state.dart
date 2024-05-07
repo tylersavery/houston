@@ -1,5 +1,5 @@
-import 'package:houston_client/houston_client.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}PaginatedListState {}
 

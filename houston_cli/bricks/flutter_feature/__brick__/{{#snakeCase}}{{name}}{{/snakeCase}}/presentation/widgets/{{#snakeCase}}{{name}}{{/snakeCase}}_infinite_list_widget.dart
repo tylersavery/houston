@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:houston_client/houston_client.dart';
 import '../../../../core/widgets/base_component.dart';
 import '../../../../core/widgets/infinite_list_widget.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_list_tile_widget.dart';
 
