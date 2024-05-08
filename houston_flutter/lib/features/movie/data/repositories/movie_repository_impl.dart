@@ -1,10 +1,9 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import 'package:houston_flutter/features/movie/data/mappers/movie_mapper.dart';
+import 'package:houston_flutter/features/movie/domain/datasources/movie_datasource.dart';
 import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-import '../datasources/movie_datasource_serverpod.dart';
 import '../../domain/repositories/movie_repository.dart';
 
 class MovieRespositoryImpl implements MovieRepository {
@@ -18,18 +17,7 @@ class MovieRespositoryImpl implements MovieRepository {
     required int limit,
   }) async {
     try {
-      final movieDtoList = await dataSource.list(page: page, limit: limit);
-
-      return right(
-        PaginatedResponse<Movie>(
-          status: 200,
-          page: movieDtoList.page,
-          count: movieDtoList.count,
-          numPages: movieDtoList.numPages,
-          limit: movieDtoList.limit,
-          results: MovieMapper.listToModel(movieDtoList.results),
-        ),
-      );
+      return right(await dataSource.list(page: page, limit: limit));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
@@ -38,8 +26,7 @@ class MovieRespositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, Movie>> retrieve(int id) async {
     try {
-      final movieDto = await dataSource.retrieve(id);
-      return right(MovieMapper.toModel(movieDto));
+      return right(await dataSource.retrieve(id));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
@@ -48,8 +35,7 @@ class MovieRespositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, Movie>> save(Movie movie) async {
     try {
-      final movieDto = await dataSource.save(MovieMapper.toDto(movie));
-      return right(MovieMapper.toModel(movieDto));
+      return right(await dataSource.save(movie));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

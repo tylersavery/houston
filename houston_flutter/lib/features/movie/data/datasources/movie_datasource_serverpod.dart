@@ -1,43 +1,51 @@
-import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
+import 'package:houston_flutter/core/models/paginated_response.dart';
+import 'package:houston_flutter/features/movie/data/mappers/movie_mapper.dart';
+import 'package:houston_flutter/features/movie/domain/datasources/movie_datasource.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import 'package:houston_client/houston_client.dart';
 
 import '../../../../core/error/exceptions.dart';
 
-abstract interface class MovieDataSource {
-  Future<MovieDTOList> list({required int page, required int limit});
-  Future<MovieDTO> retrieve(int id);
-  Future<MovieDTO> save(MovieDTO movie);
-  Future<void> delete(int id);
-}
-
 class MovieDataSourceImpl implements MovieDataSource {
   final Client client;
-  final SessionManager sessionManager;
 
-  MovieDataSourceImpl(this.client, this.sessionManager);
+  MovieDataSourceImpl(this.client);
 
   @override
-  Future<MovieDTOList> list({required int page, required int limit}) async {
+  Future<PaginatedResponse<Movie>> list({required int page, required int limit}) async {
     try {
-      return await client.movie.list(page: page, limit: limit, orderBy: 'id');
+      final response = await client.movie.list(page: page, limit: limit, orderBy: 'id');
+      return PaginatedResponse<Movie>(
+        status: 200,
+        page: response.page,
+        count: response.count,
+        numPages: response.numPages,
+        limit: response.limit,
+        results: MovieMapper.listToModel(response.results),
+      );
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<MovieDTO> retrieve(int id) async {
-    final result = await client.movie.retrieve(id);
-    if (result == null) {
-      throw const ServerException("Not Found");
+  Future<Movie> retrieve(int id) async {
+    try {
+      final result = await client.movie.retrieve(id);
+      if (result == null) {
+        throw const ServerException("Not Found");
+      }
+      return MovieMapper.toModel(result);
+    } catch (e) {
+      throw ServerException(e.toString());
     }
-    return result;
   }
 
   @override
-  Future<MovieDTO> save(MovieDTO movie) async {
+  Future<Movie> save(Movie movie) async {
     try {
-      return await client.movie.save(movie);
+      final result = await client.movie.save(MovieMapper.toDto(movie));
+      return MovieMapper.toModel(result);
     } catch (e) {
       throw ServerException(e.toString());
     }

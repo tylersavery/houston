@@ -1,16 +1,10 @@
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
+import 'package:houston_flutter/features/movie/domain/datasources/movie_datasource.dart';
 import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-abstract interface class MovieDataSourceSupabase {
-  Future<PaginatedResponse<Movie>> list({required int page, required int limit});
-  Future<Movie> retrieve(int id);
-  Future<Movie> save(Movie movie);
-  Future<void> delete(int id);
-}
-
-class MovieDataSourceSupabaseImpl implements MovieDataSourceSupabase {
+class MovieDataSourceSupabaseImpl implements MovieDataSource {
   final SupabaseClient client;
 
   MovieDataSourceSupabaseImpl(this.client);
