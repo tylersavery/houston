@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dcli/dcli.dart';
 import 'package:houston_cli/constants.dart';
-import 'package:houston_cli/serializers/flutter_blueprint_serialiizer.dart';
+import 'package:houston_cli/serializers/flutter_blueprint_serializer.dart';
 import 'package:houston_cli/serializers/serverpod_blueprint_serializer.dart';
 import 'package:houston_cli/utils/file_utils.dart';
 import 'package:houston_cli/utils/string_utils.dart';
