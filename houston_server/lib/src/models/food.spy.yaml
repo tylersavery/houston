@@ -10,4 +10,3 @@ fields:
   calories: int
   imageUrl: String
   createdAt: DateTime
-  updatedAt: DateTime

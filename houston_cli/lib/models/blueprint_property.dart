@@ -95,7 +95,7 @@ class BlueprintProperty {
       values.add({"toJson": "${type}ToJson"});
     }
 
-    if (name == "created_at") {
+    if (name == "createdAt" || name == 'uid') {
       values.add({"includeToJson": false});
     }
 

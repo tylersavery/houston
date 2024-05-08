@@ -13,13 +13,14 @@ class SupabaseBlueprintSerializer extends BlueprintSerializer {
     final List<String> sqlProperties = [];
 
     sqlProperties.add('"id" bigint NOT NULL');
-    sqlProperties.add('"uuid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL');
 
     for (final property in properties) {
       final type = property.type.toLowerCase();
       final name = snakeCase(property.name);
 
-      if (type == "char") {
+      if (name == 'uid') {
+        sqlProperties.add('"uid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL');
+      } else if (type == "char") {
         sqlProperties.add('"$name" character varying NOT NULL');
       } else if (type == "text" || type == "string" || type == "url") {
         sqlProperties.add('"$name" "text" NOT NULL');

@@ -36,20 +36,14 @@ class Blueprint {
 
     properties.addAll(data['properties'].map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p)).toList());
 
-    properties.addAll([
+    properties.add(
       BlueprintProperty(
         name: "createdAt",
         type: 'datetime',
         allowBlank: false,
         allowNull: false,
       ),
-      BlueprintProperty(
-        name: "updatedAt",
-        type: 'datetime',
-        allowBlank: false,
-        allowNull: false,
-      ),
-    ]);
+    );
 
     return Blueprint(
       name: data['name'],

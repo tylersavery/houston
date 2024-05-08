@@ -25,3 +25,13 @@
 [ ] fix yaml config for types (ie char/string etc. ) make dart like
 
 [ ] routes get from namespace
+
+[ ] double check delete invalidate / redirect
+ 
+
+==== SQL FIXES ===
+
+
+
+- add includeToJson: false for id, uid, createdAt, updatedAt
+- uid uuid default uuid_generate_v4(),

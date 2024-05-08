@@ -13,5 +13,5 @@ class Constants {
   static const dashboardNavInsertToken = '//::HOUSTON_INSERT_NAV::';
   static const formElementTypes = ['char', 'text', 'int', 'double'];
   static const primitives = ['char', 'text', 'string', 'url', 'bool', 'int', 'double', 'datetime'];
-  static const hiddenFields = ['id', 'uid', 'createdAt', 'updatedAt'];
+  static const hiddenFields = ['id', 'uid', 'createdAt'];
 }

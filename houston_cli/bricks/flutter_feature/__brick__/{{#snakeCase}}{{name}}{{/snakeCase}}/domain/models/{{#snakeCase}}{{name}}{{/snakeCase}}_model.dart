@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '{{#snakeCase}}{{name}}{{/snakeCase}}_model.freezed.dart';
@@ -11,7 +13,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}} with _${{#pascalCase}}{{name}}{{/pa
   const {{#pascalCase}}{{name}}{{/pascalCase}}._();
 
   factory {{#pascalCase}}{{name}}{{/pascalCase}}({
-    int? id,
+    @JsonKey(includeToJson: false) int? id,
     {{#properties}}{{{modelField}}}
     {{/properties}}
   }) = _{{#pascalCase}}{{name}}{{/pascalCase}};

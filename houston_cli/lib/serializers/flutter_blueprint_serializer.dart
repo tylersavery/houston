@@ -305,6 +305,8 @@ ListTile(
   @override
   Map<String, dynamic> serialize() {
     return {
+      "serverBackendIsServerpod": Constants.serverBackend == ServerBackendOption.serverpod,
+      "serverBackendIsSupabase": Constants.serverBackend == ServerBackendOption.supabase,
       'name': name,
       'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
       'toJsonFunctions': toJsonFunctions,

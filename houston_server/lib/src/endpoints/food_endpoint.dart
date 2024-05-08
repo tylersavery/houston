@@ -20,13 +20,10 @@ class FoodEndpoint extends Endpoint {
               switch (orderBy.replaceAll("-", "")) {
                 case 'createdAt':
                   return t.createdAt;
-                case 'updatedAt':
-                  return t.updatedAt;
                 case 'price':
                   return t.price;
                 case 'calories':
                   return t.calories;
-
                 default:
                   return t.id;
               }
@@ -58,7 +55,6 @@ class FoodEndpoint extends Endpoint {
           food.copyWith(
             uid: existingFood.uid,
             createdAt: existingFood.createdAt,
-            updatedAt: DateTime.now(),
           ),
         );
       }
@@ -67,8 +63,7 @@ class FoodEndpoint extends Endpoint {
     final uid = await _uniqueUid(session);
     return await FoodDTO.db.insertRow(
       session,
-      food.copyWith(
-          uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
+      food.copyWith(uid: uid, createdAt: DateTime.now()),
     );
   }
 
@@ -81,9 +76,7 @@ class FoodEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await FoodDTO.db
-              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
-          null;
+      final unique = (await FoodDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
       if (unique) {
         return uid;
       }

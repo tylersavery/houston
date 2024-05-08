@@ -20,7 +20,6 @@ abstract class FoodDTO extends _i1.SerializableEntity {
     required this.calories,
     required this.imageUrl,
     required this.createdAt,
-    required this.updatedAt,
   });
 
   factory FoodDTO({
@@ -32,7 +31,6 @@ abstract class FoodDTO extends _i1.SerializableEntity {
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) = _FoodDTOImpl;
 
   factory FoodDTO.fromJson(
@@ -53,8 +51,6 @@ abstract class FoodDTO extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['imageUrl']),
       createdAt: serializationManager
           .deserialize<DateTime>(jsonSerialization['createdAt']),
-      updatedAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -77,8 +73,6 @@ abstract class FoodDTO extends _i1.SerializableEntity {
 
   DateTime createdAt;
 
-  DateTime updatedAt;
-
   FoodDTO copyWith({
     int? id,
     String? uid,
@@ -88,7 +82,6 @@ abstract class FoodDTO extends _i1.SerializableEntity {
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -101,7 +94,6 @@ abstract class FoodDTO extends _i1.SerializableEntity {
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
-      'updatedAt': updatedAt.toJson(),
     };
   }
 }
@@ -118,7 +110,6 @@ class _FoodDTOImpl extends FoodDTO {
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) : super._(
           id: id,
           uid: uid,
@@ -128,7 +119,6 @@ class _FoodDTOImpl extends FoodDTO {
           calories: calories,
           imageUrl: imageUrl,
           createdAt: createdAt,
-          updatedAt: updatedAt,
         );
 
   @override
@@ -141,7 +131,6 @@ class _FoodDTOImpl extends FoodDTO {
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   }) {
     return FoodDTO(
       id: id is int? ? id : this.id,
@@ -152,7 +141,6 @@ class _FoodDTOImpl extends FoodDTO {
       calories: calories ?? this.calories,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

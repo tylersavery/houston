@@ -20,8 +20,6 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
               switch (orderBy.replaceAll("-", "")) {
                 case 'createdAt':
                   return t.createdAt;
-                case 'updatedAt':
-                  return t.updatedAt;
                 {{#additionalOrdering}}{{{.}}}
                 {{/additionalOrdering}}
                 default:
@@ -55,7 +53,6 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
           {{#camelCase}}{{name}}{{/camelCase}}.copyWith(
             uid: existing{{#pascalCase}}{{name}}{{/pascalCase}}.uid,
             createdAt: existing{{#pascalCase}}{{name}}{{/pascalCase}}.createdAt,
-            updatedAt: DateTime.now(),
           ),
         );
       }
@@ -64,7 +61,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
     final uid = await _uniqueUid(session);
     return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.insertRow(
       session,
-      {{#camelCase}}{{name}}{{/camelCase}}.copyWith(uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
+      {{#camelCase}}{{name}}{{/camelCase}}.copyWith(uid: uid, createdAt: DateTime.now()),
     );
   }
 

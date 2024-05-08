@@ -6,7 +6,7 @@ Future<void> main(List<String> args) async {
   scaffoldFeature(
     name: "food",
     generateServer: true,
-    generateFlutter: false,
+    generateFlutter: true,
     generateMigrations: false,
     runMigrations: false,
     updateRoutes: false,

@@ -21,7 +21,6 @@ abstract class FoodDTO extends _i1.TableRow {
     required this.calories,
     required this.imageUrl,
     required this.createdAt,
-    required this.updatedAt,
   }) : super(id);
 
   factory FoodDTO({
@@ -33,7 +32,6 @@ abstract class FoodDTO extends _i1.TableRow {
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) = _FoodDTOImpl;
 
   factory FoodDTO.fromJson(
@@ -54,8 +52,6 @@ abstract class FoodDTO extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['imageUrl']),
       createdAt: serializationManager
           .deserialize<DateTime>(jsonSerialization['createdAt']),
-      updatedAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -77,8 +73,6 @@ abstract class FoodDTO extends _i1.TableRow {
 
   DateTime createdAt;
 
-  DateTime updatedAt;
-
   @override
   _i1.Table get table => t;
 
@@ -91,7 +85,6 @@ abstract class FoodDTO extends _i1.TableRow {
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -104,7 +97,6 @@ abstract class FoodDTO extends _i1.TableRow {
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
-      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -120,7 +112,6 @@ abstract class FoodDTO extends _i1.TableRow {
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt,
-      'updatedAt': updatedAt,
     };
   }
 
@@ -135,7 +126,6 @@ abstract class FoodDTO extends _i1.TableRow {
       'calories': calories,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
-      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -169,9 +159,6 @@ abstract class FoodDTO extends _i1.TableRow {
         return;
       case 'createdAt':
         createdAt = value;
-        return;
-      case 'updatedAt':
-        updatedAt = value;
         return;
       default:
         throw UnimplementedError();
@@ -332,7 +319,6 @@ class _FoodDTOImpl extends FoodDTO {
     required int calories,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) : super._(
           id: id,
           uid: uid,
@@ -342,7 +328,6 @@ class _FoodDTOImpl extends FoodDTO {
           calories: calories,
           imageUrl: imageUrl,
           createdAt: createdAt,
-          updatedAt: updatedAt,
         );
 
   @override
@@ -355,7 +340,6 @@ class _FoodDTOImpl extends FoodDTO {
     int? calories,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   }) {
     return FoodDTO(
       id: id is int? ? id : this.id,
@@ -366,7 +350,6 @@ class _FoodDTOImpl extends FoodDTO {
       calories: calories ?? this.calories,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
@@ -401,10 +384,6 @@ class FoodDTOTable extends _i1.Table {
       'createdAt',
       this,
     );
-    updatedAt = _i1.ColumnDateTime(
-      'updatedAt',
-      this,
-    );
   }
 
   late final _i1.ColumnString uid;
@@ -421,8 +400,6 @@ class FoodDTOTable extends _i1.Table {
 
   late final _i1.ColumnDateTime createdAt;
 
-  late final _i1.ColumnDateTime updatedAt;
-
   @override
   List<_i1.Column> get columns => [
         id,
@@ -433,7 +410,6 @@ class FoodDTOTable extends _i1.Table {
         calories,
         imageUrl,
         createdAt,
-        updatedAt,
       ];
 }
 
