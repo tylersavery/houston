@@ -20,6 +20,10 @@ class FileUtils {
     return Directory("$houstonRoot/${appName}_server").path;
   }
 
+  static String get supabaseDir {
+    return Directory("$houstonRoot/${appName}_supabase").path;
+  }
+
   static String get cliDir {
     return Directory("$houstonRoot/${appName}_cli").path;
   }

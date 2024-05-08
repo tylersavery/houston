@@ -22,6 +22,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImpl implements {{#pascal
 
       return right(
         PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>(
+          status: 200,
           page: {{#camelCase}}{{name}}{{/camelCase}}DtoList.page,
           count: {{#camelCase}}{{name}}{{/camelCase}}DtoList.count,
           numPages: {{#camelCase}}{{name}}{{/camelCase}}DtoList.numPages,

@@ -1,10 +1,9 @@
+import 'package:houston_flutter/core/providers/supbase_client_provider.dart';
+import 'package:houston_flutter/features/movie/data/datasources/movie_datasource_supabase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../core/providers/client_provider.dart';
-import '../../../../core/providers/session_manager_provider.dart';
-import '../../data/datasources/movie_datasource_serverpod.dart';
 
-final movieDataSourceProvider = Provider<MovieDataSource>(
+final movieDataSourceProvider = Provider<MovieDataSourceSupabase>(
   (ref) {
-    return MovieDataSourceImpl(ref.read(clientProvider), ref.read(sessionManagerProvider));
+    return MovieDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
   },
 );

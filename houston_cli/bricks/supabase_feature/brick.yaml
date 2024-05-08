@@ -1,0 +1,9 @@
+name: feature
+description: Scaffold for supabase feature
+version: 0.1.0+1
+vars:
+  name:
+    type: string
+    description: Name of feature
+    default: cool_feature
+    prompt: New feature name?

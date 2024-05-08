@@ -1,4 +1,5 @@
 class PaginatedResponse<T> {
+  final int status;
   final int page;
   final int count;
   final int numPages;
@@ -6,6 +7,7 @@ class PaginatedResponse<T> {
   final List<T> results;
 
   PaginatedResponse({
+    required this.status,
     required this.page,
     required this.count,
     required this.numPages,
@@ -18,6 +20,7 @@ class PaginatedResponse<T> {
       page: 0,
       count: 0,
       numPages: 0,
+      status: 204,
       limit: 0,
       results: [],
     );
@@ -25,5 +28,16 @@ class PaginatedResponse<T> {
 
   bool get canLoadMore {
     return page * limit < count;
+  }
+
+  @override
+  String toString() {
+    return {
+      'page': page,
+      'count': count,
+      'limit': limit,
+      'results': results,
+      'canLoadMore': canLoadMore,
+    }.toString();
   }
 }

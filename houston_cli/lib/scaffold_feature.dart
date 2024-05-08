@@ -5,13 +5,14 @@ import 'package:dcli/dcli.dart';
 import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/serializers/flutter_blueprint_serializer.dart';
 import 'package:houston_cli/serializers/serverpod_blueprint_serializer.dart';
+import 'package:houston_cli/serializers/supabase_blueprint_serializer.dart';
 import 'package:houston_cli/utils/file_utils.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:mason/mason.dart' as mason;
 
 Future<void> scaffoldFeature({
   String? name,
-  bool? generateServerpod,
+  bool? generateServer,
   bool? generateMigrations,
   bool? runMigrations,
   bool? generateFlutter,
@@ -21,9 +22,16 @@ Future<void> scaffoldFeature({
   bool? updateNavigation,
 }) async {
   name ??= ask("Feature Name:", required: true);
-  generateServerpod ??= confirm("Generate Serverpod Code?", defaultValue: true);
-  generateMigrations ??= confirm("Generate Serverpod DB Migrations", defaultValue: true);
-  runMigrations ??= confirm("Run Serverpod DB Migrations", defaultValue: true);
+  generateServer ??= confirm("Generate Server Code?", defaultValue: true);
+
+  if (Constants.serverBackend == ServerBackendOption.serverpod) {
+    generateMigrations ??= confirm("Generate DB Migrations", defaultValue: true);
+    runMigrations ??= confirm("Run Serverpod Migrations", defaultValue: true);
+  } else {
+    generateMigrations = false;
+    runMigrations = false;
+  }
+
   generateFlutter ??= confirm("Generate Flutter Code?", defaultValue: true);
   updateRoutes ??= confirm("Update Routes?", defaultValue: true);
   updateNavigation ??= confirm("Update Navigation?", defaultValue: true);
@@ -39,61 +47,82 @@ Future<void> scaffoldFeature({
   }
   final blueprint = FileUtils.parseBlueprint(path);
 
-  if (generateServerpod == true) {
-    print(white("Scaffolding Serverpod Feature [${pascalCase(name)}]..."));
+  if (generateServer == true) {
+    switch (Constants.serverBackend) {
+      case (ServerBackendOption.serverpod):
+        print(white("Scaffolding Serverpod Feature [${pascalCase(name)}]..."));
 
-    final serverpodParentDir = "${FileUtils.serverpodDir}/lib/src";
+        final serverpodParentDir = "${FileUtils.serverpodDir}/lib/src";
 
-    final serverpodFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/serverpod_feature");
-    final serverpodFeatureGenerator = await mason.MasonGenerator.fromBrick(serverpodFeatureBrick);
-    final serverpodFeatureTarget = mason.DirectoryGeneratorTarget(Directory(serverpodParentDir));
+        final serverpodFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/serverpod_feature");
+        final serverpodFeatureGenerator = await mason.MasonGenerator.fromBrick(serverpodFeatureBrick);
+        final serverpodFeatureTarget = mason.DirectoryGeneratorTarget(Directory(serverpodParentDir));
 
-    final serializer = ServerpodBlueprintSerializer(blueprint: blueprint);
+        final serializer = ServerpodBlueprintSerializer(blueprint: blueprint);
 
-    await serverpodFeatureGenerator.generate(
-      serverpodFeatureTarget,
-      vars: serializer.serialize(),
-    );
+        await serverpodFeatureGenerator.generate(
+          serverpodFeatureTarget,
+          vars: serializer.serialize(),
+        );
 
-    print(green("Serverpod Code Scaffolded."));
+        print(green("Serverpod Code Scaffolded."));
 
-    print(white("Running Serverpod Client Generator..."));
+        print(white("Running Serverpod Client Generator..."));
 
-    final args = "generate".split(" ");
-    final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
-    await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
-    print(green("Client Code Generated."));
+        final args = "generate".split(" ");
+        final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
+        await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+        print(green("Client Code Generated."));
 
-    if (generateMigrations == true) {
-      print(white("Generating Serverpod Migrations..."));
+        if (generateMigrations == true) {
+          print(white("Generating Serverpod Migrations..."));
 
-      final args = "create-migration".split(" ");
-      final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
-      await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
-      print(green("Migration Generated."));
-    }
+          final args = "create-migration".split(" ");
+          final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
+          await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+          print(green("Migration Generated."));
+        }
 
-    if (runMigrations == true) {
-      print(white("Running Serverpod Migrations..."));
+        if (runMigrations == true) {
+          print(white("Running Serverpod Migrations..."));
 
-      final args = "bin/main.dart --role maintenance --apply-migrations".split(" ");
-      final process = await Process.start("dart", args, workingDirectory: FileUtils.serverpodDir);
-      await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
-      print(green("Migration Complete."));
-    }
+          final args = "bin/main.dart --role maintenance --apply-migrations".split(" ");
+          final process = await Process.start("dart", args, workingDirectory: FileUtils.serverpodDir);
+          await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+          print(green("Migration Complete."));
+        }
 
-    if (runPostFormatter == true) {
-      final filePrefix = snakeCase(name);
+        if (runPostFormatter == true) {
+          final filePrefix = snakeCase(name);
 
-      print(white("Formatting Serverpod Files..."));
-      final filePaths = [
-        "$serverpodParentDir/endpoints/${filePrefix}_endpoint.dart",
-      ];
+          print(white("Formatting Serverpod Files..."));
+          final filePaths = [
+            "$serverpodParentDir/endpoints/${filePrefix}_endpoint.dart",
+          ];
 
-      for (final filePath in filePaths) {
-        await Process.start("dart", ["format", filePath]);
-      }
-      print(green("Files Formatted."));
+          for (final filePath in filePaths) {
+            await Process.start("dart", ["format", filePath]);
+          }
+          print(green("Files Formatted."));
+        }
+        break;
+      case ServerBackendOption.supabase:
+        print(white("Scaffolding Supabase Feature [${pascalCase(name)}]..."));
+
+        final supabaseParentDir = FileUtils.supabaseDir;
+        final supabaseFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/supabase_feature");
+
+        final supabaseFeatureGenerator = await mason.MasonGenerator.fromBrick(supabaseFeatureBrick);
+
+        final supabaseFeatureTarget = mason.DirectoryGeneratorTarget(Directory(supabaseParentDir));
+
+        final serializer = SupabaseBlueprintSerializer(blueprint: blueprint);
+        await supabaseFeatureGenerator.generate(
+          supabaseFeatureTarget,
+          vars: serializer.serialize(),
+        );
+
+        break;
     }
   }
 
