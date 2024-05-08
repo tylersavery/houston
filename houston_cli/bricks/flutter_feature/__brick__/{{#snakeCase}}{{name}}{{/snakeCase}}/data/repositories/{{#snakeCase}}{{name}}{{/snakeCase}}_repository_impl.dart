@@ -4,7 +4,7 @@ import 'package:houston_flutter/features/{{#snakeCase}}{{name}}{{/snakeCase}}/da
 import 'package:houston_flutter/features/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-import '../datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
+import '../datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart';
 import '../../domain/repositories/{{#snakeCase}}{{name}}{{/snakeCase}}_repository.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}Repository {

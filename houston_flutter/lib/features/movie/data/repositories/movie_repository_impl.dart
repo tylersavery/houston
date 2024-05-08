@@ -4,7 +4,7 @@ import 'package:houston_flutter/features/movie/data/mappers/movie_mapper.dart';
 import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-import '../datasources/movie_datasource.dart';
+import '../datasources/movie_datasource_serverpod.dart';
 import '../../domain/repositories/movie_repository.dart';
 
 class MovieRespositoryImpl implements MovieRepository {
