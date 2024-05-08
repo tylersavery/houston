@@ -1,14 +1,14 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import '../..//domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
+import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
 import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
   final SupabaseClient client;
 
-  {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl(this.client);
+  const {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl(this.client);
 
   @override
   Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit}) async {

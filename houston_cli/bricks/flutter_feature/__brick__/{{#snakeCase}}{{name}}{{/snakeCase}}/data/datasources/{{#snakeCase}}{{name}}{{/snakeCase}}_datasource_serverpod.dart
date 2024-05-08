@@ -6,10 +6,10 @@ import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource
 import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
 
-class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
+class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
   final Client client;
 
-  {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl(this.client);
+  const {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl(this.client);
 
   @override
   Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit}) async {

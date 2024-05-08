@@ -8,6 +8,11 @@ food:
   - retrieve:
   - save:
   - delete:
+game:
+  - list:
+  - retrieve:
+  - save:
+  - delete:
 movie:
   - list:
   - retrieve:

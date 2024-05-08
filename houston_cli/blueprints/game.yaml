@@ -1,0 +1,25 @@
+name: game
+properties:
+  -
+    name: name
+    type: char
+    maxLength: 100
+    uiHeading: 1
+  - 
+    name: price
+    type: double
+    uiHeading: 2
+    orderable: true
+  -
+    name: description
+    type: text
+    uiDescription: true
+  -
+    name: players
+    type: int
+    orderable: true
+  -
+    name: imageUrl
+    type: url
+    image: true
+  

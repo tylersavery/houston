@@ -6,10 +6,10 @@ import 'package:houston_client/houston_client.dart';
 
 import '../../../../core/error/exceptions.dart';
 
-class MovieDataSourceImpl implements MovieDataSource {
+class MovieDataSourceServerpodImpl implements MovieDataSource {
   final Client client;
 
-  MovieDataSourceImpl(this.client);
+  MovieDataSourceServerpodImpl(this.client);
 
   @override
   Future<PaginatedResponse<Movie>> list({required int page, required int limit}) async {

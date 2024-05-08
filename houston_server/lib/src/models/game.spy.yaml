@@ -1,0 +1,12 @@
+class: GameDTO
+
+table: game
+
+fields:
+  uid: String
+  name: String
+  price: double
+  description: String
+  players: int
+  imageUrl: String
+  createdAt: DateTime

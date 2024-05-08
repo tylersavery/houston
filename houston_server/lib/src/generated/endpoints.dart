@@ -12,10 +12,12 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/asset_endpoint.dart' as _i2;
 import '../endpoints/example_endpoint.dart' as _i3;
 import '../endpoints/food_endpoint.dart' as _i4;
-import '../endpoints/movie_endpoint.dart' as _i5;
-import 'package:houston_server/src/generated/food.dart' as _i6;
-import 'package:houston_server/src/generated/movie.dart' as _i7;
-import 'package:serverpod_auth_server/module.dart' as _i8;
+import '../endpoints/game_endpoint.dart' as _i5;
+import '../endpoints/movie_endpoint.dart' as _i6;
+import 'package:houston_server/src/generated/food.dart' as _i7;
+import 'package:houston_server/src/generated/game.dart' as _i8;
+import 'package:houston_server/src/generated/movie.dart' as _i9;
+import 'package:serverpod_auth_server/module.dart' as _i10;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -39,7 +41,13 @@ class Endpoints extends _i1.EndpointDispatch {
           'food',
           null,
         ),
-      'movie': _i5.MovieEndpoint()
+      'game': _i5.GameEndpoint()
+        ..initialize(
+          server,
+          'game',
+          null,
+        ),
+      'movie': _i6.MovieEndpoint()
         ..initialize(
           server,
           'movie',
@@ -169,7 +177,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'food': _i1.ParameterDescription(
               name: 'food',
-              type: _i1.getType<_i6.FoodDTO>(),
+              type: _i1.getType<_i7.FoodDTO>(),
               nullable: false,
             )
           },
@@ -196,6 +204,96 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['food'] as _i4.FoodEndpoint).delete(
+            session,
+            params['id'],
+          ),
+        ),
+      },
+    );
+    connectors['game'] = _i1.EndpointConnector(
+      name: 'game',
+      endpoint: endpoints['game']!,
+      methodConnectors: {
+        'list': _i1.MethodConnector(
+          name: 'list',
+          params: {
+            'page': _i1.ParameterDescription(
+              name: 'page',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'limit': _i1.ParameterDescription(
+              name: 'limit',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'orderBy': _i1.ParameterDescription(
+              name: 'orderBy',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['game'] as _i5.GameEndpoint).list(
+            session,
+            page: params['page'],
+            limit: params['limit'],
+            orderBy: params['orderBy'],
+          ),
+        ),
+        'retrieve': _i1.MethodConnector(
+          name: 'retrieve',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['game'] as _i5.GameEndpoint).retrieve(
+            session,
+            params['id'],
+          ),
+        ),
+        'save': _i1.MethodConnector(
+          name: 'save',
+          params: {
+            'game': _i1.ParameterDescription(
+              name: 'game',
+              type: _i1.getType<_i8.GameDTO>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['game'] as _i5.GameEndpoint).save(
+            session,
+            params['game'],
+          ),
+        ),
+        'delete': _i1.MethodConnector(
+          name: 'delete',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['game'] as _i5.GameEndpoint).delete(
             session,
             params['id'],
           ),
@@ -229,7 +327,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['movie'] as _i5.MovieEndpoint).list(
+              (endpoints['movie'] as _i6.MovieEndpoint).list(
             session,
             page: params['page'],
             limit: params['limit'],
@@ -249,7 +347,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['movie'] as _i5.MovieEndpoint).retrieve(
+              (endpoints['movie'] as _i6.MovieEndpoint).retrieve(
             session,
             params['id'],
           ),
@@ -259,7 +357,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'movie': _i1.ParameterDescription(
               name: 'movie',
-              type: _i1.getType<_i7.MovieDTO>(),
+              type: _i1.getType<_i9.MovieDTO>(),
               nullable: false,
             )
           },
@@ -267,7 +365,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['movie'] as _i5.MovieEndpoint).save(
+              (endpoints['movie'] as _i6.MovieEndpoint).save(
             session,
             params['movie'],
           ),
@@ -285,13 +383,13 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['movie'] as _i5.MovieEndpoint).delete(
+              (endpoints['movie'] as _i6.MovieEndpoint).delete(
             session,
             params['id'],
           ),
         ),
       },
     );
-    modules['serverpod_auth'] = _i8.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i10.Endpoints()..initializeEndpoints(server);
   }
 }

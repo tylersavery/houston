@@ -6,7 +6,7 @@ import '../../data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_s
 
 final {{#camelCase}}{{name}}{{/camelCase}}DataSourceProvider = Provider<{{#pascalCase}}{{name}}{{/pascalCase}}DataSource>(
   (ref) {
-    return {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl(ref.read(clientProvider));
+    return {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl(ref.read(clientProvider));
   },
 );
 {{/serverBackendIsServerpod}}

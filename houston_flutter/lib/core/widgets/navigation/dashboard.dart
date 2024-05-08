@@ -28,7 +28,7 @@ class Dashboard extends BaseComponent {
             ),
 
             NavigationDestination(
-              label: "Food",
+              label: "Game",
               icon: Icon(Icons.star),
             ),
             //::HOUSTON_INSERT_TAB::
@@ -65,7 +65,7 @@ class Dashboard extends BaseComponent {
                     ),
 
                     NavigationRailDestination(
-                      label: Text("Food"),
+                      label: Text("Game"),
                       icon: Icon(Icons.star),
                     ),
                     //::HOUSTON_INSERT_NAV::

@@ -1,7 +1,5 @@
-import 'package:houston_flutter/features/food/presentation/food_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:houston_flutter/features/food/presentation/screens/food_list_screen.dart';
 import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../app.dart';
@@ -18,7 +16,7 @@ part 'app_router.g.dart';
 GoRouter router(RouterRef ref) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: FoodListScreen.route(),
+    initialLocation: MovieListScreen.route(),
     routes: [
       GoRoute(
         path: LoginScreen.route(),
@@ -38,7 +36,6 @@ GoRouter router(RouterRef ref) {
         },
         branches: [
           MovieRoutes.branch,
-          FoodRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],
       )
