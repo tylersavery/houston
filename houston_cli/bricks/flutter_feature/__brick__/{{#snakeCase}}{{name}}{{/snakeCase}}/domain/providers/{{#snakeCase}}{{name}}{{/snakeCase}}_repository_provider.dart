@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../data/repositories/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_impl.dart';
+import '../../data/repositories/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_impl_serverpod.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart';
 import '../repositories/{{#snakeCase}}{{name}}{{/snakeCase}}_repository.dart';
 

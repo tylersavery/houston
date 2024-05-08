@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../data/repositories/movie_repository_impl.dart';
+import '../../data/repositories/movie_repository_impl_serverpod.dart';
 import 'movie_datasource_provider.dart';
 import '../repositories/movie_repository.dart';
 
