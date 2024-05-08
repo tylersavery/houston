@@ -1,16 +1,11 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
+import '../..//domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
 import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-abstract interface class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabase {
-  Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit});
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> retrieve(int id);
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> save({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}});
-  Future<void> delete(int id);
-}
 
-class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabase {
+class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
   final SupabaseClient client;
 
   {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl(this.client);

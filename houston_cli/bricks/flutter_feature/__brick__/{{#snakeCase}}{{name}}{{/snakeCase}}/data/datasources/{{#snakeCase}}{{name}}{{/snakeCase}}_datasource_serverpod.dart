@@ -1,44 +1,52 @@
-import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:houston_client/houston_client.dart';
-
+import 'package:houston_flutter/core/models/paginated_response.dart';
 import '../../../../core/error/exceptions.dart';
-
-abstract interface class {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTOList> list({required int page, required int limit});
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> retrieve(int id);
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> save({{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}});
-  Future<void> delete(int id);
-}
+import '../mappers/{{#snakeCase}}{{name}}{{/snakeCase}}_mapper.dart';
+import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}DataSource {
   final Client client;
-  final SessionManager sessionManager;
 
-  {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl(this.client, this.sessionManager);
+  {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceImpl(this.client);
 
   @override
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTOList> list({required int page, required int limit}) async {
+  Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit}) async {
     try {
-      return await client.{{#camelCase}}{{name}}{{/camelCase}}.list(page: page, limit: limit, orderBy: 'id');
+      final response = await client.{{#camelCase}}{{name}}{{/camelCase}}.list(page: page, limit: limit, orderBy: 'id');
+      return PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>(
+        status: 200,
+        page: response.page,
+        count: response.count,
+        numPages: response.numPages,
+        limit: response.limit,
+        results: {{#pascalCase}}{{name}}{{/pascalCase}}Mapper.listToModel(response.results),
+      );
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> retrieve(int id) async {
-    final result = await client.{{#camelCase}}{{name}}{{/camelCase}}.retrieve(id);
-    if (result == null) {
-      throw const ServerException("Not Found");
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> retrieve(int id) async {
+
+    try {
+      final result = await client.{{#camelCase}}{{name}}{{/camelCase}}.retrieve(id);
+      if (result == null) {
+        throw const ServerException("Not Found");
+      }
+      return {{#pascalCase}}{{name}}{{/pascalCase}}Mapper.toModel(result);
+    } catch (e) {
+      throw ServerException(e.toString());
     }
-    return result;
   }
 
   @override
-  Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> save({{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}}) async {
+  Future<{{#pascalCase}}{{name}}{{/pascalCase}}> save({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}}) async {
     try {
-      return await client.{{#camelCase}}{{name}}{{/camelCase}}.save({{#camelCase}}{{name}}{{/camelCase}});
+      final result = await client.{{#camelCase}}{{name}}{{/camelCase}}.save({{#pascalCase}}{{name}}{{/pascalCase}}Mapper.toDto({{#camelCase}}{{name}}{{/camelCase}}));
+      return {{#pascalCase}}{{name}}{{/pascalCase}}Mapper.toModel(result);
     } catch (e) {
       throw ServerException(e.toString());
     }

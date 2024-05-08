@@ -1,15 +1,15 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import 'package:houston_flutter/features/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart';
-import 'package:houston_flutter/features/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
+import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/repositories/{{#snakeCase}}{{name}}{{/snakeCase}}_repository.dart';
 
-class {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImplSupabase implements {{#pascalCase}}{{name}}{{/pascalCase}}Repository {
-  final {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabase dataSource;
+class {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImpl implements {{#pascalCase}}{{name}}{{/pascalCase}}Repository {
+  final {{#pascalCase}}{{name}}{{/pascalCase}}DataSource dataSource;
 
-  const {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImplSupabase(this.dataSource);
+  const {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImpl(this.dataSource);
 
   @override
   Future<Either<Failure, PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>>> list({
@@ -17,18 +17,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImplSupabase implements {
     required int limit,
   }) async {
     try {
-      final result = await dataSource.list(page: page, limit: limit);
-
-      return right(
-        PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>(
-          status: 200,
-          page: result.page,
-          count: result.count,
-          numPages: result.numPages,
-          limit: result.limit,
-          results: result.results,
-        ),
-      );
+      return right(await dataSource.list(page: page, limit: limit));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
