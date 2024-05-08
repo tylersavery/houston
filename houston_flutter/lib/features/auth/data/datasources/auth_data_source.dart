@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:houston_client/houston_client.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/error/exceptions.dart';
 import '../models/user_model.dart';
 
@@ -37,7 +40,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
     if (user != null) {
       return UserModel(
-        id: user.id!,
+        id: user.id!.toString(),
         email: user.email!,
         username: user.userName,
       );
@@ -77,7 +80,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       }
 
       return UserModel(
-        id: result.id!,
+        id: result.id!.toString(),
         email: result.email!,
         username: result.userName,
       );
@@ -106,7 +109,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       );
 
       return UserModel(
-        id: result.userInfo!.id!,
+        id: result.userInfo!.id!.toString(),
         email: result.userInfo!.email!,
         username: result.userInfo!.userName,
       );
@@ -122,5 +125,84 @@ class AuthDataSourceImpl implements AuthDataSource {
     } catch (e) {
       throw ServerException(e.toString());
     }
+  }
+}
+
+class AuthDataSourceImplSupabase implements AuthDataSource {
+  final SupabaseClient client;
+
+  AuthDataSourceImplSupabase(this.client);
+
+  @override
+  UserModel? currentUser() {
+    final u = client.auth.currentSession?.user;
+    if (u == null) {
+      return null;
+    }
+
+    //todo: profile
+    return UserModel(id: u.id, email: u.email ?? '', username: u.id);
+  }
+
+  @override
+  Future<UserModel> login({required String email, required String password}) async {
+    try {
+      final result = await client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      if (result.session != null) {
+        return UserModel(
+          email: email,
+          username: result.session!.user.id,
+          id: result.session!.user.id,
+        );
+      }
+      throw const ServerException();
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> register({required String email, required String username, required String password}) async {
+    try {
+      await client.auth.signUp(
+        email: email,
+        password: password,
+        //TODO: dynamic deep link
+        emailRedirectTo: kIsWeb ? null : 'io.houston.app://login-callback/',
+      );
+      return true;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> confirmRegistration({required String email, required String verificationCode}) async {
+    try {
+      final result = await client.auth.verifyOTP(
+        token: verificationCode,
+        type: OtpType.email,
+        email: email,
+      );
+
+      if (result.user != null) {
+        return UserModel(
+          id: result.user!.id,
+          email: result.user!.email ?? '',
+          username: result.user!.id,
+        );
+      }
+      throw const ServerException();
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    await client.auth.signOut();
   }
 }

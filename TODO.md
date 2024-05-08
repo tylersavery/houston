@@ -4,6 +4,10 @@
 
 [x] uuid / unique id / other auto fields
 
+[ ] env file stuff
+
+[  ] can we move the mapper to the datasource??
+
 [ ] sortable fields dynamic 
 
 [ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)

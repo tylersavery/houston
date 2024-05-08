@@ -24,6 +24,7 @@ class FoodEndpoint extends Endpoint {
                   return t.price;
                 case 'calories':
                   return t.calories;
+
                 default:
                   return t.id;
               }
@@ -76,7 +77,9 @@ class FoodEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await FoodDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await FoodDTO.db
+              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+          null;
       if (unique) {
         return uid;
       }

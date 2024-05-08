@@ -51,5 +51,16 @@
 	<string>For uploading photos</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>For uploading photos</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>io.houston.app</string>
+		</array>
+		</dict>
+	</array>
 </dict>
 </plist>
