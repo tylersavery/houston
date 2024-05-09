@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:houston_flutter/config/env.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/features/auth/domain/models/user_model.dart';
 import 'package:houston_flutter/features/auth/domain/datasources/auth_data_source.dart';
@@ -47,7 +48,7 @@ class AuthDataSourceSupabaseImpl implements AuthDataSource {
         email: email,
         password: password,
         //TODO: dynamic deep link
-        emailRedirectTo: kIsWeb ? null : 'io.houston.app://login-callback/',
+        emailRedirectTo: kIsWeb ? null : '${Env.supabaseDeeplinkProtocol}://login-callback/',
       );
       return true;
     } catch (e) {

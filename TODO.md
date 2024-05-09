@@ -4,11 +4,11 @@
 
 [x] uuid / unique id / other auto fields
 
-[ ] env file stuff
+[x] env file stuff
 
-[  ] can we move the mapper to the datasource??
+[x] can we move the mapper to the datasource??
 
-[ ] sortable fields dynamic 
+[x] sortable fields dynamic 
 
 [ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)
 
@@ -18,7 +18,7 @@
 
 [ ] docs for blueprint config
 
-[ ] remove use cases from asset / auth
+[x] remove use cases from asset / auth
 
 [ ] profile model stuff
 

@@ -1,0 +1,5 @@
+FLAVOR_NAME=example
+DEBUG=true
+SUPABASE_PROJECT=myproject
+SUPABASE_ANON_KEY=mykey
+DEEPLINK_PROTOCOL=com.domain
