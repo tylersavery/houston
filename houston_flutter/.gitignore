@@ -1,5 +1,6 @@
 #TEMP FOR BUILDING
 lib/features/food 
+lib/features/game 
 
 assets/env/*
 !assets/env/example_env

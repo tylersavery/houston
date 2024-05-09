@@ -1,3 +1,4 @@
+import 'package:houston_flutter/features/game/presentation/game_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
@@ -36,6 +37,7 @@ GoRouter router(RouterRef ref) {
         },
         branches: [
           MovieRoutes.branch,
+          GameRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],
       )

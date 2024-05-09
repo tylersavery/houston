@@ -12,7 +12,9 @@
 
 [ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)
 
-[ ] image choosing for macos
+[ ] supabase image upload
+
+[x] image choosing for macos
 
 [x] ui heading / subtitles / etc.
 

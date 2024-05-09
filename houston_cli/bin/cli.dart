@@ -4,15 +4,15 @@ import 'package:houston_cli/scaffold_feature.dart';
 
 Future<void> main(List<String> args) async {
   scaffoldFeature(
-    name: "game",
+    name: "movie",
     generateServer: true,
-    generateFlutter: true,
+    generateFlutter: false,
     generateMigrations: true,
-    runMigrations: true,
-    updateRoutes: true,
-    updateNavigation: true,
-    runPostGenerator: true,
-    runPostFormatter: true,
+    runMigrations: false,
+    updateRoutes: false,
+    updateNavigation: false,
+    runPostGenerator: false,
+    runPostFormatter: false,
   );
 
   return;
