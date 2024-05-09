@@ -5,9 +5,9 @@ import 'package:houston_flutter/features/asset/domain/datasources/asset_datasour
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AssetDataSourceImplSupabase implements AssetDataSource {
+class AssetDataSourceSupabaseImpl implements AssetDataSource {
   final SupabaseClient client;
-  const AssetDataSourceImplSupabase(this.client);
+  const AssetDataSourceSupabaseImpl(this.client);
 
   @override
   Future<String> uploadImage(XFile image) async {

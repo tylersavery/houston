@@ -1,27 +1,18 @@
-{{#serverBackendIsServerpod}}
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../core/providers/client_provider.dart';
-import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
+import 'package:houston_flutter/config/constants.dart';
+import 'package:houston_flutter/core/providers/serverpod_client_provider.dart';
+import 'package:houston_flutter/core/providers/supabase_client_provider.dart';
 import '../../data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart';
-
-final {{#camelCase}}{{name}}{{/camelCase}}DataSourceProvider = Provider<{{#pascalCase}}{{name}}{{/pascalCase}}DataSource>(
-  (ref) {
-    return {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl(ref.read(clientProvider));
-  },
-);
-{{/serverBackendIsServerpod}}
-{{#serverBackendIsSupabase}}
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../core/providers/supabase_client_provider.dart';
-import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
 import '../../data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart';
+import '../../domain/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource.dart';
 
 final {{#camelCase}}{{name}}{{/camelCase}}DataSourceProvider = Provider<{{#pascalCase}}{{name}}{{/pascalCase}}DataSource>(
   (ref) {
-    return {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+    switch (Constants.serverBackend) {
+      case ServerBackendOption.supabase:
+        return {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+      case ServerBackendOption.serverpod:
+        return {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl(ref.read(serverpodClientProvider));
+    }
   },
 );
-{{/serverBackendIsSupabase}}
-
-
-

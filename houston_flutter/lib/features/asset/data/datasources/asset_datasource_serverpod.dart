@@ -6,10 +6,10 @@ import 'package:houston_client/houston_client.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/utils/string_utils.dart';
 
-class AssetDataSourceImplServerpod implements AssetDataSource {
+class AssetDataSourceServerpodImpl implements AssetDataSource {
   final Client client;
 
-  const AssetDataSourceImplServerpod(this.client);
+  const AssetDataSourceServerpodImpl(this.client);
 
   @override
   Future<String> uploadImage(XFile image) async {

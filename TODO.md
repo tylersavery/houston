@@ -10,6 +10,8 @@
 
 [x] sortable fields dynamic 
 
+[x] refactor auth (remove use cases)
+
 [ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)
 
 [ ] supabase image upload

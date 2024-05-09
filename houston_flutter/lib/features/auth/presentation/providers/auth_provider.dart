@@ -18,7 +18,7 @@ class Auth extends _$Auth {
 
   Future<void> _init() async {
     if (Constants.serverBackend == ServerBackendOption.serverpod) {
-      await ref.read(sessionManagerProvider).initialize();
+      await ref.read(serverpodSessionManagerProvider).initialize();
     }
 
     final result = await ref.read(authRepositoryProvider).currentUser();
