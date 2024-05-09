@@ -1,12 +1,9 @@
+import 'package:houston_flutter/config/constants.dart';
+import 'package:houston_flutter/features/auth/domain/providers/auth_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/providers/current_user_provider.dart';
 import '../../../../core/providers/session_manager_provider.dart';
-import '../../../../core/usecase/usecase.dart';
-import '../../domain/usecases/current_user_usecase.dart';
-import '../../domain/usecases/user_confirm_registration_usecase.dart';
-import '../../domain/usecases/user_login_usecase.dart';
-import '../../domain/usecases/user_logout_usecase.dart';
-import '../../domain/usecases/user_register_usecase.dart';
+
 import 'auth_state.dart';
 
 part 'auth_provider.g.dart';
@@ -20,9 +17,11 @@ class Auth extends _$Auth {
   }
 
   Future<void> _init() async {
-    await ref.read(sessionManagerProvider).initialize();
+    if (Constants.serverBackend == ServerBackendOption.serverpod) {
+      await ref.read(sessionManagerProvider).initialize();
+    }
 
-    final result = await ref.read(currentUserUseCaseProvider)(NoParams());
+    final result = await ref.read(authRepositoryProvider).currentUser();
 
     result.fold(
       (failure) {
@@ -35,52 +34,68 @@ class Auth extends _$Auth {
     );
   }
 
-  Future<void> register(UserRegisterParams params) async {
+  Future<void> login({required String email, required String password}) async {
     state = AuthStateLoading();
-    final result = await ref.read(userRegisterUseCaseProvider)(params);
+
+    final result = await ref.read(authRepositoryProvider).loginWithEmailPassword(email: email, password: password);
+
+    result.fold((failure) {
+      state = AuthStateFailure(failure.message);
+    }, (user) {
+      ref.read(currentUserProvider.notifier).updateUser(user);
+
+      state = AuthStateSuccess(user);
+    });
+  }
+
+  Future<void> register({
+    required String email,
+    required String password,
+    required String username,
+  }) async {
+    state = AuthStateLoading();
+    final result = await ref.read(authRepositoryProvider).registerWithEmailPassword(
+          email: email,
+          password: password,
+          username: username,
+        );
 
     result.fold((failure) {
       state = AuthStateFailure(failure.message);
     }, (success) {
       if (success) {
-        state = AuthStateVerificationRequired(email: params.email, password: params.password);
+        state = AuthStateVerificationRequired(email: email, password: password);
       } else {
         state = const AuthStateFailure("Registration Error.");
       }
     });
   }
 
-  Future<void> confirmRegistration(UserConfirmRegistrationParams params) async {
+  Future<void> confirmRegistration({required String email, required String password, required String verificationCode}) async {
     state = AuthStateLoading();
 
-    final result = await ref.read(userConfirmRegistrationUseCaseProvider)(params);
+    final confirmationResult = await ref.read(authRepositoryProvider).confirmRegistration(email: email, verificationCode: verificationCode);
 
-    result.fold((failure) {
+    await confirmationResult.fold((failure) {
       state = AuthStateFailure(failure.message);
-    }, (user) {
-      ref.read(currentUserProvider.notifier).updateUser(user);
-      state = AuthStateSuccess(user);
-    });
-  }
-
-  Future<void> login(UserLoginParams params) async {
-    state = AuthStateLoading();
-
-    final result = await ref.read(userLoginUseCaseProvider)(params);
-
-    result.fold((failure) {
-      state = AuthStateFailure(failure.message);
-    }, (user) {
-      ref.read(currentUserProvider.notifier).updateUser(user);
-
-      state = AuthStateSuccess(user);
+    }, (r) async {
+      final loginResult = await ref.read(authRepositoryProvider).loginWithEmailPassword(
+            email: email,
+            password: password,
+          );
+      loginResult.fold((failure) {
+        state = AuthStateFailure(failure.message);
+      }, (user) {
+        ref.read(currentUserProvider.notifier).updateUser(user);
+        state = AuthStateSuccess(user);
+      });
     });
   }
 
   Future<void> logout() async {
     state = AuthStateLoading();
 
-    final result = await ref.read(userLogoutUseCaseProvider)(NoParams());
+    final result = await ref.read(authRepositoryProvider).logout();
 
     result.fold((failure) {
       state = AuthStateFailure(failure.message);

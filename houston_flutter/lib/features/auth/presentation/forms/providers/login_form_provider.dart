@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/usecases/user_login_usecase.dart';
 import '../../providers/auth_provider.dart';
 
 class LoginFormProvider {
@@ -34,10 +33,8 @@ class LoginFormProvider {
     }
 
     ref.read(authProvider.notifier).login(
-          UserLoginParams(
-            email: emailController.text,
-            password: passwordController.text,
-          ),
+          email: emailController.text,
+          password: passwordController.text,
         );
   }
 }

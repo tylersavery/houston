@@ -32,7 +32,7 @@ class _AppState extends ConsumerState<App> {
     });
 
     return MaterialApp.router(
-      title: 'Clean Serverpod',
+      title: 'Houston',
       theme: ThemeData.dark(),
       scaffoldMessengerKey: rootScaffoldMessengerKey,
       debugShowCheckedModeBanner: false,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/usecases/user_confirm_registration_usecase.dart';
 import '../../providers/auth_provider.dart';
 
 class VerificationFormProvider {
@@ -25,11 +24,9 @@ class VerificationFormProvider {
     }
 
     ref.read(authProvider.notifier).confirmRegistration(
-          UserConfirmRegistrationParams(
-            email: email,
-            verificationCode: verificationCodeController.text,
-            password: password,
-          ),
+          email: email,
+          verificationCode: verificationCodeController.text,
+          password: password,
         );
   }
 }

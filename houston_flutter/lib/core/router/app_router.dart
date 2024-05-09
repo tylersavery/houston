@@ -17,7 +17,7 @@ part 'app_router.g.dart';
 GoRouter router(RouterRef ref) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: MovieListScreen.route(),
+    initialLocation: LoginScreen.route(),
     routes: [
       GoRoute(
         path: LoginScreen.route(),
@@ -50,19 +50,19 @@ GoRouter router(RouterRef ref) {
       ),
     ),
     redirect: (context, state) {
-      // final userState = ref.read(currentUserProvider);
+      final userState = ref.read(currentUserProvider);
 
-      // final publicRoutes = [
-      //   LoginScreen.route(),
-      //   RegisterScreen.route(),
-      //   VerificationScreen.route(),
-      // ];
+      final publicRoutes = [
+        LoginScreen.route(),
+        RegisterScreen.route(),
+        VerificationScreen.route(),
+      ];
 
-      // if (!publicRoutes.contains(state.matchedLocation)) {
-      //   if (userState is CurrentUserStateInitial) {
-      //     return LoginScreen.route();
-      //   }
-      // }
+      if (!publicRoutes.contains(state.matchedLocation)) {
+        if (userState is CurrentUserStateInitial) {
+          return LoginScreen.route();
+        }
+      }
 
       return null;
     },

@@ -1,18 +1,15 @@
 import 'dart:convert';
 
+import 'package:houston_flutter/features/asset/domain/datasources/asset_datasource.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:houston_client/houston_client.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/utils/string_utils.dart';
 
-abstract interface class AssetDataSource {
-  Future<String> uploadImage(XFile image);
-}
-
-class AssetDataSourceImpl implements AssetDataSource {
+class AssetDataSourceImplServerpod implements AssetDataSource {
   final Client client;
 
-  AssetDataSourceImpl(this.client);
+  const AssetDataSourceImplServerpod(this.client);
 
   @override
   Future<String> uploadImage(XFile image) async {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/usecases/user_register_usecase.dart';
 import '../../providers/auth_provider.dart';
 
 class RegisterFormProvider {
@@ -43,11 +42,9 @@ class RegisterFormProvider {
     }
 
     ref.read(authProvider.notifier).register(
-          UserRegisterParams(
-            email: emailController.text.trim(),
-            username: usernameController.text.trim(),
-            password: passwordController.text,
-          ),
+          email: emailController.text.trim(),
+          username: usernameController.text.trim(),
+          password: passwordController.text,
         );
   }
 }

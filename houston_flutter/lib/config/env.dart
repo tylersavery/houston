@@ -64,4 +64,8 @@ class Env {
   static String get supabaseDeeplinkProtocol {
     return dotenv.env['SUPABASE_DEEPLINK_PROTOCOL'] ?? '';
   }
+
+  static String get supabaseBucketName {
+    return dotenv.env['SUPABASE_BUCKET_NAME'] ?? '';
+  }
 }
