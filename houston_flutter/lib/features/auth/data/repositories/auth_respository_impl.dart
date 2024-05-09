@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:houston_flutter/features/auth/domain/datasources/auth_data_source.dart';
 import '../../../../core/common/entities/user.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-import '../datasources/auth_data_source.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
