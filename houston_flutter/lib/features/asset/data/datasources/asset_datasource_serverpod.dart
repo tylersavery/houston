@@ -29,7 +29,6 @@ class AssetDataSourceServerpodImpl implements AssetDataSource {
     await uploader.upload(stream, length);
 
     final success = await client.asset.verifyUpload(name);
-
     if (!success) {
       throw const ServerException("Upload failed");
     }

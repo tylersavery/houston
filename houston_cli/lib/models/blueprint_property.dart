@@ -91,9 +91,9 @@ class BlueprintProperty {
       values.add({"defaultValue": defaultValue});
     }
 
-    if (!Constants.primitives.contains(type)) {
-      values.add({"toJson": "${type}ToJson"});
-    }
+    // if (!Constants.primitives.contains(type)) {
+    //   values.add({"toJson": "${type}ToJson"});
+    // }
 
     if (name == "createdAt" || name == 'uid') {
       values.add({"includeToJson": false});
@@ -183,7 +183,7 @@ class BlueprintProperty {
       case 'user':
         return 'User';
       default:
-        return 'dynamic';
+        return "${pascalCase(type)}";
     }
   }
 

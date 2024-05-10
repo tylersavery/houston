@@ -1,7 +1,8 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+{{#modelImports}}{{{.}}}
+{{/modelImports}}
 part '{{#snakeCase}}{{name}}{{/snakeCase}}_model.freezed.dart';
 part '{{#snakeCase}}{{name}}{{/snakeCase}}_model.g.dart';
 
@@ -20,8 +21,22 @@ class {{#pascalCase}}{{name}}{{/pascalCase}} with _${{#pascalCase}}{{name}}{{/pa
 
   factory {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(Map<String, dynamic> json) => _${{#pascalCase}}{{name}}{{/pascalCase}}FromJson(json);
 
+
+  factory {{#pascalCase}}{{name}}{{/pascalCase}}.empty() {
+    return {{#pascalCase}}{{name}}{{/pascalCase}}(
+      id: null,
+      {{#emptyParams}}{{{.}}},
+      {{/emptyParams}}
+    );
+  }
+
+  bool get exists {
+    return id != null && id! > 0;
+  }
+
   String get label {
     {{#uiHeading1}}return {{{.}}};{{/uiHeading1}}
     {{^uiHeading1}}return "$id";{{/uiHeading1}}
   }
+
 }

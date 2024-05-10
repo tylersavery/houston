@@ -1,5 +1,9 @@
 name: game
 properties:
+
+  - 
+    name: game_system
+    type: game_system
   -
     name: name
     type: char

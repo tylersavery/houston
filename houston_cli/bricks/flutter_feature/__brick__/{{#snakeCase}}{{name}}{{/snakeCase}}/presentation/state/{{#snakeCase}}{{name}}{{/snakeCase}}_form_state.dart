@@ -1,4 +1,6 @@
 import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
+{{#formStateImports}}{{{.}}}
+{{/formStateImports}}
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}FormState {
   final {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}};

@@ -26,7 +26,6 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}FormWidget extends ConsumerWidget {
               child: Text(state.error!),
             ),
             {{#formInputs}}{{{.}}}{{/formInputs}}
-          //TODO: Foreign Key Selector
           if (isEditing)
             Padding(
               padding: const EdgeInsets.all(8.0),

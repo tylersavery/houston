@@ -1,0 +1,11 @@
+class: GameSystemDTO
+
+table: game_system
+
+fields:
+  uid: String
+  name: String
+  price: double
+  description: String
+  imageUrl: String
+  createdAt: DateTime

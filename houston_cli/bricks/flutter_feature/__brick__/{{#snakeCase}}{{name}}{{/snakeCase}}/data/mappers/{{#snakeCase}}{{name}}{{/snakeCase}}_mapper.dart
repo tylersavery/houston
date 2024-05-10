@@ -1,5 +1,7 @@
 import 'package:houston_client/houston_client.dart';
-import 'package:houston_flutter/features/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/models/{{#camelCase}}{{name}}{{/camelCase}}_model.dart';
+import 'package:houston_flutter/features/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
+{{#mapperImports}}{{{.}}}
+{{/mapperImports}}
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}Mapper {
   static {{#pascalCase}}{{name}}{{/pascalCase}} toModel({{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}}DTO) {

@@ -5,11 +5,14 @@ import '../screens/{{#snakeCase}}{{name}}{{/snakeCase}}_detail_screen.dart';
 
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget extends StatelessWidget {
+  
   final {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}};
-
+  final Function({{#pascalCase}}{{name}}{{/pascalCase}})? onPressed;
+  
   const {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget({
     super.key,
     required this.{{#camelCase}}{{name}}{{/camelCase}},
+    this.onPressed,
   });
 
   @override
@@ -20,6 +23,11 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget extends StatelessWidg
         {{^uiHeading1}}title: Text({{#camelCase}}{{name}}{{/camelCase}}.label),{{/uiHeading1}}
         {{#uiHeading2}}subtitle: Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),{{/uiHeading2}}
         onTap: () {
+          if (onPressed != null) {
+            onPressed!({{#camelCase}}{{name}}{{/camelCase}});
+            return;
+          }
+
           context.push({{#pascalCase}}{{name}}{{/pascalCase}}DetailScreen.route({{#camelCase}}{{name}}{{/camelCase}}.id));
         },
       ),

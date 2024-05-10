@@ -31,6 +31,10 @@ class Dashboard extends BaseComponent {
               label: "Game",
               icon: Icon(Icons.star),
             ),
+            NavigationDestination(
+              label: "GameSystem",
+              icon: Icon(Icons.star),
+            ),
             //::HOUSTON_INSERT_TAB::
           ],
         ),
@@ -66,6 +70,10 @@ class Dashboard extends BaseComponent {
 
                     NavigationRailDestination(
                       label: Text("Game"),
+                      icon: Icon(Icons.star),
+                    ),
+                    NavigationRailDestination(
+                      label: Text("GameSystem"),
                       icon: Icon(Icons.star),
                     ),
                     //::HOUSTON_INSERT_NAV::

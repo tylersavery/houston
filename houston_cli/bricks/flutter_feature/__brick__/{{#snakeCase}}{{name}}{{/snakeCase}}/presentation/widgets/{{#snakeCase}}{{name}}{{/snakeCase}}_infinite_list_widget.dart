@@ -7,7 +7,8 @@ import '../providers/{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_list_tile_widget.dart';
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListWidget extends BaseComponent {
-  const {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListWidget({super.key});
+  final Function({{#pascalCase}}{{name}}{{/pascalCase}})? onPressed;
+  const {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListWidget({super.key, this.onPressed});
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
@@ -16,7 +17,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListWidget extends BaseCompo
     return InfiniteListWidget<{{#pascalCase}}{{name}}{{/pascalCase}}>(
       pagingController: provider.pagingController,
       itemBuilder: (context, {{#camelCase}}{{name}}{{/camelCase}}, index) {
-        return {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget({{#camelCase}}{{name}}{{/camelCase}}: {{#camelCase}}{{name}}{{/camelCase}});
+        return {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget({{#camelCase}}{{name}}{{/camelCase}}: {{#camelCase}}{{name}}{{/camelCase}}, onPressed: onPressed);
       },
       emptyText: "No {{#titleCase}}{{name}}{{/titleCase}}s",
       onRefresh: provider.refresh,

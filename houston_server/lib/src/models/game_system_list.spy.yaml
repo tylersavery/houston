@@ -1,0 +1,9 @@
+
+class: GameSystemDTOList
+
+fields:
+  page: int
+  count: int
+  numPages: int
+  limit: int
+  results: List<GameSystemDTO>

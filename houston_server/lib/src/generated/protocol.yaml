@@ -13,6 +13,11 @@ game:
   - retrieve:
   - save:
   - delete:
+gameSystem:
+  - list:
+  - retrieve:
+  - save:
+  - delete:
 movie:
   - list:
   - retrieve:

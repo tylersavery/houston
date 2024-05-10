@@ -14,10 +14,12 @@ import 'package:houston_client/src/protocol/food_list.dart' as _i3;
 import 'package:houston_client/src/protocol/food.dart' as _i4;
 import 'package:houston_client/src/protocol/game_list.dart' as _i5;
 import 'package:houston_client/src/protocol/game.dart' as _i6;
-import 'package:houston_client/src/protocol/movie_list.dart' as _i7;
-import 'package:houston_client/src/protocol/movie.dart' as _i8;
-import 'package:serverpod_auth_client/module.dart' as _i9;
-import 'protocol.dart' as _i10;
+import 'package:houston_client/src/protocol/game_system_list.dart' as _i7;
+import 'package:houston_client/src/protocol/game_system.dart' as _i8;
+import 'package:houston_client/src/protocol/movie_list.dart' as _i9;
+import 'package:houston_client/src/protocol/movie.dart' as _i10;
+import 'package:serverpod_auth_client/module.dart' as _i11;
+import 'protocol.dart' as _i12;
 
 /// {@category Endpoint}
 class EndpointAsset extends _i1.EndpointRef {
@@ -141,18 +143,61 @@ class EndpointGame extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointGameSystem extends _i1.EndpointRef {
+  EndpointGameSystem(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'gameSystem';
+
+  _i2.Future<_i7.GameSystemDTOList> list({
+    required int page,
+    required int limit,
+    String? orderBy,
+  }) =>
+      caller.callServerEndpoint<_i7.GameSystemDTOList>(
+        'gameSystem',
+        'list',
+        {
+          'page': page,
+          'limit': limit,
+          'orderBy': orderBy,
+        },
+      );
+
+  _i2.Future<_i8.GameSystemDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i8.GameSystemDTO?>(
+        'gameSystem',
+        'retrieve',
+        {'id': id},
+      );
+
+  _i2.Future<_i8.GameSystemDTO> save(_i8.GameSystemDTO gameSystem) =>
+      caller.callServerEndpoint<_i8.GameSystemDTO>(
+        'gameSystem',
+        'save',
+        {'gameSystem': gameSystem},
+      );
+
+  _i2.Future<void> delete(int id) => caller.callServerEndpoint<void>(
+        'gameSystem',
+        'delete',
+        {'id': id},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointMovie extends _i1.EndpointRef {
   EndpointMovie(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'movie';
 
-  _i2.Future<_i7.MovieDTOList> list({
+  _i2.Future<_i9.MovieDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i7.MovieDTOList>(
+      caller.callServerEndpoint<_i9.MovieDTOList>(
         'movie',
         'list',
         {
@@ -162,15 +207,15 @@ class EndpointMovie extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i8.MovieDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i8.MovieDTO?>(
+  _i2.Future<_i10.MovieDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i10.MovieDTO?>(
         'movie',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i8.MovieDTO> save(_i8.MovieDTO movie) =>
-      caller.callServerEndpoint<_i8.MovieDTO>(
+  _i2.Future<_i10.MovieDTO> save(_i10.MovieDTO movie) =>
+      caller.callServerEndpoint<_i10.MovieDTO>(
         'movie',
         'save',
         {'movie': movie},
@@ -185,10 +230,10 @@ class EndpointMovie extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i9.Caller(client);
+    auth = _i11.Caller(client);
   }
 
-  late final _i9.Caller auth;
+  late final _i11.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -200,7 +245,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i10.Protocol(),
+          _i12.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -210,6 +255,7 @@ class Client extends _i1.ServerpodClient {
     example = EndpointExample(this);
     food = EndpointFood(this);
     game = EndpointGame(this);
+    gameSystem = EndpointGameSystem(this);
     movie = EndpointMovie(this);
     modules = _Modules(this);
   }
@@ -222,6 +268,8 @@ class Client extends _i1.ServerpodClient {
 
   late final EndpointGame game;
 
+  late final EndpointGameSystem gameSystem;
+
   late final EndpointMovie movie;
 
   late final _Modules modules;
@@ -232,6 +280,7 @@ class Client extends _i1.ServerpodClient {
         'example': example,
         'food': food,
         'game': game,
+        'gameSystem': gameSystem,
         'movie': movie,
       };
 

@@ -4,6 +4,7 @@ table: game
 
 fields:
   uid: String
+  gameSystem: GameSystemDTO
   name: String
   price: double
   description: String

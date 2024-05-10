@@ -8,18 +8,33 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   const FlutterBlueprintSerializer({required super.blueprint});
 
   // Models
-  List<String> get toJsonFunctions {
-    final List<String> items = [];
+  // List<String> get toJsonFunctions {
+  //   final List<String> items = [];
 
-    for (final property in properties) {
-      if (!Constants.primitives.contains(property.type)) {
-        items.add("int ${property.type}ToJson(${pascalCase(property.type)} ${property.name}) => ${property.name}.id;");
+  //   for (final property in properties) {
+  //     if (!Constants.primitives.contains(property.type)) {
+  //       items.add("int ${property.type}ToJson(${pascalCase(property.type)} ${property.name}) => ${property.name}.id;");
+  //     }
+  //   }
+  //   return items;
+  // }
+
+  List<String> get modelImports {
+    final List<String> items = [];
+    for (final p in properties) {
+      if (!Constants.primitives.contains(p.type)) {
+        if (p.type == "user") {
+          // items.add("import 'package:app/src/core/utils/user_utils.dart';");
+          // items.add("import 'package:supabase_flutter/supabase_flutter.dart';");
+        } else {
+          items.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+        }
       }
     }
+
     return items;
   }
 
-  // Form State
   List<String> get emptyParams {
     final List<String> items = [];
 
@@ -32,6 +47,24 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     return items;
   }
 
+  // Form State
+
+  List<String> get formStateImports {
+    final List<String> items = [];
+    for (final p in properties) {
+      if (!Constants.primitives.contains(p.type)) {
+        if (p.type == "user") {
+          // items.add("import 'package:app/src/core/utils/user_utils.dart';");
+          // items.add("import 'package:supabase_flutter/supabase_flutter.dart';");
+        } else {
+          items.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+        }
+      }
+    }
+
+    return items;
+  }
+
   //Form Provider
   List<String> get formProviderImports {
     final List<String> importStrings = [];
@@ -41,7 +74,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       }
 
       if (!Constants.primitives.contains(p.type) && p.type.toLowerCase() != "profile") {
-        importStrings.add("import '../../${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
+        importStrings.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
       }
     }
 
@@ -153,8 +186,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       }
 
       if (!Constants.primitives.contains(p.type) && p.type.toLowerCase() != "profile") {
-        importStrings.add("import '../../${snakeCase(p.type)}/models/${snakeCase(p.type)}.dart';");
-        importStrings.add("import '../../${snakeCase(p.type)}/components/${snakeCase(p.type)}_list.dart';");
+        importStrings.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+        importStrings.add("import '../../../${snakeCase(p.type)}/presentation/widgets/${snakeCase(p.type)}_infinite_list_widget.dart';");
         includeButton = true;
       }
       if (p.isImage) {
@@ -219,15 +252,15 @@ Padding(
         final value = """
 ListTile(
                 contentPadding: EdgeInsets.zero,
-                title: const Text("${pascalCase(property.name)}"),
-                subtitle: model.${camelCase(property.name)}.exists ? Text(model.${camelCase(property.name)}.$uiHeading) : const Text("-"),
+                title: const Text("${titleCase(property.name)}"),
+                subtitle: state.${camelCase(name)}.${camelCase(property.name)}.exists ? Text(state.${camelCase(name)}.${camelCase(property.name)}.$uiHeading) : const Text("-"),
                 trailing: AppButton(
                   label: "Choose",
                   onPressed: () async {
                     final ${pascalCase(property.name)}? ${camelCase(property.name)} = await showModalBottomSheet(
                       context: context,
                       builder: (context){
-                        return ${pascalCase(property.name)}List(
+                        return ${pascalCase(property.name)}InfiniteListWidget(
                           onPressed: (${camelCase(property.name)}) => Navigator.of(context).pop(${camelCase(property.name)}),
                         );
                       },
@@ -284,10 +317,30 @@ ListTile(
 
   // Model Mapper
 
+  List<String> get mapperImports {
+    final List<String> items = [];
+    for (final p in properties) {
+      if (!Constants.primitives.contains(p.type)) {
+        if (p.type == "user") {
+          // items.add("import 'package:app/src/core/utils/user_utils.dart';");
+          // items.add("import 'package:supabase_flutter/supabase_flutter.dart';");
+        } else {
+          items.add("import '../../../${snakeCase(p.type)}/data/mappers/${snakeCase(p.type)}_mapper.dart';");
+        }
+      }
+    }
+
+    return items;
+  }
+
   List<String> get dtoToModelFields {
     final List<String> items = [];
     for (final property in properties) {
-      items.add("${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)},");
+      if (!Constants.primitives.contains(property.type)) {
+        items.add("${camelCase(property.name)}: ${pascalCase(property.name)}Mapper.toModel(${camelCase(name)}DTO.${camelCase(property.name)}),");
+      } else {
+        items.add("${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)},");
+      }
     }
 
     return items;
@@ -296,7 +349,11 @@ ListTile(
   List<String> get modelToDtoFields {
     final List<String> items = [];
     for (final property in properties) {
-      items.add("${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)},");
+      if (!Constants.primitives.contains(property.type)) {
+        items.add("${camelCase(property.name)}: ${pascalCase(property.name)}Mapper.toDto(${camelCase(name)}.${camelCase(property.name)}),");
+      } else {
+        items.add("${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)},");
+      }
     }
 
     return items;
@@ -309,7 +366,8 @@ ListTile(
       "serverBackendIsSupabase": Constants.serverBackend == ServerBackendOption.supabase,
       'name': name,
       'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
-      'toJsonFunctions': toJsonFunctions,
+      // 'toJsonFunctions': toJsonFunctions,
+      'formStateImports': formStateImports,
       'emptyParams': emptyParams,
       'formProviderImports': formProviderImports,
       'formControllers': formControllers,
@@ -322,8 +380,10 @@ ListTile(
       'uiHeading1': uiHeading1,
       'uiHeading2': uiHeading2,
       'uiDescription': uiDescription,
+      'mapperImports': mapperImports,
       'dtoToModelFields': dtoToModelFields,
       'modelToDtoFields': modelToDtoFields,
+      'modelImports': modelImports,
     };
   }
 }

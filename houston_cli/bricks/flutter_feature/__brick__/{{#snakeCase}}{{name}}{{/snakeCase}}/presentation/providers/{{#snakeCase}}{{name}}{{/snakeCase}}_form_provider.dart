@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/utils/validation_utils.dart';
-import '../../domain/providers/{{#camelCase}}{{name}}{{/camelCase}}_repository_provider.dart';
+import '../../domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_provider.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
 import '../state/{{#snakeCase}}{{name}}{{/snakeCase}}_form_state.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider.dart';

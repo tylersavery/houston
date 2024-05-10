@@ -9,11 +9,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'protocol.dart' as _i2;
 
 abstract class GameDTO extends _i1.SerializableEntity {
   GameDTO._({
     this.id,
     required this.uid,
+    required this.gameSystem,
     required this.name,
     required this.price,
     required this.description,
@@ -25,6 +27,7 @@ abstract class GameDTO extends _i1.SerializableEntity {
   factory GameDTO({
     int? id,
     required String uid,
+    required _i2.GameSystemDTO gameSystem,
     required String name,
     required double price,
     required String description,
@@ -40,6 +43,8 @@ abstract class GameDTO extends _i1.SerializableEntity {
     return GameDTO(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
+      gameSystem: serializationManager
+          .deserialize<_i2.GameSystemDTO>(jsonSerialization['gameSystem']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
       price:
           serializationManager.deserialize<double>(jsonSerialization['price']),
@@ -61,6 +66,8 @@ abstract class GameDTO extends _i1.SerializableEntity {
 
   String uid;
 
+  _i2.GameSystemDTO gameSystem;
+
   String name;
 
   double price;
@@ -76,6 +83,7 @@ abstract class GameDTO extends _i1.SerializableEntity {
   GameDTO copyWith({
     int? id,
     String? uid,
+    _i2.GameSystemDTO? gameSystem,
     String? name,
     double? price,
     String? description,
@@ -88,6 +96,7 @@ abstract class GameDTO extends _i1.SerializableEntity {
     return {
       if (id != null) 'id': id,
       'uid': uid,
+      'gameSystem': gameSystem.toJson(),
       'name': name,
       'price': price,
       'description': description,
@@ -104,6 +113,7 @@ class _GameDTOImpl extends GameDTO {
   _GameDTOImpl({
     int? id,
     required String uid,
+    required _i2.GameSystemDTO gameSystem,
     required String name,
     required double price,
     required String description,
@@ -113,6 +123,7 @@ class _GameDTOImpl extends GameDTO {
   }) : super._(
           id: id,
           uid: uid,
+          gameSystem: gameSystem,
           name: name,
           price: price,
           description: description,
@@ -125,6 +136,7 @@ class _GameDTOImpl extends GameDTO {
   GameDTO copyWith({
     Object? id = _Undefined,
     String? uid,
+    _i2.GameSystemDTO? gameSystem,
     String? name,
     double? price,
     String? description,
@@ -135,6 +147,7 @@ class _GameDTOImpl extends GameDTO {
     return GameDTO(
       id: id is int? ? id : this.id,
       uid: uid ?? this.uid,
+      gameSystem: gameSystem ?? this.gameSystem.copyWith(),
       name: name ?? this.name,
       price: price ?? this.price,
       description: description ?? this.description,

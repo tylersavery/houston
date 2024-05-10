@@ -7,11 +7,11 @@ Future<void> main(List<String> args) async {
     name: "game",
     generateServer: false,
     generateFlutter: true,
-    generateMigrations: false,
+    generateMigrations: true,
     runMigrations: false,
     updateRoutes: false,
     updateNavigation: false,
-    runPostGenerator: true,
+    runPostGenerator: false,
     runPostFormatter: true,
   );
 
