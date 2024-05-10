@@ -103,12 +103,10 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
         throw const ServerException("UserInfo was null");
       }
 
-      final profileDTO = await client.profile.createFromUser(result);
-      final profile = ProfileMapper.toModel(profileDTO);
+      final profile = await _fetchProfile(result.id!);
 
-      print("PROFILE");
-      print(profileDTO);
-      print(profile);
+      // final profileDTO = await client.profile.createFromUser(result);
+      // final profile = ProfileMapper.toModel(profileDTO);
 
       return _userWithProfile(result.id!.toString(), result.email!, result.userName, profile);
     } catch (e) {

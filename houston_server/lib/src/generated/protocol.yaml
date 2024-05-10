@@ -27,6 +27,5 @@ profile:
   - list:
   - retrieve:
   - retrieveByUserId:
-  - createFromUser:
   - save:
   - delete:

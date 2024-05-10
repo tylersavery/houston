@@ -47,36 +47,8 @@ class ProfileEndpoint extends Endpoint {
     return await ProfileDTO.db.findFirstRow(session, where: (row) => row.userId.equals(userId));
   }
 
-  Future<ProfileDTO> createFromUser(Session session, UserInfo userInfo) async {
-    if (userInfo.id == null) {
-      throw Exception("User ID is null");
-    }
-
-    final existingProfile = await ProfileDTO.db.findFirstRow(session, where: (row) => row.userId.equals(userInfo.id!));
-
-    if (existingProfile != null) {
-      return existingProfile;
-    }
-
-    final uid = await _uniqueUid(session);
-
-    final profile = await ProfileDTO.db.insertRow(
-      session,
-      ProfileDTO(
-        userId: userInfo.id!,
-        uid: uid,
-        username: userInfo.userName,
-        firstName: '',
-        lastName: '',
-        avatar: userInfo.imageUrl ?? '',
-        createdAt: DateTime.now(),
-      ),
-    );
-
-    return profile;
-  }
-
   Future<ProfileDTO> save(Session session, ProfileDTO profile) async {
+    //TODO auth check
     if (profile.id == null) {
       throw Exception("Profile id is null");
     }

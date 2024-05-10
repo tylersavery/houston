@@ -20,8 +20,8 @@ import 'package:houston_server/src/generated/food.dart' as _i9;
 import 'package:houston_server/src/generated/game.dart' as _i10;
 import 'package:houston_server/src/generated/game_system.dart' as _i11;
 import 'package:houston_server/src/generated/movie.dart' as _i12;
-import 'package:serverpod_auth_server/module.dart' as _i13;
-import 'package:houston_server/src/generated/profile.dart' as _i14;
+import 'package:houston_server/src/generated/profile.dart' as _i13;
+import 'package:serverpod_auth_server/module.dart' as _i14;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -566,30 +566,12 @@ class Endpoints extends _i1.EndpointDispatch {
             params['userId'],
           ),
         ),
-        'createFromUser': _i1.MethodConnector(
-          name: 'createFromUser',
-          params: {
-            'userInfo': _i1.ParameterDescription(
-              name: 'userInfo',
-              type: _i1.getType<_i13.UserInfo>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['profile'] as _i8.ProfileEndpoint).createFromUser(
-            session,
-            params['userInfo'],
-          ),
-        ),
         'save': _i1.MethodConnector(
           name: 'save',
           params: {
             'profile': _i1.ParameterDescription(
               name: 'profile',
-              type: _i1.getType<_i14.ProfileDTO>(),
+              type: _i1.getType<_i13.ProfileDTO>(),
               nullable: false,
             )
           },
@@ -622,6 +604,6 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    modules['serverpod_auth'] = _i13.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i14.Endpoints()..initializeEndpoints(server);
   }
 }

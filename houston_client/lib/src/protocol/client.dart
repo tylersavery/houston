@@ -266,13 +266,6 @@ class EndpointProfile extends _i1.EndpointRef {
         {'userId': userId},
       );
 
-  _i2.Future<_i12.ProfileDTO> createFromUser(_i13.UserInfo userInfo) =>
-      caller.callServerEndpoint<_i12.ProfileDTO>(
-        'profile',
-        'createFromUser',
-        {'userInfo': userInfo},
-      );
-
   _i2.Future<_i12.ProfileDTO> save(_i12.ProfileDTO profile) =>
       caller.callServerEndpoint<_i12.ProfileDTO>(
         'profile',

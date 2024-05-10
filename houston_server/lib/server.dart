@@ -1,3 +1,4 @@
+import 'package:houston_server/src/utils/strings.dart';
 import 'package:serverpod/serverpod.dart';
 
 import 'package:houston_server/src/web/routes/root.dart';
@@ -31,18 +32,30 @@ void run(List<String> args) async {
     '/*',
   );
 
-  auth.AuthConfig.set(auth.AuthConfig(
-    sendValidationEmail: (session, email, validationCode) async {
-      // Send your validation email here.
-      print("Email Validation Code: $validationCode");
-      return true;
-    },
-    sendPasswordResetEmail: (session, userInfo, validationCode) async {
-      // Send a password reset email here.
-      print("Password Reset Code: $validationCode");
-      return true;
-    },
-  ));
+  auth.AuthConfig.set(auth.AuthConfig(sendValidationEmail: (session, email, validationCode) async {
+    // Send your validation email here.
+    print("Email Validation Code: $validationCode");
+    return true;
+  }, sendPasswordResetEmail: (session, userInfo, validationCode) async {
+    // Send a password reset email here.
+    print("Password Reset Code: $validationCode");
+    return true;
+  }, onUserCreated: (session, userInfo) async {
+    final uid = await _uniqueProfileUid(session);
+
+    await ProfileDTO.db.insertRow(
+      session,
+      ProfileDTO(
+        userId: userInfo.id!,
+        uid: uid,
+        username: userInfo.userName,
+        firstName: '',
+        lastName: '',
+        avatar: userInfo.imageUrl ?? '',
+        createdAt: DateTime.now(),
+      ),
+    );
+  }));
 
   pod.addCloudStorage(s3.S3CloudStorage(
     serverpod: pod,
@@ -54,4 +67,16 @@ void run(List<String> args) async {
 
   // Start the server.
   await pod.start();
+}
+
+Future<String> _uniqueProfileUid(Session session) async {
+  late String uid;
+
+  while (true) {
+    uid = generateRandomString(8);
+    final unique = (await ProfileDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+    if (unique) {
+      return uid;
+    }
+  }
 }
