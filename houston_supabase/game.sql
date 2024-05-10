@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS "public"."game" (
 "id" bigint NOT NULL,
 "uid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+"game_system" bigint NOT NULL,
 "name" character varying NOT NULL,
 "price" numeric NOT NULL,
 "description" "text" NOT NULL,
@@ -18,3 +19,4 @@ NO MAXVALUE
 CACHE 1
 );
 ALTER TABLE ONLY "public"."game" ADD CONSTRAINT "game_pkey" PRIMARY KEY ("id");
+ALTER TABLE ONLY "public"."game" ADD CONSTRAINT "game_game_system_fkey" FOREIGN KEY ("game_system") REFERENCES "public"."game_system"("id") ON DELETE CASCADE;

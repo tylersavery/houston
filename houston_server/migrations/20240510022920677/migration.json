@@ -1,0 +1,102 @@
+{
+  "actions": [
+    {
+      "type": "deleteTable",
+      "deleteTable": "game"
+    },
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "game",
+        "dartName": "GameDTO",
+        "module": "houston",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 2,
+            "isNullable": false,
+            "columnDefault": "nextval('game_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "uid",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "gameSystem",
+            "columnType": 8,
+            "isNullable": false,
+            "dartType": "protocol:GameSystemDTO"
+          },
+          {
+            "name": "name",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "price",
+            "columnType": 3,
+            "isNullable": false,
+            "dartType": "double"
+          },
+          {
+            "name": "description",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "players",
+            "columnType": 2,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "imageUrl",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "game_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "tableDropped",
+      "message": "One or more columns are added to table \"game\" which cannot be added in a table migration. The complete table will be deleted and recreated.",
+      "table": "game",
+      "columns": [
+        "gameSystem"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

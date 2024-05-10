@@ -8,16 +8,21 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   const FlutterBlueprintSerializer({required super.blueprint});
 
   // Models
-  // List<String> get toJsonFunctions {
-  //   final List<String> items = [];
+  List<String> get toJsonFunctions {
+    if (Constants.serverBackend == ServerBackendOption.serverpod) {
+      return [];
+    }
 
-  //   for (final property in properties) {
-  //     if (!Constants.primitives.contains(property.type)) {
-  //       items.add("int ${property.type}ToJson(${pascalCase(property.type)} ${property.name}) => ${property.name}.id;");
-  //     }
-  //   }
-  //   return items;
-  // }
+    final List<String> items = [];
+
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        items.add(
+            "int ${camelCase(property.type)}ToJson(${pascalCase(property.type)} ${camelCase(property.name)}) => ${camelCase(property.name)}.id ?? 0;");
+      }
+    }
+    return items;
+  }
 
   List<String> get modelImports {
     final List<String> items = [];
@@ -359,6 +364,40 @@ ListTile(
     return items;
   }
 
+  List<String> get supabaseDatasourceImports {
+    if (Constants.serverBackend != ServerBackendOption.supabase) {
+      return [];
+    }
+
+    final List<String> importStrings = [];
+    for (final p in properties) {
+      if (!Constants.primitives.contains(p.type)) {
+        importStrings.add("import '../../../${snakeCase(p.type)}/data/datasources/${snakeCase(p.type)}_datasource_supabase.dart';");
+      }
+    }
+
+    return importStrings;
+  }
+
+  String? get supabaseDatasourceJoins {
+    if (Constants.serverBackend != ServerBackendOption.supabase) {
+      return null;
+    }
+
+    final List<String> joins = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        joins.add('${snakeCase(property.name)}(\${${pascalCase(property.name)}DataSourceSupabaseImpl.defaultSelect})');
+      }
+    }
+
+    if (joins.isNotEmpty) {
+      joins.insert(0, "");
+    }
+
+    return joins.join(",");
+  }
+
   @override
   Map<String, dynamic> serialize() {
     return {
@@ -366,7 +405,7 @@ ListTile(
       "serverBackendIsSupabase": Constants.serverBackend == ServerBackendOption.supabase,
       'name': name,
       'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
-      // 'toJsonFunctions': toJsonFunctions,
+      'toJsonFunctions': toJsonFunctions,
       'formStateImports': formStateImports,
       'emptyParams': emptyParams,
       'formProviderImports': formProviderImports,
@@ -384,6 +423,8 @@ ListTile(
       'dtoToModelFields': dtoToModelFields,
       'modelToDtoFields': modelToDtoFields,
       'modelImports': modelImports,
+      'supabaseDatasourceImports': supabaseDatasourceImports,
+      'supabaseDatasourceJoins': supabaseDatasourceJoins,
     };
   }
 }

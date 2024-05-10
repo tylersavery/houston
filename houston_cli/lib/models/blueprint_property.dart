@@ -82,6 +82,10 @@ class BlueprintProperty {
   }
 
   List<Map<String, dynamic>> get _modelAnnotations {
+    if (Constants.serverBackend == ServerBackendOption.serverpod) {
+      return [];
+    }
+
     final List<Map<String, dynamic>> values = [];
     if (snakeCase(name) != camelCase(name)) {
       values.add({'name': snakeCase(name)});
@@ -91,9 +95,9 @@ class BlueprintProperty {
       values.add({"defaultValue": defaultValue});
     }
 
-    // if (!Constants.primitives.contains(type)) {
-    //   values.add({"toJson": "${type}ToJson"});
-    // }
+    if (!Constants.primitives.contains(type)) {
+      values.add({"toJson": "${camelCase(type)}ToJson"});
+    }
 
     if (name == "createdAt" || name == 'uid') {
       values.add({"includeToJson": false});

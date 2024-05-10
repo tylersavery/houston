@@ -12,9 +12,11 @@
 
 [x] refactor auth (remove use cases)
 
-[ ] for dashboard, allow icon to change without readding the whole thing (smaller needle)
+[x] supabase image upload
 
-[ ] supabase image upload
+[x] fk relationships serverpod
+
+[ ] fk relationships supebase
 
 [x] image choosing for macos
 
