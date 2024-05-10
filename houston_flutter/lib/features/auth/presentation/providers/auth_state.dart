@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../../../../core/common/entities/user.dart';
+import 'package:houston_flutter/features/auth/domain/models/user_model.dart';
 
 @immutable
 sealed class AuthState {

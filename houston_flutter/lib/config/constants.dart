@@ -7,5 +7,6 @@ enum ServerBackendOption {
 
 class Constants {
   static const defaultPaginationLimit = 2;
-  static const serverBackend = ServerBackendOption.supabase;
+  static const serverBackend = ServerBackendOption.serverpod;
+  static const supabaseSignupRequiresConfirmation = false;
 }

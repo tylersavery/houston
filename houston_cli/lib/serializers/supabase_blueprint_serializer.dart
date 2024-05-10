@@ -14,26 +14,54 @@ class SupabaseBlueprintSerializer extends BlueprintSerializer {
 
     sqlProperties.add('"id" bigint NOT NULL');
 
+    // if (camelCase(name) == "profile") {
+    //   sqlProperties.add('"id" "uuid" NOT NULL references auth.users ON DELETE CASCADE');
+    // } else {
+    //   sqlProperties.add('"id" bigint NOT NULL');
+    // }
+
     for (final property in properties) {
       final type = property.type.toLowerCase();
-      final name = snakeCase(property.name);
+      final propertyName = snakeCase(property.name);
 
-      if (name == 'uid') {
-        sqlProperties.add('"uid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL');
-      } else if (type == "char") {
-        sqlProperties.add('"$name" character varying NOT NULL');
-      } else if (type == "text" || type == "string" || type == "url") {
-        sqlProperties.add('"$name" "text" NOT NULL');
-      } else if (type == "int" || type == "double") {
-        sqlProperties.add('"$name" numeric NOT NULL');
-      } else if (type == "datetime") {
-        if (name == "created_at") {
-          sqlProperties.add('"$name" timestamp with time zone DEFAULT "now"() NOT NULL');
+      String? defaultValue;
+
+      if (property.defaultValue != null) {
+        if (property.defaultValue is String) {
+          defaultValue = "'${property.defaultValue}'";
+        }
+        if (property.defaultValue is num) {
+          defaultValue = "${property.defaultValue}";
+        }
+      } else if (property.allowBlank) {
+        if (property.isStringish) {
+          defaultValue = "''";
+        } else if (property.isNumeric) {
+          defaultValue = '0';
+        }
+      }
+
+      if (propertyName == 'uid') {
+        if (name == "profile") {
+          sqlProperties.add('"uid" "uuid" NOT NULL references auth.users ON DELETE CASCADE');
         } else {
-          sqlProperties.add('"$name" timestamp with time zone NOT NULL');
+          sqlProperties.add('"uid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL');
+        }
+      } else if (type == "char") {
+        sqlProperties
+            .add('"$propertyName" character varying${!property.allowNull ? " NOT NULL" : ""}${defaultValue != null ? ' DEFAULT $defaultValue' : ''}');
+      } else if (type == "text" || type == "string" || type == "url") {
+        sqlProperties.add('"$propertyName" "text"${!property.allowNull ? " NOT NULL" : ""}${defaultValue != null ? ' DEFAULT $defaultValue' : ''}');
+      } else if (type == "int" || type == "double") {
+        sqlProperties.add('"$propertyName" numeric${!property.allowNull ? " NOT NULL" : ""}${defaultValue != null ? ' DEFAULT $defaultValue' : ''}');
+      } else if (type == "datetime") {
+        if (propertyName == "created_at") {
+          sqlProperties.add('"$propertyName" timestamp with time zone DEFAULT "now"() NOT NULL');
+        } else {
+          sqlProperties.add('"$propertyName" timestamp with time zone${!property.allowNull ? " NOT NULL" : ""}');
         }
       } else {
-        sqlProperties.add('"$name" bigint NOT NULL');
+        sqlProperties.add('"$propertyName" bigint${!property.allowNull ? " NOT NULL" : ""}');
       }
     }
 

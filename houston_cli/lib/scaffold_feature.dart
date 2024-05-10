@@ -39,6 +39,10 @@ Future<void> scaffoldFeature({
 
   name = snakeCase(name);
 
+  if (['auth', 'profile', 'asset', 'core'].contains(name)) {
+    return print(red('Feature $name is a reserved houston feature name.'));
+  }
+
   final dir = FileUtils.blueprintsDir;
   final path = "$dir/$name.yaml";
 
@@ -147,7 +151,7 @@ Future<void> scaffoldFeature({
 
     final routerPath = "${FileUtils.flutterDir}/lib/core/router/app_router.dart";
 
-    if (updateRoutes == true) {
+    if (updateRoutes == true && camelCase(name) != "profile") {
       print(white("Updating routes..."));
       await FileUtils.insertTextInFile(
         path: routerPath,
@@ -165,7 +169,7 @@ Future<void> scaffoldFeature({
 
     final dashboardPath = "${FileUtils.flutterDir}/lib/core/widgets/navigation/dashboard.dart";
 
-    if (updateNavigation == true) {
+    if (updateNavigation == true && camelCase(name) != "profile") {
       print(white("Updating Navigation..."));
 
       await FileUtils.insertTextInFileAtToken(
@@ -198,10 +202,6 @@ Future<void> scaffoldFeature({
         "$flutterGeneratedPath/domain/providers/${filePrefix}_datasource_provider.dart",
         "$flutterGeneratedPath/domain/providers/${filePrefix}_repository_provider.dart",
         "$flutterGeneratedPath/domain/repositories/${filePrefix}_repository.dart",
-        "$flutterGeneratedPath/domain/usecases/${filePrefix}_delete_usecase.dart",
-        "$flutterGeneratedPath/domain/usecases/${filePrefix}_list_usecase.dart",
-        "$flutterGeneratedPath/domain/usecases/${filePrefix}_retrieve_usecase.dart",
-        "$flutterGeneratedPath/domain/usecases/${filePrefix}_save_usecase.dart",
         "$flutterGeneratedPath/presentation/providers/${filePrefix}_detail_provider.dart",
         "$flutterGeneratedPath/presentation/providers/${filePrefix}_form_provider.dart",
         "$flutterGeneratedPath/presentation/providers/${filePrefix}_infinite_list_provider.dart",

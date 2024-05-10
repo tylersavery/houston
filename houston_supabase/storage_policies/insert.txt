@@ -1,0 +1,1 @@
+((bucket_id = 'houston2024'::text) AND (( SELECT (auth.uid())::text AS uid) = (storage.foldername(name))[1]))

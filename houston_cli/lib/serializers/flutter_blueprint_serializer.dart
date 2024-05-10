@@ -108,7 +108,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       }
 
       if (Constants.formElementTypes.contains(property.type)) {
-        if (!property.allowNull) {
+        if (!property.allowNull && !property.allowBlank) {
           items.add(
               'String? ${camelCase(property.name)}Validator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "${titleCase(property.name)}");');
         }
@@ -150,10 +150,18 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
         continue;
       }
       if (Constants.formElementTypes.contains(property.type)) {
-        if (property.isStringish) {
-          items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)};");
-        } else if (property.isNumeric) {
-          items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)}.toString();");
+        if (property.allowNull) {
+          if (property.isStringish) {
+            items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)} ?? '';");
+          } else if (property.isNumeric) {
+            items.add("${camelCase(property.name)}Controller.text = (state.${camelCase(name)}.${camelCase(property.name)} ?? 0).toString();");
+          }
+        } else {
+          if (property.isStringish) {
+            items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)};");
+          } else if (property.isNumeric) {
+            items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)}.toString();");
+          }
         }
       }
     }
@@ -222,7 +230,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
             ? """
 TextFormField(
                 controller: provider.${camelCase(property.name)}Controller,
-                validator: provider.${camelCase(property.name)}Validator,
+                ${!property.allowBlank && !property.allowNull ? 'validator: provider.${camelCase(property.name)}Validator,' : ''}
                 decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
                 minLines: 3,
                 maxLines: 3,
@@ -231,7 +239,7 @@ TextFormField(
             : """
 TextFormField(
                 controller: provider.${camelCase(property.name)}Controller,
-                validator: provider.${camelCase(property.name)}Validator,
+                ${!property.allowBlank && !property.allowNull ? 'validator: provider.${camelCase(property.name)}Validator,' : ''}
                 decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
               ),
 """;
@@ -416,9 +424,9 @@ ListTile(
       'formSetters': formSetters,
       'formImports': formImports,
       'formInputs': formInputs,
-      'uiHeading1': uiHeading1,
-      'uiHeading2': uiHeading2,
-      'uiDescription': uiDescription,
+      'uiHeading1': uiHeading1 ?? false,
+      'uiHeading2': uiHeading2 ?? false,
+      'uiDescription': uiDescription ?? false,
       'mapperImports': mapperImports,
       'dtoToModelFields': dtoToModelFields,
       'modelToDtoFields': modelToDtoFields,

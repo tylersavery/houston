@@ -1,0 +1,22 @@
+name: profile
+properties:
+  -
+    name: username
+    type: char
+  -
+    name: firstName
+    type: char
+    allowBlank: true
+  -
+    name: lastName
+    type: char
+    allowBlank: true
+  -
+    name: avatar
+    type: char
+    maxLength: 255
+    allowBlank: true
+  -
+    name: bio
+    type: text
+    allowNull: true

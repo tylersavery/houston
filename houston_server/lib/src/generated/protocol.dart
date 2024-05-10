@@ -20,7 +20,9 @@ import 'game_system.dart' as _i8;
 import 'game_system_list.dart' as _i9;
 import 'movie.dart' as _i10;
 import 'movie_list.dart' as _i11;
-import 'protocol.dart' as _i12;
+import 'profile.dart' as _i12;
+import 'profile_list.dart' as _i13;
+import 'protocol.dart' as _i14;
 export 'food.dart';
 export 'food_list.dart';
 export 'game.dart';
@@ -29,6 +31,8 @@ export 'game_system.dart';
 export 'game_system_list.dart';
 export 'movie.dart';
 export 'movie_list.dart';
+export 'profile.dart';
+export 'profile_list.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -330,6 +334,86 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
+    _i2.TableDefinition(
+      name: 'profile',
+      dartName: 'ProfileDTO',
+      schema: 'public',
+      module: 'houston',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'profile_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'uid',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'userId',
+          columnType: _i2.ColumnType.integer,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'username',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'firstName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lastName',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'avatar',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'bio',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'profile_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
     ..._i3.Protocol.targetTableDefinitions,
     ..._i2.Protocol.targetTableDefinitions,
   ];
@@ -367,6 +451,12 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i11.MovieDTOList) {
       return _i11.MovieDTOList.fromJson(data, this) as T;
     }
+    if (t == _i12.ProfileDTO) {
+      return _i12.ProfileDTO.fromJson(data, this) as T;
+    }
+    if (t == _i13.ProfileDTOList) {
+      return _i13.ProfileDTOList.fromJson(data, this) as T;
+    }
     if (t == _i1.getType<_i4.FoodDTO?>()) {
       return (data != null ? _i4.FoodDTO.fromJson(data, this) : null) as T;
     }
@@ -394,21 +484,32 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data != null ? _i11.MovieDTOList.fromJson(data, this) : null)
           as T;
     }
-    if (t == List<_i12.FoodDTO>) {
-      return (data as List).map((e) => deserialize<_i12.FoodDTO>(e)).toList()
+    if (t == _i1.getType<_i12.ProfileDTO?>()) {
+      return (data != null ? _i12.ProfileDTO.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i13.ProfileDTOList?>()) {
+      return (data != null ? _i13.ProfileDTOList.fromJson(data, this) : null)
+          as T;
+    }
+    if (t == List<_i14.FoodDTO>) {
+      return (data as List).map((e) => deserialize<_i14.FoodDTO>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.GameDTO>) {
-      return (data as List).map((e) => deserialize<_i12.GameDTO>(e)).toList()
+    if (t == List<_i14.GameDTO>) {
+      return (data as List).map((e) => deserialize<_i14.GameDTO>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.GameSystemDTO>) {
+    if (t == List<_i14.GameSystemDTO>) {
       return (data as List)
-          .map((e) => deserialize<_i12.GameSystemDTO>(e))
+          .map((e) => deserialize<_i14.GameSystemDTO>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i12.MovieDTO>) {
-      return (data as List).map((e) => deserialize<_i12.MovieDTO>(e)).toList()
+    if (t == List<_i14.MovieDTO>) {
+      return (data as List).map((e) => deserialize<_i14.MovieDTO>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i14.ProfileDTO>) {
+      return (data as List).map((e) => deserialize<_i14.ProfileDTO>(e)).toList()
           as dynamic;
     }
     try {
@@ -451,6 +552,12 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i11.MovieDTOList) {
       return 'MovieDTOList';
     }
+    if (data is _i12.ProfileDTO) {
+      return 'ProfileDTO';
+    }
+    if (data is _i13.ProfileDTOList) {
+      return 'ProfileDTOList';
+    }
     return super.getClassNameForObject(data);
   }
 
@@ -484,6 +591,12 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'MovieDTOList') {
       return deserialize<_i11.MovieDTOList>(data['data']);
     }
+    if (data['className'] == 'ProfileDTO') {
+      return deserialize<_i12.ProfileDTO>(data['data']);
+    }
+    if (data['className'] == 'ProfileDTOList') {
+      return deserialize<_i13.ProfileDTOList>(data['data']);
+    }
     return super.deserializeByClassName(data);
   }
 
@@ -510,6 +623,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i8.GameSystemDTO.t;
       case _i10.MovieDTO:
         return _i10.MovieDTO.t;
+      case _i12.ProfileDTO:
+        return _i12.ProfileDTO.t;
     }
     return null;
   }

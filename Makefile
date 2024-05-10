@@ -10,8 +10,14 @@ cli_run:
 create_migration:
 	cd houston_server && serverpod create-migration
 
+create_migration_force:
+	cd houston_server && serverpod create-migration --force
+
 migrate:
 	cd houston_server && dart run bin/main.dart --role maintenance --apply-migrations
+
+migrate_force:
+	cd houston_server && dart run bin/main.dart --role maintenance --apply-migrations --force
 
 init:
 	cd houston_server && docker-compose up -d

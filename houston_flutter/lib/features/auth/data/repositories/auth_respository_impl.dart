@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_flutter/features/auth/domain/datasources/auth_data_source.dart';
-import '../../../../core/common/entities/user.dart';
+import 'package:houston_flutter/features/auth/domain/models/user_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -12,7 +12,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, User>> currentUser() async {
-    final user = dataSource.currentUser();
+    final user = await dataSource.currentUser();
 
     if (user == null) {
       return left(Failure('User not logged in!'));

@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import '../../../../core/common/entities/user.dart';
+import 'package:houston_flutter/features/auth/domain/models/user_model.dart';
 import '../../../../core/error/failures.dart';
 
 abstract interface class AuthRepository {

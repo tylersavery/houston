@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:houston_flutter/core/providers/current_user_provider.dart';
 import '../../theme/theme.dart';
 import '../base_component.dart';
 import '../../../features/auth/presentation/providers/auth_provider.dart';
@@ -9,6 +10,8 @@ class MainDrawer extends BaseComponent {
   const MainDrawer({super.key});
   @override
   Widget body(BuildContext context, WidgetRef ref) {
+    final userState = ref.watch(currentUserProvider);
+
     return Drawer(
       width: 220,
       backgroundColor: Theme.of(context).colorScheme.drawerBackground,
@@ -33,6 +36,26 @@ class MainDrawer extends BaseComponent {
                     "Houston",
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
+                ),
+                Builder(
+                  builder: (context) {
+                    switch (userState) {
+                      case CurrentUserStateInitial():
+                        return const SizedBox.shrink();
+                      case CurrentUserStateAuthenticated():
+                        final user = userState.user;
+                        return Card(
+                          child: ListTile(
+                            title: Text(user.username),
+                            leading: const Icon(Icons.person),
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              //TODO: hook up to profile route when ready
+                            },
+                          ),
+                        );
+                    }
+                  },
                 ),
                 Card(
                   child: ListTile(

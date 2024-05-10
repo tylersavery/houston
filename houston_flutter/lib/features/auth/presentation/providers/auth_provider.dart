@@ -62,9 +62,23 @@ class Auth extends _$Auth {
 
     result.fold((failure) {
       state = AuthStateFailure(failure.message);
-    }, (success) {
+    }, (success) async {
       if (success) {
-        state = AuthStateVerificationRequired(email: email, password: password);
+        if (Constants.serverBackend == ServerBackendOption.supabase && !Constants.supabaseSignupRequiresConfirmation) {
+          final loginResult = await ref.read(authRepositoryProvider).loginWithEmailPassword(
+                email: email,
+                password: password,
+              );
+
+          loginResult.fold((failure) {
+            state = AuthStateFailure(failure.message);
+          }, (user) {
+            ref.read(currentUserProvider.notifier).updateUser(user);
+            state = AuthStateSuccess(user);
+          });
+        } else {
+          state = AuthStateVerificationRequired(email: email, password: password);
+        }
       } else {
         state = const AuthStateFailure("Registration Error.");
       }

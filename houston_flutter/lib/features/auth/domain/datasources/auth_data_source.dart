@@ -1,7 +1,7 @@
 import 'package:houston_flutter/features/auth/domain/models/user_model.dart';
 
 abstract interface class AuthDataSource {
-  UserModel? currentUser();
+  Future<User?> currentUser();
 
   Future<bool> register({
     required String email,
@@ -9,12 +9,12 @@ abstract interface class AuthDataSource {
     required String password,
   });
 
-  Future<UserModel> confirmRegistration({
+  Future<User> confirmRegistration({
     required String email,
     required String verificationCode,
   });
 
-  Future<UserModel> login({
+  Future<User> login({
     required String email,
     required String password,
   });

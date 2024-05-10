@@ -1,0 +1,13 @@
+class: ProfileDTO
+
+table: profile
+
+fields:
+  uid: String
+  userId: int
+  username: String
+  firstName: String
+  lastName: String
+  avatar: String
+  bio: String?
+  createdAt: DateTime

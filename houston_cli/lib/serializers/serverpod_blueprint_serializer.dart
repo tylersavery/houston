@@ -10,7 +10,7 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
     List<String> items = [];
 
     for (final p in properties) {
-      items.add("  ${camelCase(p.name)}: ${p.dartTypeAsString}");
+      items.add("  ${camelCase(p.name)}: ${p.dartTypeAsString}${p.allowNull ? '?' : ''}");
     }
 
     return items;
