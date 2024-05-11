@@ -1,18 +1,28 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_flutter/features/movie/domain/models/movie_list_variant.dart';
 import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
 import '../../domain/providers/movie_repository_provider.dart';
 
-class MovieInfiniteListProvider {
-  final Ref ref;
+part 'movie_infinite_list_provider.g.dart';
+
+@Riverpod(keepAlive: true)
+class MovieInfiniteList extends _$MovieInfiniteList {
   final PagingController<int, Movie> pagingController = PagingController(firstPageKey: 1);
 
-  MovieInfiniteListProvider(this.ref) {
+  @override
+  PagingStatus build(MovieListVariant variant, [String? arg]) {
     pagingController.addPageRequestListener((page) {
       fetchPage(page: page);
     });
+
+    pagingController.addStatusListener((status) {
+      state = status;
+    });
+
+    return PagingStatus.loadingFirstPage;
   }
 
   Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
@@ -38,7 +48,3 @@ class MovieInfiniteListProvider {
     pagingController.refresh();
   }
 }
-
-final movieInfiniteListProvider = Provider<MovieInfiniteListProvider>((ref) {
-  return MovieInfiniteListProvider(ref);
-});

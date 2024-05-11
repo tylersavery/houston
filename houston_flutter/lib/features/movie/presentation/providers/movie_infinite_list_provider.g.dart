@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_paginated_list_provider.dart';
+part of 'movie_infinite_list_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$moviePaginatedListHash() =>
-    r'6f9ccfce6ca10987b0c0cb8d980362e03bda3264';
+String _$movieInfiniteListHash() => r'ca33a6731201edaa0d56ddb1588b0360619dc7ce';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,40 +29,39 @@ class _SystemHash {
   }
 }
 
-abstract class _$MoviePaginatedList
-    extends BuildlessNotifier<MoviePaginatedListState> {
+abstract class _$MovieInfiniteList extends BuildlessNotifier<PagingStatus> {
   late final MovieListVariant variant;
   late final String? arg;
 
-  MoviePaginatedListState build(
+  PagingStatus build(
     MovieListVariant variant, [
     String? arg,
   ]);
 }
 
-/// See also [MoviePaginatedList].
-@ProviderFor(MoviePaginatedList)
-const moviePaginatedListProvider = MoviePaginatedListFamily();
+/// See also [MovieInfiniteList].
+@ProviderFor(MovieInfiniteList)
+const movieInfiniteListProvider = MovieInfiniteListFamily();
 
-/// See also [MoviePaginatedList].
-class MoviePaginatedListFamily extends Family<MoviePaginatedListState> {
-  /// See also [MoviePaginatedList].
-  const MoviePaginatedListFamily();
+/// See also [MovieInfiniteList].
+class MovieInfiniteListFamily extends Family<PagingStatus> {
+  /// See also [MovieInfiniteList].
+  const MovieInfiniteListFamily();
 
-  /// See also [MoviePaginatedList].
-  MoviePaginatedListProvider call(
+  /// See also [MovieInfiniteList].
+  MovieInfiniteListProvider call(
     MovieListVariant variant, [
     String? arg,
   ]) {
-    return MoviePaginatedListProvider(
+    return MovieInfiniteListProvider(
       variant,
       arg,
     );
   }
 
   @override
-  MoviePaginatedListProvider getProviderOverride(
-    covariant MoviePaginatedListProvider provider,
+  MovieInfiniteListProvider getProviderOverride(
+    covariant MovieInfiniteListProvider provider,
   ) {
     return call(
       provider.variant,
@@ -83,34 +81,34 @@ class MoviePaginatedListFamily extends Family<MoviePaginatedListState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'moviePaginatedListProvider';
+  String? get name => r'movieInfiniteListProvider';
 }
 
-/// See also [MoviePaginatedList].
-class MoviePaginatedListProvider
-    extends NotifierProviderImpl<MoviePaginatedList, MoviePaginatedListState> {
-  /// See also [MoviePaginatedList].
-  MoviePaginatedListProvider(
+/// See also [MovieInfiniteList].
+class MovieInfiniteListProvider
+    extends NotifierProviderImpl<MovieInfiniteList, PagingStatus> {
+  /// See also [MovieInfiniteList].
+  MovieInfiniteListProvider(
     MovieListVariant variant, [
     String? arg,
   ]) : this._internal(
-          () => MoviePaginatedList()
+          () => MovieInfiniteList()
             ..variant = variant
             ..arg = arg,
-          from: moviePaginatedListProvider,
-          name: r'moviePaginatedListProvider',
+          from: movieInfiniteListProvider,
+          name: r'movieInfiniteListProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$moviePaginatedListHash,
-          dependencies: MoviePaginatedListFamily._dependencies,
+                  : _$movieInfiniteListHash,
+          dependencies: MovieInfiniteListFamily._dependencies,
           allTransitiveDependencies:
-              MoviePaginatedListFamily._allTransitiveDependencies,
+              MovieInfiniteListFamily._allTransitiveDependencies,
           variant: variant,
           arg: arg,
         );
 
-  MoviePaginatedListProvider._internal(
+  MovieInfiniteListProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -125,8 +123,8 @@ class MoviePaginatedListProvider
   final String? arg;
 
   @override
-  MoviePaginatedListState runNotifierBuild(
-    covariant MoviePaginatedList notifier,
+  PagingStatus runNotifierBuild(
+    covariant MovieInfiniteList notifier,
   ) {
     return notifier.build(
       variant,
@@ -135,10 +133,10 @@ class MoviePaginatedListProvider
   }
 
   @override
-  Override overrideWith(MoviePaginatedList Function() create) {
+  Override overrideWith(MovieInfiniteList Function() create) {
     return ProviderOverride(
       origin: this,
-      override: MoviePaginatedListProvider._internal(
+      override: MovieInfiniteListProvider._internal(
         () => create()
           ..variant = variant
           ..arg = arg,
@@ -154,14 +152,13 @@ class MoviePaginatedListProvider
   }
 
   @override
-  NotifierProviderElement<MoviePaginatedList, MoviePaginatedListState>
-      createElement() {
-    return _MoviePaginatedListProviderElement(this);
+  NotifierProviderElement<MovieInfiniteList, PagingStatus> createElement() {
+    return _MovieInfiniteListProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is MoviePaginatedListProvider &&
+    return other is MovieInfiniteListProvider &&
         other.variant == variant &&
         other.arg == arg;
   }
@@ -176,7 +173,7 @@ class MoviePaginatedListProvider
   }
 }
 
-mixin MoviePaginatedListRef on NotifierProviderRef<MoviePaginatedListState> {
+mixin MovieInfiniteListRef on NotifierProviderRef<PagingStatus> {
   /// The parameter `variant` of this provider.
   MovieListVariant get variant;
 
@@ -184,16 +181,15 @@ mixin MoviePaginatedListRef on NotifierProviderRef<MoviePaginatedListState> {
   String? get arg;
 }
 
-class _MoviePaginatedListProviderElement
-    extends NotifierProviderElement<MoviePaginatedList, MoviePaginatedListState>
-    with MoviePaginatedListRef {
-  _MoviePaginatedListProviderElement(super.provider);
+class _MovieInfiniteListProviderElement
+    extends NotifierProviderElement<MovieInfiniteList, PagingStatus>
+    with MovieInfiniteListRef {
+  _MovieInfiniteListProviderElement(super.provider);
 
   @override
-  MovieListVariant get variant =>
-      (origin as MoviePaginatedListProvider).variant;
+  MovieListVariant get variant => (origin as MovieInfiniteListProvider).variant;
   @override
-  String? get arg => (origin as MoviePaginatedListProvider).arg;
+  String? get arg => (origin as MovieInfiniteListProvider).arg;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

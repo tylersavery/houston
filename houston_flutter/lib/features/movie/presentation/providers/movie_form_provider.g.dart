@@ -6,7 +6,7 @@ part of 'movie_form_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$movieFormHash() => r'bd578ff1aaf5991374dcb58b2942b6d21ff0f906';
+String _$movieFormHash() => r'fe561d2ac9298f35c31f0d113f50ea374f9ffaac';
 
 /// See also [MovieForm].
 @ProviderFor(MovieForm)
