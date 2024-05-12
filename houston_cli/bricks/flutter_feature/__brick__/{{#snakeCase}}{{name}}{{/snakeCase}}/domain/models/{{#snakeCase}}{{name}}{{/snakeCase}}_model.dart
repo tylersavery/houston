@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+{{#modelImports}}{{{.}}}{{/modelImports}}
 
 part '{{#snakeCase}}{{name}}{{/snakeCase}}_model.freezed.dart';
 part '{{#snakeCase}}{{name}}{{/snakeCase}}_model.g.dart';

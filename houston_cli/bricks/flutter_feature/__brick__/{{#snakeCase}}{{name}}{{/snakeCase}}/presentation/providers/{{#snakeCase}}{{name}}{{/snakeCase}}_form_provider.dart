@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/utils/validation_utils.dart';
 import '../../domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_provider.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_list_variant.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_detail_provider.dart';
 import '../state/{{#snakeCase}}{{name}}{{/snakeCase}}_form_state.dart';
 import '{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider.dart';
@@ -73,7 +74,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
       ({{#camelCase}}{{name}}{{/camelCase}}) {
         state = state.success({{#camelCase}}{{name}}{{/camelCase}});
         reset();
-        ref.read({{#camelCase}}{{name}}{{/camelCase}}InfiniteListProvider).refresh();
+        ref.read({{#camelCase}}{{name}}{{/camelCase}}InfiniteListProvider({{#pascalCase}}{{name}}{{/pascalCase}}ListVariant.all).notifier).refresh();
         if ({{#camelCase}}{{name}}{{/camelCase}}.id != null) {
           ref.invalidate({{#camelCase}}{{name}}{{/camelCase}}DetailProvider({{#camelCase}}{{name}}{{/camelCase}}.id!));
         }

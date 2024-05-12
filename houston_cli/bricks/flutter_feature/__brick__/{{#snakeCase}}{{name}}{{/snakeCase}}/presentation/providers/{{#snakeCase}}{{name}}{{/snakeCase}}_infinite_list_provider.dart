@@ -1,18 +1,29 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
-import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 import '../../domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_provider.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_list_variant.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 
-class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider {
-  final Ref ref;
+part '{{#snakeCase}}{{name}}{{/snakeCase}}_infinite_list_provider.g.dart';
+
+@Riverpod(keepAlive: true)
+class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteList extends _${{#pascalCase}}{{name}}{{/pascalCase}}InfiniteList {
   final PagingController<int, {{#pascalCase}}{{name}}{{/pascalCase}}> pagingController = PagingController(firstPageKey: 1);
 
-  {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider(this.ref) {
+  @override
+  PagingStatus build({{#pascalCase}}{{name}}{{/pascalCase}}ListVariant variant, [String? arg]) {
     pagingController.addPageRequestListener((page) {
       fetchPage(page: page);
     });
+
+    pagingController.addStatusListener((status) {
+      state = status;
+    });
+
+    return PagingStatus.loadingFirstPage;
   }
 
   Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
@@ -38,7 +49,3 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider {
     pagingController.refresh();
   }
 }
-
-final {{#camelCase}}{{name}}{{/camelCase}}InfiniteListProvider = Provider<{{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider>((ref) {
-  return {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteListProvider(ref);
-});
