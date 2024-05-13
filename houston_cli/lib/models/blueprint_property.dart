@@ -35,18 +35,6 @@ class BlueprintProperty {
       throw Exception(red("type required"));
     }
 
-    String module = 'root';
-
-    if (type.contains('.')) {
-      final parts = type.split('.');
-      module = parts.first;
-      type = type.split('.').last;
-    }
-
-    // if (!PROPERTY_TYPES.contains(data['type'])) {
-    //   throw Exception(red("Invalid Property Type `$type`"));
-    // }
-
     return BlueprintProperty(
       name: data['name'],
       type: type.toString().toLowerCase(),
@@ -187,7 +175,7 @@ class BlueprintProperty {
       case 'user':
         return 'User';
       default:
-        return "${pascalCase(type)}";
+        return pascalCase(type);
     }
   }
 

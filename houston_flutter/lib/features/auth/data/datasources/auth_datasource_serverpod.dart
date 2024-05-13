@@ -1,5 +1,5 @@
+import 'package:houston_flutter/core/utils/debugger_utils.dart';
 import 'package:houston_flutter/features/auth/domain/datasources/auth_data_source.dart';
-import 'package:houston_flutter/features/profile/data/mappers/profile_mapper.dart';
 import 'package:houston_flutter/features/profile/domain/models/profile_model.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:houston_client/houston_client.dart';
@@ -11,20 +11,6 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
   final SessionManager sessionManager;
 
   AuthDataSourceServerpodImpl(this.client, this.sessionManager);
-
-  // User _userWithProfile(String id, String email, Profile profile) {
-  //   return User(
-  //     id: id,
-  //     email: email,
-  //     username: profile.username,
-  //     firstName: profile.firstName,
-  //     lastName: profile.lastName,
-  //     bio: profile.bio,
-  //     avatar: profile.avatar,
-  //   );
-  // }
-
-  //TODO: Serverpod Profile
 
   User _userWithProfile(String id, String email, String username, Profile profile) {
     return User(
@@ -55,8 +41,8 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
         );
       }
       throw const ServerException("No Profile");
-    } catch (e) {
-      print(e);
+    } catch (e, st) {
+      Debugger.error(e, st);
       throw ServerException(e.toString());
     }
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../asset/presentation/widgets/upload_image_widget.dart';
@@ -31,9 +30,7 @@ class GameFormWidget extends ConsumerWidget {
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text("Game System"),
-            subtitle: state.game.gameSystem.exists
-                ? Text(state.game.gameSystem.name)
-                : const Text("-"),
+            subtitle: state.game.gameSystem.exists ? Text(state.game.gameSystem.name) : const Text("-"),
             trailing: AppButton(
               label: "Choose",
               onPressed: () async {
@@ -41,8 +38,7 @@ class GameFormWidget extends ConsumerWidget {
                   context: context,
                   builder: (context) {
                     return GameSystemInfiniteListWidget(
-                      onPressed: (gameSystem) =>
-                          Navigator.of(context).pop(gameSystem),
+                      onPressed: (gameSystem) => Navigator.of(context).pop(gameSystem),
                     );
                   },
                 );

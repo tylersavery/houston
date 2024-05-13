@@ -1,7 +1,5 @@
 import 'package:serverpod/serverpod.dart';
 import 'package:houston_server/src/generated/protocol.dart';
-import 'package:houston_server/src/utils/strings.dart';
-import 'package:serverpod_auth_server/module.dart';
 
 class ProfileEndpoint extends Endpoint {
   Future<ProfileDTOList> list(
@@ -69,17 +67,5 @@ class ProfileEndpoint extends Endpoint {
 
   Future<void> delete(Session session, int id) async {
     await ProfileDTO.db.deleteWhere(session, where: (row) => row.id.equals(id));
-  }
-
-  Future<String> _uniqueUid(Session session) async {
-    late String uid;
-
-    while (true) {
-      uid = generateRandomString(8);
-      final unique = (await ProfileDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
-      if (unique) {
-        return uid;
-      }
-    }
   }
 }

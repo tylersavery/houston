@@ -8,6 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  collection: ^1.18.0
   dcli: ^3.4.0
   mason: ^0.1.0-dev.50
   recase: ^4.1.0

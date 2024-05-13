@@ -1,7 +1,5 @@
-import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/serializers/blueprint_serializer.dart';
 import 'package:houston_cli/utils/string_utils.dart';
-import 'package:collection/collection.dart';
 
 class ServerpodBlueprintSerializer extends BlueprintSerializer {
   const ServerpodBlueprintSerializer({required super.blueprint});
