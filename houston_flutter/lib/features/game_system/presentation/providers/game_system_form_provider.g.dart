@@ -6,7 +6,7 @@ part of 'game_system_form_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameSystemFormHash() => r'863db6561ac4aa18ffb10db7d02af84f30c4f9af';
+String _$gameSystemFormHash() => r'7ec07ef7b8b0472363d17673cc111ba878acbfbe';
 
 /// See also [GameSystemForm].
 @ProviderFor(GameSystemForm)

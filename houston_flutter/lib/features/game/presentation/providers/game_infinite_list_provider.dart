@@ -1,3 +1,4 @@
+
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
@@ -10,8 +11,7 @@ part 'game_infinite_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class GameInfiniteList extends _$GameInfiniteList {
-  final PagingController<int, Game> pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, Game> pagingController = PagingController(firstPageKey: 1);
 
   @override
   PagingStatus build(GameListVariant variant, [String? arg]) {
@@ -26,10 +26,8 @@ class GameInfiniteList extends _$GameInfiniteList {
     return PagingStatus.loadingFirstPage;
   }
 
-  Future<void> fetchPage(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result =
-        await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
+  Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
+    final result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
 
     result.fold((failure) {
       pagingController.error = failure.message;

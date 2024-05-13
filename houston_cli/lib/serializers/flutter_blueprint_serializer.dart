@@ -261,12 +261,12 @@ Padding(
 """;
         items.add(value);
       } else if (property.type.toLowerCase() != "profile") {
-        final uiHeading = properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uuid';
+        final uiHeading = properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uid';
         final value = """
 ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text("${titleCase(property.name)}"),
-                subtitle: state.${camelCase(name)}.${camelCase(property.name)}.exists ? Text(state.${camelCase(name)}.${camelCase(property.name)}.$uiHeading) : const Text("-"),
+                subtitle: state.${camelCase(name)}.${camelCase(property.name)}?.exists == true ? Text(state.${camelCase(name)}.${camelCase(property.name)}!.$uiHeading) : const Text("-"),
                 trailing: AppButton(
                   label: "Choose",
                   onPressed: () async {
@@ -350,7 +350,8 @@ ListTile(
     final List<String> items = [];
     for (final property in properties) {
       if (!Constants.primitives.contains(property.type)) {
-        items.add("${camelCase(property.name)}: ${pascalCase(property.name)}Mapper.toModel(${camelCase(name)}DTO.${camelCase(property.name)}),");
+        items.add(
+            "${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)} != null ? ${pascalCase(property.name)}Mapper.toModel(${camelCase(name)}DTO.${camelCase(property.name)}!) : null,");
       } else {
         items.add("${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)},");
       }
@@ -363,7 +364,11 @@ ListTile(
     final List<String> items = [];
     for (final property in properties) {
       if (!Constants.primitives.contains(property.type)) {
-        items.add("${camelCase(property.name)}: ${pascalCase(property.name)}Mapper.toDto(${camelCase(name)}.${camelCase(property.name)}),");
+        if (Constants.serverBackend == ServerBackendOption.serverpod) {
+          items.add("${camelCase(property.name)}Id : ${camelCase(name)}.${camelCase(property.name)}?.id ?? 0,");
+        }
+        items.add(
+            "${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)} != null ? ${pascalCase(property.name)}Mapper.toDto(${camelCase(name)}.${camelCase(property.name)}!) : null,");
       } else {
         items.add("${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)},");
       }

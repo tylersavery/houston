@@ -13,14 +13,16 @@ _$GameSystemImpl _$$GameSystemImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       description: json['description'] as String,
-      imageUrl: json['image_url'] as String,
-      createdAt: DateTime.parse(json['created_at'] as String),
+      imageUrl: json['imageUrl'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$GameSystemImplToJson(_$GameSystemImpl instance) =>
     <String, dynamic>{
+      'uid': instance.uid,
       'name': instance.name,
       'price': instance.price,
       'description': instance.description,
-      'image_url': instance.imageUrl,
+      'imageUrl': instance.imageUrl,
+      'createdAt': instance.createdAt.toIso8601String(),
     };

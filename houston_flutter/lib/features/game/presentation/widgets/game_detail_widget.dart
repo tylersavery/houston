@@ -10,6 +10,8 @@ class GameDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -18,5 +20,7 @@ class GameDetailWidget extends StatelessWidget {
         Text(game.description),
       ],
     );
+    
+
   }
 }

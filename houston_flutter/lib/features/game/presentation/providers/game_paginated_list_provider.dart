@@ -14,11 +14,9 @@ class GamePaginatedList extends _$GamePaginatedList {
     return GamePaginatedListStateInitial();
   }
 
-  Future<void> load(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> load({required int page, int limit = Constants.defaultPaginationLimit}) async {
     state = GamePaginatedListStateLoading();
-    final result =
-        await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
+    final result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
 
     result.fold((failure) {
       state = GamePaginatedListStateFailure(error: failure.message);

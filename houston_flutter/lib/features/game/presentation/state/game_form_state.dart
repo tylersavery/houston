@@ -1,6 +1,7 @@
 import '../../domain/models/game_model.dart';
 import '../../../game_system/domain/models/game_system_model.dart';
 
+
 class GameFormState {
   final Game game;
   final bool isLoading;
@@ -16,14 +17,13 @@ class GameFormState {
     return Game(
       id: null,
       uid: "",
-      gameSystem: GameSystem.empty(),
       name: "",
       price: 0,
       description: "",
       players: 0,
       imageUrl: "",
       createdAt: DateTime.now(),
-    );
+      );
   }
 
   factory GameFormState.initial() {

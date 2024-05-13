@@ -16,7 +16,8 @@ abstract class GameDTO extends _i1.TableRow {
   GameDTO._({
     int? id,
     required this.uid,
-    required this.gameSystem,
+    required this.gameSystemId,
+    this.gameSystem,
     required this.name,
     required this.price,
     required this.description,
@@ -28,7 +29,8 @@ abstract class GameDTO extends _i1.TableRow {
   factory GameDTO({
     int? id,
     required String uid,
-    required _i2.GameSystemDTO gameSystem,
+    required int gameSystemId,
+    _i2.GameSystemDTO? gameSystem,
     required String name,
     required double price,
     required String description,
@@ -44,8 +46,10 @@ abstract class GameDTO extends _i1.TableRow {
     return GameDTO(
       id: serializationManager.deserialize<int?>(jsonSerialization['id']),
       uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
+      gameSystemId: serializationManager
+          .deserialize<int>(jsonSerialization['gameSystemId']),
       gameSystem: serializationManager
-          .deserialize<_i2.GameSystemDTO>(jsonSerialization['gameSystem']),
+          .deserialize<_i2.GameSystemDTO?>(jsonSerialization['gameSystem']),
       name: serializationManager.deserialize<String>(jsonSerialization['name']),
       price:
           serializationManager.deserialize<double>(jsonSerialization['price']),
@@ -66,7 +70,9 @@ abstract class GameDTO extends _i1.TableRow {
 
   String uid;
 
-  _i2.GameSystemDTO gameSystem;
+  int gameSystemId;
+
+  _i2.GameSystemDTO? gameSystem;
 
   String name;
 
@@ -86,6 +92,7 @@ abstract class GameDTO extends _i1.TableRow {
   GameDTO copyWith({
     int? id,
     String? uid,
+    int? gameSystemId,
     _i2.GameSystemDTO? gameSystem,
     String? name,
     double? price,
@@ -99,7 +106,8 @@ abstract class GameDTO extends _i1.TableRow {
     return {
       if (id != null) 'id': id,
       'uid': uid,
-      'gameSystem': gameSystem.toJson(),
+      'gameSystemId': gameSystemId,
+      if (gameSystem != null) 'gameSystem': gameSystem?.toJson(),
       'name': name,
       'price': price,
       'description': description,
@@ -115,7 +123,7 @@ abstract class GameDTO extends _i1.TableRow {
     return {
       'id': id,
       'uid': uid,
-      'gameSystem': gameSystem,
+      'gameSystemId': gameSystemId,
       'name': name,
       'price': price,
       'description': description,
@@ -130,7 +138,8 @@ abstract class GameDTO extends _i1.TableRow {
     return {
       if (id != null) 'id': id,
       'uid': uid,
-      'gameSystem': gameSystem.allToJson(),
+      'gameSystemId': gameSystemId,
+      if (gameSystem != null) 'gameSystem': gameSystem?.allToJson(),
       'name': name,
       'price': price,
       'description': description,
@@ -153,8 +162,8 @@ abstract class GameDTO extends _i1.TableRow {
       case 'uid':
         uid = value;
         return;
-      case 'gameSystem':
-        gameSystem = value;
+      case 'gameSystemId':
+        gameSystemId = value;
         return;
       case 'name':
         name = value;
@@ -190,6 +199,7 @@ abstract class GameDTO extends _i1.TableRow {
     bool orderDescending = false,
     bool useCache = true,
     _i1.Transaction? transaction,
+    GameDTOInclude? include,
   }) async {
     return session.db.find<GameDTO>(
       where: where != null ? where(GameDTO.t) : null,
@@ -200,6 +210,7 @@ abstract class GameDTO extends _i1.TableRow {
       orderDescending: orderDescending,
       useCache: useCache,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -212,6 +223,7 @@ abstract class GameDTO extends _i1.TableRow {
     bool orderDescending = false,
     bool useCache = true,
     _i1.Transaction? transaction,
+    GameDTOInclude? include,
   }) async {
     return session.db.findSingleRow<GameDTO>(
       where: where != null ? where(GameDTO.t) : null,
@@ -220,15 +232,20 @@ abstract class GameDTO extends _i1.TableRow {
       orderDescending: orderDescending,
       useCache: useCache,
       transaction: transaction,
+      include: include,
     );
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
   static Future<GameDTO?> findById(
     _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<GameDTO>(id);
+    int id, {
+    GameDTOInclude? include,
+  }) async {
+    return session.db.findById<GameDTO>(
+      id,
+      include: include,
+    );
   }
 
   @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
@@ -296,8 +313,8 @@ abstract class GameDTO extends _i1.TableRow {
     );
   }
 
-  static GameDTOInclude include() {
-    return GameDTOInclude._();
+  static GameDTOInclude include({_i2.GameSystemDTOInclude? gameSystem}) {
+    return GameDTOInclude._(gameSystem: gameSystem);
   }
 
   static GameDTOIncludeList includeList({
@@ -327,7 +344,8 @@ class _GameDTOImpl extends GameDTO {
   _GameDTOImpl({
     int? id,
     required String uid,
-    required _i2.GameSystemDTO gameSystem,
+    required int gameSystemId,
+    _i2.GameSystemDTO? gameSystem,
     required String name,
     required double price,
     required String description,
@@ -337,6 +355,7 @@ class _GameDTOImpl extends GameDTO {
   }) : super._(
           id: id,
           uid: uid,
+          gameSystemId: gameSystemId,
           gameSystem: gameSystem,
           name: name,
           price: price,
@@ -350,7 +369,8 @@ class _GameDTOImpl extends GameDTO {
   GameDTO copyWith({
     Object? id = _Undefined,
     String? uid,
-    _i2.GameSystemDTO? gameSystem,
+    int? gameSystemId,
+    Object? gameSystem = _Undefined,
     String? name,
     double? price,
     String? description,
@@ -361,7 +381,10 @@ class _GameDTOImpl extends GameDTO {
     return GameDTO(
       id: id is int? ? id : this.id,
       uid: uid ?? this.uid,
-      gameSystem: gameSystem ?? this.gameSystem.copyWith(),
+      gameSystemId: gameSystemId ?? this.gameSystemId,
+      gameSystem: gameSystem is _i2.GameSystemDTO?
+          ? gameSystem
+          : this.gameSystem?.copyWith(),
       name: name ?? this.name,
       price: price ?? this.price,
       description: description ?? this.description,
@@ -378,8 +401,8 @@ class GameDTOTable extends _i1.Table {
       'uid',
       this,
     );
-    gameSystem = _i1.ColumnSerializable(
-      'gameSystem',
+    gameSystemId = _i1.ColumnInt(
+      'gameSystemId',
       this,
     );
     name = _i1.ColumnString(
@@ -410,7 +433,9 @@ class GameDTOTable extends _i1.Table {
 
   late final _i1.ColumnString uid;
 
-  late final _i1.ColumnSerializable gameSystem;
+  late final _i1.ColumnInt gameSystemId;
+
+  _i2.GameSystemDTOTable? _gameSystem;
 
   late final _i1.ColumnString name;
 
@@ -424,11 +449,24 @@ class GameDTOTable extends _i1.Table {
 
   late final _i1.ColumnDateTime createdAt;
 
+  _i2.GameSystemDTOTable get gameSystem {
+    if (_gameSystem != null) return _gameSystem!;
+    _gameSystem = _i1.createRelationTable(
+      relationFieldName: 'gameSystem',
+      field: GameDTO.t.gameSystemId,
+      foreignField: _i2.GameSystemDTO.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.GameSystemDTOTable(tableRelation: foreignTableRelation),
+    );
+    return _gameSystem!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
         uid,
-        gameSystem,
+        gameSystemId,
         name,
         price,
         description,
@@ -436,16 +474,28 @@ class GameDTOTable extends _i1.Table {
         imageUrl,
         createdAt,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'gameSystem') {
+      return gameSystem;
+    }
+    return null;
+  }
 }
 
 @Deprecated('Use GameDTOTable.t instead.')
 GameDTOTable tGameDTO = GameDTOTable();
 
 class GameDTOInclude extends _i1.IncludeObject {
-  GameDTOInclude._();
+  GameDTOInclude._({_i2.GameSystemDTOInclude? gameSystem}) {
+    _gameSystem = gameSystem;
+  }
+
+  _i2.GameSystemDTOInclude? _gameSystem;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'gameSystem': _gameSystem};
 
   @override
   _i1.Table get table => GameDTO.t;
@@ -474,6 +524,8 @@ class GameDTOIncludeList extends _i1.IncludeList {
 class GameDTORepository {
   const GameDTORepository._();
 
+  final attachRow = const GameDTOAttachRowRepository._();
+
   Future<List<GameDTO>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<GameDTOTable>? where,
@@ -483,6 +535,7 @@ class GameDTORepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<GameDTOTable>? orderByList,
     _i1.Transaction? transaction,
+    GameDTOInclude? include,
   }) async {
     return session.dbNext.find<GameDTO>(
       where: where?.call(GameDTO.t),
@@ -492,6 +545,7 @@ class GameDTORepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -503,6 +557,7 @@ class GameDTORepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<GameDTOTable>? orderByList,
     _i1.Transaction? transaction,
+    GameDTOInclude? include,
   }) async {
     return session.dbNext.findFirstRow<GameDTO>(
       where: where?.call(GameDTO.t),
@@ -511,6 +566,7 @@ class GameDTORepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -518,10 +574,12 @@ class GameDTORepository {
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
+    GameDTOInclude? include,
   }) async {
     return session.dbNext.findById<GameDTO>(
       id,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -616,6 +674,29 @@ class GameDTORepository {
       where: where?.call(GameDTO.t),
       limit: limit,
       transaction: transaction,
+    );
+  }
+}
+
+class GameDTOAttachRowRepository {
+  const GameDTOAttachRowRepository._();
+
+  Future<void> gameSystem(
+    _i1.Session session,
+    GameDTO gameDTO,
+    _i2.GameSystemDTO gameSystem,
+  ) async {
+    if (gameDTO.id == null) {
+      throw ArgumentError.notNull('gameDTO.id');
+    }
+    if (gameSystem.id == null) {
+      throw ArgumentError.notNull('gameSystem.id');
+    }
+
+    var $gameDTO = gameDTO.copyWith(gameSystemId: gameSystem.id);
+    await session.dbNext.updateRow<GameDTO>(
+      $gameDTO,
+      columns: [GameDTO.t.gameSystemId],
     );
   }
 }

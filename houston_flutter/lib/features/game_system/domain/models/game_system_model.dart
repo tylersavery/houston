@@ -2,6 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+
 part 'game_system_model.freezed.dart';
 part 'game_system_model.g.dart';
 
@@ -13,12 +14,12 @@ class GameSystem with _$GameSystem {
 
   factory GameSystem({
     @JsonKey(includeToJson: false) int? id,
-    @JsonKey(includeToJson: false) required String uid,
+    required String uid,
     required String name,
     required double price,
     required String description,
-    @JsonKey(name: "image_url") required String imageUrl,
-    @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
+    required String imageUrl,
+    required DateTime createdAt,
     
   }) = _GameSystem;
 

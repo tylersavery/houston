@@ -40,7 +40,8 @@ class BlueprintProperty {
       type: type.toString().toLowerCase(),
       maxLength: data['maxLength'],
       allowBlank: data['allowBlank'] ?? false,
-      allowNull: data['allowNull'] == true && data['allowBlank'] != true && data['default'] == null,
+      allowNull: !Constants.primitives.contains(type.toString().toLowerCase()) ||
+          (data['allowNull'] == true && data['allowBlank'] != true && data['default'] == null),
       defaultValue: data['default'],
       uiHeading: data['uiHeading'],
       isImage: data['image'] ?? false,

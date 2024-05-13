@@ -24,33 +24,34 @@ class GameSystemFormWidget extends ConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(state.error!),
             ),
-          TextFormField(
-            controller: provider.nameController,
-            validator: provider.nameValidator,
-            decoration: const InputDecoration(label: Text("Name")),
-          ),
-          TextFormField(
-            controller: provider.priceController,
-            validator: provider.priceValidator,
-            decoration: const InputDecoration(label: Text("Price")),
-          ),
-          TextFormField(
-            controller: provider.descriptionController,
-            validator: provider.descriptionValidator,
-            decoration: const InputDecoration(label: Text("Description")),
-            minLines: 3,
-            maxLines: 3,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
-            child: UploadImageWidget(
-              url: state.gameSystem.imageUrl,
-              label: "Image Url",
-              onComplete: (url) {
-                provider.setImageUrl(url);
-              },
-            ),
-          ),
+            TextFormField(
+                controller: provider.nameController,
+                validator: provider.nameValidator,
+                decoration: const InputDecoration(label: Text("Name")),
+              ),
+TextFormField(
+                controller: provider.priceController,
+                validator: provider.priceValidator,
+                decoration: const InputDecoration(label: Text("Price")),
+              ),
+TextFormField(
+                controller: provider.descriptionController,
+                validator: provider.descriptionValidator,
+                decoration: const InputDecoration(label: Text("Description")),
+                minLines: 3,
+                maxLines: 3,
+              ),
+Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
+      child: UploadImageWidget(
+        url: state.gameSystem.imageUrl,
+        label: "Image Url",
+        onComplete: (url) {
+          provider.setImageUrl(url);
+        },
+      ),
+    ),
+
           if (isEditing)
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -21,10 +21,10 @@ class GameEndpoint extends Endpoint {
                 case 'createdAt':
                   return t.createdAt;
                 case 'price':
-                  return t.price;
+	return t.price;
                 case 'players':
-                  return t.players;
-
+	return t.players;
+                
                 default:
                   return t.id;
               }
@@ -77,9 +77,7 @@ class GameEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await GameDTO.db
-              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
-          null;
+      final unique = (await GameDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
       if (unique) {
         return uid;
       }

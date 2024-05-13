@@ -7,7 +7,6 @@ part 'game_system_detail_provider.g.dart';
 @riverpod
 Future<GameSystem> gameSystemDetail(GameSystemDetailRef ref, int id) async {
   final result = await ref.read(gameSystemRepositoryProvider).retrieve(id);
-
-  return result.fold(
-      (failure) => throw Exception(failure), (gameSystem) => gameSystem);
+  
+  return result.fold((failure) => throw Exception(failure), (gameSystem) => gameSystem);
 }

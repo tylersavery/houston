@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/utils/validation_utils.dart';
 import '../../domain/providers/game_system_repository_provider.dart';
+import '../../domain/models/game_system_list_variant.dart';
 import 'game_system_detail_provider.dart';
 import '../state/game_system_form_state.dart';
 import 'game_system_infinite_list_provider.dart';
+
 
 part 'game_system_form_provider.g.dart';
 
@@ -19,17 +21,15 @@ class GameSystemForm extends _$GameSystemForm {
   final nameController = TextEditingController();
   final priceController = TextEditingController();
   final descriptionController = TextEditingController();
+  
 
-  String? nameValidator(String? value) =>
-      ValidationUtils.formValidatorNotEmpty(value, "Name");
-  String? priceValidator(String? value) =>
-      ValidationUtils.formValidatorNotEmpty(value, "Price");
-  String? descriptionValidator(String? value) =>
-      ValidationUtils.formValidatorNotEmpty(value, "Description");
+  String? nameValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Name");
+  String? priceValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Price");
+  String? descriptionValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Description");
+  
 
   Future<void> load(int gameSystemId) async {
-    final result =
-        await ref.read(gameSystemRepositoryProvider).retrieve(gameSystemId);
+    final result = await ref.read(gameSystemRepositoryProvider).retrieve(gameSystemId);
 
     result.fold(
       (failure) {
@@ -46,6 +46,7 @@ class GameSystemForm extends _$GameSystemForm {
     nameController.text = state.gameSystem.name;
     priceController.text = state.gameSystem.price.toString();
     descriptionController.text = state.gameSystem.description;
+    
   }
 
   void reset() {
@@ -53,11 +54,14 @@ class GameSystemForm extends _$GameSystemForm {
     _refreshControllers();
   }
 
-  void setImageUrl(String value) {
+    void setImageUrl(String value) {
     state = state.updateGameSystem(
       state.gameSystem.copyWith(imageUrl: value),
     );
   }
+
+
+  
 
   Future<bool> submit() async {
     if (!formKey.currentState!.validate()) {
@@ -69,12 +73,12 @@ class GameSystemForm extends _$GameSystemForm {
       name: nameController.text,
       price: double.tryParse(priceController.text) ?? 0.0,
       description: descriptionController.text,
+      
     );
 
     state = state.loading();
 
-    final result =
-        await ref.read(gameSystemRepositoryProvider).save(gameSystem);
+    final result = await ref.read(gameSystemRepositoryProvider).save(gameSystem);
 
     return result.fold(
       (failure) {
@@ -84,7 +88,7 @@ class GameSystemForm extends _$GameSystemForm {
       (gameSystem) {
         state = state.success(gameSystem);
         reset();
-        ref.read(gameSystemInfiniteListProvider).refresh();
+        ref.read(gameSystemInfiniteListProvider(GameSystemListVariant.all).notifier).refresh();
         if (gameSystem.id != null) {
           ref.invalidate(gameSystemDetailProvider(gameSystem.id!));
         }
@@ -95,10 +99,8 @@ class GameSystemForm extends _$GameSystemForm {
 
   Future<bool> delete() async {
     if (state.gameSystem.id != null) {
-      final result = await ref
-          .read(gameSystemRepositoryProvider)
-          .delete(state.gameSystem.id!);
-
+      final result = await ref.read(gameSystemRepositoryProvider).delete(state.gameSystem.id!);
+    
       return result.fold((failure) {
         state = state.failure(failure.message);
         return false;

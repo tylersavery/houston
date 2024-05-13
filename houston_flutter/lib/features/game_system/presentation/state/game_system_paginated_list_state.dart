@@ -3,11 +3,9 @@ import '../../domain/models/game_system_model.dart';
 
 class GameSystemPaginatedListState {}
 
-class GameSystemPaginatedListStateInitial
-    extends GameSystemPaginatedListState {}
+class GameSystemPaginatedListStateInitial extends GameSystemPaginatedListState {}
 
-class GameSystemPaginatedListStateLoading
-    extends GameSystemPaginatedListState {}
+class GameSystemPaginatedListStateLoading extends GameSystemPaginatedListState {}
 
 class GameSystemPaginatedListStateSuccess extends GameSystemPaginatedListState {
   final PaginatedResponse<GameSystem> data;

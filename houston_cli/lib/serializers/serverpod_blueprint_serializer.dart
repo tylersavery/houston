@@ -1,3 +1,4 @@
+import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/serializers/blueprint_serializer.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 
@@ -8,7 +9,9 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
     List<String> items = [];
 
     for (final p in properties) {
-      items.add("  ${camelCase(p.name)}: ${p.dartTypeAsString}${p.allowNull ? '?' : ''}");
+      final isRelationship = !Constants.primitives.contains(p.type);
+      items.add(
+          "  ${camelCase(p.name)}: ${p.dartTypeAsString}${isRelationship ? 'DTO' : ''}${p.allowNull || isRelationship ? '?' : ''}${isRelationship ? ', relation' : ''}");
     }
 
     return items;

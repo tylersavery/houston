@@ -56,10 +56,10 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
-          name: 'gameSystem',
-          columnType: _i2.ColumnType.json,
+          name: 'gameSystemId',
+          columnType: _i2.ColumnType.integer,
           isNullable: false,
-          dartType: 'protocol:GameSystemDTO',
+          dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'name',
@@ -98,7 +98,18 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'DateTime',
         ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'game_fk_0',
+          columns: ['gameSystemId'],
+          referenceTable: 'game_system',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'game_pkey',

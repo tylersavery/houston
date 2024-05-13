@@ -23,7 +23,7 @@ mixin _$Game {
   @JsonKey(includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
-  GameSystem get gameSystem => throw _privateConstructorUsedError;
+  GameSystem? get gameSystem => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $GameCopyWith<$Res> {
   $Res call(
       {@JsonKey(includeToJson: false) int? id,
       String uid,
-      GameSystem gameSystem,
+      GameSystem? gameSystem,
       String name,
       double price,
       String description,
@@ -52,7 +52,7 @@ abstract class $GameCopyWith<$Res> {
       String imageUrl,
       DateTime createdAt});
 
-  $GameSystemCopyWith<$Res> get gameSystem;
+  $GameSystemCopyWith<$Res>? get gameSystem;
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
   $Res call({
     Object? id = freezed,
     Object? uid = null,
-    Object? gameSystem = null,
+    Object? gameSystem = freezed,
     Object? name = null,
     Object? price = null,
     Object? description = null,
@@ -87,10 +87,10 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      gameSystem: null == gameSystem
+      gameSystem: freezed == gameSystem
           ? _value.gameSystem
           : gameSystem // ignore: cast_nullable_to_non_nullable
-              as GameSystem,
+              as GameSystem?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,12 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
 
   @override
   @pragma('vm:prefer-inline')
-  $GameSystemCopyWith<$Res> get gameSystem {
-    return $GameSystemCopyWith<$Res>(_value.gameSystem, (value) {
+  $GameSystemCopyWith<$Res>? get gameSystem {
+    if (_value.gameSystem == null) {
+      return null;
+    }
+
+    return $GameSystemCopyWith<$Res>(_value.gameSystem!, (value) {
       return _then(_value.copyWith(gameSystem: value) as $Val);
     });
   }
@@ -137,7 +141,7 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
   $Res call(
       {@JsonKey(includeToJson: false) int? id,
       String uid,
-      GameSystem gameSystem,
+      GameSystem? gameSystem,
       String name,
       double price,
       String description,
@@ -146,7 +150,7 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
       DateTime createdAt});
 
   @override
-  $GameSystemCopyWith<$Res> get gameSystem;
+  $GameSystemCopyWith<$Res>? get gameSystem;
 }
 
 /// @nodoc
@@ -161,7 +165,7 @@ class __$$GameImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? uid = null,
-    Object? gameSystem = null,
+    Object? gameSystem = freezed,
     Object? name = null,
     Object? price = null,
     Object? description = null,
@@ -178,10 +182,10 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      gameSystem: null == gameSystem
+      gameSystem: freezed == gameSystem
           ? _value.gameSystem
           : gameSystem // ignore: cast_nullable_to_non_nullable
-              as GameSystem,
+              as GameSystem?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -216,7 +220,7 @@ class _$GameImpl extends _Game {
   _$GameImpl(
       {@JsonKey(includeToJson: false) this.id,
       required this.uid,
-      required this.gameSystem,
+      this.gameSystem,
       required this.name,
       required this.price,
       required this.description,
@@ -234,7 +238,7 @@ class _$GameImpl extends _Game {
   @override
   final String uid;
   @override
-  final GameSystem gameSystem;
+  final GameSystem? gameSystem;
   @override
   final String name;
   @override
@@ -296,7 +300,7 @@ abstract class _Game extends Game {
   factory _Game(
       {@JsonKey(includeToJson: false) final int? id,
       required final String uid,
-      required final GameSystem gameSystem,
+      final GameSystem? gameSystem,
       required final String name,
       required final double price,
       required final String description,
@@ -313,7 +317,7 @@ abstract class _Game extends Game {
   @override
   String get uid;
   @override
-  GameSystem get gameSystem;
+  GameSystem? get gameSystem;
   @override
   String get name;
   @override

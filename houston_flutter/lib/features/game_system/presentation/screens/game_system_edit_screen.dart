@@ -8,10 +8,9 @@ import '../widgets/game_system_form_widget.dart';
 
 class GameSystemEditScreen extends BaseScreen {
   final int? gameSystemId;
-
-  static String route([int? gameSystemId]) =>
-      "/game-system/edit/${gameSystemId ?? ':id'}";
-
+  
+  static String route([int? gameSystemId]) => "/game-system/edit/${gameSystemId ?? ':id'}";
+  
   static String routeNew() => "/game-system/new";
 
   const GameSystemEditScreen({

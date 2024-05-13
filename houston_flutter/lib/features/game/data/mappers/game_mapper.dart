@@ -8,7 +8,7 @@ class GameMapper {
     return Game(
       id: gameDTO.id,
       uid: gameDTO.uid,
-      gameSystem: GameSystemMapper.toModel(gameDTO.gameSystem),
+      gameSystem: gameDTO.gameSystem != null ? GameSystemMapper.toModel(gameDTO.gameSystem!) : null,
       name: gameDTO.name,
       price: gameDTO.price,
       description: gameDTO.description,
@@ -23,7 +23,8 @@ class GameMapper {
     return GameDTO(
       id: game.id,
       uid: game.uid,
-      gameSystem: GameSystemMapper.toDto(game.gameSystem),
+      gameSystemId : game.gameSystem?.id ?? 0,
+      gameSystem: game.gameSystem != null ? GameSystemMapper.toDto(game.gameSystem!) : null,
       name: game.name,
       price: game.price,
       description: game.description,

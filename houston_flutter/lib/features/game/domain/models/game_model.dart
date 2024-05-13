@@ -15,7 +15,7 @@ class Game with _$Game {
   factory Game({
     @JsonKey(includeToJson: false) int? id,
     required String uid,
-    required GameSystem gameSystem,
+    GameSystem? gameSystem,
     required String name,
     required double price,
     required String description,
@@ -32,7 +32,6 @@ class Game with _$Game {
     return Game(
       id: null,
       uid: "",
-      gameSystem: GameSystem.empty(),
       name: "",
       price: 0,
       description: "",

@@ -9,8 +9,9 @@ part of 'game_model.dart';
 _$GameImpl _$$GameImplFromJson(Map<String, dynamic> json) => _$GameImpl(
       id: (json['id'] as num?)?.toInt(),
       uid: json['uid'] as String,
-      gameSystem:
-          GameSystem.fromJson(json['gameSystem'] as Map<String, dynamic>),
+      gameSystem: json['gameSystem'] == null
+          ? null
+          : GameSystem.fromJson(json['gameSystem'] as Map<String, dynamic>),
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       description: json['description'] as String,

@@ -1,26 +1,33 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
-import '../../domain/models/game_system_model.dart';
 import '../../domain/providers/game_system_repository_provider.dart';
+import '../../domain/models/game_system_list_variant.dart';
+import '../../domain/models/game_system_model.dart';
 
-class GameSystemInfiniteListProvider {
-  final Ref ref;
-  final PagingController<int, GameSystem> pagingController =
-      PagingController(firstPageKey: 1);
+part 'game_system_infinite_list_provider.g.dart';
 
-  GameSystemInfiniteListProvider(this.ref) {
+@Riverpod(keepAlive: true)
+class GameSystemInfiniteList extends _$GameSystemInfiniteList {
+  final PagingController<int, GameSystem> pagingController = PagingController(firstPageKey: 1);
+
+  @override
+  PagingStatus build(GameSystemListVariant variant, [String? arg]) {
     pagingController.addPageRequestListener((page) {
       fetchPage(page: page);
     });
+
+    pagingController.addStatusListener((status) {
+      state = status;
+    });
+
+    return PagingStatus.loadingFirstPage;
   }
 
-  Future<void> fetchPage(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result = await ref
-        .read(gameSystemRepositoryProvider)
-        .list(page: page, limit: limit);
+  Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
+    final result = await ref.read(gameSystemRepositoryProvider).list(page: page, limit: limit);
 
     result.fold((failure) {
       pagingController.error = failure.message;
@@ -42,8 +49,3 @@ class GameSystemInfiniteListProvider {
     pagingController.refresh();
   }
 }
-
-final gameSystemInfiniteListProvider =
-    Provider<GameSystemInfiniteListProvider>((ref) {
-  return GameSystemInfiniteListProvider(ref);
-});
