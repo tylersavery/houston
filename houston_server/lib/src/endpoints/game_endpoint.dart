@@ -21,16 +21,19 @@ class GameEndpoint extends Endpoint {
                 case 'createdAt':
                   return t.createdAt;
                 case 'price':
-	return t.price;
+                  return t.price;
                 case 'players':
-	return t.players;
-                
+                  return t.players;
+
                 default:
                   return t.id;
               }
             }
           : null,
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
+      include: GameDTO.include(
+        gameSystem: GameSystemDTO.include(),
+      ),
     );
 
     return GameDTOList(
@@ -43,12 +46,24 @@ class GameEndpoint extends Endpoint {
   }
 
   Future<GameDTO?> retrieve(Session session, int id) async {
-    return await GameDTO.db.findById(session, id);
+    return await GameDTO.db.findById(
+      session,
+      id,
+      include: GameDTO.include(
+        gameSystem: GameSystemDTO.include(),
+      ),
+    );
   }
 
   Future<GameDTO> save(Session session, GameDTO game) async {
     if (game.id != null) {
-      final existingGame = await GameDTO.db.findById(session, game.id!);
+      final existingGame = await GameDTO.db.findById(
+        session,
+        game.id!,
+        include: GameDTO.include(
+          gameSystem: GameSystemDTO.include(),
+        ),
+      );
 
       if (existingGame != null) {
         return await GameDTO.db.updateRow(
@@ -62,10 +77,12 @@ class GameEndpoint extends Endpoint {
     }
 
     final uid = await _uniqueUid(session);
-    return await GameDTO.db.insertRow(
+    final newGame = await GameDTO.db.insertRow(
       session,
       game.copyWith(uid: uid, createdAt: DateTime.now()),
     );
+
+    return newGame.copyWith(gameSystem: game.gameSystem);
   }
 
   Future<void> delete(Session session, int id) async {
