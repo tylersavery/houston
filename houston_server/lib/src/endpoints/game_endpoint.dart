@@ -8,6 +8,7 @@ class GameEndpoint extends Endpoint {
     required int page,
     required int limit,
     String? orderBy,
+    String? gameSystemUid,
   }) async {
     final count = await GameDTO.db.count(session);
 
@@ -15,6 +16,12 @@ class GameEndpoint extends Endpoint {
       session,
       limit: limit,
       offset: (page * limit) - limit,
+      where: (t) {
+        if (gameSystemUid != null) {
+          return t.gameSystem.uid.equals(gameSystemUid);
+        }
+        return t.id.notEquals(0);
+      },
       orderBy: orderBy != null
           ? (t) {
               switch (orderBy.replaceAll("-", "")) {

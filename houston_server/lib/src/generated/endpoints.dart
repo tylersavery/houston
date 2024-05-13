@@ -142,6 +142,11 @@ class Endpoints extends _i1.EndpointDispatch {
               type: _i1.getType<String?>(),
               nullable: true,
             ),
+            'gameSystemUid': _i1.ParameterDescription(
+              name: 'gameSystemUid',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            ),
           },
           call: (
             _i1.Session session,
@@ -152,6 +157,7 @@ class Endpoints extends _i1.EndpointDispatch {
             page: params['page'],
             limit: params['limit'],
             orderBy: params['orderBy'],
+            gameSystemUid: params['gameSystemUid'],
           ),
         ),
         'retrieve': _i1.MethodConnector(

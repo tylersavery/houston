@@ -6,7 +6,7 @@ part of 'game_infinite_list_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameInfiniteListHash() => r'2d66700883208996d6e770d958e49b17f95a5b3c';
+String _$gameInfiniteListHash() => r'36dfc40407f15ed7c7743e7dd503309d8d9a810e';
 
 /// Copied from Dart SDK
 class _SystemHash {

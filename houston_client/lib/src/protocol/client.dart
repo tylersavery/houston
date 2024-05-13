@@ -65,6 +65,7 @@ class EndpointGame extends _i1.EndpointRef {
     required int page,
     required int limit,
     String? orderBy,
+    String? gameSystemUid,
   }) =>
       caller.callServerEndpoint<_i3.GameDTOList>(
         'game',
@@ -73,6 +74,7 @@ class EndpointGame extends _i1.EndpointRef {
           'page': page,
           'limit': limit,
           'orderBy': orderBy,
+          'gameSystemUid': gameSystemUid,
         },
       );
 

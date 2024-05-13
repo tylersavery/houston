@@ -1,4 +1,6 @@
-
+import 'package:fpdart/fpdart.dart';
+import 'package:houston_flutter/core/error/failures.dart';
+import 'package:houston_flutter/core/models/paginated_response.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
@@ -27,7 +29,14 @@ class GameInfiniteList extends _$GameInfiniteList {
   }
 
   Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
+    late final Either<Failure, PaginatedResponse<Game>> result;
+
+    switch (variant) {
+      case GameListVariant.system:
+        result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit, gameSystemUid: arg);
+      default:
+        result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
+    }
 
     result.fold((failure) {
       pagingController.error = failure.message;
