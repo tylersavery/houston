@@ -1,4 +1,4 @@
-enum GameListVariant {
+enum {{#pascalCase}}{{name}}{{/pascalCase}}ListVariant {
   all,
   isOwner,
   ;
