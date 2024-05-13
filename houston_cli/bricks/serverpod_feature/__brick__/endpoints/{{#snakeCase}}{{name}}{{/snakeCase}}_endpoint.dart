@@ -28,6 +28,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
             }
           : null,
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
+      {{endpointIncludes}}
     );
 
     return {{#pascalCase}}{{name}}{{/pascalCase}}DTOList(
@@ -40,12 +41,12 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
   }
 
   Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO?> retrieve(Session session, int id) async {
-    return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findById(session, id);
+    return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findById(session, id, {{endpointIncludes}});
   }
 
   Future<{{#pascalCase}}{{name}}{{/pascalCase}}DTO> save(Session session, {{#pascalCase}}{{name}}{{/pascalCase}}DTO {{#camelCase}}{{name}}{{/camelCase}}) async {
     if ({{#camelCase}}{{name}}{{/camelCase}}.id != null) {
-      final existing{{#pascalCase}}{{name}}{{/pascalCase}} = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findById(session, {{#camelCase}}{{name}}{{/camelCase}}.id!);
+      final existing{{#pascalCase}}{{name}}{{/pascalCase}} = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.findById(session, {{#camelCase}}{{name}}{{/camelCase}}.id!,{{endpointIncludes}});
 
       if (existing{{#pascalCase}}{{name}}{{/pascalCase}} != null) {
         return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.updateRow(
@@ -59,10 +60,12 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
     }
 
     final uid = await _uniqueUid(session);
-    return await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.insertRow(
+    final new{{#pascalCase}}{{name}}{{/pascalCase}} = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.insertRow(
       session,
       {{#camelCase}}{{name}}{{/camelCase}}.copyWith(uid: uid, createdAt: DateTime.now()),
     );
+
+    return new{{#pascalCase}}{{name}}{{/pascalCase}}.copyWith({{copyWithForRelationships}});
   }
 
   Future<void> delete(Session session, int id) async {

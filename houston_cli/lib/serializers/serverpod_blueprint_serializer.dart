@@ -17,7 +17,7 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
     return items;
   }
 
-  get additionalOrdering {
+  List<String> get additionalOrdering {
     List<String> items = [];
 
     for (final p in properties) {
@@ -28,12 +28,39 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
     return items;
   }
 
+  String get endpointIncludes {
+    final items = properties.where((p) => !Constants.primitives.contains(p.type)).toList();
+
+    if (items.isEmpty) {
+      return '';
+    }
+
+    String output = """
+include: ${pascalCase(name)}DTO.include(
+        ${items.map((p) => "${camelCase(p.name)}: ${pascalCase(p.name)}DTO.include(),").join("\n")}
+      ),""";
+
+    return output;
+  }
+
+  String get copyWithForRelationships {
+    final items = properties.where((p) => !Constants.primitives.contains(p.type)).toList();
+
+    if (items.isEmpty) {
+      return '';
+    }
+
+    return items.map((p) => "${camelCase(p.name)}: ${camelCase(name)}.${camelCase(p.name)}").join(", ");
+  }
+
   @override
   Map<String, dynamic> serialize() {
     return {
       'name': name,
       'modelFields': modelFields,
       'additionalOrdering': additionalOrdering,
+      'endpointIncludes': endpointIncludes,
+      'copyWithForRelationships': copyWithForRelationships,
     };
   }
 }
