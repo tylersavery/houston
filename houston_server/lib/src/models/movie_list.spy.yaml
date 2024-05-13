@@ -1,9 +1,0 @@
-
-class: MovieDTOList
-
-fields:
-  page: int
-  count: int
-  numPages: int
-  limit: int
-  results: List<MovieDTO>

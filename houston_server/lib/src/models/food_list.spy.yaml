@@ -1,9 +1,0 @@
-
-class: FoodDTOList
-
-fields:
-  page: int
-  count: int
-  numPages: int
-  limit: int
-  results: List<FoodDTO>

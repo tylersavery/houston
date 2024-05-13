@@ -3,22 +3,12 @@ asset:
   - verifyUpload:
 example:
   - hello:
-food:
-  - list:
-  - retrieve:
-  - save:
-  - delete:
 game:
   - list:
   - retrieve:
   - save:
   - delete:
 gameSystem:
-  - list:
-  - retrieve:
-  - save:
-  - delete:
-movie:
   - list:
   - retrieve:
   - save:

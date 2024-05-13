@@ -10,18 +10,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:houston_client/src/protocol/food_list.dart' as _i3;
-import 'package:houston_client/src/protocol/food.dart' as _i4;
-import 'package:houston_client/src/protocol/game_list.dart' as _i5;
-import 'package:houston_client/src/protocol/game.dart' as _i6;
-import 'package:houston_client/src/protocol/game_system_list.dart' as _i7;
-import 'package:houston_client/src/protocol/game_system.dart' as _i8;
-import 'package:houston_client/src/protocol/movie_list.dart' as _i9;
-import 'package:houston_client/src/protocol/movie.dart' as _i10;
-import 'package:houston_client/src/protocol/profile_list.dart' as _i11;
-import 'package:houston_client/src/protocol/profile.dart' as _i12;
-import 'package:serverpod_auth_client/module.dart' as _i13;
-import 'protocol.dart' as _i14;
+import 'package:houston_client/src/protocol/game_list.dart' as _i3;
+import 'package:houston_client/src/protocol/game.dart' as _i4;
+import 'package:houston_client/src/protocol/game_system_list.dart' as _i5;
+import 'package:houston_client/src/protocol/game_system.dart' as _i6;
+import 'package:houston_client/src/protocol/profile_list.dart' as _i7;
+import 'package:houston_client/src/protocol/profile.dart' as _i8;
+import 'package:serverpod_auth_client/module.dart' as _i9;
+import 'protocol.dart' as _i10;
 
 /// {@category Endpoint}
 class EndpointAsset extends _i1.EndpointRef {
@@ -59,61 +55,18 @@ class EndpointExample extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
-class EndpointFood extends _i1.EndpointRef {
-  EndpointFood(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'food';
-
-  _i2.Future<_i3.FoodDTOList> list({
-    required int page,
-    required int limit,
-    String? orderBy,
-  }) =>
-      caller.callServerEndpoint<_i3.FoodDTOList>(
-        'food',
-        'list',
-        {
-          'page': page,
-          'limit': limit,
-          'orderBy': orderBy,
-        },
-      );
-
-  _i2.Future<_i4.FoodDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i4.FoodDTO?>(
-        'food',
-        'retrieve',
-        {'id': id},
-      );
-
-  _i2.Future<_i4.FoodDTO> save(_i4.FoodDTO food) =>
-      caller.callServerEndpoint<_i4.FoodDTO>(
-        'food',
-        'save',
-        {'food': food},
-      );
-
-  _i2.Future<void> delete(int id) => caller.callServerEndpoint<void>(
-        'food',
-        'delete',
-        {'id': id},
-      );
-}
-
-/// {@category Endpoint}
 class EndpointGame extends _i1.EndpointRef {
   EndpointGame(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'game';
 
-  _i2.Future<_i5.GameDTOList> list({
+  _i2.Future<_i3.GameDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i5.GameDTOList>(
+      caller.callServerEndpoint<_i3.GameDTOList>(
         'game',
         'list',
         {
@@ -123,15 +76,15 @@ class EndpointGame extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i6.GameDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i6.GameDTO?>(
+  _i2.Future<_i4.GameDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i4.GameDTO?>(
         'game',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i6.GameDTO> save(_i6.GameDTO game) =>
-      caller.callServerEndpoint<_i6.GameDTO>(
+  _i2.Future<_i4.GameDTO> save(_i4.GameDTO game) =>
+      caller.callServerEndpoint<_i4.GameDTO>(
         'game',
         'save',
         {'game': game},
@@ -151,12 +104,12 @@ class EndpointGameSystem extends _i1.EndpointRef {
   @override
   String get name => 'gameSystem';
 
-  _i2.Future<_i7.GameSystemDTOList> list({
+  _i2.Future<_i5.GameSystemDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i7.GameSystemDTOList>(
+      caller.callServerEndpoint<_i5.GameSystemDTOList>(
         'gameSystem',
         'list',
         {
@@ -166,15 +119,15 @@ class EndpointGameSystem extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i8.GameSystemDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i8.GameSystemDTO?>(
+  _i2.Future<_i6.GameSystemDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i6.GameSystemDTO?>(
         'gameSystem',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i8.GameSystemDTO> save(_i8.GameSystemDTO gameSystem) =>
-      caller.callServerEndpoint<_i8.GameSystemDTO>(
+  _i2.Future<_i6.GameSystemDTO> save(_i6.GameSystemDTO gameSystem) =>
+      caller.callServerEndpoint<_i6.GameSystemDTO>(
         'gameSystem',
         'save',
         {'gameSystem': gameSystem},
@@ -188,61 +141,18 @@ class EndpointGameSystem extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
-class EndpointMovie extends _i1.EndpointRef {
-  EndpointMovie(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'movie';
-
-  _i2.Future<_i9.MovieDTOList> list({
-    required int page,
-    required int limit,
-    String? orderBy,
-  }) =>
-      caller.callServerEndpoint<_i9.MovieDTOList>(
-        'movie',
-        'list',
-        {
-          'page': page,
-          'limit': limit,
-          'orderBy': orderBy,
-        },
-      );
-
-  _i2.Future<_i10.MovieDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i10.MovieDTO?>(
-        'movie',
-        'retrieve',
-        {'id': id},
-      );
-
-  _i2.Future<_i10.MovieDTO> save(_i10.MovieDTO movie) =>
-      caller.callServerEndpoint<_i10.MovieDTO>(
-        'movie',
-        'save',
-        {'movie': movie},
-      );
-
-  _i2.Future<void> delete(int id) => caller.callServerEndpoint<void>(
-        'movie',
-        'delete',
-        {'id': id},
-      );
-}
-
-/// {@category Endpoint}
 class EndpointProfile extends _i1.EndpointRef {
   EndpointProfile(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'profile';
 
-  _i2.Future<_i11.ProfileDTOList> list({
+  _i2.Future<_i7.ProfileDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i11.ProfileDTOList>(
+      caller.callServerEndpoint<_i7.ProfileDTOList>(
         'profile',
         'list',
         {
@@ -252,22 +162,22 @@ class EndpointProfile extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i12.ProfileDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i12.ProfileDTO?>(
+  _i2.Future<_i8.ProfileDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i8.ProfileDTO?>(
         'profile',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i12.ProfileDTO?> retrieveByUserId(int userId) =>
-      caller.callServerEndpoint<_i12.ProfileDTO?>(
+  _i2.Future<_i8.ProfileDTO?> retrieveByUserId(int userId) =>
+      caller.callServerEndpoint<_i8.ProfileDTO?>(
         'profile',
         'retrieveByUserId',
         {'userId': userId},
       );
 
-  _i2.Future<_i12.ProfileDTO> save(_i12.ProfileDTO profile) =>
-      caller.callServerEndpoint<_i12.ProfileDTO>(
+  _i2.Future<_i8.ProfileDTO> save(_i8.ProfileDTO profile) =>
+      caller.callServerEndpoint<_i8.ProfileDTO>(
         'profile',
         'save',
         {'profile': profile},
@@ -282,10 +192,10 @@ class EndpointProfile extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i13.Caller(client);
+    auth = _i9.Caller(client);
   }
 
-  late final _i13.Caller auth;
+  late final _i9.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -297,7 +207,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i14.Protocol(),
+          _i10.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -305,10 +215,8 @@ class Client extends _i1.ServerpodClient {
         ) {
     asset = EndpointAsset(this);
     example = EndpointExample(this);
-    food = EndpointFood(this);
     game = EndpointGame(this);
     gameSystem = EndpointGameSystem(this);
-    movie = EndpointMovie(this);
     profile = EndpointProfile(this);
     modules = _Modules(this);
   }
@@ -317,13 +225,9 @@ class Client extends _i1.ServerpodClient {
 
   late final EndpointExample example;
 
-  late final EndpointFood food;
-
   late final EndpointGame game;
 
   late final EndpointGameSystem gameSystem;
-
-  late final EndpointMovie movie;
 
   late final EndpointProfile profile;
 
@@ -333,10 +237,8 @@ class Client extends _i1.ServerpodClient {
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'asset': asset,
         'example': example,
-        'food': food,
         'game': game,
         'gameSystem': gameSystem,
-        'movie': movie,
         'profile': profile,
       };
 
