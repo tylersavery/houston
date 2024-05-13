@@ -20,13 +20,13 @@ Movie _$MovieFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Movie {
+  @JsonKey(includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   int get year => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,13 +39,12 @@ abstract class $MovieCopyWith<$Res> {
       _$MovieCopyWithImpl<$Res, Movie>;
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(includeToJson: false) int? id,
       String uid,
       String title,
       int year,
       String imageUrl,
-      DateTime createdAt,
-      DateTime updatedAt});
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -67,7 +66,6 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
     Object? year = null,
     Object? imageUrl = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -94,10 +92,6 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -110,13 +104,12 @@ abstract class _$$MovieImplCopyWith<$Res> implements $MovieCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(includeToJson: false) int? id,
       String uid,
       String title,
       int year,
       String imageUrl,
-      DateTime createdAt,
-      DateTime updatedAt});
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -136,7 +129,6 @@ class __$$MovieImplCopyWithImpl<$Res>
     Object? year = null,
     Object? imageUrl = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(_$MovieImpl(
       id: freezed == id
@@ -163,10 +155,6 @@ class __$$MovieImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -175,19 +163,19 @@ class __$$MovieImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MovieImpl extends _Movie {
   _$MovieImpl(
-      {this.id,
+      {@JsonKey(includeToJson: false) this.id,
       required this.uid,
       required this.title,
       required this.year,
       required this.imageUrl,
-      required this.createdAt,
-      required this.updatedAt})
+      required this.createdAt})
       : super._();
 
   factory _$MovieImpl.fromJson(Map<String, dynamic> json) =>
       _$$MovieImplFromJson(json);
 
   @override
+  @JsonKey(includeToJson: false)
   final int? id;
   @override
   final String uid;
@@ -199,12 +187,10 @@ class _$MovieImpl extends _Movie {
   final String imageUrl;
   @override
   final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Movie(id: $id, uid: $uid, title: $title, year: $year, imageUrl: $imageUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Movie(id: $id, uid: $uid, title: $title, year: $year, imageUrl: $imageUrl, createdAt: $createdAt)';
   }
 
   @override
@@ -219,15 +205,13 @@ class _$MovieImpl extends _Movie {
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, uid, title, year, imageUrl, createdAt, updatedAt);
+  int get hashCode =>
+      Object.hash(runtimeType, id, uid, title, year, imageUrl, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -245,18 +229,18 @@ class _$MovieImpl extends _Movie {
 
 abstract class _Movie extends Movie {
   factory _Movie(
-      {final int? id,
+      {@JsonKey(includeToJson: false) final int? id,
       required final String uid,
       required final String title,
       required final int year,
       required final String imageUrl,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$MovieImpl;
+      required final DateTime createdAt}) = _$MovieImpl;
   _Movie._() : super._();
 
   factory _Movie.fromJson(Map<String, dynamic> json) = _$MovieImpl.fromJson;
 
   @override
+  @JsonKey(includeToJson: false)
   int? get id;
   @override
   String get uid;
@@ -268,8 +252,6 @@ abstract class _Movie extends Movie {
   String get imageUrl;
   @override
   DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$MovieImplCopyWith<_$MovieImpl> get copyWith =>

@@ -12,7 +12,8 @@ import '../widgets/movie_detail_widget.dart';
 class MovieDetailScreen extends BaseScreen {
   final int movieId;
 
-  static String route([int? movieId]) => "${MovieListScreen.route()}/${movieId ?? ':id'}";
+  static String route([int? movieId]) =>
+      "${MovieListScreen.route()}/${movieId ?? ':id'}";
 
   const MovieDetailScreen({super.key, required this.movieId});
 

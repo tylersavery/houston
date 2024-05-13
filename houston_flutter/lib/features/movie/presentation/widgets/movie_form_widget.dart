@@ -45,8 +45,6 @@ class MovieFormWidget extends ConsumerWidget {
               },
             ),
           ),
-
-          //TODO: Foreign Key Selector
           if (isEditing)
             Padding(
               padding: const EdgeInsets.all(8.0),

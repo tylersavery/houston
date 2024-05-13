@@ -1,13 +1,17 @@
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import 'package:houston_flutter/features/movie/domain/datasources/movie_datasource.dart';
-import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../domain/datasources/movie_datasource.dart';
+import '../../domain/models/movie_model.dart';
+
 
 class MovieDataSourceSupabaseImpl implements MovieDataSource {
   final SupabaseClient client;
 
-  MovieDataSourceSupabaseImpl(this.client);
+  const MovieDataSourceSupabaseImpl(this.client);
+
+  static String defaultSelect = "*";
+
 
   @override
   Future<PaginatedResponse<Movie>> list({required int page, required int limit}) async {
@@ -15,7 +19,7 @@ class MovieDataSourceSupabaseImpl implements MovieDataSource {
       final result = await client
           .from("movie")
           .select(
-            "*",
+            defaultSelect,
           )
           .range((page - 1) * limit, limit * page)
           .count(CountOption.exact);
@@ -36,7 +40,7 @@ class MovieDataSourceSupabaseImpl implements MovieDataSource {
   @override
   Future<Movie> retrieve(int id) async {
     try {
-      final result = await client.from("movie").select("*").eq('id', id).single();
+      final result = await client.from("movie").select(defaultSelect).eq('id', id).single();
       return Movie.fromJson(result);
     } catch (e) {
       throw const ServerException("Not Found");
@@ -47,10 +51,10 @@ class MovieDataSourceSupabaseImpl implements MovieDataSource {
   Future<Movie> save(Movie movie) async {
     try {
       if (movie.id == null) {
-        final result = await client.from("movie").insert(movie.toJson()).select("*").single();
+        final result = await client.from("movie").insert(movie.toJson()).select(defaultSelect).single();
         return Movie.fromJson(result);
       } else {
-        final result = await client.from("movie").update(movie.toJson()).match({"id": movie.id}).select("*").single();
+        final result = await client.from("movie").update(movie.toJson()).match({"id": movie.id}).select(defaultSelect).single();
         return Movie.fromJson(result);
       }
     } catch (e) {

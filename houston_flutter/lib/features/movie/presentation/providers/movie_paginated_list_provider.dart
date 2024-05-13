@@ -1,8 +1,8 @@
-import 'package:houston_flutter/features/movie/domain/models/movie_list_variant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
 import '../state/movie_paginated_list_state.dart';
 import '../../domain/providers/movie_repository_provider.dart';
+import '../../domain/models/movie_list_variant.dart';
 
 part 'movie_paginated_list_provider.g.dart';
 
@@ -14,9 +14,11 @@ class MoviePaginatedList extends _$MoviePaginatedList {
     return MoviePaginatedListStateInitial();
   }
 
-  Future<void> load({required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> load(
+      {required int page, int limit = Constants.defaultPaginationLimit}) async {
     state = MoviePaginatedListStateLoading();
-    final result = await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
+    final result =
+        await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
 
     result.fold((failure) {
       state = MoviePaginatedListStateFailure(error: failure.message);

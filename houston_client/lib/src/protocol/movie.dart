@@ -18,7 +18,6 @@ abstract class MovieDTO extends _i1.SerializableEntity {
     required this.year,
     required this.imageUrl,
     required this.createdAt,
-    required this.updatedAt,
   });
 
   factory MovieDTO({
@@ -28,7 +27,6 @@ abstract class MovieDTO extends _i1.SerializableEntity {
     required int year,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) = _MovieDTOImpl;
 
   factory MovieDTO.fromJson(
@@ -45,8 +43,6 @@ abstract class MovieDTO extends _i1.SerializableEntity {
           .deserialize<String>(jsonSerialization['imageUrl']),
       createdAt: serializationManager
           .deserialize<DateTime>(jsonSerialization['createdAt']),
-      updatedAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -65,8 +61,6 @@ abstract class MovieDTO extends _i1.SerializableEntity {
 
   DateTime createdAt;
 
-  DateTime updatedAt;
-
   MovieDTO copyWith({
     int? id,
     String? uid,
@@ -74,7 +68,6 @@ abstract class MovieDTO extends _i1.SerializableEntity {
     int? year,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -85,7 +78,6 @@ abstract class MovieDTO extends _i1.SerializableEntity {
       'year': year,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
-      'updatedAt': updatedAt.toJson(),
     };
   }
 }
@@ -100,7 +92,6 @@ class _MovieDTOImpl extends MovieDTO {
     required int year,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) : super._(
           id: id,
           uid: uid,
@@ -108,7 +99,6 @@ class _MovieDTOImpl extends MovieDTO {
           year: year,
           imageUrl: imageUrl,
           createdAt: createdAt,
-          updatedAt: updatedAt,
         );
 
   @override
@@ -119,7 +109,6 @@ class _MovieDTOImpl extends MovieDTO {
     int? year,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   }) {
     return MovieDTO(
       id: id is int? ? id : this.id,
@@ -128,7 +117,6 @@ class _MovieDTOImpl extends MovieDTO {
       year: year ?? this.year,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

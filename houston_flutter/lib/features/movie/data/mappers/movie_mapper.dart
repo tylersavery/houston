@@ -1,6 +1,7 @@
 import 'package:houston_client/houston_client.dart';
 import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 
+
 class MovieMapper {
   static Movie toModel(MovieDTO movieDTO) {
     return Movie(
@@ -10,7 +11,7 @@ class MovieMapper {
       year: movieDTO.year,
       imageUrl: movieDTO.imageUrl,
       createdAt: movieDTO.createdAt,
-      updatedAt: movieDTO.updatedAt,
+      
     );
   }
 
@@ -22,7 +23,7 @@ class MovieMapper {
       year: movie.year,
       imageUrl: movie.imageUrl,
       createdAt: movie.createdAt,
-      updatedAt: movie.updatedAt,
+      
     );
   }
 

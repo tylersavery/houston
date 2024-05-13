@@ -1,15 +1,15 @@
-import 'package:houston_flutter/core/models/paginated_response.dart';
-import 'package:houston_flutter/features/movie/data/mappers/movie_mapper.dart';
-import 'package:houston_flutter/features/movie/domain/datasources/movie_datasource.dart';
-import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
 import 'package:houston_client/houston_client.dart';
-
+import 'package:houston_flutter/core/models/paginated_response.dart';
 import '../../../../core/error/exceptions.dart';
+import '../mappers/movie_mapper.dart';
+import '../../domain/datasources/movie_datasource.dart';
+import '../../domain/models/movie_model.dart';
+
 
 class MovieDataSourceServerpodImpl implements MovieDataSource {
   final Client client;
 
-  MovieDataSourceServerpodImpl(this.client);
+  const MovieDataSourceServerpodImpl(this.client);
 
   @override
   Future<PaginatedResponse<Movie>> list({required int page, required int limit}) async {
@@ -30,6 +30,7 @@ class MovieDataSourceServerpodImpl implements MovieDataSource {
 
   @override
   Future<Movie> retrieve(int id) async {
+
     try {
       final result = await client.movie.retrieve(id);
       if (result == null) {

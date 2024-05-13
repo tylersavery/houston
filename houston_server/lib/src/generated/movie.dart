@@ -19,7 +19,6 @@ abstract class MovieDTO extends _i1.TableRow {
     required this.year,
     required this.imageUrl,
     required this.createdAt,
-    required this.updatedAt,
   }) : super(id);
 
   factory MovieDTO({
@@ -29,7 +28,6 @@ abstract class MovieDTO extends _i1.TableRow {
     required int year,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) = _MovieDTOImpl;
 
   factory MovieDTO.fromJson(
@@ -46,8 +44,6 @@ abstract class MovieDTO extends _i1.TableRow {
           .deserialize<String>(jsonSerialization['imageUrl']),
       createdAt: serializationManager
           .deserialize<DateTime>(jsonSerialization['createdAt']),
-      updatedAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['updatedAt']),
     );
   }
 
@@ -65,8 +61,6 @@ abstract class MovieDTO extends _i1.TableRow {
 
   DateTime createdAt;
 
-  DateTime updatedAt;
-
   @override
   _i1.Table get table => t;
 
@@ -77,7 +71,6 @@ abstract class MovieDTO extends _i1.TableRow {
     int? year,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -88,7 +81,6 @@ abstract class MovieDTO extends _i1.TableRow {
       'year': year,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
-      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -102,7 +94,6 @@ abstract class MovieDTO extends _i1.TableRow {
       'year': year,
       'imageUrl': imageUrl,
       'createdAt': createdAt,
-      'updatedAt': updatedAt,
     };
   }
 
@@ -115,7 +106,6 @@ abstract class MovieDTO extends _i1.TableRow {
       'year': year,
       'imageUrl': imageUrl,
       'createdAt': createdAt.toJson(),
-      'updatedAt': updatedAt.toJson(),
     };
   }
 
@@ -143,9 +133,6 @@ abstract class MovieDTO extends _i1.TableRow {
         return;
       case 'createdAt':
         createdAt = value;
-        return;
-      case 'updatedAt':
-        updatedAt = value;
         return;
       default:
         throw UnimplementedError();
@@ -304,7 +291,6 @@ class _MovieDTOImpl extends MovieDTO {
     required int year,
     required String imageUrl,
     required DateTime createdAt,
-    required DateTime updatedAt,
   }) : super._(
           id: id,
           uid: uid,
@@ -312,7 +298,6 @@ class _MovieDTOImpl extends MovieDTO {
           year: year,
           imageUrl: imageUrl,
           createdAt: createdAt,
-          updatedAt: updatedAt,
         );
 
   @override
@@ -323,7 +308,6 @@ class _MovieDTOImpl extends MovieDTO {
     int? year,
     String? imageUrl,
     DateTime? createdAt,
-    DateTime? updatedAt,
   }) {
     return MovieDTO(
       id: id is int? ? id : this.id,
@@ -332,7 +316,6 @@ class _MovieDTOImpl extends MovieDTO {
       year: year ?? this.year,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }
@@ -359,10 +342,6 @@ class MovieDTOTable extends _i1.Table {
       'createdAt',
       this,
     );
-    updatedAt = _i1.ColumnDateTime(
-      'updatedAt',
-      this,
-    );
   }
 
   late final _i1.ColumnString uid;
@@ -375,8 +354,6 @@ class MovieDTOTable extends _i1.Table {
 
   late final _i1.ColumnDateTime createdAt;
 
-  late final _i1.ColumnDateTime updatedAt;
-
   @override
   List<_i1.Column> get columns => [
         id,
@@ -385,7 +362,6 @@ class MovieDTOTable extends _i1.Table {
         year,
         imageUrl,
         createdAt,
-        updatedAt,
       ];
 }
 

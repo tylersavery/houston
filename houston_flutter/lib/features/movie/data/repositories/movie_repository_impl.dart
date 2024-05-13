@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import 'package:houston_flutter/features/movie/domain/datasources/movie_datasource.dart';
-import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
+import '../../domain/datasources/movie_datasource.dart';
+import '../../domain/models/movie_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/repositories/movie_repository.dart';
@@ -44,8 +44,7 @@ class MovieRespositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, void>> delete(int id) async {
     try {
-      await dataSource.delete(id);
-      return right(null);
+      return right(await dataSource.delete(id));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

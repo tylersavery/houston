@@ -8,4 +8,3 @@ fields:
   year: int
   imageUrl: String
   createdAt: DateTime
-  updatedAt: DateTime

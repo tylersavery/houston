@@ -18,8 +18,9 @@ class MovieEndpoint extends Endpoint {
       orderBy: orderBy != null
           ? (t) {
               switch (orderBy.replaceAll("-", "")) {
-                case 'id':
-                  return t.id;
+                case 'createdAt':
+                  return t.createdAt;
+
                 default:
                   return t.id;
               }
@@ -51,7 +52,6 @@ class MovieEndpoint extends Endpoint {
           movie.copyWith(
             uid: existingMovie.uid,
             createdAt: existingMovie.createdAt,
-            updatedAt: DateTime.now(),
           ),
         );
       }
@@ -60,7 +60,7 @@ class MovieEndpoint extends Endpoint {
     final uid = await _uniqueUid(session);
     return await MovieDTO.db.insertRow(
       session,
-      movie.copyWith(uid: uid, createdAt: DateTime.now(), updatedAt: DateTime.now()),
+      movie.copyWith(uid: uid, createdAt: DateTime.now()),
     );
   }
 
@@ -73,7 +73,9 @@ class MovieEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await MovieDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await MovieDTO.db
+              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+          null;
       if (unique) {
         return uid;
       }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:houston_flutter/features/movie/domain/models/movie_list_variant.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/utils/validation_utils.dart';
 import '../../domain/providers/movie_repository_provider.dart';
+import '../../domain/models/movie_list_variant.dart';
 import 'movie_detail_provider.dart';
 import '../state/movie_form_state.dart';
 import 'movie_infinite_list_provider.dart';
@@ -20,8 +20,10 @@ class MovieForm extends _$MovieForm {
   final titleController = TextEditingController();
   final yearController = TextEditingController();
 
-  String? titleValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Title");
-  String? yearValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Year");
+  String? titleValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Title");
+  String? yearValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Year");
 
   Future<void> load(int movieId) async {
     final result = await ref.read(movieRepositoryProvider).retrieve(movieId);
@@ -76,7 +78,9 @@ class MovieForm extends _$MovieForm {
       (movie) {
         state = state.success(movie);
         reset();
-        ref.read(movieInfiniteListProvider(MovieListVariant.all).notifier).refresh();
+        ref
+            .read(movieInfiniteListProvider(MovieListVariant.all).notifier)
+            .refresh();
         if (movie.id != null) {
           ref.invalidate(movieDetailProvider(movie.id!));
         }
@@ -87,7 +91,8 @@ class MovieForm extends _$MovieForm {
 
   Future<bool> delete() async {
     if (state.movie.id != null) {
-      final result = await ref.read(movieRepositoryProvider).delete(state.movie.id!);
+      final result =
+          await ref.read(movieRepositoryProvider).delete(state.movie.id!);
 
       return result.fold((failure) {
         state = state.failure(failure.message);

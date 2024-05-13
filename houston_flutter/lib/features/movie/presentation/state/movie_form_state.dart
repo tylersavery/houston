@@ -1,4 +1,4 @@
-import 'package:houston_flutter/features/movie/domain/models/movie_model.dart';
+import '../../domain/models/movie_model.dart';
 
 class MovieFormState {
   final Movie movie;
@@ -19,7 +19,6 @@ class MovieFormState {
       year: 0,
       imageUrl: "",
       createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
     );
   }
 
