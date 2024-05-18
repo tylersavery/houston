@@ -195,7 +195,8 @@ Future<void> scaffoldFeature({
 
       print(white("Formatting Flutter Files..."));
       final filePaths = [
-        "$flutterGeneratedPath/data/datasources/${filePrefix}_datasource.dart",
+        "$flutterGeneratedPath/data/datasources/${filePrefix}_datasource_supabase.dart",
+        "$flutterGeneratedPath/data/datasources/${filePrefix}_datasource_serverpod.dart",
         "$flutterGeneratedPath/data/repositories/${filePrefix}_repository.dart",
         "$flutterGeneratedPath/domain/extensions/${filePrefix}_extension.dart",
         "$flutterGeneratedPath/domain/extensions/${filePrefix}_list_extension.dart",

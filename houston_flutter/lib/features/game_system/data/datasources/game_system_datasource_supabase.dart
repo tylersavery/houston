@@ -4,7 +4,6 @@ import 'package:houston_flutter/core/models/paginated_response.dart';
 import '../../domain/datasources/game_system_datasource.dart';
 import '../../domain/models/game_system_model.dart';
 
-
 class GameSystemDataSourceSupabaseImpl implements GameSystemDataSource {
   final SupabaseClient client;
 
@@ -12,9 +11,11 @@ class GameSystemDataSourceSupabaseImpl implements GameSystemDataSource {
 
   static String defaultSelect = "*";
 
-
   @override
-  Future<PaginatedResponse<GameSystem>> list({required int page, required int limit, }) async {
+  Future<PaginatedResponse<GameSystem>> list({
+    required int page,
+    required int limit,
+  }) async {
     try {
       final result = await client
           .from("game_system")
@@ -25,7 +26,9 @@ class GameSystemDataSourceSupabaseImpl implements GameSystemDataSource {
           .count(CountOption.exact);
 
       return PaginatedResponse<GameSystem>(
-        results: result.data.map<GameSystem>((item) => GameSystem.fromJson(item)).toList(),
+        results: result.data
+            .map<GameSystem>((item) => GameSystem.fromJson(item))
+            .toList(),
         status: 200,
         count: result.count,
         page: page,
@@ -40,7 +43,11 @@ class GameSystemDataSourceSupabaseImpl implements GameSystemDataSource {
   @override
   Future<GameSystem> retrieve(int id) async {
     try {
-      final result = await client.from("game_system").select(defaultSelect).eq('id', id).single();
+      final result = await client
+          .from("game_system")
+          .select(defaultSelect)
+          .eq('id', id)
+          .single();
       return GameSystem.fromJson(result);
     } catch (e) {
       throw const ServerException("Not Found");
@@ -51,10 +58,19 @@ class GameSystemDataSourceSupabaseImpl implements GameSystemDataSource {
   Future<GameSystem> save(GameSystem gameSystem) async {
     try {
       if (gameSystem.id == null) {
-        final result = await client.from("game_system").insert(gameSystem.toJson()).select(defaultSelect).single();
+        final result = await client
+            .from("game_system")
+            .insert(gameSystem.toJson())
+            .select(defaultSelect)
+            .single();
         return GameSystem.fromJson(result);
       } else {
-        final result = await client.from("game_system").update(gameSystem.toJson()).match({"id": gameSystem.id}).select(defaultSelect).single();
+        final result = await client
+            .from("game_system")
+            .update(gameSystem.toJson())
+            .match({"id": gameSystem.id})
+            .select(defaultSelect)
+            .single();
         return GameSystem.fromJson(result);
       }
     } catch (e) {

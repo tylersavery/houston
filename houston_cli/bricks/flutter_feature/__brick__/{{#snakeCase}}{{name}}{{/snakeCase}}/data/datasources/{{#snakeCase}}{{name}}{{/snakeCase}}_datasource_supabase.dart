@@ -17,13 +17,46 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl implements {{
   @override
   Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit, {{{datasourceRelationshipParams}}}}) async {
     try {
-      final result = await client
+
+      {{#hasDatasourceRelationshipTypes}}
+      late final PostgrestResponse<List<Map<String, dynamic>>> result;
+
+      {{#datasourceRelationshipTypes}}
+      if({{#camelCase}}{{.}}{{/camelCase}}Uid != null) {
+        result = await client
+          .from("{{#snakeCase}}{{name}}{{/snakeCase}}")
+          .select(
+            defaultSelect
+          )
+          .filter('{{#snakeCase}}{{.}}{{/snakeCase}}.uid', 'eq', {{#camelCase}}{{.}}{{/camelCase}}Uid)
+
+          .range((page - 1) * limit, limit * page)
+          .count(CountOption.exact);
+      } else 
+      {{/datasourceRelationshipTypes}}
+
+{
+      result = await client
+          .from("{{#snakeCase}}{{name}}{{/snakeCase}}")
+          .select(
+            defaultSelect
+          )
+          .range((page - 1) * limit, limit * page)
+          .count(CountOption.exact);
+}
+
+      {{/hasDatasourceRelationshipTypes}}
+
+      {{^hasDatasourceRelationshipTypes}}
+        final result = await client
           .from("{{#snakeCase}}{{name}}{{/snakeCase}}")
           .select(
             defaultSelect,
           )
           .range((page - 1) * limit, limit * page)
           .count(CountOption.exact);
+      {{/hasDatasourceRelationshipTypes}}
+
 
       return PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>(
         results: result.data.map<{{#pascalCase}}{{name}}{{/pascalCase}}>((item) => {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(item)).toList(),

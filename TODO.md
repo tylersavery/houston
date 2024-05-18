@@ -16,7 +16,7 @@
 
 [x] fk relationships serverpod
 
-[ ] fk relationships supebase
+[ ] fk relationships supabase
 
 [x] image choosing for macos
 

@@ -378,10 +378,6 @@ ListTile(
   }
 
   List<String> get supabaseDatasourceImports {
-    if (Constants.serverBackend != ServerBackendOption.supabase) {
-      return [];
-    }
-
     final List<String> importStrings = [];
     for (final p in properties) {
       if (!Constants.primitives.contains(p.type)) {
@@ -393,10 +389,6 @@ ListTile(
   }
 
   String? get supabaseDatasourceJoins {
-    if (Constants.serverBackend != ServerBackendOption.supabase) {
-      return null;
-    }
-
     final List<String> joins = [];
     for (final property in properties) {
       if (!Constants.primitives.contains(property.type)) {
@@ -431,6 +423,17 @@ ListTile(
     }
 
     return params.join(", ");
+  }
+
+  List<String> get datasourceRelationshipTypes {
+    final List<String> params = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        params.add(camelCase(property.name));
+      }
+    }
+
+    return params;
   }
 
   String get listVariantRelationshipOptions {
@@ -489,6 +492,8 @@ ListTile(
       'listVariantRelationshipOptions': listVariantRelationshipOptions,
       'listProviderVariantCases': listProviderVariantCases,
       'hasListProviderVariantCases': listProviderVariantCases.isNotEmpty,
+      'datasourceRelationshipTypes': datasourceRelationshipTypes,
+      'hasDatasourceRelationshipTypes': datasourceRelationshipTypes.isNotEmpty,
       'relationshipChildren': blueprint.children,
     };
   }
