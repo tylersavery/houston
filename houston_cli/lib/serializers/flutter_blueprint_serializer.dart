@@ -9,16 +9,16 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
 
   // Models
   List<String> get toJsonFunctions {
-    if (Constants.serverBackend == ServerBackendOption.serverpod) {
-      return [];
-    }
+    // if (Constants.serverBackend == ServerBackendOption.serverpod) {
+    //   return [];
+    // }
 
     final List<String> items = [];
 
     for (final property in properties) {
       if (!Constants.primitives.contains(property.type)) {
         items.add(
-            "int ${camelCase(property.type)}ToJson(${pascalCase(property.type)} ${camelCase(property.name)}) => ${camelCase(property.name)}.id ?? 0;");
+            "int? ${camelCase(property.type)}ToJson(${pascalCase(property.type)}? ${camelCase(property.name)}) => ${camelCase(property.name)}?.id;");
       }
     }
     return items;
@@ -364,9 +364,9 @@ ListTile(
     final List<String> items = [];
     for (final property in properties) {
       if (!Constants.primitives.contains(property.type)) {
-        if (Constants.serverBackend == ServerBackendOption.serverpod) {
-          items.add("${camelCase(property.name)}Id : ${camelCase(name)}.${camelCase(property.name)}?.id ?? 0,");
-        }
+        // if (Constants.serverBackend == ServerBackendOption.serverpod) {
+        items.add("${camelCase(property.name)}Id : ${camelCase(name)}.${camelCase(property.name)}?.id ?? 0,");
+        // }
         items.add(
             "${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)} != null ? ${pascalCase(property.name)}Mapper.toDto(${camelCase(name)}.${camelCase(property.name)}!) : null,");
       } else {
@@ -392,7 +392,7 @@ ListTile(
     final List<String> joins = [];
     for (final property in properties) {
       if (!Constants.primitives.contains(property.type)) {
-        joins.add('${snakeCase(property.name)}(\${${pascalCase(property.name)}DataSourceSupabaseImpl.defaultSelect})');
+        joins.add('${snakeCase(property.name)}!inner(\${${pascalCase(property.name)}DataSourceSupabaseImpl.defaultSelect})');
       }
     }
 

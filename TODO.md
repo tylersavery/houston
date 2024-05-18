@@ -16,7 +16,9 @@
 
 [x] fk relationships serverpod
 
-[ ] fk relationships supabase
+[x] fk relationships supabase
+
+[ ] proper test of supabase filtering
 
 [x] image choosing for macos
 

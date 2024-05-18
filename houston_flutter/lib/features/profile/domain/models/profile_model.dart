@@ -12,7 +12,7 @@ class Profile with _$Profile {
   factory Profile({
     @JsonKey(includeToJson: false) int? id,
     required String uid,
-    required int userId,
+    @Default(0) int userId, // serverpod only
     required String username,
     @JsonKey(name: "first_name") required String firstName,
     @JsonKey(name: "last_name") required String lastName,

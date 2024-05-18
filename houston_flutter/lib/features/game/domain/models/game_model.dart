@@ -6,6 +6,7 @@ import '../../../game_system/domain/models/game_system_model.dart';
 part 'game_model.freezed.dart';
 part 'game_model.g.dart';
 
+int? gameSystemToJson(GameSystem? gameSystem) => gameSystem?.id;
 
 
 @freezed
@@ -14,14 +15,14 @@ class Game with _$Game {
 
   factory Game({
     @JsonKey(includeToJson: false) int? id,
-    required String uid,
-    GameSystem? gameSystem,
+    @JsonKey(includeToJson: false) required String uid,
+    @JsonKey(name: "game_system", toJson: gameSystemToJson) GameSystem? gameSystem,
     required String name,
     required double price,
     required String description,
     required int players,
-    required String imageUrl,
-    required DateTime createdAt,
+    @JsonKey(name: "image_url") required String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
     
   }) = _Game;
 

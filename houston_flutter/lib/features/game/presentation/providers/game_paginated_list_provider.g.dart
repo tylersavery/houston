@@ -6,7 +6,7 @@ part of 'game_paginated_list_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gamePaginatedListHash() => r'd35357b148506914540e27905eb433ac795243a0';
+String _$gamePaginatedListHash() => r'3904f6e60c005d54658cb219a9c3c87e101a4b91';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -11,7 +11,7 @@ class GameDataSourceSupabaseImpl implements GameDataSource {
   const GameDataSourceSupabaseImpl(this.client);
 
   static String defaultSelect =
-      "*,game_system(${GameSystemDataSourceSupabaseImpl.defaultSelect})";
+      "*,game_system!inner(${GameSystemDataSourceSupabaseImpl.defaultSelect})";
 
   @override
   Future<PaginatedResponse<Game>> list(

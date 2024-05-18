@@ -14,12 +14,12 @@ class GameSystem with _$GameSystem {
 
   factory GameSystem({
     @JsonKey(includeToJson: false) int? id,
-    required String uid,
+    @JsonKey(includeToJson: false) required String uid,
     required String name,
     required double price,
     required String description,
-    required String imageUrl,
-    required DateTime createdAt,
+    @JsonKey(name: "image_url") required String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
     
   }) = _GameSystem;
 

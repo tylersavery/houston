@@ -10,7 +10,7 @@ _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
     _$ProfileImpl(
       id: (json['id'] as num?)?.toInt(),
       uid: json['uid'] as String,
-      userId: (json['userId'] as num).toInt(),
+      userId: (json['userId'] as num?)?.toInt() ?? 0,
       username: json['username'] as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,

@@ -23,7 +23,7 @@ mixin _$Profile {
   @JsonKey(includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
-  int get userId => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError; // serverpod only
   String get username => throw _privateConstructorUsedError;
   @JsonKey(name: "first_name")
   String get firstName => throw _privateConstructorUsedError;
@@ -207,7 +207,7 @@ class _$ProfileImpl extends _Profile {
   _$ProfileImpl(
       {@JsonKey(includeToJson: false) this.id,
       required this.uid,
-      required this.userId,
+      this.userId = 0,
       required this.username,
       @JsonKey(name: "first_name") required this.firstName,
       @JsonKey(name: "last_name") required this.lastName,
@@ -225,7 +225,9 @@ class _$ProfileImpl extends _Profile {
   @override
   final String uid;
   @override
+  @JsonKey()
   final int userId;
+// serverpod only
   @override
   final String username;
   @override
@@ -290,7 +292,7 @@ abstract class _Profile extends Profile {
   factory _Profile(
           {@JsonKey(includeToJson: false) final int? id,
           required final String uid,
-          required final int userId,
+          final int userId,
           required final String username,
           @JsonKey(name: "first_name") required final String firstName,
           @JsonKey(name: "last_name") required final String lastName,
@@ -309,7 +311,7 @@ abstract class _Profile extends Profile {
   String get uid;
   @override
   int get userId;
-  @override
+  @override // serverpod only
   String get username;
   @override
   @JsonKey(name: "first_name")

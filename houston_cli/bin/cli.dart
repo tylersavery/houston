@@ -11,7 +11,7 @@ Future<void> main(List<String> args) async {
     runMigrations: false,
     updateRoutes: false,
     updateNavigation: false,
-    runPostGenerator: false,
+    runPostGenerator: true,
     runPostFormatter: true,
   );
 

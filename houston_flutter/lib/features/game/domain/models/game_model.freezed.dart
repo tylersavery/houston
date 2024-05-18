@@ -22,13 +22,17 @@ Game _$GameFromJson(Map<String, dynamic> json) {
 mixin _$Game {
   @JsonKey(includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
   String get uid => throw _privateConstructorUsedError;
+  @JsonKey(name: "game_system", toJson: gameSystemToJson)
   GameSystem? get gameSystem => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   int get players => throw _privateConstructorUsedError;
+  @JsonKey(name: "image_url")
   String get imageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at", includeToJson: false)
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,14 +47,15 @@ abstract class $GameCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(includeToJson: false) int? id,
-      String uid,
+      @JsonKey(includeToJson: false) String uid,
+      @JsonKey(name: "game_system", toJson: gameSystemToJson)
       GameSystem? gameSystem,
       String name,
       double price,
       String description,
       int players,
-      String imageUrl,
-      DateTime createdAt});
+      @JsonKey(name: "image_url") String imageUrl,
+      @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt});
 
   $GameSystemCopyWith<$Res>? get gameSystem;
 }
@@ -140,14 +145,15 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(includeToJson: false) int? id,
-      String uid,
+      @JsonKey(includeToJson: false) String uid,
+      @JsonKey(name: "game_system", toJson: gameSystemToJson)
       GameSystem? gameSystem,
       String name,
       double price,
       String description,
       int players,
-      String imageUrl,
-      DateTime createdAt});
+      @JsonKey(name: "image_url") String imageUrl,
+      @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt});
 
   @override
   $GameSystemCopyWith<$Res>? get gameSystem;
@@ -219,13 +225,14 @@ class __$$GameImplCopyWithImpl<$Res>
 class _$GameImpl extends _Game {
   _$GameImpl(
       {@JsonKey(includeToJson: false) this.id,
-      required this.uid,
-      this.gameSystem,
+      @JsonKey(includeToJson: false) required this.uid,
+      @JsonKey(name: "game_system", toJson: gameSystemToJson) this.gameSystem,
       required this.name,
       required this.price,
       required this.description,
       required this.players,
-      required this.imageUrl,
+      @JsonKey(name: "image_url") required this.imageUrl,
+      @JsonKey(name: "created_at", includeToJson: false)
       required this.createdAt})
       : super._();
 
@@ -236,8 +243,10 @@ class _$GameImpl extends _Game {
   @JsonKey(includeToJson: false)
   final int? id;
   @override
+  @JsonKey(includeToJson: false)
   final String uid;
   @override
+  @JsonKey(name: "game_system", toJson: gameSystemToJson)
   final GameSystem? gameSystem;
   @override
   final String name;
@@ -248,8 +257,10 @@ class _$GameImpl extends _Game {
   @override
   final int players;
   @override
+  @JsonKey(name: "image_url")
   final String imageUrl;
   @override
+  @JsonKey(name: "created_at", includeToJson: false)
   final DateTime createdAt;
 
   @override
@@ -299,13 +310,15 @@ class _$GameImpl extends _Game {
 abstract class _Game extends Game {
   factory _Game(
       {@JsonKey(includeToJson: false) final int? id,
-      required final String uid,
+      @JsonKey(includeToJson: false) required final String uid,
+      @JsonKey(name: "game_system", toJson: gameSystemToJson)
       final GameSystem? gameSystem,
       required final String name,
       required final double price,
       required final String description,
       required final int players,
-      required final String imageUrl,
+      @JsonKey(name: "image_url") required final String imageUrl,
+      @JsonKey(name: "created_at", includeToJson: false)
       required final DateTime createdAt}) = _$GameImpl;
   _Game._() : super._();
 
@@ -315,8 +328,10 @@ abstract class _Game extends Game {
   @JsonKey(includeToJson: false)
   int? get id;
   @override
+  @JsonKey(includeToJson: false)
   String get uid;
   @override
+  @JsonKey(name: "game_system", toJson: gameSystemToJson)
   GameSystem? get gameSystem;
   @override
   String get name;
@@ -327,8 +342,10 @@ abstract class _Game extends Game {
   @override
   int get players;
   @override
+  @JsonKey(name: "image_url")
   String get imageUrl;
   @override
+  @JsonKey(name: "created_at", includeToJson: false)
   DateTime get createdAt;
   @override
   @JsonKey(ignore: true)
