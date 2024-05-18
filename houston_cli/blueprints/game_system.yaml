@@ -19,6 +19,4 @@ properties:
     type: url
     image: true
 
-children:
-  - game
   

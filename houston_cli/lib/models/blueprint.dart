@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:houston_cli/models/blueprint_property.dart';
+import 'package:houston_cli/utils/file_utils.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:yaml/yaml.dart';
 
@@ -46,12 +49,27 @@ class Blueprint {
       ),
     );
 
-    final children = data['children']?.map<String>((child) => child.toString()).toList();
+    // search other blueprints for relationships to this model
+    final otherBlueprintFiles = Directory(FileUtils.blueprintsDir)
+        .listSync()
+        .where((entity) => entity is File && entity.path.endsWith('.yaml') && !entity.path.endsWith("${camelCase(data['name'])}.yaml"))
+        .toList();
+
+    List<String> children = [];
+    for (final f in otherBlueprintFiles) {
+      final parsedYaml = FileUtils.parseYaml(f.path);
+      final properties = parsedYaml['properties'];
+      for (final p in properties) {
+        if (snakeCase(p['type']) == snakeCase(data['name'])) {
+          children.add(snakeCase(parsedYaml['name']));
+        }
+      }
+    }
 
     return Blueprint(
       name: data['name'],
       properties: properties,
-      children: children,
+      children: children.isNotEmpty ? children : null,
     );
   }
 }
