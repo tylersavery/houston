@@ -11,9 +11,10 @@ import '../widgets/game_system_detail_widget.dart';
 
 class GameSystemDetailScreen extends BaseScreen {
   final int gameSystemId;
-  
-  static String route([int? gameSystemId]) => "${GameSystemListScreen.route()}/${gameSystemId ?? ':id'}";
-  
+
+  static String route([int? gameSystemId]) =>
+      "${GameSystemListScreen.route()}/${gameSystemId ?? ':id'}";
+
   const GameSystemDetailScreen({super.key, required this.gameSystemId});
 
   @override
@@ -31,7 +32,9 @@ class GameSystemDetailScreen extends BaseScreen {
           actions: [
             IconButton(
               onPressed: () async {
-                await ref.read(gameSystemFormProvider.notifier).load(gameSystemId);
+                await ref
+                    .read(gameSystemFormProvider.notifier)
+                    .load(gameSystemId);
                 if (context.mounted) {
                   context.push(GameSystemEditScreen.route(gameSystemId));
                 }

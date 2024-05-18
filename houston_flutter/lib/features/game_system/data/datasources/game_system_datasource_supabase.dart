@@ -14,7 +14,7 @@ class GameSystemDataSourceSupabaseImpl implements GameSystemDataSource {
 
 
   @override
-  Future<PaginatedResponse<GameSystem>> list({required int page, required int limit}) async {
+  Future<PaginatedResponse<GameSystem>> list({required int page, required int limit, }) async {
     try {
       final result = await client
           .from("game_system")

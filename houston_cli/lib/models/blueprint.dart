@@ -46,18 +46,12 @@ class Blueprint {
       ),
     );
 
-    print(data['children']);
+    final children = data['children']?.map<String>((child) => child.toString()).toList();
 
     return Blueprint(
       name: data['name'],
       properties: properties,
-      children: data['children'],
+      children: children,
     );
-  }
-
-  Map<String, dynamic> serializeServerpod() {
-    return {
-      'name': name,
-    };
   }
 }

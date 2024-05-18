@@ -488,7 +488,8 @@ ListTile(
       'datasourceRelationshipListParams': datasourceRelationshipListParams,
       'listVariantRelationshipOptions': listVariantRelationshipOptions,
       'listProviderVariantCases': listProviderVariantCases,
-      'hasListProviderVariantCases': listProviderVariantCases.isNotEmpty
+      'hasListProviderVariantCases': listProviderVariantCases.isNotEmpty,
+      'relationshipChildren': blueprint.children,
     };
   }
 }

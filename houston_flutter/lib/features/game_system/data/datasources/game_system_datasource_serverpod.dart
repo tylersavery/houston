@@ -12,9 +12,9 @@ class GameSystemDataSourceServerpodImpl implements GameSystemDataSource {
   const GameSystemDataSourceServerpodImpl(this.client);
 
   @override
-  Future<PaginatedResponse<GameSystem>> list({required int page, required int limit}) async {
+  Future<PaginatedResponse<GameSystem>> list({required int page, required int limit, }) async {
     try {
-      final response = await client.gameSystem.list(page: page, limit: limit, orderBy: 'id');
+      final response = await client.gameSystem.list(page: page, limit: limit, orderBy: 'id', );
       return PaginatedResponse<GameSystem>(
         status: 200,
         page: response.page,

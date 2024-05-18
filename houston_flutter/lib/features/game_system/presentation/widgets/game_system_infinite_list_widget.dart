@@ -21,12 +21,14 @@ class GameSystemInfiniteListWidget extends BaseComponent {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(gameSystemInfiniteListProvider(variant, variantArg).notifier);
+    final provider =
+        ref.read(gameSystemInfiniteListProvider(variant, variantArg).notifier);
 
     return InfiniteListWidget<GameSystem>(
       pagingController: provider.pagingController,
       itemBuilder: (context, gameSystem, index) {
-        return GameSystemListTileWidget(gameSystem: gameSystem, onPressed: onPressed);
+        return GameSystemListTileWidget(
+            gameSystem: gameSystem, onPressed: onPressed);
       },
       emptyText: "No Game Systems",
       onRefresh: provider.refresh,

@@ -20,5 +20,5 @@ properties:
     image: true
 
 children:
-  game
+  - game
   

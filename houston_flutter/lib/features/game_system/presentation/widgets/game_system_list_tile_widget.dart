@@ -3,12 +3,10 @@ import 'package:go_router/go_router.dart';
 import '../../domain/models/game_system_model.dart';
 import '../screens/game_system_detail_screen.dart';
 
-
 class GameSystemListTileWidget extends StatelessWidget {
-  
   final GameSystem gameSystem;
   final Function(GameSystem)? onPressed;
-  
+
   const GameSystemListTileWidget({
     super.key,
     required this.gameSystem,
@@ -20,7 +18,6 @@ class GameSystemListTileWidget extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text(gameSystem.name),
-        
         subtitle: Text(gameSystem.price.toString()),
         onTap: () {
           if (onPressed != null) {

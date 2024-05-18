@@ -1,6 +1,9 @@
-
+import 'package:fpdart/fpdart.dart';
+import 'package:houston_flutter/core/error/failures.dart';
+import 'package:houston_flutter/core/models/paginated_response.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../domain/models/game_system_model.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
 import '../../domain/providers/game_system_repository_provider.dart';
@@ -11,7 +14,8 @@ part 'game_system_infinite_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class GameSystemInfiniteList extends _$GameSystemInfiniteList {
-  final PagingController<int, GameSystem> pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, GameSystem> pagingController =
+      PagingController(firstPageKey: 1);
 
   @override
   PagingStatus build(GameSystemListVariant variant, [String? arg]) {
@@ -26,8 +30,11 @@ class GameSystemInfiniteList extends _$GameSystemInfiniteList {
     return PagingStatus.loadingFirstPage;
   }
 
-  Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result = await ref.read(gameSystemRepositoryProvider).list(page: page, limit: limit);
+  Future<void> fetchPage(
+      {required int page, int limit = Constants.defaultPaginationLimit}) async {
+    final result = await ref
+        .read(gameSystemRepositoryProvider)
+        .list(page: page, limit: limit);
 
     result.fold((failure) {
       pagingController.error = failure.message;

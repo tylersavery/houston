@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
+{{#relationshipChildren}}
+import '../../../{{#snakeCase}}{{.}}{{/snakeCase}}/domain/models/{{#snakeCase}}{{.}}{{/snakeCase}}_list_variant.dart';
+import '../../../{{#snakeCase}}{{.}}{{/snakeCase}}/presentation/widgets/{{#snakeCase}}{{.}}{{/snakeCase}}_infinite_list_widget.dart';
+{{/relationshipChildren}}
 
 class {{#pascalCase}}{{name}}{{/pascalCase}}DetailWidget extends StatelessWidget {
   final {{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}};
@@ -20,6 +24,14 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DetailWidget extends StatelessWidget
         Text({{#camelCase}}{{name}}{{/camelCase}}.label),
         Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),
         {{#uiDescription}}Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),{{/uiDescription}}
+        {{#relationshipChildren}}
+        Expanded(
+          child: {{#pascalCase}}{{.}}{{/pascalCase}}InfiniteListWidget(
+            variant: {{#pascalCase}}{{.}}{{/pascalCase}}ListVariant.{{#camelCase}}{{name}}{{/camelCase}},
+            variantArg: {{#camelCase}}{{name}}{{/camelCase}}.uid,
+          ),
+        ),
+        {{/relationshipChildren}}
       ],
     );
     {{/uiHeading2}}

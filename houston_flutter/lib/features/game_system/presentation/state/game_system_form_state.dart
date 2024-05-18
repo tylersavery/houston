@@ -1,6 +1,5 @@
 import '../../domain/models/game_system_model.dart';
 
-
 class GameSystemFormState {
   final GameSystem gameSystem;
   final bool isLoading;
@@ -21,7 +20,7 @@ class GameSystemFormState {
       description: "",
       imageUrl: "",
       createdAt: DateTime.now(),
-      );
+    );
   }
 
   factory GameSystemFormState.initial() {

@@ -1,5 +1,6 @@
 enum GameSystemListVariant {
   all,
   isOwner,
+  
   ;
 }
