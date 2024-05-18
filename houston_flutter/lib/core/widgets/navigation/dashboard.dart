@@ -18,7 +18,8 @@ class Dashboard extends BaseComponent {
         NavigationBar(
           selectedIndex: navigationShell.currentIndex,
           onDestinationSelected: (index) {
-            navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+            navigationShell.goBranch(index,
+                initialLocation: index == navigationShell.currentIndex);
           },
           destinations: const [
             NavigationDestination(
@@ -68,7 +69,8 @@ class Dashboard extends BaseComponent {
                     //::HOUSTON_INSERT_NAV::
                   ],
                   onDestinationSelected: (index) {
-                    navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+                    navigationShell.goBranch(index,
+                        initialLocation: index == navigationShell.currentIndex);
                   },
                 ),
               ),

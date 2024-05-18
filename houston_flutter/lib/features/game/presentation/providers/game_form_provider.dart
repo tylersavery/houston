@@ -22,13 +22,15 @@ class GameForm extends _$GameForm {
   final priceController = TextEditingController();
   final descriptionController = TextEditingController();
   final playersController = TextEditingController();
-  
 
-  String? nameValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Name");
-  String? priceValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Price");
-  String? descriptionValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Description");
-  String? playersValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Players");
-  
+  String? nameValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Name");
+  String? priceValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Price");
+  String? descriptionValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Description");
+  String? playersValidator(String? value) =>
+      ValidationUtils.formValidatorNotEmpty(value, "Players");
 
   Future<void> load(int gameId) async {
     final result = await ref.read(gameRepositoryProvider).retrieve(gameId);
@@ -49,7 +51,6 @@ class GameForm extends _$GameForm {
     priceController.text = state.game.price.toString();
     descriptionController.text = state.game.description;
     playersController.text = state.game.players.toString();
-    
   }
 
   void reset() {
@@ -57,21 +58,17 @@ class GameForm extends _$GameForm {
     _refreshControllers();
   }
 
-    void setGameSystem(GameSystem value) {
+  void setGameSystem(GameSystem value) {
     state = state.updateGame(
       state.game.copyWith(gameSystem: value),
     );
   }
 
-
-    void setImageUrl(String value) {
+  void setImageUrl(String value) {
     state = state.updateGame(
       state.game.copyWith(imageUrl: value),
     );
   }
-
-
-  
 
   Future<bool> submit() async {
     if (!formKey.currentState!.validate()) {
@@ -84,7 +81,6 @@ class GameForm extends _$GameForm {
       price: double.tryParse(priceController.text) ?? 0.0,
       description: descriptionController.text,
       players: int.tryParse(playersController.text) ?? 0,
-      
     );
 
     state = state.loading();
@@ -99,7 +95,9 @@ class GameForm extends _$GameForm {
       (game) {
         state = state.success(game);
         reset();
-        ref.read(gameInfiniteListProvider(GameListVariant.all).notifier).refresh();
+        ref
+            .read(gameInfiniteListProvider(GameListVariant.all).notifier)
+            .refresh();
         if (game.id != null) {
           ref.invalidate(gameDetailProvider(game.id!));
         }
@@ -110,8 +108,9 @@ class GameForm extends _$GameForm {
 
   Future<bool> delete() async {
     if (state.game.id != null) {
-      final result = await ref.read(gameRepositoryProvider).delete(state.game.id!);
-    
+      final result =
+          await ref.read(gameRepositoryProvider).delete(state.game.id!);
+
       return result.fold((failure) {
         state = state.failure(failure.message);
         return false;

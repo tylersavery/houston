@@ -11,9 +11,10 @@ import '../widgets/game_detail_widget.dart';
 
 class GameDetailScreen extends BaseScreen {
   final int gameId;
-  
-  static String route([int? gameId]) => "${GameListScreen.route()}/${gameId ?? ':id'}";
-  
+
+  static String route([int? gameId]) =>
+      "${GameListScreen.route()}/${gameId ?? ':id'}";
+
   const GameDetailScreen({super.key, required this.gameId});
 
   @override

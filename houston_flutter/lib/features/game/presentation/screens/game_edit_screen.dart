@@ -8,9 +8,9 @@ import '../widgets/game_form_widget.dart';
 
 class GameEditScreen extends BaseScreen {
   final int? gameId;
-  
+
   static String route([int? gameId]) => "/game/edit/${gameId ?? ':id'}";
-  
+
   static String routeNew() => "/game/new";
 
   const GameEditScreen({

@@ -1,6 +1,9 @@
-
+import 'package:fpdart/fpdart.dart';
+import 'package:houston_flutter/core/error/failures.dart';
+import 'package:houston_flutter/core/models/paginated_response.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../domain/models/{{#snakeCase}}{{name}}{{/snakeCase}}_model.dart';
 import '../../../../config/constants.dart';
 import '../../../../core/utils/debugger_utils.dart';
 import '../../domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_repository_provider.dart';
@@ -27,7 +30,21 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}InfiniteList extends _${{#pascalCase
   }
 
   Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
+
+    {{^hasListProviderVariantCases}}
     final result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RepositoryProvider).list(page: page, limit: limit);
+    {{/hasListProviderVariantCases}}
+
+    {{#hasListProviderVariantCases}}
+    late final Either<Failure, PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> result;
+
+    switch (variant) {
+      {{#listProviderVariantCases}}{{.}}{{/listProviderVariantCases}}
+      default:
+        result = await ref.read({{#camelCase}}{{name}}{{/camelCase}}RepositoryProvider).list(page: page, limit: limit);
+    }
+    {{/hasListProviderVariantCases}}
+
 
     result.fold((failure) {
       pagingController.error = failure.message;

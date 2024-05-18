@@ -17,7 +17,7 @@ class ScreenUtils {
   static const bool isWeb = kIsWeb;
 
   static double width(BuildContext context) {
-    return MediaQuery.of(context).size.shortestSide;
+    return MediaQuery.of(context).size.width;
   }
 
   static ScreenSize size(BuildContext context) {

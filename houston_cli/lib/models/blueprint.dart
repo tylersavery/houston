@@ -5,6 +5,7 @@ import 'package:yaml/yaml.dart';
 class Blueprint {
   final String name;
   final List<BlueprintProperty> properties;
+  final List<String>? children;
   late String namePlural;
   late String label;
   late String labelPlural;
@@ -12,6 +13,7 @@ class Blueprint {
   Blueprint({
     required this.name,
     required this.properties,
+    this.children,
     String? namePlural,
     String? label,
     String? labelPlural,
@@ -44,9 +46,12 @@ class Blueprint {
       ),
     );
 
+    print(data['children']);
+
     return Blueprint(
       name: data['name'],
       properties: properties,
+      children: data['children'],
     );
   }
 

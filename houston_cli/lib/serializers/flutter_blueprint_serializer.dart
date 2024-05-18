@@ -411,6 +411,52 @@ ListTile(
     return joins.join(",");
   }
 
+  String get datasourceRelationshipParams {
+    final List<String> params = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        params.add("String? ${camelCase(property.name)}Uid");
+      }
+    }
+
+    return params.join(", ");
+  }
+
+  String get datasourceRelationshipListParams {
+    final List<String> params = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        params.add("${camelCase(property.name)}Uid: ${camelCase(property.name)}Uid");
+      }
+    }
+
+    return params.join(", ");
+  }
+
+  String get listVariantRelationshipOptions {
+    final List<String> params = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        params.add(camelCase(property.name));
+      }
+    }
+
+    return params.join(",\n");
+  }
+
+  List<String> get listProviderVariantCases {
+    final List<String> cases = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        cases.add("""case ${pascalCase(name)}ListVariant.${camelCase(property.name)}:
+        result = await ref.read(${camelCase(name)}RepositoryProvider).list(page: page, limit: limit, ${camelCase(property.name)}Uid: arg);
+""");
+      }
+    }
+
+    return cases;
+  }
+
   @override
   Map<String, dynamic> serialize() {
     return {
@@ -438,6 +484,11 @@ ListTile(
       'modelImports': modelImports,
       'supabaseDatasourceImports': supabaseDatasourceImports,
       'supabaseDatasourceJoins': supabaseDatasourceJoins,
+      'datasourceRelationshipParams': datasourceRelationshipParams,
+      'datasourceRelationshipListParams': datasourceRelationshipListParams,
+      'listVariantRelationshipOptions': listVariantRelationshipOptions,
+      'listProviderVariantCases': listProviderVariantCases,
+      'hasListProviderVariantCases': listProviderVariantCases.isNotEmpty
     };
   }
 }

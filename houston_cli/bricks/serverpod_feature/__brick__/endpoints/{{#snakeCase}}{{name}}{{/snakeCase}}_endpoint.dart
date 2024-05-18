@@ -8,6 +8,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
     required int page,
     required int limit,
     String? orderBy,
+    {{{endpointRelationshipParams}}}
   }) async {
     final count = await {{#pascalCase}}{{name}}{{/pascalCase}}DTO.db.count(session);
 
@@ -29,6 +30,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Endpoint extends Endpoint {
           : null,
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
       {{endpointIncludes}}
+      {{{endpointRelationshipWhereClause}}}
     );
 
     return {{#pascalCase}}{{name}}{{/pascalCase}}DTOList(

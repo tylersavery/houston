@@ -53,6 +53,41 @@ include: ${pascalCase(name)}DTO.include(
     return items.map((p) => "${camelCase(p.name)}: ${camelCase(name)}.${camelCase(p.name)}").join(", ");
   }
 
+  String get endpointRelationshipParams {
+    final List<String> params = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        params.add("String? ${camelCase(property.name)}Uid");
+      }
+    }
+
+    return params.join(", ");
+  }
+
+  String get endpointRelationshipWhereClause {
+    List<String> clauses = [];
+    for (final property in properties) {
+      if (!Constants.primitives.contains(property.type)) {
+        final str = """
+if (${camelCase(property.name)}Uid != null) {
+  return t.${camelCase(property.name)}.uid.equals(${camelCase(property.name)}Uid);
+}
+""";
+        clauses.add(str);
+      }
+    }
+
+    if (clauses.isNotEmpty) {
+      return """
+where: (t) {
+  ${clauses.join('\n')}
+  return t.id.notEquals(0); 
+},
+""";
+    }
+    return "";
+  }
+
   @override
   Map<String, dynamic> serialize() {
     return {
@@ -61,6 +96,8 @@ include: ${pascalCase(name)}DTO.include(
       'additionalOrdering': additionalOrdering,
       'endpointIncludes': endpointIncludes,
       'copyWithForRelationships': copyWithForRelationships,
+      'endpointRelationshipParams': endpointRelationshipParams,
+      'endpointRelationshipWhereClause': endpointRelationshipWhereClause,
     };
   }
 }

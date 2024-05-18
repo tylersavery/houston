@@ -4,6 +4,7 @@ import 'package:houston_flutter/core/models/paginated_response.dart';
 import '../../domain/datasources/game_datasource.dart';
 import '../../domain/models/game_model.dart';
 
+
 class GameDataSourceSupabaseImpl implements GameDataSource {
   final SupabaseClient client;
 
@@ -11,9 +12,9 @@ class GameDataSourceSupabaseImpl implements GameDataSource {
 
   static String defaultSelect = "*";
 
+
   @override
   Future<PaginatedResponse<Game>> list({required int page, required int limit, String? gameSystemUid}) async {
-    //TODO handle filter for gameSystemUid
     try {
       final result = await client
           .from("game")

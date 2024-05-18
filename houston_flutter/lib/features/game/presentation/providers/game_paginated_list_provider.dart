@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_flutter/core/error/failures.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import 'package:houston_flutter/features/game/domain/models/game_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../config/constants.dart';
+import '../../domain/models/game_model.dart';
 import '../state/game_paginated_list_state.dart';
 import '../../domain/providers/game_repository_provider.dart';
 import '../../domain/models/game_list_variant.dart';
@@ -18,16 +18,22 @@ class GamePaginatedList extends _$GamePaginatedList {
     return GamePaginatedListStateInitial();
   }
 
-  Future<void> load({required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> load(
+      {required int page, int limit = Constants.defaultPaginationLimit}) async {
     state = GamePaginatedListStateLoading();
 
     late final Either<Failure, PaginatedResponse<Game>> result;
 
     switch (variant) {
-      case GameListVariant.system:
-        result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit, gameSystemUid: arg);
+      case GameListVariant.gameSystem:
+        result = await ref
+            .read(gameRepositoryProvider)
+            .list(page: page, limit: limit, gameSystemUid: arg);
+
       default:
-        result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
+        result = await ref
+            .read(gameRepositoryProvider)
+            .list(page: page, limit: limit);
     }
 
     result.fold((failure) {

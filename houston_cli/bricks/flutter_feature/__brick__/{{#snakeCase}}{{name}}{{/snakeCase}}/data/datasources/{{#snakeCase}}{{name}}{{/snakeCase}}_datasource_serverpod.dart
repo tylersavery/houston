@@ -12,9 +12,9 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl implements {
   const {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceServerpodImpl(this.client);
 
   @override
-  Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit}) async {
+  Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit, {{{datasourceRelationshipParams}}}}) async {
     try {
-      final response = await client.{{#camelCase}}{{name}}{{/camelCase}}.list(page: page, limit: limit, orderBy: 'id');
+      final response = await client.{{#camelCase}}{{name}}{{/camelCase}}.list(page: page, limit: limit, orderBy: 'id', {{{datasourceRelationshipListParams}}});
       return PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>(
         status: 200,
         page: response.page,

@@ -3,25 +3,13 @@ import 'package:houston_server/src/generated/protocol.dart';
 import 'package:houston_server/src/utils/strings.dart';
 
 class GameEndpoint extends Endpoint {
-  Future<GameDTOList> list(
-    Session session, {
-    required int page,
-    required int limit,
-    String? orderBy,
-    String? gameSystemUid,
-  }) async {
+  Future<GameDTOList> list(Session session, {required int page, required int limit, String? orderBy, String? gameSystemUid}) async {
     final count = await GameDTO.db.count(session);
 
     final results = await GameDTO.db.find(
       session,
       limit: limit,
       offset: (page * limit) - limit,
-      where: (t) {
-        if (gameSystemUid != null) {
-          return t.gameSystem.uid.equals(gameSystemUid);
-        }
-        return t.id.notEquals(0);
-      },
       orderBy: orderBy != null
           ? (t) {
               switch (orderBy.replaceAll("-", "")) {
@@ -41,6 +29,13 @@ class GameEndpoint extends Endpoint {
       include: GameDTO.include(
         gameSystem: GameSystemDTO.include(),
       ),
+      where: (t) {
+        if (gameSystemUid != null) {
+          return t.gameSystem.uid.equals(gameSystemUid);
+        }
+
+        return t.id.notEquals(0);
+      },
     );
 
     return GameDTOList(

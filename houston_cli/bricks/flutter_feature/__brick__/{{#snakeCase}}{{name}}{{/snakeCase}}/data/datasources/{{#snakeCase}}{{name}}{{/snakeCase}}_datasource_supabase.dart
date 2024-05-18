@@ -15,7 +15,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl implements {{
 
 
   @override
-  Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit}) async {
+  Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit, {{{datasourceRelationshipParams}}}}) async {
     try {
       final result = await client
           .from("{{#snakeCase}}{{name}}{{/snakeCase}}")

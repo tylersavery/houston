@@ -20,7 +20,8 @@ class GamePaginatedListWidget extends BaseComponent {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(gamePaginatedListProvider(variant, variantArg).notifier);
+    final provider =
+        ref.read(gamePaginatedListProvider(variant, variantArg).notifier);
     final state = ref.watch(gamePaginatedListProvider(variant, variantArg));
 
     switch (state) {
@@ -47,7 +48,9 @@ class GamePaginatedListWidget extends BaseComponent {
                   type: AppButtonType.Text,
                   onPressed: state.data.page > 1
                       ? () {
-                          provider.load(page: state.data.page - 1, limit: state.data.limit);
+                          provider.load(
+                              page: state.data.page - 1,
+                              limit: state.data.limit);
                         }
                       : null,
                 ),
@@ -58,7 +61,9 @@ class GamePaginatedListWidget extends BaseComponent {
                   iconTrails: true,
                   onPressed: state.data.canLoadMore
                       ? () {
-                          provider.load(page: state.data.page + 1, limit: state.data.limit);
+                          provider.load(
+                              page: state.data.page + 1,
+                              limit: state.data.limit);
                         }
                       : null,
                 ),

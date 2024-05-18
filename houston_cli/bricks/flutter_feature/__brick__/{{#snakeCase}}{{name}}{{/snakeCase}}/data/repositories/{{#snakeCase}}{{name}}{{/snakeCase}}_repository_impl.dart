@@ -15,9 +15,10 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}RespositoryImpl implements {{#pascal
   Future<Either<Failure, PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>>> list({
     required int page,
     required int limit,
+    {{{datasourceRelationshipParams}}}
   }) async {
     try {
-      return right(await dataSource.list(page: page, limit: limit));
+      return right(await dataSource.list(page: page, limit: limit, {{{datasourceRelationshipListParams}}}));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

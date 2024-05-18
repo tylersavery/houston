@@ -21,7 +21,7 @@ class GameSystemDetailWidget extends StatelessWidget {
         const Text("GAMES:"),
         Expanded(
           child: GameInfiniteListWidget(
-            variant: GameListVariant.system,
+            variant: GameListVariant.gameSystem,
             variantArg: gameSystem.uid,
           ),
         ),
