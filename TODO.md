@@ -1,5 +1,7 @@
 ### TODO
 
+DONE
+
 [x] rename project
 
 [x] uuid / unique id / other auto fields
@@ -18,17 +20,33 @@
 
 [x] fk relationships supabase
 
-[ ] proper test of supabase filtering
+[x] proper test of supabase filtering
 
 [x] image choosing for macos
 
 [x] ui heading / subtitles / etc.
 
-[ ] docs for blueprint config
-
 [x] remove use cases from asset / auth
 
-[ ] profile model stuff
+[x] profile model stuff
+
+
+Big Tasks
+
+[ ] Django
+
+
+Medium Tasks
+
+[ ] profile management
+
+[ ] additonal auth (password reset etc)
+
+
+
+Minor Tasks
+
+[ ] docs for blueprint config
 
 [ ] validate blueprint (auto gen fields aren't used)
 
@@ -36,22 +54,7 @@
 
 [ ] fix yaml config for types (ie char/string etc. ) make dart like
 
-[ ] routes get from namespace
+[ ] routes get from namespace (rather than hardcoding string)
 
 [ ] double check delete invalidate / redirect
  
-
-==== SQL FIXES ===
-
-
-
-- add includeToJson: false for id, uid, createdAt, updatedAt
-- uid uuid default uuid_generate_v4(),
-
-
-
-=====
-
-
-Commit for filtering
-https://github.com/tylersavery/houston/commit/44324aac4ceca12f75b4de7cee2ea230f634dcb8
