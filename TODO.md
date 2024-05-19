@@ -35,6 +35,8 @@ Big Tasks
 
 [ ] Django
 
+[ ] Docs
+
 
 Medium Tasks
 
@@ -46,7 +48,7 @@ Medium Tasks
 
 Minor Tasks
 
-[ ] docs for blueprint config
+[ ] docs for blueprint config / examples
 
 [ ] validate blueprint (auto gen fields aren't used)
 

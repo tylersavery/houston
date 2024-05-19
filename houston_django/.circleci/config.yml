@@ -1,0 +1,42 @@
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@1.0.1
+
+stage_only: &stage_only
+  filters:
+    branches:
+      only: stage
+
+prod_only: &prod_only
+  filters:
+    branches:
+      only: main
+
+commands:
+  config-stage:
+    description: Configure stage environment
+    steps:
+      - run:
+          name: Export $HEROKU_APP_NAME
+          command: echo "export HEROKU_APP_NAME=$HEROKU_APP_NAME_STAGE" >> $BASH_ENV
+  config-prod:
+    description: Configure production environment
+    steps:
+      - run:
+          name: Export $HEROKU_APP_NAME
+          command: echo "export HEROKU_APP_NAME=$HEROKU_APP_NAME_PROD" >> $BASH_ENV
+
+workflows:
+  deploy-stage:
+    jobs:
+      - heroku/deploy-via-git:
+          <<: *stage_only
+          pre-deploy:
+            - config-stage
+  deploy-prod:
+    jobs:
+      - heroku/deploy-via-git:
+          <<: *prod_only
+          pre-deploy:
+            - config-prod

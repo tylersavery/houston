@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <div id="content-main">
+        <form method="post" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="submit-row">
+                <input type="submit" class="button" name="clearcache" value="Clear Cache">
+            </div>
+        </form>
+    </div>
+{% endblock %}

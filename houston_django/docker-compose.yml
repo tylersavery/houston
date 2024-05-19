@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:13.2-alpine
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+
+  cache:
+    image: redis:6.2-alpine
+    ports:
+      - 6379:6379
+
+  broker:
+    image: rabbitmq:3.8-management-alpine
+    volumes:
+      - ./data/broker:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
