@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dcli/dcli.dart';
 import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/models/blueprint.dart';
+import 'package:houston_cli/utils/string_utils.dart';
 import 'package:yaml/yaml.dart';
 
 const isCompiled = String.fromEnvironment('COMPILED') == 'true';
@@ -22,6 +23,18 @@ class FileUtils {
 
   static String get supabaseDir {
     return Directory("$houstonRoot/${appName}_supabase").path;
+  }
+
+  static String get djangoRootDir {
+    return Directory("$houstonRoot/${appName}_django").path;
+  }
+
+  static String djangoAppDirectory(String appName) {
+    return "$djangoRootDir/${snakeCase(appName)}";
+  }
+
+  static String get djangoApiDirectory {
+    return "$djangoRootDir/api";
   }
 
   static String get cliDir {

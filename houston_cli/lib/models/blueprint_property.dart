@@ -1,10 +1,12 @@
 import 'package:dcli/dcli.dart';
 import 'package:houston_cli/constants.dart';
+import 'package:houston_cli/models/kwarg.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:yaml/yaml.dart';
 
 class BlueprintProperty {
   final String name;
+  final String djangoAppName;
   final String type;
   final int? maxLength;
   final dynamic defaultValue;
@@ -20,6 +22,7 @@ class BlueprintProperty {
     required this.type,
     required this.allowBlank,
     required this.allowNull,
+    this.djangoAppName = "content",
     this.isImage = false,
     this.maxLength,
     this.defaultValue,
@@ -180,6 +183,81 @@ class BlueprintProperty {
     }
   }
 
+  String get _djangoVariableType {
+    switch (type) {
+      case "char":
+        return 'models.CharField';
+      case "text":
+        return 'models.TextField';
+      case "url":
+      case "bitpack_image":
+      case "bitpack_file":
+        return 'models.URLField';
+      case "boolean":
+        return 'models.BooleanField';
+      case "int":
+        return 'models.IntegerField';
+      case "double":
+        return 'models.DecimalField';
+      default:
+        return "models.ForeignKey";
+    }
+  }
+
+  String get djangoModelEntry {
+    if (['uuid', 'uid', 'created_at', 'updated_at', 'id'].contains(snakeCase(name))) {
+      return "";
+    }
+
+    List<String> args = [];
+    List<Kwarg> kwargs = [];
+
+    if (Constants.primitives.contains(type)) {
+      args.add('_("${titleCase(name)}")');
+    } else {
+      args.add('"${snakeCase(djangoAppName)}.${pascalCase(type)}"');
+      kwargs.add(Kwarg('verbose_name', '_("${titleCase(name)}")'));
+      kwargs.add(Kwarg('on_delete', 'models.CASCADE'));
+    }
+
+    if (type == "double" || type == "decimal") {
+      kwargs.add(Kwarg('decimal_places', 2)); //TODO: get from blueprint
+      kwargs.add(Kwarg('max_digits', 12)); //TODO: get from blueprint
+    }
+
+    if (type == 'char') {
+      kwargs.add(Kwarg('max_length', maxLength ?? 255));
+    }
+
+    if (defaultValue != null) {
+      final defaultValueString = defaultValue.toString();
+      String? value;
+
+      if (defaultValueString == "true") {
+        value = "True";
+      } else if (defaultValueString == "false") {
+        value = "False";
+      } else if (int.tryParse(defaultValueString) != null || double.tryParse(defaultValueString) != null) {
+        value = defaultValueString;
+      } else {
+        value = '"$defaultValueString"';
+      }
+
+      kwargs.add(Kwarg('default', value));
+    }
+
+    final kwargsString = kwargs.map((p) => "${p.key}=${p.value},").toList().join(' ');
+    String params = args.join(", ");
+
+    params = '$params, $kwargsString';
+
+    if (Constants.primitives.contains(type)) {
+      return '''${snakeCase(name)} = $_djangoVariableType($params)''';
+    }
+
+    return '''${snakeCase(name)} = models.ForeignKey($params)''';
+  }
+
   Map<String, dynamic> serialize() {
     return {
       'name': name,
@@ -189,6 +267,7 @@ class BlueprintProperty {
       'allowBlank': allowBlank,
       'allowNull': allowNull,
       'modelField': modelField,
+      'djangoModelEntry': djangoModelEntry,
     };
   }
 }
