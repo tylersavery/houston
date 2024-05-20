@@ -14,6 +14,6 @@ class User {
     required this.firstName,
     required this.lastName,
     required this.avatar,
-    required this.bio,
+    this.bio,
   });
 }

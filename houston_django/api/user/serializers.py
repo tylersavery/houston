@@ -28,8 +28,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "uuid",
+            "username",
             "number",
             "name",
+            "first_name",
+            "last_name",
             "email",
             "image",
             "bio",
@@ -42,6 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "uuid",
             "is_setup",
+            "first_name",
+            "last_name",
             "metadata",
             "created_at",
             "updated_at",
@@ -56,6 +61,7 @@ class UserPublicSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "uuid",
+            "username",
             "name",
             "image",
             "bio",

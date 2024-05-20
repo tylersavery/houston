@@ -30,9 +30,9 @@ class LoginForm extends ConsumerWidget {
         context.go(GameListScreen.route());
       }
     });
-
     switch (state) {
       case AuthStateLoading():
+      case AuthStateBooting():
         return const Loader();
       case AuthStateFailure():
       case AuthStateInitial():

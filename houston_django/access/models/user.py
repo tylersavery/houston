@@ -10,7 +10,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from project.fields import CIEmailField
 from project.models import AbstractModel
-from project.utils.string import get_random_string
+from project.utils.string import split_name
 
 
 class UserManager(BaseUserManager):
@@ -68,6 +68,16 @@ class User(AbstractModel, AbstractBaseUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
+
+    @property
+    def first_name(self):
+        f, _ = split_name(self.name)
+        return f
+
+    @property
+    def last_name(self):
+        _, l = split_name(self.name)
+        return l
 
     @property
     def is_staff(self):

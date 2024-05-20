@@ -1,0 +1,21 @@
+{% extends "email/base.html" %}{% load i18n %}{% block body %}<p>{% trans "Hi" %} {{ user.name }},</p>
+<p>
+    {{content}}
+</p>
+
+{% if details %}
+<p>
+    <strong>{{details}}</strong>
+</p>
+{% endif %}
+
+{% if url %}
+<p>
+    <a href="{{url}}">{{url}}</a>
+</p>
+{% else %}
+<p>
+    <a href="{{landing_site_domain}}">{{landing_site_domain}}</a>
+</p>
+{% endif %}
+{% endblock %}

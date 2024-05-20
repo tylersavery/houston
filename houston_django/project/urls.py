@@ -9,5 +9,3 @@ if settings.ADMIN_ENABLED:
 
 if settings.API_ENABLED:
     urlpatterns.append(path("v1/", include("api.urls")))
-
-urlpatterns.append(path("accounts/", include("allauth.urls")))

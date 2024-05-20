@@ -8,10 +8,13 @@ API_MAX_PAGE_SIZE = ENV.int("API_MAX_PAGE_SIZE", default=100)
 # Django REST Framework
 # https://www.django-rest-framework.org/
 
+REST_USE_JWT = True
+
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication"
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
     ],
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",

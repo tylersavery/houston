@@ -14,29 +14,24 @@ AUTH_PASSWORD_VALIDATORS = [
         "OPTIONS": {"min_length": ENV.int("AUTH_PASSWORD_MIN_LENGTH", default=8)},
     },
 ]
-AUTHENTICATION_BACKENDS = [
-    "access.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
+AUTH_OTP_TIMEOUT = ENV.int("AUTH_OTP_TIMEOUT", default=60)
+AUTHENTICATION_BACKENDS = ["access.backends.ModelBackend"]
 LOGIN_URL = reverse_lazy("admin:login")
 
-# django-allauth
-# https://docs.allauth.org/en/latest/account/configuration.html
+# Simple JWT
+# https://django-rest-framework-simplejwt.readthedocs.io
 
-
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_VERIFICATION = "none"  # "none", "optional", "manditory"
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-
-HEADLESS_ONLY = ENV.bool("AUTH_HEADLESS_ONLY", default=True)
-
-HEADLESS_FRONTEND_URLS = {
-    "account_confirm_email": ENV.str(
-        "AUTH_CONFIRM_EMAIL_URL",
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        seconds=ENV.int("AUTH_JWT_ACCESS_TOKEN_TIMEOUT", default=86400)
     ),
-    "account_reset_password_from_key": ENV.str("AUTH_RESET_PASSWORD_URL"),
-    "account_signup": ENV.str("AUTH_REGISTER_URL"),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        seconds=ENV.int("AUTH_JWT_REFRESH_TOKEN_TIMEOUT", default=604800)
+    ),
+    "ROTATE_REFRESH_TOKENS": True,
+    "SIGNING_KEY": ENV.str("AUTH_JWT_SIGNING_KEY"),
+    "USER_ID_FIELD": "uuid",
 }
 
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+AUTH_TOKEN_TIMEOUT = ENV.int("AUTH_TOKEN_TIMEOUT", default=259200)
+AUTH_TOKEN_SECRET = ENV.str("AUTH_TOKEN_SECRET")

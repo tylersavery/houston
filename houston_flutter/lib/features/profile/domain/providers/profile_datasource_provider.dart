@@ -12,8 +12,8 @@ final profileDataSourceProvider = Provider<ProfileDataSource>(
       case ServerBackendOption.supabase:
         return ProfileDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
       case ServerBackendOption.serverpod:
-        return ProfileDataSourceServerpodImpl(
-            ref.read(serverpodClientProvider));
+      default:
+        return ProfileDataSourceServerpodImpl(ref.read(serverpodClientProvider));
     }
   },
 );

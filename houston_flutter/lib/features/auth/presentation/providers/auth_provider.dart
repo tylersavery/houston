@@ -13,6 +13,7 @@ class Auth extends _$Auth {
   @override
   AuthState build() {
     _init();
+
     return AuthStateBooting();
   }
 
@@ -20,6 +21,12 @@ class Auth extends _$Auth {
     if (Constants.serverBackend == ServerBackendOption.serverpod) {
       await ref.read(serverpodSessionManagerProvider).initialize();
     }
+
+    //TODO: remove this (handle django)
+    await Future.delayed(Duration(milliseconds: 100));
+    state = AuthStateInitial();
+
+    return;
 
     final result = await ref.read(authRepositoryProvider).currentUser();
 

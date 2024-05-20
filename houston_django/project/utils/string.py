@@ -26,3 +26,19 @@ def string_to_bool(val):
         return 0
     else:
         raise ValueError("invalid truth value %r" % (val,))
+
+
+def split_name(name):
+    parts = name.strip().split()
+
+    if not parts:
+        first_name = ""
+        last_name = ""
+    elif len(parts) == 1:
+        first_name = parts[0]
+        last_name = ""
+    else:
+        first_name = parts[0]
+        last_name = " ".join(parts[1:])
+
+    return first_name, last_name
