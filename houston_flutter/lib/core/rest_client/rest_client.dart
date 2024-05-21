@@ -65,9 +65,10 @@ class RestClient {
             data: data,
           );
         case HttpMethod.delete:
-          response = await Dio(_options(withAuth: withAuth)).delete(
+          await Dio(_options(withAuth: withAuth)).delete(
             cleanPath ? _cleanPath(path) : path,
           );
+          return {};
       }
 
       return response.data;

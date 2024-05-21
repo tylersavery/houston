@@ -1,3 +1,4 @@
+import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 import 'package:houston_flutter/core/rest_client/rest_client.dart';
@@ -41,8 +42,11 @@ class MovieDataSourceDjangoImpl implements MovieDataSource {
   }
 
   @override
-  Future<void> delete(int id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(int id) async {
+    try {
+      await client.delete("/movie/$id/");
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 }
