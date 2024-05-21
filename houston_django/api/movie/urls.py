@@ -7,5 +7,5 @@ from api.movie.views import (
 
 urlpatterns = [
     path("", MovieListCreateView.as_view()),
-    path("<uuid:uuid>/", MovieRetrieveUpdateDestroyView.as_view(lookup_field="uuid")),
+    path("<int:pk>/", MovieRetrieveUpdateDestroyView.as_view()),
 ]

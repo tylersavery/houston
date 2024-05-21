@@ -21,6 +21,9 @@ class SupabaseBlueprintSerializer extends BlueprintSerializer {
     // }
 
     for (final property in properties) {
+      if (property.type == 'user') {
+        continue;
+      }
       final type = property.type.toLowerCase();
       final propertyName = snakeCase(property.name);
 

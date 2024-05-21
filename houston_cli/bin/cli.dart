@@ -7,12 +7,12 @@ Future<void> main(List<String> args) async {
     name: "movie",
     generateServer: true,
     generateFlutter: true,
-    generateMigrations: true,
-    runMigrations: true,
-    updateRoutes: true,
-    updateNavigation: true,
-    runPostGenerator: true,
-    runPostFormatter: true,
+    generateMigrations: false,
+    runMigrations: false,
+    updateRoutes: false,
+    updateNavigation: false,
+    runPostGenerator: false,
+    runPostFormatter: false,
   );
 
   return;

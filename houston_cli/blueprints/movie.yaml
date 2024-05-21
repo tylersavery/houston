@@ -13,4 +13,5 @@ properties:
     name: imageUrl
     type: url
     image: true
+    allowBlank: true
   

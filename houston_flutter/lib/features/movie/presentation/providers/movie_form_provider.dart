@@ -7,6 +7,7 @@ import 'movie_detail_provider.dart';
 import '../state/movie_form_state.dart';
 import 'movie_infinite_list_provider.dart';
 
+
 part 'movie_form_provider.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -19,11 +20,11 @@ class MovieForm extends _$MovieForm {
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final yearController = TextEditingController();
+  
 
-  String? titleValidator(String? value) =>
-      ValidationUtils.formValidatorNotEmpty(value, "Title");
-  String? yearValidator(String? value) =>
-      ValidationUtils.formValidatorNotEmpty(value, "Year");
+  String? titleValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Title");
+  String? yearValidator(String? value) => ValidationUtils.formValidatorNotEmpty(value, "Year");
+  
 
   Future<void> load(int movieId) async {
     final result = await ref.read(movieRepositoryProvider).retrieve(movieId);
@@ -42,6 +43,7 @@ class MovieForm extends _$MovieForm {
   void _refreshControllers() {
     titleController.text = state.movie.title;
     yearController.text = state.movie.year.toString();
+    
   }
 
   void reset() {
@@ -49,11 +51,14 @@ class MovieForm extends _$MovieForm {
     _refreshControllers();
   }
 
-  void setImageUrl(String value) {
+    void setImageUrl(String value) {
     state = state.updateMovie(
       state.movie.copyWith(imageUrl: value),
     );
   }
+
+
+  
 
   Future<bool> submit() async {
     if (!formKey.currentState!.validate()) {
@@ -64,6 +69,7 @@ class MovieForm extends _$MovieForm {
     final movie = state.movie.copyWith(
       title: titleController.text,
       year: int.tryParse(yearController.text) ?? 0,
+      
     );
 
     state = state.loading();
@@ -78,9 +84,7 @@ class MovieForm extends _$MovieForm {
       (movie) {
         state = state.success(movie);
         reset();
-        ref
-            .read(movieInfiniteListProvider(MovieListVariant.all).notifier)
-            .refresh();
+        ref.read(movieInfiniteListProvider(MovieListVariant.all).notifier).refresh();
         if (movie.id != null) {
           ref.invalidate(movieDetailProvider(movie.id!));
         }
@@ -91,9 +95,8 @@ class MovieForm extends _$MovieForm {
 
   Future<bool> delete() async {
     if (state.movie.id != null) {
-      final result =
-          await ref.read(movieRepositoryProvider).delete(state.movie.id!);
-
+      final result = await ref.read(movieRepositoryProvider).delete(state.movie.id!);
+    
       return result.fold((failure) {
         state = state.failure(failure.message);
         return false;

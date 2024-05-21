@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "public"."movie" (
 "uid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
 "title" character varying NOT NULL,
 "year" numeric NOT NULL,
-"image_url" "text" NOT NULL,
+"image_url" "text" NOT NULL DEFAULT '',
 "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
 );
 ALTER TABLE "public"."movie" OWNER TO "postgres";
@@ -16,3 +16,4 @@ NO MAXVALUE
 CACHE 1
 );
 ALTER TABLE ONLY "public"."movie" ADD CONSTRAINT "movie_pkey" PRIMARY KEY ("id");
+ALTER TABLE ONLY "public"."movie" ADD CONSTRAINT "movie_owner_fkey" FOREIGN KEY ("owner") REFERENCES "public"."owner"("id") ON DELETE CASCADE;

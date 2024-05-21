@@ -8,9 +8,9 @@ import '../widgets/movie_form_widget.dart';
 
 class MovieEditScreen extends BaseScreen {
   final int? movieId;
-
+  
   static String route([int? movieId]) => "/movie/edit/${movieId ?? ':id'}";
-
+  
   static String routeNew() => "/movie/new";
 
   const MovieEditScreen({

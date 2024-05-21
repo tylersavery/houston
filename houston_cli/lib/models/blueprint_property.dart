@@ -109,6 +109,8 @@ class BlueprintProperty {
   }
 
   String get modelField {
+    if (type == 'user') return "";
+
     final value =
         "$_modelAnnotation${allowNull == true && defaultValue == null ? '' : 'required '}$dartTypeAsString${allowNull ? '?' : ''} ${camelCase(name)},";
     return value;
@@ -244,6 +246,12 @@ class BlueprintProperty {
       }
 
       kwargs.add(Kwarg('default', value));
+    }
+    if (allowBlank) {
+      kwargs.add(Kwarg("blank", "True"));
+    }
+    if (allowNull) {
+      kwargs.add(Kwarg("null", "True"));
     }
 
     final kwargsString = kwargs.map((p) => "${p.key}=${p.value},").toList().join(' ');

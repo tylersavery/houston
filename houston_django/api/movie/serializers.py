@@ -5,14 +5,22 @@ from content.models import Movie
 
 class MovieSerializer(serializers.ModelSerializer):
 
+    uid = serializers.CharField(source="uuid", required=False)
+
     class Meta:
         model = Movie
         fields = [
             "id",
-            "uuid",
+            "uid",
+            "title",
+            "year",
+            "image_url",
+            "created_at",
         ]
 
         read_only_fields = [
             "id",
-            "uuid",
+            "uid",
+            "created_at",
+            "owner",
         ]

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/models/movie_model.dart';
 
+
 class MovieDetailWidget extends StatelessWidget {
   final Movie movie;
   const MovieDetailWidget({
@@ -10,12 +11,18 @@ class MovieDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(movie.label),
         Text(movie.year.toString()),
+        
+        
       ],
     );
+    
+
   }
 }

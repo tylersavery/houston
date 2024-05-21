@@ -1,5 +1,6 @@
 import '../../domain/models/movie_model.dart';
 
+
 class MovieFormState {
   final Movie movie;
   final bool isLoading;
@@ -19,7 +20,7 @@ class MovieFormState {
       year: 0,
       imageUrl: "",
       createdAt: DateTime.now(),
-    );
+      );
   }
 
   factory MovieFormState.initial() {

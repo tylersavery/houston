@@ -20,8 +20,7 @@ class MoviePaginatedListWidget extends BaseComponent {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final provider =
-        ref.read(moviePaginatedListProvider(variant, variantArg).notifier);
+    final provider = ref.read(moviePaginatedListProvider(variant, variantArg).notifier);
     final state = ref.watch(moviePaginatedListProvider(variant, variantArg));
 
     switch (state) {
@@ -48,9 +47,7 @@ class MoviePaginatedListWidget extends BaseComponent {
                   type: AppButtonType.Text,
                   onPressed: state.data.page > 1
                       ? () {
-                          provider.load(
-                              page: state.data.page - 1,
-                              limit: state.data.limit);
+                          provider.load(page: state.data.page - 1, limit: state.data.limit);
                         }
                       : null,
                 ),
@@ -61,9 +58,7 @@ class MoviePaginatedListWidget extends BaseComponent {
                   iconTrails: true,
                   onPressed: state.data.canLoadMore
                       ? () {
-                          provider.load(
-                              page: state.data.page + 1,
-                              limit: state.data.limit);
+                          provider.load(page: state.data.page + 1, limit: state.data.limit);
                         }
                       : null,
                 ),

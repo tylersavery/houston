@@ -14,8 +14,7 @@ part 'movie_infinite_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class MovieInfiniteList extends _$MovieInfiniteList {
-  final PagingController<int, Movie> pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, Movie> pagingController = PagingController(firstPageKey: 1);
 
   @override
   PagingStatus build(MovieListVariant variant, [String? arg]) {
@@ -30,10 +29,14 @@ class MovieInfiniteList extends _$MovieInfiniteList {
     return PagingStatus.loadingFirstPage;
   }
 
-  Future<void> fetchPage(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
-    final result =
-        await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
+  Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
+
+    
+    final result = await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
+    
+
+    
+
 
     result.fold((failure) {
       pagingController.error = failure.message;

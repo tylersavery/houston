@@ -11,26 +11,38 @@ class MovieDataSourceDjangoImpl implements MovieDataSource {
   MovieDataSourceDjangoImpl(this.client, this.session);
 
   @override
+  Future<PaginatedResponse<Movie>> list({required int page, required int limit}) async {
+    final data = await client.get("/movie/");
+    final results = data['results'].map<Movie>((json) => Movie.fromJson(json)).toList();
+
+    return PaginatedResponse<Movie>(
+      status: 200,
+      page: data['page'],
+      count: data['count'],
+      numPages: data['num_pages'],
+      limit: data['limit'],
+      results: results,
+    );
+  }
+
+  @override
+  Future<Movie> retrieve(int id) async {
+    final data = await client.get("/movie/$id/");
+    return Movie.fromJson(data);
+  }
+
+  @override
+  Future<Movie> save(Movie movie) async {
+    if (movie.exists) {
+      return Movie.fromJson(await client.patch('/movie/${movie.id}/', data: movie.toJson()));
+    } else {
+      return Movie.fromJson(await client.post('/movie/', data: movie.toJson()));
+    }
+  }
+
+  @override
   Future<void> delete(int id) {
     // TODO: implement delete
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<PaginatedResponse<Movie>> list({required int page, required int limit}) {
-    // TODO: implement list
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Movie> retrieve(int id) {
-    // TODO: implement retrieve
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Movie> save(Movie movie) {
-    // TODO: implement save
     throw UnimplementedError();
   }
 }

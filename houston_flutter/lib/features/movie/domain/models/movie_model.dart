@@ -20,6 +20,7 @@ class Movie with _$Movie {
     @JsonKey(name: "image_url") required String imageUrl,
     @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
     
+    
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);

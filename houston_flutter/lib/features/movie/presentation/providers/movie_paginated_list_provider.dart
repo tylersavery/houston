@@ -18,12 +18,14 @@ class MoviePaginatedList extends _$MoviePaginatedList {
     return MoviePaginatedListStateInitial();
   }
 
-  Future<void> load(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> load({required int page, int limit = Constants.defaultPaginationLimit}) async {
     state = MoviePaginatedListStateLoading();
+    
+    
+    final result = await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
+    
 
-    final result =
-        await ref.read(movieRepositoryProvider).list(page: page, limit: limit);
+    
 
     result.fold((failure) {
       state = MoviePaginatedListStateFailure(error: failure.message);

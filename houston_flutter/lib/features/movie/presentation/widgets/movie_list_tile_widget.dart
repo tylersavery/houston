@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import '../../domain/models/movie_model.dart';
 import '../screens/movie_detail_screen.dart';
 
+
 class MovieListTileWidget extends StatelessWidget {
+  
   final Movie movie;
   final Function(Movie)? onPressed;
-
+  
   const MovieListTileWidget({
     super.key,
     required this.movie,
@@ -18,6 +20,7 @@ class MovieListTileWidget extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text(movie.title),
+        
         subtitle: Text(movie.year.toString()),
         onTap: () {
           if (onPressed != null) {

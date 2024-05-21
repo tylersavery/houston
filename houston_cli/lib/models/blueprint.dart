@@ -52,6 +52,16 @@ class Blueprint {
       ),
     );
 
+    properties.add(
+      BlueprintProperty(
+        name: "owner",
+        type: 'user',
+        djangoAppName: "access",
+        allowBlank: false,
+        allowNull: false,
+      ),
+    );
+
     // search other blueprints for relationships to this model
     final otherBlueprintFiles = Directory(FileUtils.blueprintsDir)
         .listSync()

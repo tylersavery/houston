@@ -7,5 +7,5 @@ from api.{{#snakeCase}}{{name}}{{/snakeCase}}.views import (
 
 urlpatterns = [
     path("", {{#pascalCase}}{{name}}{{/pascalCase}}ListCreateView.as_view()),
-    path("<uuid:uuid>/", {{#pascalCase}}{{name}}{{/pascalCase}}RetrieveUpdateDestroyView.as_view(lookup_field="uuid")),
+    path("<int:pk>/", {{#pascalCase}}{{name}}{{/pascalCase}}RetrieveUpdateDestroyView.as_view()),
 ]

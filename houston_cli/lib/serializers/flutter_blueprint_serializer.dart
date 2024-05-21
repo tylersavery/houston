@@ -16,6 +16,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     final List<String> items = [];
 
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         items.add(
             "int? ${camelCase(property.type)}ToJson(${pascalCase(property.type)}? ${camelCase(property.name)}) => ${camelCase(property.name)}?.id;");
@@ -44,6 +45,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     final List<String> items = [];
 
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       final value = property.flutterEmptyParam;
       if (value != null) {
         items.add('${camelCase(property.name)}: $value');
@@ -74,6 +77,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formProviderImports {
     final List<String> importStrings = [];
     for (final p in properties) {
+      if (p.type == 'user') continue;
       if (Constants.hiddenFields.contains(p.name)) {
         continue;
       }
@@ -121,6 +125,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     final List<String> items = [];
 
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       if (Constants.hiddenFields.contains(property.name)) {
         continue;
       }
@@ -146,6 +152,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formControllerRefreshers {
     final List<String> items = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       if (Constants.hiddenFields.contains(property.name)) {
         continue;
       }
@@ -171,6 +179,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formControllerSetters {
     final List<String> items = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       if (Constants.hiddenFields.contains(property.name)) {
         continue;
       }
@@ -194,6 +204,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     bool includeButton = false;
     bool includeImageUploader = false;
     for (final p in properties) {
+      if (p.type == 'user') continue;
+
       if (Constants.hiddenFields.contains(p.name)) {
         continue;
       }
@@ -221,6 +233,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
   List<String> get formInputs {
     final List<String> items = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (Constants.hiddenFields.contains(property.name)) {
         continue;
       }
@@ -333,13 +346,10 @@ ListTile(
   List<String> get mapperImports {
     final List<String> items = [];
     for (final p in properties) {
+      if (p.type == 'user') continue;
+
       if (!Constants.primitives.contains(p.type)) {
-        if (p.type == "user") {
-          // items.add("import 'package:app/src/core/utils/user_utils.dart';");
-          // items.add("import 'package:supabase_flutter/supabase_flutter.dart';");
-        } else {
-          items.add("import '../../../${snakeCase(p.type)}/data/mappers/${snakeCase(p.type)}_mapper.dart';");
-        }
+        items.add("import '../../../${snakeCase(p.type)}/data/mappers/${snakeCase(p.type)}_mapper.dart';");
       }
     }
 
@@ -349,6 +359,8 @@ ListTile(
   List<String> get dtoToModelFields {
     final List<String> items = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       if (!Constants.primitives.contains(property.type)) {
         items.add(
             "${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)} != null ? ${pascalCase(property.name)}Mapper.toModel(${camelCase(name)}DTO.${camelCase(property.name)}!) : null,");
@@ -363,6 +375,8 @@ ListTile(
   List<String> get modelToDtoFields {
     final List<String> items = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       if (!Constants.primitives.contains(property.type)) {
         // if (Constants.serverBackend == ServerBackendOption.serverpod) {
         items.add("${camelCase(property.name)}Id : ${camelCase(name)}.${camelCase(property.name)}?.id ?? 0,");
@@ -380,6 +394,8 @@ ListTile(
   List<String> get supabaseDatasourceImports {
     final List<String> importStrings = [];
     for (final p in properties) {
+      if (p.type == 'user') continue;
+
       if (!Constants.primitives.contains(p.type)) {
         importStrings.add("import '../../../${snakeCase(p.type)}/data/datasources/${snakeCase(p.type)}_datasource_supabase.dart';");
       }
@@ -391,6 +407,8 @@ ListTile(
   String? get supabaseDatasourceJoins {
     final List<String> joins = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
+
       if (!Constants.primitives.contains(property.type)) {
         joins.add('${snakeCase(property.name)}!inner(\${${pascalCase(property.name)}DataSourceSupabaseImpl.defaultSelect})');
       }
@@ -406,6 +424,7 @@ ListTile(
   String get datasourceRelationshipParams {
     final List<String> params = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         params.add("String? ${camelCase(property.name)}Uid");
       }
@@ -417,6 +436,7 @@ ListTile(
   String get datasourceRelationshipListParams {
     final List<String> params = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         params.add("${camelCase(property.name)}Uid: ${camelCase(property.name)}Uid");
       }
@@ -428,6 +448,7 @@ ListTile(
   List<String> get datasourceRelationshipTypes {
     final List<String> params = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         params.add(camelCase(property.name));
       }
@@ -439,6 +460,7 @@ ListTile(
   String get listVariantRelationshipOptions {
     final List<String> params = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         params.add(camelCase(property.name));
       }
@@ -450,6 +472,7 @@ ListTile(
   List<String> get listProviderVariantCases {
     final List<String> cases = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         cases.add("""case ${pascalCase(name)}ListVariant.${camelCase(property.name)}:
         result = await ref.read(${camelCase(name)}RepositoryProvider).list(page: page, limit: limit, ${camelCase(property.name)}Uid: arg);

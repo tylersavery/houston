@@ -6,8 +6,7 @@ import 'screens/movie_list_screen.dart';
 
 class MovieRoutes {
   static const String namespace = "/movie";
-  static final shellNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "Movie Shell");
+  static final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "Movie Shell");
 
   static StatefulShellBranch branch = StatefulShellBranch(
     navigatorKey: shellNavigatorKey,
