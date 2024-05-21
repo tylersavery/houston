@@ -27,62 +27,60 @@ class GameFormWidget extends ConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(state.error!),
             ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text("Game System"),
-            subtitle: state.game.gameSystem?.exists == true
-                ? Text(state.game.gameSystem!.name)
-                : const Text("-"),
-            trailing: AppButton(
-              label: "Choose",
-              onPressed: () async {
-                final GameSystem? gameSystem = await showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return GameSystemInfiniteListWidget(
-                      onPressed: (gameSystem) =>
-                          Navigator.of(context).pop(gameSystem),
+            ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text("Game System"),
+                subtitle: state.game.gameSystem?.exists == true ? Text(state.game.gameSystem!.name) : const Text("-"),
+                trailing: AppButton(
+                  label: "Choose",
+                  onPressed: () async {
+                    final GameSystem? gameSystem = await showModalBottomSheet(
+                      context: context,
+                      builder: (context){
+                        return GameSystemInfiniteListWidget(
+                          onPressed: (gameSystem) => Navigator.of(context).pop(gameSystem),
+                        );
+                      },
                     );
+                    if(gameSystem != null) {
+                      provider.setGameSystem(gameSystem);
+                    }
                   },
-                );
-                if (gameSystem != null) {
-                  provider.setGameSystem(gameSystem);
-                }
-              },
-            ),
-          ),
-          TextFormField(
-            controller: provider.nameController,
-            validator: provider.nameValidator,
-            decoration: const InputDecoration(label: Text("Name")),
-          ),
-          TextFormField(
-            controller: provider.priceController,
-            validator: provider.priceValidator,
-            decoration: const InputDecoration(label: Text("Price")),
-          ),
-          TextFormField(
-            controller: provider.descriptionController,
-            validator: provider.descriptionValidator,
-            decoration: const InputDecoration(label: Text("Description")),
-            minLines: 3,
-            maxLines: 3,
-          ),
-          TextFormField(
-            controller: provider.playersController,
-            validator: provider.playersValidator,
-            decoration: const InputDecoration(label: Text("Players")),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
-            child: UploadImageWidget(
-              url: state.game.imageUrl,
-              label: "Image Url",
-              onComplete: (url) {
-                provider.setImageUrl(url);
-              },
-            ),
-          ),
+                ),
+              ),
+TextFormField(
+                controller: provider.nameController,
+                validator: provider.nameValidator,
+                decoration: const InputDecoration(label: Text("Name")),
+              ),
+TextFormField(
+                controller: provider.priceController,
+                validator: provider.priceValidator,
+                decoration: const InputDecoration(label: Text("Price")),
+              ),
+TextFormField(
+                controller: provider.descriptionController,
+                validator: provider.descriptionValidator,
+                decoration: const InputDecoration(label: Text("Description")),
+                minLines: 3,
+                maxLines: 3,
+              ),
+TextFormField(
+                controller: provider.playersController,
+                validator: provider.playersValidator,
+                decoration: const InputDecoration(label: Text("Players")),
+              ),
+Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
+      child: UploadImageWidget(
+        url: state.game.imageUrl,
+        label: "Image Url",
+        onComplete: (url) {
+          provider.setImageUrl(url);
+        },
+      ),
+    ),
+
           if (isEditing)
             Padding(
               padding: const EdgeInsets.all(8.0),

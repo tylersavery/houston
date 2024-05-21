@@ -82,7 +82,11 @@ class RestClient {
     Map<String, dynamic> data = const {},
     bool cleanPath = true,
     bool withAuth = true,
+    String? orderBy,
   }) {
+    if (orderBy != null) {
+      data['ordering'] = orderBy;
+    }
     return _handle(
       method: HttpMethod.get,
       path: path,

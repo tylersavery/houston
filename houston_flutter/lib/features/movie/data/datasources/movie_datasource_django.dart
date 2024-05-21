@@ -17,15 +17,17 @@ class MovieDataSourceDjangoImpl implements MovieDataSource {
     required int limit,
   }) async {
     try {
-      final data = await client.get("/movie/");
-      final results = data['results'].map<Movie>((json) => Movie.fromJson(json)).toList();
+      final Map<String, dynamic> params = {};
+
+      final response = await client.get("/movie/", orderBy: 'id', data: params);
+      final results = response['results'].map<Movie>((json) => Movie.fromJson(json)).toList();
 
       return PaginatedResponse<Movie>(
         status: 200,
-        page: data['page'],
-        count: data['count'],
-        numPages: data['num_pages'],
-        limit: data['limit'],
+        page: response['page'],
+        count: response['count'],
+        numPages: response['num_pages'],
+        limit: response['limit'],
         results: results,
       );
     } catch (e) {
@@ -36,8 +38,8 @@ class MovieDataSourceDjangoImpl implements MovieDataSource {
   @override
   Future<Movie> retrieve(int id) async {
     try {
-      final data = await client.get("/movie/$id/");
-      return Movie.fromJson(data);
+      final response = await client.get("/movie/$id/");
+      return Movie.fromJson(response);
     } catch (e) {
       throw ServerException(e.toString());
     }

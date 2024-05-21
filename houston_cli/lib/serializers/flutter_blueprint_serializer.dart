@@ -445,6 +445,22 @@ ListTile(
     return params.join(", ");
   }
 
+  String get datasourceRelationshipDjangoParams {
+    final List<String> params = [];
+    for (final property in properties) {
+      if (property.type == 'user') continue;
+      if (!Constants.primitives.contains(property.type)) {
+        params.add("'${snakeCase(property.name)}': ${camelCase(property.name)}Uid");
+      }
+    }
+
+    return """
+  final Map<String, dynamic> params = {
+    ${params.join(',\n')}${params.isNotEmpty ? ',' : ''}
+  };
+""";
+  }
+
   List<String> get datasourceRelationshipTypes {
     final List<String> params = [];
     for (final property in properties) {
@@ -513,6 +529,7 @@ ListTile(
       'datasourceRelationshipParams': datasourceRelationshipParams,
       'datasourceRelationshipListParams': datasourceRelationshipListParams,
       'listVariantRelationshipOptions': listVariantRelationshipOptions,
+      'datasourceRelationshipDjangoParams': datasourceRelationshipDjangoParams,
       'listProviderVariantCases': listProviderVariantCases,
       'hasListProviderVariantCases': listProviderVariantCases.isNotEmpty,
       'datasourceRelationshipTypes': datasourceRelationshipTypes,

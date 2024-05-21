@@ -14,15 +14,16 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceDjangoImpl implements {{#p
   @override
   Future<PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>> list({required int page, required int limit, {{{datasourceRelationshipParams}}}}) async {
     try {
-      final data = await client.get("/{{#paramCase}}{{name}}{{/paramCase}}/");
-      final results = data['results'].map<{{#pascalCase}}{{name}}{{/pascalCase}}>((json) => {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(json)).toList();
+      {{{datasourceRelationshipDjangoParams}}}
+      final response = await client.get("/{{#paramCase}}{{name}}{{/paramCase}}/", orderBy: 'id', data: params);
+      final results = response['results'].map<{{#pascalCase}}{{name}}{{/pascalCase}}>((json) => {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(json)).toList();
 
       return PaginatedResponse<{{#pascalCase}}{{name}}{{/pascalCase}}>(
         status: 200,
-        page: data['page'],
-        count: data['count'],
-        numPages: data['num_pages'],
-        limit: data['limit'],
+        page: response['page'],
+        count: response['count'],
+        numPages: response['num_pages'],
+        limit: response['limit'],
         results: results,
       );
     } catch (e) {
@@ -33,8 +34,8 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceDjangoImpl implements {{#p
   @override
   Future<{{#pascalCase}}{{name}}{{/pascalCase}}> retrieve(int id) async {
     try {
-      final data = await client.get("/{{#paramCase}}{{name}}{{/paramCase}}/$id/");
-      return {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(data);
+      final response = await client.get("/{{#paramCase}}{{name}}{{/paramCase}}/$id/");
+      return {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(response);
     } catch (e) {
       throw ServerException(e.toString());
     }

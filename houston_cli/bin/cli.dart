@@ -4,7 +4,7 @@ import 'package:houston_cli/scaffold_feature.dart';
 
 Future<void> main(List<String> args) async {
   scaffoldFeature(
-    name: "movie",
+    name: "game",
     generateServer: false,
     generateFlutter: true,
     generateMigrations: false,

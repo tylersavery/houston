@@ -21,8 +21,7 @@ class GameInfiniteListWidget extends BaseComponent {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final provider =
-        ref.read(gameInfiniteListProvider(variant, variantArg).notifier);
+    final provider = ref.read(gameInfiniteListProvider(variant, variantArg).notifier);
 
     return InfiniteListWidget<Game>(
       pagingController: provider.pagingController,
