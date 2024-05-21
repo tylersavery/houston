@@ -127,17 +127,40 @@ Future<void> scaffoldFeature({
 
         break;
       case (ServerBackendOption.django):
-        // TODO: handle module
+        final module = blueprint.module;
 
-        String appName = "content";
+        final modulePath = FileUtils.djangoModuleDirectory(module);
+
+        if (!await FileUtils.directoryExists(modulePath)) {
+          print(white("Scaffolding Django Module [${pascalCase(module)}]..."));
+
+          final djangoModuleBrick = mason.Brick.path("${FileUtils.bricksDir}/django/module");
+          final djangoModuleGenerator = await mason.MasonGenerator.fromBrick(djangoModuleBrick);
+          final djangoModuleTarget = mason.DirectoryGeneratorTarget(Directory(modulePath));
+
+          final djangoModuleeSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(module));
+
+          await djangoModuleGenerator.generate(
+            djangoModuleTarget,
+            vars: djangoModuleeSerializer.serialize(),
+          );
+
+          print(white("Registering new app in project/settings.apps.py"));
+
+          await FileUtils.insertTextInFileAtToken(
+            path: "${FileUtils.djangoRootDir}/project/settings/apps.py",
+            token: "#::HOUSTON-INSERT-MODULE::",
+            value: '"${snakeCase(module)}.apps.${pascalCase(module)}Config",',
+          );
+        }
 
         print(white("Scaffolding Django Feature [${pascalCase(name)}]..."));
-        final djangoAppDir = FileUtils.djangoAppDirectory(appName);
+        final djangoAppDir = FileUtils.djangoModuleDirectory(blueprint.module);
         final djangoFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/django/feature");
         final djangoFeatureGenerator = await mason.MasonGenerator.fromBrick(djangoFeatureBrick);
         final djangoFeatureTarget = mason.DirectoryGeneratorTarget(Directory(djangoAppDir));
 
-        final djangoFeatureSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(appName));
+        final djangoFeatureSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(blueprint.module));
 
         await djangoFeatureGenerator.generate(
           djangoFeatureTarget,
@@ -165,7 +188,7 @@ Future<void> scaffoldFeature({
         final djangoApiFeatureGenerator = await mason.MasonGenerator.fromBrick(djangoApiFeatureBrick);
         final djangoApiFeatureTarget = mason.DirectoryGeneratorTarget(Directory(djangoApiAppDir));
 
-        final djangoApiSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(appName));
+        final djangoApiSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(blueprint.module));
 
         await djangoApiFeatureGenerator.generate(
           djangoApiFeatureTarget,

@@ -29,7 +29,7 @@ class FileUtils {
     return Directory("$houstonRoot/${appName}_django").path;
   }
 
-  static String djangoAppDirectory(String appName) {
+  static String djangoModuleDirectory(String appName) {
     return "$djangoRootDir/${snakeCase(appName)}";
   }
 
@@ -151,5 +151,9 @@ class FileUtils {
     }
 
     return count;
+  }
+
+  static Future<bool> directoryExists(String path) async {
+    return Directory(path).exists();
   }
 }

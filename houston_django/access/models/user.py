@@ -7,10 +7,12 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
+from project.validators import TypeValidator
 
 from project.fields import CIEmailField
 from project.models import AbstractModel
 from project.utils.string import split_name
+from project.utils.uuid import get_uuid
 
 
 class UserManager(BaseUserManager):
@@ -30,7 +32,16 @@ class UserManager(BaseUserManager):
         return self._create_user(password, **kwargs)
 
 
-class User(AbstractModel, AbstractBaseUser):
+class User(AbstractBaseUser):
+    id = models.UUIDField(
+        _("ID"),
+        primary_key=True,
+        default=get_uuid,
+        unique=True,
+        editable=False,
+        db_index=True,
+    )
+
     email = CIEmailField(
         _("Email"), max_length=128, blank=True, null=True, unique=True, db_index=True
     )
@@ -39,7 +50,7 @@ class User(AbstractModel, AbstractBaseUser):
     number = PhoneNumberField(_("Number"), unique=True, null=True, db_index=True)
 
     name = models.CharField(_("Name"), max_length=32, blank=True)
-    image = models.URLField(
+    avatar = models.URLField(
         _("Image"),
         max_length=256,
         blank=True,
@@ -60,6 +71,9 @@ class User(AbstractModel, AbstractBaseUser):
         default=False,
     )
 
+    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
+
     bio = models.TextField(blank=True)
 
     last_login = None
@@ -68,6 +82,14 @@ class User(AbstractModel, AbstractBaseUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
+
+    metadata = models.JSONField(
+        _("Metadata"),
+        default=dict,
+        blank=True,
+        null=True,
+        validators=[TypeValidator(dict)],
+    )
 
     @property
     def first_name(self):
@@ -87,6 +109,10 @@ class User(AbstractModel, AbstractBaseUser):
     def is_superuser(self):
         return self.is_admin
 
+    @classmethod
+    def get_field(cls, field_name):
+        return cls._meta.get_field(field_name)
+
     def __str__(self):
         return f"{self.number} | {self.name}" if self.name else str(self.number)
 
@@ -98,6 +124,17 @@ class User(AbstractModel, AbstractBaseUser):
 
     def get_all_permissions(self, obj=None):
         return []
+
+    def silent_save(self, *fields):
+        cls = type(self)
+        if hasattr(cls, "_default_manager"):
+            cls._default_manager.filter(pk=self.pk).update(
+                **{
+                    field: getattr(self, field)
+                    for field in fields
+                    if hasattr(self, field)
+                }
+            )
 
     class Meta(AbstractModel.Meta):
         verbose_name = _("User")

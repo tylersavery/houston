@@ -1,0 +1,9 @@
+name: event
+module: analytics
+properties:
+  -
+    name: title
+    type: char
+    maxLength: 100
+    uiHeading: 1
+  

@@ -16,22 +16,11 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
       return null;
     }
 
-    final result = await client.get('/user/me');
-    print(result);
-
     //TODO: check for expiry etc (or via interceptor)
     try {
       final result = await client.get('/user/me');
 
-      return User(
-        id: result['id'].toString(),
-        email: result['email'],
-        username: result['username'],
-        firstName: result['first_name'],
-        lastName: result['last_name'],
-        avatar: result['image'],
-        bio: result['bio'],
-      );
+      return User.fromJson(result);
     } catch (e, st) {
       print(e);
       print(st);
