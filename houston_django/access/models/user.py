@@ -11,8 +11,27 @@ from project.validators import TypeValidator
 
 from project.fields import CIEmailField
 from project.models import AbstractModel
-from project.utils.string import split_name
+from project.utils.string import split_name, get_random_string
 from project.utils.uuid import get_uuid
+
+
+def get_user_id():
+    user_id = ""
+
+    while True:
+        user_id = get_random_string(
+            "ABCDEFGHJKMNPQRSTUVWXYabcdefghjkmnpqrstuvwxyzZ123456789", 8
+        )
+        try:
+            User.objects.get(user_id=user_id)
+        except User.DoesNotExist:
+            break
+        except Exception as e:
+            # if the migrations have never run, we need this:
+            user_id = "foobar"
+            break
+
+    return user_id
 
 
 class UserManager(BaseUserManager):
@@ -32,22 +51,23 @@ class UserManager(BaseUserManager):
         return self._create_user(password, **kwargs)
 
 
-class User(AbstractBaseUser):
-    id = models.UUIDField(
-        _("ID"),
-        primary_key=True,
-        default=get_uuid,
+class User(AbstractModel, AbstractBaseUser):
+
+    user_id = models.CharField(
+        _("User ID"),
+        default=get_user_id,
         unique=True,
         editable=False,
         db_index=True,
+        max_length=8,
     )
 
-    email = CIEmailField(
-        _("Email"), max_length=128, blank=True, null=True, unique=True, db_index=True
-    )
+    email = CIEmailField(_("Email"), max_length=128, unique=True, db_index=True)
     username = models.CharField(_("Username"), max_length=128, db_index=True)
     password = models.CharField(_("Password"), max_length=128)
-    number = PhoneNumberField(_("Number"), unique=True, null=True, db_index=True)
+    number = PhoneNumberField(
+        _("Number"), unique=True, null=True, blank=True, db_index=True
+    )
 
     name = models.CharField(_("Name"), max_length=32, blank=True)
     avatar = models.URLField(
@@ -71,9 +91,6 @@ class User(AbstractBaseUser):
         default=False,
     )
 
-    created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
-    updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
-
     bio = models.TextField(blank=True)
 
     last_login = None
@@ -82,14 +99,6 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
-
-    metadata = models.JSONField(
-        _("Metadata"),
-        default=dict,
-        blank=True,
-        null=True,
-        validators=[TypeValidator(dict)],
-    )
 
     @property
     def first_name(self):
@@ -109,10 +118,6 @@ class User(AbstractBaseUser):
     def is_superuser(self):
         return self.is_admin
 
-    @classmethod
-    def get_field(cls, field_name):
-        return cls._meta.get_field(field_name)
-
     def __str__(self):
         return f"{self.number} | {self.name}" if self.name else str(self.number)
 
@@ -124,17 +129,6 @@ class User(AbstractBaseUser):
 
     def get_all_permissions(self, obj=None):
         return []
-
-    def silent_save(self, *fields):
-        cls = type(self)
-        if hasattr(cls, "_default_manager"):
-            cls._default_manager.filter(pk=self.pk).update(
-                **{
-                    field: getattr(self, field)
-                    for field in fields
-                    if hasattr(self, field)
-                }
-            )
 
     class Meta(AbstractModel.Meta):
         verbose_name = _("User")

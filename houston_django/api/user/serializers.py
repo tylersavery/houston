@@ -23,6 +23,8 @@ class UserSerializer(serializers.ModelSerializer):
         required=False,
     )
 
+    id = serializers.CharField(source="user_id")
+
     class Meta:
         model = User
         fields = [
@@ -34,7 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
-            "image",
+            "avatar",
             "bio",
             "is_setup",
             "metadata",
@@ -63,7 +65,7 @@ class UserPublicSerializer(serializers.ModelSerializer):
             "uuid",
             "username",
             "name",
-            "image",
+            "avatar",
             "bio",
             "created_at",
         ]
