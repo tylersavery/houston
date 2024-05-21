@@ -7,5 +7,5 @@ from api.user.views import (
 
 urlpatterns = [
     path("me/", UserMeRetrieveUpdateView.as_view()),
-    path("<uuid:uuid>/", UserRetrieveView.as_view(lookup_field="uuid")),
+    path("<str:user_id>/", UserRetrieveView.as_view(lookup_field="user_id")),
 ]

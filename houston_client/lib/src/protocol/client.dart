@@ -14,10 +14,12 @@ import 'package:houston_client/src/protocol/game_list.dart' as _i3;
 import 'package:houston_client/src/protocol/game.dart' as _i4;
 import 'package:houston_client/src/protocol/game_system_list.dart' as _i5;
 import 'package:houston_client/src/protocol/game_system.dart' as _i6;
-import 'package:houston_client/src/protocol/profile_list.dart' as _i7;
-import 'package:houston_client/src/protocol/profile.dart' as _i8;
-import 'package:serverpod_auth_client/module.dart' as _i9;
-import 'protocol.dart' as _i10;
+import 'package:houston_client/src/protocol/movie_list.dart' as _i7;
+import 'package:houston_client/src/protocol/movie.dart' as _i8;
+import 'package:houston_client/src/protocol/profile_list.dart' as _i9;
+import 'package:houston_client/src/protocol/profile.dart' as _i10;
+import 'package:serverpod_auth_client/module.dart' as _i11;
+import 'protocol.dart' as _i12;
 
 /// {@category Endpoint}
 class EndpointAsset extends _i1.EndpointRef {
@@ -143,18 +145,61 @@ class EndpointGameSystem extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointMovie extends _i1.EndpointRef {
+  EndpointMovie(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'movie';
+
+  _i2.Future<_i7.MovieDTOList> list({
+    required int page,
+    required int limit,
+    String? orderBy,
+  }) =>
+      caller.callServerEndpoint<_i7.MovieDTOList>(
+        'movie',
+        'list',
+        {
+          'page': page,
+          'limit': limit,
+          'orderBy': orderBy,
+        },
+      );
+
+  _i2.Future<_i8.MovieDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i8.MovieDTO?>(
+        'movie',
+        'retrieve',
+        {'id': id},
+      );
+
+  _i2.Future<_i8.MovieDTO> save(_i8.MovieDTO movie) =>
+      caller.callServerEndpoint<_i8.MovieDTO>(
+        'movie',
+        'save',
+        {'movie': movie},
+      );
+
+  _i2.Future<void> delete(int id) => caller.callServerEndpoint<void>(
+        'movie',
+        'delete',
+        {'id': id},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointProfile extends _i1.EndpointRef {
   EndpointProfile(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'profile';
 
-  _i2.Future<_i7.ProfileDTOList> list({
+  _i2.Future<_i9.ProfileDTOList> list({
     required int page,
     required int limit,
     String? orderBy,
   }) =>
-      caller.callServerEndpoint<_i7.ProfileDTOList>(
+      caller.callServerEndpoint<_i9.ProfileDTOList>(
         'profile',
         'list',
         {
@@ -164,22 +209,22 @@ class EndpointProfile extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i8.ProfileDTO?> retrieve(int id) =>
-      caller.callServerEndpoint<_i8.ProfileDTO?>(
+  _i2.Future<_i10.ProfileDTO?> retrieve(int id) =>
+      caller.callServerEndpoint<_i10.ProfileDTO?>(
         'profile',
         'retrieve',
         {'id': id},
       );
 
-  _i2.Future<_i8.ProfileDTO?> retrieveByUserId(int userId) =>
-      caller.callServerEndpoint<_i8.ProfileDTO?>(
+  _i2.Future<_i10.ProfileDTO?> retrieveByUserId(int userId) =>
+      caller.callServerEndpoint<_i10.ProfileDTO?>(
         'profile',
         'retrieveByUserId',
         {'userId': userId},
       );
 
-  _i2.Future<_i8.ProfileDTO> save(_i8.ProfileDTO profile) =>
-      caller.callServerEndpoint<_i8.ProfileDTO>(
+  _i2.Future<_i10.ProfileDTO> save(_i10.ProfileDTO profile) =>
+      caller.callServerEndpoint<_i10.ProfileDTO>(
         'profile',
         'save',
         {'profile': profile},
@@ -194,10 +239,10 @@ class EndpointProfile extends _i1.EndpointRef {
 
 class _Modules {
   _Modules(Client client) {
-    auth = _i9.Caller(client);
+    auth = _i11.Caller(client);
   }
 
-  late final _i9.Caller auth;
+  late final _i11.Caller auth;
 }
 
 class Client extends _i1.ServerpodClient {
@@ -209,7 +254,7 @@ class Client extends _i1.ServerpodClient {
     Duration? connectionTimeout,
   }) : super(
           host,
-          _i10.Protocol(),
+          _i12.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -219,6 +264,7 @@ class Client extends _i1.ServerpodClient {
     example = EndpointExample(this);
     game = EndpointGame(this);
     gameSystem = EndpointGameSystem(this);
+    movie = EndpointMovie(this);
     profile = EndpointProfile(this);
     modules = _Modules(this);
   }
@@ -231,6 +277,8 @@ class Client extends _i1.ServerpodClient {
 
   late final EndpointGameSystem gameSystem;
 
+  late final EndpointMovie movie;
+
   late final EndpointProfile profile;
 
   late final _Modules modules;
@@ -241,6 +289,7 @@ class Client extends _i1.ServerpodClient {
         'example': example,
         'game': game,
         'gameSystem': gameSystem,
+        'movie': movie,
         'profile': profile,
       };
 

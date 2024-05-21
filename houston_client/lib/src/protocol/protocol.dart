@@ -14,14 +14,18 @@ import 'game.dart' as _i2;
 import 'game_list.dart' as _i3;
 import 'game_system.dart' as _i4;
 import 'game_system_list.dart' as _i5;
-import 'profile.dart' as _i6;
-import 'profile_list.dart' as _i7;
-import 'protocol.dart' as _i8;
-import 'package:serverpod_auth_client/module.dart' as _i9;
+import 'movie.dart' as _i6;
+import 'movie_list.dart' as _i7;
+import 'profile.dart' as _i8;
+import 'profile_list.dart' as _i9;
+import 'protocol.dart' as _i10;
+import 'package:serverpod_auth_client/module.dart' as _i11;
 export 'game.dart';
 export 'game_list.dart';
 export 'game_system.dart';
 export 'game_system_list.dart';
+export 'movie.dart';
+export 'movie_list.dart';
 export 'profile.dart';
 export 'profile_list.dart';
 export 'client.dart';
@@ -56,11 +60,17 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i5.GameSystemDTOList) {
       return _i5.GameSystemDTOList.fromJson(data, this) as T;
     }
-    if (t == _i6.ProfileDTO) {
-      return _i6.ProfileDTO.fromJson(data, this) as T;
+    if (t == _i6.MovieDTO) {
+      return _i6.MovieDTO.fromJson(data, this) as T;
     }
-    if (t == _i7.ProfileDTOList) {
-      return _i7.ProfileDTOList.fromJson(data, this) as T;
+    if (t == _i7.MovieDTOList) {
+      return _i7.MovieDTOList.fromJson(data, this) as T;
+    }
+    if (t == _i8.ProfileDTO) {
+      return _i8.ProfileDTO.fromJson(data, this) as T;
+    }
+    if (t == _i9.ProfileDTOList) {
+      return _i9.ProfileDTOList.fromJson(data, this) as T;
     }
     if (t == _i1.getType<_i2.GameDTO?>()) {
       return (data != null ? _i2.GameDTO.fromJson(data, this) : null) as T;
@@ -76,28 +86,38 @@ class Protocol extends _i1.SerializationManager {
       return (data != null ? _i5.GameSystemDTOList.fromJson(data, this) : null)
           as T;
     }
-    if (t == _i1.getType<_i6.ProfileDTO?>()) {
-      return (data != null ? _i6.ProfileDTO.fromJson(data, this) : null) as T;
+    if (t == _i1.getType<_i6.MovieDTO?>()) {
+      return (data != null ? _i6.MovieDTO.fromJson(data, this) : null) as T;
     }
-    if (t == _i1.getType<_i7.ProfileDTOList?>()) {
-      return (data != null ? _i7.ProfileDTOList.fromJson(data, this) : null)
+    if (t == _i1.getType<_i7.MovieDTOList?>()) {
+      return (data != null ? _i7.MovieDTOList.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i8.ProfileDTO?>()) {
+      return (data != null ? _i8.ProfileDTO.fromJson(data, this) : null) as T;
+    }
+    if (t == _i1.getType<_i9.ProfileDTOList?>()) {
+      return (data != null ? _i9.ProfileDTOList.fromJson(data, this) : null)
           as T;
     }
-    if (t == List<_i8.GameDTO>) {
-      return (data as List).map((e) => deserialize<_i8.GameDTO>(e)).toList()
+    if (t == List<_i10.GameDTO>) {
+      return (data as List).map((e) => deserialize<_i10.GameDTO>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i8.GameSystemDTO>) {
+    if (t == List<_i10.GameSystemDTO>) {
       return (data as List)
-          .map((e) => deserialize<_i8.GameSystemDTO>(e))
+          .map((e) => deserialize<_i10.GameSystemDTO>(e))
           .toList() as dynamic;
     }
-    if (t == List<_i8.ProfileDTO>) {
-      return (data as List).map((e) => deserialize<_i8.ProfileDTO>(e)).toList()
+    if (t == List<_i10.MovieDTO>) {
+      return (data as List).map((e) => deserialize<_i10.MovieDTO>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i10.ProfileDTO>) {
+      return (data as List).map((e) => deserialize<_i10.ProfileDTO>(e)).toList()
           as dynamic;
     }
     try {
-      return _i9.Protocol().deserialize<T>(data, t);
+      return _i11.Protocol().deserialize<T>(data, t);
     } catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -105,7 +125,7 @@ class Protocol extends _i1.SerializationManager {
   @override
   String? getClassNameForObject(Object data) {
     String? className;
-    className = _i9.Protocol().getClassNameForObject(data);
+    className = _i11.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -121,10 +141,16 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i5.GameSystemDTOList) {
       return 'GameSystemDTOList';
     }
-    if (data is _i6.ProfileDTO) {
+    if (data is _i6.MovieDTO) {
+      return 'MovieDTO';
+    }
+    if (data is _i7.MovieDTOList) {
+      return 'MovieDTOList';
+    }
+    if (data is _i8.ProfileDTO) {
       return 'ProfileDTO';
     }
-    if (data is _i7.ProfileDTOList) {
+    if (data is _i9.ProfileDTOList) {
       return 'ProfileDTOList';
     }
     return super.getClassNameForObject(data);
@@ -134,7 +160,7 @@ class Protocol extends _i1.SerializationManager {
   dynamic deserializeByClassName(Map<String, dynamic> data) {
     if (data['className'].startsWith('serverpod_auth.')) {
       data['className'] = data['className'].substring(15);
-      return _i9.Protocol().deserializeByClassName(data);
+      return _i11.Protocol().deserializeByClassName(data);
     }
     if (data['className'] == 'GameDTO') {
       return deserialize<_i2.GameDTO>(data['data']);
@@ -148,11 +174,17 @@ class Protocol extends _i1.SerializationManager {
     if (data['className'] == 'GameSystemDTOList') {
       return deserialize<_i5.GameSystemDTOList>(data['data']);
     }
+    if (data['className'] == 'MovieDTO') {
+      return deserialize<_i6.MovieDTO>(data['data']);
+    }
+    if (data['className'] == 'MovieDTOList') {
+      return deserialize<_i7.MovieDTOList>(data['data']);
+    }
     if (data['className'] == 'ProfileDTO') {
-      return deserialize<_i6.ProfileDTO>(data['data']);
+      return deserialize<_i8.ProfileDTO>(data['data']);
     }
     if (data['className'] == 'ProfileDTOList') {
-      return deserialize<_i7.ProfileDTOList>(data['data']);
+      return deserialize<_i9.ProfileDTOList>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

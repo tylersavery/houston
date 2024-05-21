@@ -29,7 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
-            "uuid",
             "username",
             "number",
             "name",
@@ -62,7 +61,6 @@ class UserPublicSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
-            "uuid",
             "username",
             "name",
             "avatar",
