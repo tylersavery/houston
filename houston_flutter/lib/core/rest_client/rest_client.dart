@@ -84,8 +84,8 @@ class RestClient {
     bool withAuth = true,
     String? orderBy,
   }) {
-    if (orderBy != null) {
-      data['ordering'] = orderBy;
+   if (orderBy != null) {
+      data = {...data, 'ordering': orderBy};
     }
     return _handle(
       method: HttpMethod.get,

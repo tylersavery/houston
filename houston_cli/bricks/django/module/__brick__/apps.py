@@ -1,8 +1,8 @@
 from django.apps import AppConfig
 
 
-class {{#pascalCase}}{{name}}{{/pascalCase}}Config(AppConfig):
-    name = "{{#snakeCase}}{{name}}{{/snakeCase}}"
+class {{#pascalCase}}{{appName}}{{/pascalCase}}Config(AppConfig):
+    name = "{{#snakeCase}}{{appName}}{{/snakeCase}}"
 
     def ready(self):
-        import {{#snakeCase}}{{name}}{{/snakeCase}}.signals  # noqa
+        import {{#snakeCase}}{{appName}}{{/snakeCase}}.signals  # noqa

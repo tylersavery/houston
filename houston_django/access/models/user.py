@@ -119,7 +119,7 @@ class User(AbstractModel, AbstractBaseUser):
         return self.is_admin
 
     def __str__(self):
-        return f"{self.number} | {self.name}" if self.name else str(self.number)
+        return f"{self.username} ({self.email})"
 
     def has_perm(self, perm, obj=None):
         return self.is_active and self.is_admin

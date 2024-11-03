@@ -246,7 +246,7 @@ Future<void> scaffoldFeature({
       print(white("Updating routes..."));
       await FileUtils.insertTextInFile(
         path: routerPath,
-        value: "import 'package:${Constants.appName}_flutter/features/${snakeCase(name)}/presentation/${snakeCase(name)}_routes.dart';",
+        value: "import '../../features/${snakeCase(name)}/presentation/${snakeCase(name)}_routes.dart';",
         prepend: true,
       );
 

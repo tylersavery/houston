@@ -44,9 +44,9 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceDjangoImpl implements {{#p
   @override
   Future<{{#pascalCase}}{{name}}{{/pascalCase}}> save({{#pascalCase}}{{name}}{{/pascalCase}} {{#camelCase}}{{name}}{{/camelCase}}) async {
     try {
-      if ({{#paramCase}}{{name}}{{/paramCase}}.exists) {
+      if ({{#camelCase}}{{name}}{{/camelCase}}.exists) {
         {{=<% %>=}}
-        return <% #pascalCase %><% name %><% /pascalCase %>.fromJson(await client.patch('/<% #paramCase %><% name %><% /paramCase %>/${<% #paramCase %><% name %><% /paramCase %>.id}/', data: <% #camelCase %><% name %><% /camelCase %>.toJson()));
+        return <% #pascalCase %><% name %><% /pascalCase %>.fromJson(await client.patch('/<% #paramCase %><% name %><% /paramCase %>/${<% #camelCase %><% name %><% /camelCase %>.id}/', data: <% #camelCase %><% name %><% /camelCase %>.toJson()));
         <%={{ }}=%>
 
       } else {

@@ -18,9 +18,9 @@ source venv/bin/activate
 make install
 ```
 
-#### Docker Services (Optional)
+#### Docker Services
 
-Optionally you can run necessary services with Docker; db (postgres), cache (redis), and broker (rabbitmq).
+You can run necessary services with Docker; db (postgres), cache (redis), and broker (rabbitmq).
 
 ```
 docker compose -p houston_django up -d
@@ -82,16 +82,10 @@ python manage.py loaddata admin/fixtures/theme.json
 ```
 
 Create superuser.
-Note: you will have to provide a valid international phone number such as `+10002222`
 ```
 python manage.py createsuperuser
 ```
 
-### Collect Static files
-Note: static files are only used for the admin
-```
-python manage.py collectstatic
-```
 
 #### Run Application
 
