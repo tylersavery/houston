@@ -1,0 +1,7 @@
+{% extends "email/base.html" %}{% load i18n %}
+{% block body %}
+<p>{% trans "Hi" %} {{ user.first_name }},</p>
+<p>{% trans "Here is your one-time code:" %}<br />
+   <strong>{{code}}</strong>
+</p>
+{% endblock %}

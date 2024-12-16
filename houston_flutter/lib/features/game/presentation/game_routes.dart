@@ -6,8 +6,7 @@ import 'screens/game_list_screen.dart';
 
 class GameRoutes {
   static const String namespace = "/game";
-  static final shellNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "Game Shell");
+  static final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "Game Shell");
 
   static StatefulShellBranch branch = StatefulShellBranch(
     navigatorKey: shellNavigatorKey,

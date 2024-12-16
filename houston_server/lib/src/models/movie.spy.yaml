@@ -1,0 +1,10 @@
+class: MovieDTO
+
+table: movie
+
+fields:
+  uid: String
+  title: String
+  year: int
+  imageUrl: String
+  createdAt: DateTime

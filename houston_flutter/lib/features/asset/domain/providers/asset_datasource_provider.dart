@@ -12,6 +12,7 @@ final assetDataSourceProvider = Provider<AssetDataSource>(
       case ServerBackendOption.supabase:
         return AssetDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
       case ServerBackendOption.serverpod:
+      default:
         return AssetDataSourceServerpodImpl(ref.read(serverpodClientProvider));
     }
   },

@@ -12,11 +12,13 @@ class Blueprint {
   late String namePlural;
   late String label;
   late String labelPlural;
+  late String module;
 
   Blueprint({
     required this.name,
     required this.properties,
     this.children,
+    String? module,
     String? namePlural,
     String? label,
     String? labelPlural,
@@ -24,6 +26,7 @@ class Blueprint {
     this.namePlural = namePlural ?? "${name}s";
     this.label = label ?? titleCase(name);
     this.labelPlural = labelPlural ?? "${titleCase(name)}s";
+    this.module = module != null ? snakeCase(module) : "content";
   }
 
   factory Blueprint.fromYaml(YamlMap data) {
@@ -49,6 +52,16 @@ class Blueprint {
       ),
     );
 
+    properties.add(
+      BlueprintProperty(
+        name: "owner",
+        type: 'user',
+        djangoAppName: "access",
+        allowBlank: false,
+        allowNull: false,
+      ),
+    );
+
     // search other blueprints for relationships to this model
     final otherBlueprintFiles = Directory(FileUtils.blueprintsDir)
         .listSync()
@@ -69,6 +82,7 @@ class Blueprint {
     return Blueprint(
       name: data['name'],
       properties: properties,
+      module: data['module'],
       children: children.isNotEmpty ? children : null,
     );
   }

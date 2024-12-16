@@ -1,0 +1,6 @@
+{% extends "admin_interface:admin/base_site.html" %}{% load static %}
+
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/override.css" %}">{% endblock %}
+
+{% block welcome-msg %}<strong>{{ user }}</strong>{% endblock %}

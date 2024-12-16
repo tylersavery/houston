@@ -10,11 +10,10 @@ final gameSystemDataSourceProvider = Provider<GameSystemDataSource>(
   (ref) {
     switch (Constants.serverBackend) {
       case ServerBackendOption.supabase:
-        return GameSystemDataSourceSupabaseImpl(
-            ref.read(supabaseClientProvider));
+        return GameSystemDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
       case ServerBackendOption.serverpod:
-        return GameSystemDataSourceServerpodImpl(
-            ref.read(serverpodClientProvider));
+      default:
+        return GameSystemDataSourceServerpodImpl(ref.read(serverpodClientProvider));
     }
   },
 );

@@ -9,6 +9,9 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
     List<String> items = [];
 
     for (final p in properties) {
+      if (p.type == "user") {
+        continue;
+      }
       final isRelationship = !Constants.primitives.contains(p.type);
       items.add(
           "  ${camelCase(p.name)}: ${p.dartTypeAsString}${isRelationship ? 'DTO' : ''}${p.allowNull || isRelationship ? '?' : ''}${isRelationship ? ', relation' : ''}");
@@ -29,7 +32,7 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
   }
 
   String get endpointIncludes {
-    final items = properties.where((p) => !Constants.primitives.contains(p.type)).toList();
+    final items = properties.where((p) => !Constants.primitives.contains(p.type) && p.type != 'user').toList();
 
     if (items.isEmpty) {
       return '';
@@ -44,7 +47,7 @@ include: ${pascalCase(name)}DTO.include(
   }
 
   String get copyWithForRelationships {
-    final items = properties.where((p) => !Constants.primitives.contains(p.type)).toList();
+    final items = properties.where((p) => !Constants.primitives.contains(p.type) && p.type != "user").toList();
 
     if (items.isEmpty) {
       return '';
@@ -56,6 +59,7 @@ include: ${pascalCase(name)}DTO.include(
   String get endpointRelationshipParams {
     final List<String> params = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         params.add("String? ${camelCase(property.name)}Uid");
       }
@@ -67,6 +71,7 @@ include: ${pascalCase(name)}DTO.include(
   String get endpointRelationshipWhereClause {
     List<String> clauses = [];
     for (final property in properties) {
+      if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
         final str = """
 if (${camelCase(property.name)}Uid != null) {

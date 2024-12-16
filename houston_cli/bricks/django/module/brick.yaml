@@ -1,0 +1,9 @@
+name: app
+description: Scaffold for django app/module
+version: 0.1.0+1
+vars:
+  name:
+    type: string
+    description: Name of app
+    default: cool_app
+    prompt: New app name?

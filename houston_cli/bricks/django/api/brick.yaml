@@ -1,0 +1,9 @@
+name: api_feature
+description: Scaffold for django api feature
+version: 0.1.0+1
+vars:
+  name:
+    type: string
+    description: Name of api_feature
+    default: cool_feature
+    prompt: New api feature name?

@@ -1,0 +1,6 @@
+enum MovieListVariant {
+  all,
+  isOwner,
+  
+  ;
+}

@@ -24,6 +24,7 @@ class Game with _$Game {
     @JsonKey(name: "image_url") required String imageUrl,
     @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
     
+    
   }) = _Game;
 
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);

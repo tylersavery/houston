@@ -1,0 +1,70 @@
+{
+  "actions": [
+    {
+      "type": "createTable",
+      "createTable": {
+        "name": "movie",
+        "dartName": "MovieDTO",
+        "module": "houston",
+        "schema": "public",
+        "columns": [
+          {
+            "name": "id",
+            "columnType": 2,
+            "isNullable": false,
+            "columnDefault": "nextval('movie_id_seq'::regclass)",
+            "dartType": "int?"
+          },
+          {
+            "name": "uid",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "title",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "year",
+            "columnType": 2,
+            "isNullable": false,
+            "dartType": "int"
+          },
+          {
+            "name": "imageUrl",
+            "columnType": 0,
+            "isNullable": false,
+            "dartType": "String"
+          },
+          {
+            "name": "createdAt",
+            "columnType": 4,
+            "isNullable": false,
+            "dartType": "DateTime"
+          }
+        ],
+        "foreignKeys": [],
+        "indexes": [
+          {
+            "indexName": "movie_pkey",
+            "elements": [
+              {
+                "type": 0,
+                "definition": "id"
+              }
+            ],
+            "type": "btree",
+            "isUnique": true,
+            "isPrimary": true
+          }
+        ],
+        "managed": true
+      }
+    }
+  ],
+  "warnings": [],
+  "migrationApiVersion": 1
+}

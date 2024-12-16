@@ -18,21 +18,17 @@ class LoginForm extends ConsumerWidget {
     final provider = ref.read(loginFormProvider);
 
     ref.listen(authProvider, (previous, next) {
-      if (previous is AuthStateSuccess) {
+      if (previous is AuthStateSuccess || next is AuthStateSuccess) {
         context.go(GameListScreen.route());
       }
 
       if (next is AuthStateFailure) {
         Toast.message(context, next.message);
       }
-
-      if (next is AuthStateSuccess) {
-        context.go(GameListScreen.route());
-      }
     });
-
     switch (state) {
       case AuthStateLoading():
+      case AuthStateBooting():
         return const Loader();
       case AuthStateFailure():
       case AuthStateInitial():
