@@ -12,11 +12,16 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
 
   AuthDataSourceServerpodImpl(this.client, this.sessionManager);
 
-  User _userWithProfile(String id, String email, String username, Profile profile) {
+  User _userWithProfile(
+    String id,
+    String email,
+    String? username,
+    Profile profile,
+  ) {
     return User(
       id: id,
       email: email,
-      username: username,
+      username: username ?? "user $id",
       firstName: profile.firstName,
       lastName: profile.lastName,
       bio: profile.bio,
@@ -53,7 +58,12 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
 
     if (user != null && user.id != null) {
       final profile = await _fetchProfile(user.id!);
-      return _userWithProfile(user.id!.toString(), user.email!, user.userName, profile);
+      return _userWithProfile(
+        user.id!.toString(),
+        user.email!,
+        user.userName,
+        profile,
+      );
     }
     return null;
   }
@@ -65,7 +75,11 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
     required String password,
   }) async {
     try {
-      final result = await client.modules.auth.email.createAccountRequest(username, email, password);
+      final result = await client.modules.auth.email.createAccountRequest(
+        username,
+        email,
+        password,
+      );
 
       if (result == false) {
         throw const ServerException();
@@ -83,7 +97,10 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
     required String verificationCode,
   }) async {
     try {
-      final result = await client.modules.auth.email.createAccount(email, verificationCode);
+      final result = await client.modules.auth.email.createAccount(
+        email,
+        verificationCode,
+      );
 
       if (result == null) {
         throw const ServerException("UserInfo was null");
@@ -94,7 +111,12 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
       // final profileDTO = await client.profile.createFromUser(result);
       // final profile = ProfileMapper.toModel(profileDTO);
 
-      return _userWithProfile(result.id!.toString(), result.email!, result.userName, profile);
+      return _userWithProfile(
+        result.id!.toString(),
+        result.email!,
+        result.userName,
+        profile,
+      );
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -103,10 +125,15 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
   @override
   Future<User> login({required String email, required String password}) async {
     try {
-      final result = await client.modules.auth.email.authenticate(email, password);
+      final result = await client.modules.auth.email.authenticate(
+        email,
+        password,
+      );
 
       if (!result.success) {
-        throw ServerException(result.failReason?.toString() ?? "Not successful");
+        throw ServerException(
+          result.failReason?.toString() ?? "Not successful",
+        );
       }
 
       if (result.userInfo == null) {
@@ -125,7 +152,12 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
 
       final profile = await _fetchProfile(result.userInfo!.id!);
 
-      return _userWithProfile(result.userInfo!.id!.toString(), result.userInfo!.email!, result.userInfo!.userName, profile);
+      return _userWithProfile(
+        result.userInfo!.id!.toString(),
+        result.userInfo!.email!,
+        result.userInfo!.userName,
+        profile,
+      );
     } catch (e) {
       throw ServerException(e.toString());
     }

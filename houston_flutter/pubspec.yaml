@@ -1,9 +1,9 @@
 name: houston_flutter
-description: A new Flutter project with Serverpod.
+description: A new Flutter project
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -18,23 +18,22 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.10.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   houston_client:
     path: ../houston_client
-  serverpod_flutter: 1.2.6
-  serverpod_auth_shared_flutter: 1.2.6
+  serverpod_flutter: 2.8.0
+  serverpod_auth_shared_flutter: 2.8.0
   supabase_flutter: ^2.5.2
   fpdart: ^1.1.0
   go_router: ^13.2.4
   flutter_riverpod: ^2.5.1
   riverpod_generator: ^2.4.0
   riverpod_annotation: ^2.3.5
-  image_picker: ^1.1.0
+  image_picker: ^1.1.2
   logger: ^2.2.0
   infinite_scroll_pagination: ^4.0.0
   freezed_annotation: ^2.4.1
@@ -57,7 +56,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

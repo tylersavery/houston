@@ -1,17 +1,18 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'protocol.dart' as _i2;
+import 'game_system.dart' as _i2;
 
-abstract class GameSystemDTOList extends _i1.SerializableEntity {
+abstract class GameSystemDTOList implements _i1.SerializableModel {
   GameSystemDTOList._({
     required this.page,
     required this.count,
@@ -28,18 +29,15 @@ abstract class GameSystemDTOList extends _i1.SerializableEntity {
     required List<_i2.GameSystemDTO> results,
   }) = _GameSystemDTOListImpl;
 
-  factory GameSystemDTOList.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory GameSystemDTOList.fromJson(Map<String, dynamic> jsonSerialization) {
     return GameSystemDTOList(
-      page: serializationManager.deserialize<int>(jsonSerialization['page']),
-      count: serializationManager.deserialize<int>(jsonSerialization['count']),
-      numPages:
-          serializationManager.deserialize<int>(jsonSerialization['numPages']),
-      limit: serializationManager.deserialize<int>(jsonSerialization['limit']),
-      results: serializationManager
-          .deserialize<List<_i2.GameSystemDTO>>(jsonSerialization['results']),
+      page: jsonSerialization['page'] as int,
+      count: jsonSerialization['count'] as int,
+      numPages: jsonSerialization['numPages'] as int,
+      limit: jsonSerialization['limit'] as int,
+      results: (jsonSerialization['results'] as List)
+          .map((e) => _i2.GameSystemDTO.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -53,6 +51,9 @@ abstract class GameSystemDTOList extends _i1.SerializableEntity {
 
   List<_i2.GameSystemDTO> results;
 
+  /// Returns a shallow copy of this [GameSystemDTOList]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   GameSystemDTOList copyWith({
     int? page,
     int? count,
@@ -69,6 +70,11 @@ abstract class GameSystemDTOList extends _i1.SerializableEntity {
       'limit': limit,
       'results': results.toJson(valueToJson: (v) => v.toJson()),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -87,6 +93,9 @@ class _GameSystemDTOListImpl extends GameSystemDTOList {
           results: results,
         );
 
+  /// Returns a shallow copy of this [GameSystemDTOList]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   GameSystemDTOList copyWith({
     int? page,
@@ -100,7 +109,7 @@ class _GameSystemDTOListImpl extends GameSystemDTOList {
       count: count ?? this.count,
       numPages: numPages ?? this.numPages,
       limit: limit ?? this.limit,
-      results: results ?? this.results.clone(),
+      results: results ?? this.results.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

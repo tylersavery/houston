@@ -55,7 +55,8 @@ extension CustomColorScheme on ColorScheme {
   Color get light => _lightColor;
   Color get dark => _darkColor;
 
-  Color get text => brightness == Brightness.light ? _textColorDark : _textColorLight;
+  Color get text =>
+      brightness == Brightness.light ? _textColorDark : _textColorLight;
 
   Color get primaryButtonBg => primary;
   Color get primaryButtonFg => const Color(0xFFFFFFFF);
@@ -81,8 +82,10 @@ extension CustomColorScheme on ColorScheme {
   Color get darkButtonBg => dark;
   Color get darkButtonFg => const Color(0xFFFFFFFF);
 
-  Color get drawerBackground => brightness == Brightness.light ? Colors.white70 : Colors.black87;
-  Color get bottomSheetBackground => brightness == Brightness.light ? Colors.white70 : Colors.black87;
+  Color get drawerBackground =>
+      brightness == Brightness.light ? Colors.white70 : Colors.black87;
+  Color get bottomSheetBackground =>
+      brightness == Brightness.light ? Colors.white70 : Colors.black87;
 }
 
 class AppTheme {
@@ -96,7 +99,8 @@ class AppTheme {
     return AppTheme(
       themeData: ThemeData(
         useMaterial3: true,
-        dialogTheme: const DialogTheme(titleTextStyle: TextStyle(fontSize: 16)),
+        dialogTheme:
+            const DialogThemeData(titleTextStyle: TextStyle(fontSize: 16)),
         colorScheme: ColorScheme.fromSeed(
           seedColor: _primaryColor,
           brightness: Brightness.light,
@@ -109,7 +113,8 @@ class AppTheme {
     return AppTheme(
       themeData: ThemeData(
         useMaterial3: true,
-        dialogTheme: const DialogTheme(titleTextStyle: TextStyle(fontSize: 16)),
+        dialogTheme:
+            const DialogThemeData(titleTextStyle: TextStyle(fontSize: 16)),
         colorScheme: ColorScheme.fromSeed(
           seedColor: _primaryColor,
           brightness: Brightness.dark,

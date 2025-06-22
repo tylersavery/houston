@@ -7,7 +7,6 @@ import 'app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Env.init();
 
   if (Constants.serverBackend == ServerBackendOption.supabase) {
     await Supabase.initialize(

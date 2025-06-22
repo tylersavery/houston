@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:houston_flutter/config/env.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 
@@ -22,11 +23,13 @@ class RestClient {
   BaseOptions _options({bool withAuth = true}) {
     if (withAuth && session.accessToken != null) {}
     return BaseOptions(
-      baseUrl: "http://localhost:8000/v1",
+      baseUrl: Env.apiBaseUrl,
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
         HttpHeaders.acceptHeader: "application/json",
-        ...withAuth && session.accessToken != null ? {HttpHeaders.authorizationHeader: "Bearer ${session.accessToken}"} : {}
+        ...withAuth && session.accessToken != null
+            ? {HttpHeaders.authorizationHeader: "Bearer ${session.accessToken}"}
+            : {}
       },
     );
   }
@@ -84,7 +87,7 @@ class RestClient {
     bool withAuth = true,
     String? orderBy,
   }) {
-   if (orderBy != null) {
+    if (orderBy != null) {
       data = {...data, 'ordering': orderBy};
     }
     return _handle(

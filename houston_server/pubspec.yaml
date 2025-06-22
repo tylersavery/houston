@@ -4,12 +4,12 @@ description: Starting point for a Serverpod server.
 # homepage: https://www.example.com
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  serverpod: 1.2.6
-  serverpod_auth_server: 1.2.6
-  serverpod_cloud_storage_s3: 1.2.6
+  serverpod: 2.8.0
+  serverpod_auth_server: 2.8.0
+  serverpod_cloud_storage_s3: 2.8.0
 
 dev_dependencies:
   lints: ^3.0.0

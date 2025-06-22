@@ -1,19 +1,20 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import 'package:serverpod_serialization/serverpod_serialization.dart';
 
-abstract class ProfileDTO extends _i1.TableRow {
+abstract class ProfileDTO
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   ProfileDTO._({
-    int? id,
+    this.id,
     required this.uid,
     required this.userId,
     required this.username,
@@ -22,7 +23,7 @@ abstract class ProfileDTO extends _i1.TableRow {
     required this.avatar,
     this.bio,
     required this.createdAt,
-  }) : super(id);
+  });
 
   factory ProfileDTO({
     int? id,
@@ -36,32 +37,27 @@ abstract class ProfileDTO extends _i1.TableRow {
     required DateTime createdAt,
   }) = _ProfileDTOImpl;
 
-  factory ProfileDTO.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory ProfileDTO.fromJson(Map<String, dynamic> jsonSerialization) {
     return ProfileDTO(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      username: serializationManager
-          .deserialize<String>(jsonSerialization['username']),
-      firstName: serializationManager
-          .deserialize<String>(jsonSerialization['firstName']),
-      lastName: serializationManager
-          .deserialize<String>(jsonSerialization['lastName']),
-      avatar:
-          serializationManager.deserialize<String>(jsonSerialization['avatar']),
-      bio: serializationManager.deserialize<String?>(jsonSerialization['bio']),
-      createdAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['createdAt']),
+      id: jsonSerialization['id'] as int?,
+      uid: jsonSerialization['uid'] as String,
+      userId: jsonSerialization['userId'] as int,
+      username: jsonSerialization['username'] as String,
+      firstName: jsonSerialization['firstName'] as String,
+      lastName: jsonSerialization['lastName'] as String,
+      avatar: jsonSerialization['avatar'] as String,
+      bio: jsonSerialization['bio'] as String?,
+      createdAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
     );
   }
 
   static final t = ProfileDTOTable();
 
   static const db = ProfileDTORepository._();
+
+  @override
+  int? id;
 
   String uid;
 
@@ -80,8 +76,11 @@ abstract class ProfileDTO extends _i1.TableRow {
   DateTime createdAt;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [ProfileDTO]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   ProfileDTO copyWith({
     int? id,
     String? uid,
@@ -109,23 +108,7 @@ abstract class ProfileDTO extends _i1.TableRow {
   }
 
   @override
-  @Deprecated('Will be removed in 2.0.0')
-  Map<String, dynamic> toJsonForDatabase() {
-    return {
-      'id': id,
-      'uid': uid,
-      'userId': userId,
-      'username': username,
-      'firstName': firstName,
-      'lastName': lastName,
-      'avatar': avatar,
-      'bio': bio,
-      'createdAt': createdAt,
-    };
-  }
-
-  @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
       'uid': uid,
@@ -137,162 +120,6 @@ abstract class ProfileDTO extends _i1.TableRow {
       if (bio != null) 'bio': bio,
       'createdAt': createdAt.toJson(),
     };
-  }
-
-  @override
-  @Deprecated('Will be removed in 2.0.0')
-  void setColumn(
-    String columnName,
-    value,
-  ) {
-    switch (columnName) {
-      case 'id':
-        id = value;
-        return;
-      case 'uid':
-        uid = value;
-        return;
-      case 'userId':
-        userId = value;
-        return;
-      case 'username':
-        username = value;
-        return;
-      case 'firstName':
-        firstName = value;
-        return;
-      case 'lastName':
-        lastName = value;
-        return;
-      case 'avatar':
-        avatar = value;
-        return;
-      case 'bio':
-        bio = value;
-        return;
-      case 'createdAt':
-        createdAt = value;
-        return;
-      default:
-        throw UnimplementedError();
-    }
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.find instead.')
-  static Future<List<ProfileDTO>> find(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<ProfileDTOTable>? where,
-    int? limit,
-    int? offset,
-    _i1.Column? orderBy,
-    List<_i1.Order>? orderByList,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.find<ProfileDTO>(
-      where: where != null ? where(ProfileDTO.t) : null,
-      limit: limit,
-      offset: offset,
-      orderBy: orderBy,
-      orderByList: orderByList,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findRow instead.')
-  static Future<ProfileDTO?> findSingleRow(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<ProfileDTOTable>? where,
-    int? offset,
-    _i1.Column? orderBy,
-    bool orderDescending = false,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.findSingleRow<ProfileDTO>(
-      where: where != null ? where(ProfileDTO.t) : null,
-      offset: offset,
-      orderBy: orderBy,
-      orderDescending: orderDescending,
-      useCache: useCache,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.findById instead.')
-  static Future<ProfileDTO?> findById(
-    _i1.Session session,
-    int id,
-  ) async {
-    return session.db.findById<ProfileDTO>(id);
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteWhere instead.')
-  static Future<int> delete(
-    _i1.Session session, {
-    required _i1.WhereExpressionBuilder<ProfileDTOTable> where,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.delete<ProfileDTO>(
-      where: where(ProfileDTO.t),
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.deleteRow instead.')
-  static Future<bool> deleteRow(
-    _i1.Session session,
-    ProfileDTO row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.deleteRow(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.update instead.')
-  static Future<bool> update(
-    _i1.Session session,
-    ProfileDTO row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.update(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated(
-      'Will be removed in 2.0.0. Use: db.insert instead. Important note: In db.insert, the object you pass in is no longer modified, instead a new copy with the added row is returned which contains the inserted id.')
-  static Future<void> insert(
-    _i1.Session session,
-    ProfileDTO row, {
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.insert(
-      row,
-      transaction: transaction,
-    );
-  }
-
-  @Deprecated('Will be removed in 2.0.0. Use: db.count instead.')
-  static Future<int> count(
-    _i1.Session session, {
-    _i1.WhereExpressionBuilder<ProfileDTOTable>? where,
-    int? limit,
-    bool useCache = true,
-    _i1.Transaction? transaction,
-  }) async {
-    return session.db.count<ProfileDTO>(
-      where: where != null ? where(ProfileDTO.t) : null,
-      limit: limit,
-      useCache: useCache,
-      transaction: transaction,
-    );
   }
 
   static ProfileDTOInclude include() {
@@ -317,6 +144,11 @@ abstract class ProfileDTO extends _i1.TableRow {
       orderByList: orderByList?.call(ProfileDTO.t),
       include: include,
     );
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -345,6 +177,9 @@ class _ProfileDTOImpl extends ProfileDTO {
           createdAt: createdAt,
         );
 
+  /// Returns a shallow copy of this [ProfileDTO]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   ProfileDTO copyWith({
     Object? id = _Undefined,
@@ -371,7 +206,7 @@ class _ProfileDTOImpl extends ProfileDTO {
   }
 }
 
-class ProfileDTOTable extends _i1.Table {
+class ProfileDTOTable extends _i1.Table<int?> {
   ProfileDTOTable({super.tableRelation}) : super(tableName: 'profile') {
     uid = _i1.ColumnString(
       'uid',
@@ -437,9 +272,6 @@ class ProfileDTOTable extends _i1.Table {
       ];
 }
 
-@Deprecated('Use ProfileDTOTable.t instead.')
-ProfileDTOTable tProfileDTO = ProfileDTOTable();
-
 class ProfileDTOInclude extends _i1.IncludeObject {
   ProfileDTOInclude._();
 
@@ -447,7 +279,7 @@ class ProfileDTOInclude extends _i1.IncludeObject {
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => ProfileDTO.t;
+  _i1.Table<int?> get table => ProfileDTO.t;
 }
 
 class ProfileDTOIncludeList extends _i1.IncludeList {
@@ -467,12 +299,34 @@ class ProfileDTOIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => ProfileDTO.t;
+  _i1.Table<int?> get table => ProfileDTO.t;
 }
 
 class ProfileDTORepository {
   const ProfileDTORepository._();
 
+  /// Returns a list of [ProfileDTO]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<ProfileDTO>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<ProfileDTOTable>? where,
@@ -483,7 +337,7 @@ class ProfileDTORepository {
     _i1.OrderByListBuilder<ProfileDTOTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.find<ProfileDTO>(
+    return session.db.find<ProfileDTO>(
       where: where?.call(ProfileDTO.t),
       orderBy: orderBy?.call(ProfileDTO.t),
       orderByList: orderByList?.call(ProfileDTO.t),
@@ -494,6 +348,23 @@ class ProfileDTORepository {
     );
   }
 
+  /// Returns the first matching [ProfileDTO] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<ProfileDTO?> findFirstRow(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<ProfileDTOTable>? where,
@@ -503,7 +374,7 @@ class ProfileDTORepository {
     _i1.OrderByListBuilder<ProfileDTOTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findFirstRow<ProfileDTO>(
+    return session.db.findFirstRow<ProfileDTO>(
       where: where?.call(ProfileDTO.t),
       orderBy: orderBy?.call(ProfileDTO.t),
       orderByList: orderByList?.call(ProfileDTO.t),
@@ -513,105 +384,130 @@ class ProfileDTORepository {
     );
   }
 
+  /// Finds a single [ProfileDTO] by its [id] or null if no such row exists.
   Future<ProfileDTO?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.findById<ProfileDTO>(
+    return session.db.findById<ProfileDTO>(
       id,
       transaction: transaction,
     );
   }
 
+  /// Inserts all [ProfileDTO]s in the list and returns the inserted rows.
+  ///
+  /// The returned [ProfileDTO]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<ProfileDTO>> insert(
     _i1.Session session,
     List<ProfileDTO> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insert<ProfileDTO>(
+    return session.db.insert<ProfileDTO>(
       rows,
       transaction: transaction,
     );
   }
 
+  /// Inserts a single [ProfileDTO] and returns the inserted row.
+  ///
+  /// The returned [ProfileDTO] will have its `id` field set.
   Future<ProfileDTO> insertRow(
     _i1.Session session,
     ProfileDTO row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.insertRow<ProfileDTO>(
+    return session.db.insertRow<ProfileDTO>(
       row,
       transaction: transaction,
     );
   }
 
+  /// Updates all [ProfileDTO]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<ProfileDTO>> update(
     _i1.Session session,
     List<ProfileDTO> rows, {
     _i1.ColumnSelections<ProfileDTOTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.update<ProfileDTO>(
+    return session.db.update<ProfileDTO>(
       rows,
       columns: columns?.call(ProfileDTO.t),
       transaction: transaction,
     );
   }
 
+  /// Updates a single [ProfileDTO]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<ProfileDTO> updateRow(
     _i1.Session session,
     ProfileDTO row, {
     _i1.ColumnSelections<ProfileDTOTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.updateRow<ProfileDTO>(
+    return session.db.updateRow<ProfileDTO>(
       row,
       columns: columns?.call(ProfileDTO.t),
       transaction: transaction,
     );
   }
 
-  Future<List<int>> delete(
+  /// Deletes all [ProfileDTO]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
+  Future<List<ProfileDTO>> delete(
     _i1.Session session,
     List<ProfileDTO> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.delete<ProfileDTO>(
+    return session.db.delete<ProfileDTO>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<int> deleteRow(
+  /// Deletes a single [ProfileDTO].
+  Future<ProfileDTO> deleteRow(
     _i1.Session session,
     ProfileDTO row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteRow<ProfileDTO>(
+    return session.db.deleteRow<ProfileDTO>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<int>> deleteWhere(
+  /// Deletes all rows matching the [where] expression.
+  Future<List<ProfileDTO>> deleteWhere(
     _i1.Session session, {
     required _i1.WhereExpressionBuilder<ProfileDTOTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.deleteWhere<ProfileDTO>(
+    return session.db.deleteWhere<ProfileDTO>(
       where: where(ProfileDTO.t),
       transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<ProfileDTOTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.dbNext.count<ProfileDTO>(
+    return session.db.count<ProfileDTO>(
       where: where?.call(ProfileDTO.t),
       limit: limit,
       transaction: transaction,

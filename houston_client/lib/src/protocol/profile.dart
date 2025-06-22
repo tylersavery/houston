@@ -1,16 +1,17 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class ProfileDTO extends _i1.SerializableEntity {
+abstract class ProfileDTO implements _i1.SerializableModel {
   ProfileDTO._({
     this.id,
     required this.uid,
@@ -35,26 +36,18 @@ abstract class ProfileDTO extends _i1.SerializableEntity {
     required DateTime createdAt,
   }) = _ProfileDTOImpl;
 
-  factory ProfileDTO.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory ProfileDTO.fromJson(Map<String, dynamic> jsonSerialization) {
     return ProfileDTO(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      uid: serializationManager.deserialize<String>(jsonSerialization['uid']),
-      userId:
-          serializationManager.deserialize<int>(jsonSerialization['userId']),
-      username: serializationManager
-          .deserialize<String>(jsonSerialization['username']),
-      firstName: serializationManager
-          .deserialize<String>(jsonSerialization['firstName']),
-      lastName: serializationManager
-          .deserialize<String>(jsonSerialization['lastName']),
-      avatar:
-          serializationManager.deserialize<String>(jsonSerialization['avatar']),
-      bio: serializationManager.deserialize<String?>(jsonSerialization['bio']),
-      createdAt: serializationManager
-          .deserialize<DateTime>(jsonSerialization['createdAt']),
+      id: jsonSerialization['id'] as int?,
+      uid: jsonSerialization['uid'] as String,
+      userId: jsonSerialization['userId'] as int,
+      username: jsonSerialization['username'] as String,
+      firstName: jsonSerialization['firstName'] as String,
+      lastName: jsonSerialization['lastName'] as String,
+      avatar: jsonSerialization['avatar'] as String,
+      bio: jsonSerialization['bio'] as String?,
+      createdAt:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
     );
   }
 
@@ -79,6 +72,9 @@ abstract class ProfileDTO extends _i1.SerializableEntity {
 
   DateTime createdAt;
 
+  /// Returns a shallow copy of this [ProfileDTO]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   ProfileDTO copyWith({
     int? id,
     String? uid,
@@ -103,6 +99,11 @@ abstract class ProfileDTO extends _i1.SerializableEntity {
       if (bio != null) 'bio': bio,
       'createdAt': createdAt.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -131,6 +132,9 @@ class _ProfileDTOImpl extends ProfileDTO {
           createdAt: createdAt,
         );
 
+  /// Returns a shallow copy of this [ProfileDTO]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   ProfileDTO copyWith({
     Object? id = _Undefined,

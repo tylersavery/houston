@@ -1,0 +1,95 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Web [develop]",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "42069",
+                "--dart-define",
+                "ENVIRONMENT_NAME=develop",
+                "--dart-define",
+                "DEBUG=true",
+                "--dart-define",
+                "API_BASE_URL=http://localhost:8000/v1",
+                "--dart-define",
+                "SUPABASE_PROJECT=changeme",
+                "--dart-define",
+                "SUPABASE_DEEPLINK_PROTOCOL=changeme",
+                "--dart-define",
+                "SUPABASE_BUCKET_NAME=changeme",
+            ]
+        },
+        {
+            "name": "Web [develop hotreload]",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "42069",
+                "--dart-define",
+                "ENVIRONMENT_NAME=develop",
+                "--dart-define",
+                "DEBUG=true",
+                "--dart-define",
+                "API_BASE_URL=http://localhost:8000/v1",
+                "--dart-define",
+                "SUPABASE_PROJECT=changeme",
+                "--dart-define",
+                "SUPABASE_DEEPLINK_PROTOCOL=changeme",
+                "--dart-define",
+                "SUPABASE_BUCKET_NAME=changeme",
+                "--web-experimental-hot-reload"
+            ]
+        },
+        {
+            "name": "iOS [develop]",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "ios",
+            "args": [
+                "--dart-define",
+                "ENVIRONMENT_NAME=develop",
+                "--dart-define",
+                "DEBUG=true",
+                "--dart-define",
+                "API_BASE_URL=http://localhost:8000/v1",
+                "--dart-define",
+                "SUPABASE_PROJECT=changeme",
+                "--dart-define",
+                "SUPABASE_DEEPLINK_PROTOCOL=changeme",
+                "--dart-define",
+                "SUPABASE_BUCKET_NAME=changeme",
+            ]
+        },
+        {
+            "name": "Mac [develop]",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "macos",
+            "args": [
+                "--dart-define",
+                "ENVIRONMENT_NAME=develop",
+                "--dart-define",
+                "DEBUG=true",
+                "--dart-define",
+                "API_BASE_URL=http://localhost:8000/v1",
+                "--dart-define",
+                "SUPABASE_PROJECT=changeme",
+                "--dart-define",
+                "SUPABASE_DEEPLINK_PROTOCOL=changeme",
+                "--dart-define",
+                "SUPABASE_BUCKET_NAME=changeme",
+            ]
+        }
+    ]
+}

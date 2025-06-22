@@ -1,11 +1,12 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -18,7 +19,7 @@ import 'package:houston_client/src/protocol/movie_list.dart' as _i7;
 import 'package:houston_client/src/protocol/movie.dart' as _i8;
 import 'package:houston_client/src/protocol/profile_list.dart' as _i9;
 import 'package:houston_client/src/protocol/profile.dart' as _i10;
-import 'package:serverpod_auth_client/module.dart' as _i11;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i11;
 import 'protocol.dart' as _i12;
 
 /// {@category Endpoint}
@@ -237,21 +238,28 @@ class EndpointProfile extends _i1.EndpointRef {
       );
 }
 
-class _Modules {
-  _Modules(Client client) {
+class Modules {
+  Modules(Client client) {
     auth = _i11.Caller(client);
   }
 
   late final _i11.Caller auth;
 }
 
-class Client extends _i1.ServerpodClient {
+class Client extends _i1.ServerpodClientShared {
   Client(
     String host, {
     dynamic securityContext,
     _i1.AuthenticationKeyManager? authenticationKeyManager,
     Duration? streamingConnectionTimeout,
     Duration? connectionTimeout,
+    Function(
+      _i1.MethodCallContext,
+      Object,
+      StackTrace,
+    )? onFailedCall,
+    Function(_i1.MethodCallContext)? onSucceededCall,
+    bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
           _i12.Protocol(),
@@ -259,6 +267,10 @@ class Client extends _i1.ServerpodClient {
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
           connectionTimeout: connectionTimeout,
+          onFailedCall: onFailedCall,
+          onSucceededCall: onSucceededCall,
+          disconnectStreamsOnLostInternetConnection:
+              disconnectStreamsOnLostInternetConnection,
         ) {
     asset = EndpointAsset(this);
     example = EndpointExample(this);
@@ -266,7 +278,7 @@ class Client extends _i1.ServerpodClient {
     gameSystem = EndpointGameSystem(this);
     movie = EndpointMovie(this);
     profile = EndpointProfile(this);
-    modules = _Modules(this);
+    modules = Modules(this);
   }
 
   late final EndpointAsset asset;
@@ -281,7 +293,7 @@ class Client extends _i1.ServerpodClient {
 
   late final EndpointProfile profile;
 
-  late final _Modules modules;
+  late final Modules modules;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {

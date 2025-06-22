@@ -1,18 +1,19 @@
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
-// ignore_for_file: library_private_types_in_public_api
-// ignore_for_file: public_member_api_docs
 // ignore_for_file: implementation_imports
-// ignore_for_file: use_super_parameters
+// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
+// ignore_for_file: use_super_parameters
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import 'protocol.dart' as _i2;
-import 'package:serverpod_serialization/serverpod_serialization.dart';
+import 'profile.dart' as _i2;
 
-abstract class ProfileDTOList extends _i1.SerializableEntity {
+abstract class ProfileDTOList
+    implements _i1.SerializableModel, _i1.ProtocolSerialization {
   ProfileDTOList._({
     required this.page,
     required this.count,
@@ -29,18 +30,15 @@ abstract class ProfileDTOList extends _i1.SerializableEntity {
     required List<_i2.ProfileDTO> results,
   }) = _ProfileDTOListImpl;
 
-  factory ProfileDTOList.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory ProfileDTOList.fromJson(Map<String, dynamic> jsonSerialization) {
     return ProfileDTOList(
-      page: serializationManager.deserialize<int>(jsonSerialization['page']),
-      count: serializationManager.deserialize<int>(jsonSerialization['count']),
-      numPages:
-          serializationManager.deserialize<int>(jsonSerialization['numPages']),
-      limit: serializationManager.deserialize<int>(jsonSerialization['limit']),
-      results: serializationManager
-          .deserialize<List<_i2.ProfileDTO>>(jsonSerialization['results']),
+      page: jsonSerialization['page'] as int,
+      count: jsonSerialization['count'] as int,
+      numPages: jsonSerialization['numPages'] as int,
+      limit: jsonSerialization['limit'] as int,
+      results: (jsonSerialization['results'] as List)
+          .map((e) => _i2.ProfileDTO.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -54,6 +52,9 @@ abstract class ProfileDTOList extends _i1.SerializableEntity {
 
   List<_i2.ProfileDTO> results;
 
+  /// Returns a shallow copy of this [ProfileDTOList]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   ProfileDTOList copyWith({
     int? page,
     int? count,
@@ -73,14 +74,19 @@ abstract class ProfileDTOList extends _i1.SerializableEntity {
   }
 
   @override
-  Map<String, dynamic> allToJson() {
+  Map<String, dynamic> toJsonForProtocol() {
     return {
       'page': page,
       'count': count,
       'numPages': numPages,
       'limit': limit,
-      'results': results.toJson(valueToJson: (v) => v.allToJson()),
+      'results': results.toJson(valueToJson: (v) => v.toJsonForProtocol()),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
@@ -99,6 +105,9 @@ class _ProfileDTOListImpl extends ProfileDTOList {
           results: results,
         );
 
+  /// Returns a shallow copy of this [ProfileDTOList]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   ProfileDTOList copyWith({
     int? page,
@@ -112,7 +121,7 @@ class _ProfileDTOListImpl extends ProfileDTOList {
       count: count ?? this.count,
       numPages: numPages ?? this.numPages,
       limit: limit ?? this.limit,
-      results: results ?? this.results.clone(),
+      results: results ?? this.results.map((e0) => e0.copyWith()).toList(),
     );
   }
 }
