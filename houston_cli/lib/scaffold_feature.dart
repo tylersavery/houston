@@ -25,8 +25,10 @@ Future<void> scaffoldFeature({
   name ??= ask("Feature Name:", required: true);
   generateServer ??= confirm("Generate Server Code?", defaultValue: true);
 
-  if (Constants.serverBackend == ServerBackendOption.serverpod || Constants.serverBackend == ServerBackendOption.django) {
-    generateMigrations ??= confirm("Generate DB Migrations", defaultValue: true);
+  if (Constants.serverBackend == ServerBackendOption.serverpod ||
+      Constants.serverBackend == ServerBackendOption.django) {
+    generateMigrations ??=
+        confirm("Generate DB Migrations", defaultValue: true);
     runMigrations ??= confirm("Run DB Migrations", defaultValue: true);
   } else {
     generateMigrations = false;
@@ -48,7 +50,8 @@ Future<void> scaffoldFeature({
   final path = "$dir/$name.yaml";
 
   if (!File(path).existsSync()) {
-    return print(red('Feature $name not found. Try creating it first at `$path`'));
+    return print(
+        red('Feature $name not found. Try creating it first at `$path`'));
   }
   final blueprint = FileUtils.parseBlueprint(path);
 
@@ -60,9 +63,12 @@ Future<void> scaffoldFeature({
 
     final serverpodParentDir = "${FileUtils.serverpodDir}/lib/src";
 
-    final serverpodFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/serverpod_feature");
-    final serverpodFeatureGenerator = await mason.MasonGenerator.fromBrick(serverpodFeatureBrick);
-    final serverpodFeatureTarget = mason.DirectoryGeneratorTarget(Directory(serverpodParentDir));
+    final serverpodFeatureBrick =
+        mason.Brick.path("${FileUtils.bricksDir}/serverpod_feature");
+    final serverpodFeatureGenerator =
+        await mason.MasonGenerator.fromBrick(serverpodFeatureBrick);
+    final serverpodFeatureTarget =
+        mason.DirectoryGeneratorTarget(Directory(serverpodParentDir));
 
     final serializer = ServerpodBlueprintSerializer(blueprint: blueprint);
 
@@ -76,25 +82,35 @@ Future<void> scaffoldFeature({
     print(white("Running Serverpod Client Generator..."));
 
     final args = "generate".split(" ");
-    final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
-    await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+    final process = await Process.start("serverpod", args,
+        workingDirectory: FileUtils.serverpodDir);
+    await process.stdout
+        .transform(utf8.decoder)
+        .forEach((line) => print(yellow(line)));
     print(green("Client Code Generated."));
 
     if (generateMigrations == true) {
       print(white("Generating Serverpod Migrations..."));
 
       final args = "create-migration".split(" ");
-      final process = await Process.start("serverpod", args, workingDirectory: FileUtils.serverpodDir);
-      await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+      final process = await Process.start("serverpod", args,
+          workingDirectory: FileUtils.serverpodDir);
+      await process.stdout
+          .transform(utf8.decoder)
+          .forEach((line) => print(yellow(line)));
       print(green("Migration Generated."));
     }
 
     if (runMigrations == true) {
       print(white("Running Serverpod Migrations..."));
 
-      final args = "bin/main.dart --role maintenance --apply-migrations".split(" ");
-      final process = await Process.start("dart", args, workingDirectory: FileUtils.serverpodDir);
-      await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+      final args =
+          "bin/main.dart --role maintenance --apply-migrations".split(" ");
+      final process = await Process.start("dart", args,
+          workingDirectory: FileUtils.serverpodDir);
+      await process.stdout
+          .transform(utf8.decoder)
+          .forEach((line) => print(yellow(line)));
       print(green("Migration Complete."));
     }
 
@@ -117,11 +133,15 @@ Future<void> scaffoldFeature({
     print(white("Scaffolding Supabase Feature [${pascalCase(name)}]..."));
 
     final supabaseParentDir = FileUtils.supabaseDir;
-    final supabaseFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/supabase_feature");
-    final supabaseFeatureGenerator = await mason.MasonGenerator.fromBrick(supabaseFeatureBrick);
-    final supabaseFeatureTarget = mason.DirectoryGeneratorTarget(Directory(supabaseParentDir));
+    final supabaseFeatureBrick =
+        mason.Brick.path("${FileUtils.bricksDir}/supabase_feature");
+    final supabaseFeatureGenerator =
+        await mason.MasonGenerator.fromBrick(supabaseFeatureBrick);
+    final supabaseFeatureTarget =
+        mason.DirectoryGeneratorTarget(Directory(supabaseParentDir));
 
-    final serverpodSerializer = SupabaseBlueprintSerializer(blueprint: blueprint);
+    final serverpodSerializer =
+        SupabaseBlueprintSerializer(blueprint: blueprint);
     await supabaseFeatureGenerator.generate(
       supabaseFeatureTarget,
       vars: serverpodSerializer.serialize(),
@@ -134,11 +154,15 @@ Future<void> scaffoldFeature({
     if (!await FileUtils.directoryExists(modulePath)) {
       print(white("Scaffolding Django Module [${pascalCase(module)}]..."));
 
-      final djangoModuleBrick = mason.Brick.path("${FileUtils.bricksDir}/django/module");
-      final djangoModuleGenerator = await mason.MasonGenerator.fromBrick(djangoModuleBrick);
-      final djangoModuleTarget = mason.DirectoryGeneratorTarget(Directory(modulePath));
+      final djangoModuleBrick =
+          mason.Brick.path("${FileUtils.bricksDir}/django/module");
+      final djangoModuleGenerator =
+          await mason.MasonGenerator.fromBrick(djangoModuleBrick);
+      final djangoModuleTarget =
+          mason.DirectoryGeneratorTarget(Directory(modulePath));
 
-      final djangoModuleeSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(module));
+      final djangoModuleeSerializer = DjangoBlueprintSerializer(
+          blueprint: blueprint, appName: snakeCase(module));
 
       await djangoModuleGenerator.generate(
         djangoModuleTarget,
@@ -156,11 +180,15 @@ Future<void> scaffoldFeature({
 
     print(white("Scaffolding Django Feature [${pascalCase(name)}]..."));
     final djangoAppDir = FileUtils.djangoModuleDirectory(blueprint.module);
-    final djangoFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/django/feature");
-    final djangoFeatureGenerator = await mason.MasonGenerator.fromBrick(djangoFeatureBrick);
-    final djangoFeatureTarget = mason.DirectoryGeneratorTarget(Directory(djangoAppDir));
+    final djangoFeatureBrick =
+        mason.Brick.path("${FileUtils.bricksDir}/django/feature");
+    final djangoFeatureGenerator =
+        await mason.MasonGenerator.fromBrick(djangoFeatureBrick);
+    final djangoFeatureTarget =
+        mason.DirectoryGeneratorTarget(Directory(djangoAppDir));
 
-    final djangoFeatureSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(blueprint.module));
+    final djangoFeatureSerializer = DjangoBlueprintSerializer(
+        blueprint: blueprint, appName: snakeCase(blueprint.module));
 
     await djangoFeatureGenerator.generate(
       djangoFeatureTarget,
@@ -168,10 +196,14 @@ Future<void> scaffoldFeature({
     );
 
     print(white("Registering model in app's models/__init__.py"));
-    await FileUtils.insertTextInFile(path: "$djangoAppDir/models/__init__.py", value: "from .${snakeCase(name)} import *");
+    await FileUtils.insertTextInFile(
+        path: "$djangoAppDir/models/__init__.py",
+        value: "from .${snakeCase(name)} import *");
 
     print(white("Registering admin in app's admin/__init__.py"));
-    await FileUtils.insertTextInFile(path: "$djangoAppDir/admin/__init__.py", value: "from .${snakeCase(name)} import *");
+    await FileUtils.insertTextInFile(
+        path: "$djangoAppDir/admin/__init__.py",
+        value: "from .${snakeCase(name)} import *");
 
     print(white("Registering namespace in api/urls.py"));
     final urlInsert = 'path("$name/", include("api.$name.urls")),';
@@ -184,11 +216,15 @@ Future<void> scaffoldFeature({
     print(white("Scaffolding Django API Feature [${pascalCase(name)}]..."));
 
     final djangoApiAppDir = FileUtils.djangoApiDirectory;
-    final djangoApiFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/django/api");
-    final djangoApiFeatureGenerator = await mason.MasonGenerator.fromBrick(djangoApiFeatureBrick);
-    final djangoApiFeatureTarget = mason.DirectoryGeneratorTarget(Directory(djangoApiAppDir));
+    final djangoApiFeatureBrick =
+        mason.Brick.path("${FileUtils.bricksDir}/django/api");
+    final djangoApiFeatureGenerator =
+        await mason.MasonGenerator.fromBrick(djangoApiFeatureBrick);
+    final djangoApiFeatureTarget =
+        mason.DirectoryGeneratorTarget(Directory(djangoApiAppDir));
 
-    final djangoApiSerializer = DjangoBlueprintSerializer(blueprint: blueprint, appName: snakeCase(blueprint.module));
+    final djangoApiSerializer = DjangoBlueprintSerializer(
+        blueprint: blueprint, appName: snakeCase(blueprint.module));
 
     await djangoApiFeatureGenerator.generate(
       djangoApiFeatureTarget,
@@ -198,7 +234,8 @@ Future<void> scaffoldFeature({
     if (generateMigrations == true) {
       print(white("Generating Django Migrations"));
       final args = "manage.py makemigrations".split(" ");
-      final result = await Process.run("./venv/bin/python", args, workingDirectory: FileUtils.djangoRootDir);
+      final result = await Process.run("./venv/bin/python", args,
+          workingDirectory: FileUtils.djangoRootDir);
 
       print(yellow(result.stdout));
       if (result.stderr != null && result.stderr != "") {
@@ -211,7 +248,8 @@ Future<void> scaffoldFeature({
     if (runMigrations == true) {
       print(white("Running Django Migrations"));
       final args = "manage.py migrate".split(" ");
-      final result = await Process.run("./venv/bin/python", args, workingDirectory: FileUtils.djangoRootDir);
+      final result = await Process.run("./venv/bin/python", args,
+          workingDirectory: FileUtils.djangoRootDir);
       print(yellow(result.stdout));
       if (result.stderr != null && result.stderr != "") {
         print(red(result.stderr));
@@ -227,11 +265,14 @@ Future<void> scaffoldFeature({
     final flutterParentDir = "${FileUtils.flutterDir}/lib/features";
     final flutterGeneratedPath = "$flutterParentDir/$name";
 
-    final flutterFeatureBrick = mason.Brick.path("${FileUtils.bricksDir}/flutter_feature");
+    final flutterFeatureBrick =
+        mason.Brick.path("${FileUtils.bricksDir}/flutter_feature");
 
-    final flutterFeatureGenerator = await mason.MasonGenerator.fromBrick(flutterFeatureBrick);
+    final flutterFeatureGenerator =
+        await mason.MasonGenerator.fromBrick(flutterFeatureBrick);
 
-    final flutterFeatureTarget = mason.DirectoryGeneratorTarget(Directory(flutterParentDir));
+    final flutterFeatureTarget =
+        mason.DirectoryGeneratorTarget(Directory(flutterParentDir));
 
     final serializer = FlutterBlueprintSerializer(blueprint: blueprint);
 
@@ -240,13 +281,15 @@ Future<void> scaffoldFeature({
       vars: serializer.serialize(),
     );
 
-    final routerPath = "${FileUtils.flutterDir}/lib/core/router/app_router.dart";
+    final routerPath =
+        "${FileUtils.flutterDir}/lib/core/router/app_router.dart";
 
     if (updateRoutes == true && camelCase(name) != "profile") {
       print(white("Updating routes..."));
       await FileUtils.insertTextInFile(
         path: routerPath,
-        value: "import '../../features/${snakeCase(name)}/presentation/${snakeCase(name)}_routes.dart';",
+        value:
+            "import '../../features/${snakeCase(name)}/presentation/${snakeCase(name)}_routes.dart';",
         prepend: true,
       );
 
@@ -258,7 +301,8 @@ Future<void> scaffoldFeature({
       print(green("Routes Updated."));
     }
 
-    final dashboardPath = "${FileUtils.flutterDir}/lib/core/widgets/navigation/dashboard.dart";
+    final dashboardPath =
+        "${FileUtils.flutterDir}/lib/core/widgets/navigation/dashboard.dart";
 
     if (updateNavigation == true && camelCase(name) != "profile") {
       print(white("Updating Navigation..."));
@@ -266,15 +310,18 @@ Future<void> scaffoldFeature({
       await FileUtils.insertTextInFileAtToken(
         path: dashboardPath,
         token: Constants.dashboardTabInsertToken,
-        value: 'NavigationDestination(label: "${pascalCase(name)}", icon: Icon(Icons.star),),',
+        value:
+            'NavigationDestination(label: "${pascalCase(name)}", icon: Icon(Icons.star),),',
         duplicateLookup: 'NavigationDestination(label: "${pascalCase(name)}"',
       );
 
       await FileUtils.insertTextInFileAtToken(
         path: dashboardPath,
         token: Constants.dashboardNavInsertToken,
-        value: 'NavigationRailDestination(label: Text("${pascalCase(name)}"), icon: Icon(Icons.star),),',
-        duplicateLookup: 'NavigationRailDestination(label: Text("${pascalCase(name)}")',
+        value:
+            'NavigationRailDestination(label: Text("${pascalCase(name)}"), icon: Icon(Icons.star),),',
+        duplicateLookup:
+            'NavigationRailDestination(label: Text("${pascalCase(name)}")',
       );
       print(green("Navigation Updated."));
     }
@@ -322,9 +369,14 @@ Future<void> scaffoldFeature({
     if (runPostGenerator == true) {
       print(white("Running generate function in flutter project..."));
 
-      final args = "packages pub run build_runner build --delete-conflicting-outputs".split(" ");
-      final process = await Process.start("flutter", args, workingDirectory: FileUtils.flutterDir);
-      await process.stdout.transform(utf8.decoder).forEach((line) => print(yellow(line)));
+      final args =
+          "packages pub run build_runner build --delete-conflicting-outputs"
+              .split(" ");
+      final process = await Process.start("flutter", args,
+          workingDirectory: FileUtils.flutterDir);
+      await process.stdout
+          .transform(utf8.decoder)
+          .forEach((line) => print(yellow(line)));
       print(green("Generation Complete"));
     }
   }

@@ -130,7 +130,8 @@ class FileUtils {
     await f.writeAsString(text);
   }
 
-  static Future<int> countSpecificStringInFile({required String path, required String search}) async {
+  static Future<int> countSpecificStringInFile(
+      {required String path, required String search}) async {
     final f = File(path);
     String text = await f.readAsString();
 

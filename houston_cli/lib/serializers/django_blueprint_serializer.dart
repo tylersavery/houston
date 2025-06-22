@@ -7,7 +7,8 @@ import 'package:houston_cli/utils/string_utils.dart';
 class DjangoBlueprintSerializer extends BlueprintSerializer {
   final String appName;
 
-  const DjangoBlueprintSerializer({required super.blueprint, required this.appName});
+  const DjangoBlueprintSerializer(
+      {required super.blueprint, required this.appName});
 
   List<String> get modelImports {
     final List<String> importStrings = [];
@@ -16,7 +17,8 @@ class DjangoBlueprintSerializer extends BlueprintSerializer {
         if (p.type == "user") {
           importStrings.add("from django.contrib.auth import get_user_model");
         } else {
-          importStrings.add("from ${snakeCase(appName)}.models import ${pascalCase(p.type)}");
+          importStrings.add(
+              "from ${snakeCase(appName)}.models import ${pascalCase(p.type)}");
         }
       }
     }
@@ -25,7 +27,9 @@ class DjangoBlueprintSerializer extends BlueprintSerializer {
   }
 
   bool get shouldRegisterUser {
-    return properties.firstWhereOrNull((p) => p.djangoAppName == 'access' && p.type == 'user') != null;
+    return properties.firstWhereOrNull(
+            (p) => p.djangoAppName == 'access' && p.type == 'user') !=
+        null;
   }
 
   List<Map<String, dynamic>> get propertiesForSerializer {
@@ -55,7 +59,8 @@ class DjangoBlueprintSerializer extends BlueprintSerializer {
     return {
       'name': name,
       'appName': appName,
-      'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
+      'properties':
+          properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
       'propertiesForSerializer': propertiesForSerializer,
       'readOnlyPropertiesForSerializer': readOnlyPropertiesForSerializer,
       'modelImports': modelImports.toSet().toList()..sort(),

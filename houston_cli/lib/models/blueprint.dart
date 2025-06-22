@@ -41,7 +41,9 @@ class Blueprint {
       ),
     ];
 
-    properties.addAll(data['properties'].map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p)).toList());
+    properties.addAll(data['properties']
+        .map<BlueprintProperty>((p) => BlueprintProperty.fromYaml(p))
+        .toList());
 
     properties.add(
       BlueprintProperty(
@@ -65,7 +67,10 @@ class Blueprint {
     // search other blueprints for relationships to this model
     final otherBlueprintFiles = Directory(FileUtils.blueprintsDir)
         .listSync()
-        .where((entity) => entity is File && entity.path.endsWith('.yaml') && !entity.path.endsWith("${camelCase(data['name'])}.yaml"))
+        .where((entity) =>
+            entity is File &&
+            entity.path.endsWith('.yaml') &&
+            !entity.path.endsWith("${camelCase(data['name'])}.yaml"))
         .toList();
 
     List<String> children = [];

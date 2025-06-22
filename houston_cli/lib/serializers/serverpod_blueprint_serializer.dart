@@ -25,14 +25,18 @@ class ServerpodBlueprintSerializer extends BlueprintSerializer {
 
     for (final p in properties) {
       if (p.orderable) {
-        items.add("case '${camelCase(p.name)}':\n\treturn t.${camelCase(p.name)};");
+        items.add(
+            "case '${camelCase(p.name)}':\n\treturn t.${camelCase(p.name)};");
       }
     }
     return items;
   }
 
   String get endpointIncludes {
-    final items = properties.where((p) => !Constants.primitives.contains(p.type) && p.type != 'user').toList();
+    final items = properties
+        .where(
+            (p) => !Constants.primitives.contains(p.type) && p.type != 'user')
+        .toList();
 
     if (items.isEmpty) {
       return '';
@@ -47,13 +51,19 @@ include: ${pascalCase(name)}DTO.include(
   }
 
   String get copyWithForRelationships {
-    final items = properties.where((p) => !Constants.primitives.contains(p.type) && p.type != "user").toList();
+    final items = properties
+        .where(
+            (p) => !Constants.primitives.contains(p.type) && p.type != "user")
+        .toList();
 
     if (items.isEmpty) {
       return '';
     }
 
-    return items.map((p) => "${camelCase(p.name)}: ${camelCase(name)}.${camelCase(p.name)}").join(", ");
+    return items
+        .map((p) =>
+            "${camelCase(p.name)}: ${camelCase(name)}.${camelCase(p.name)}")
+        .join(", ");
   }
 
   String get endpointRelationshipParams {

@@ -43,8 +43,11 @@ class BlueprintProperty {
       type: type.toString().toLowerCase(),
       maxLength: data['maxLength'],
       allowBlank: data['allowBlank'] ?? false,
-      allowNull: !Constants.primitives.contains(type.toString().toLowerCase()) ||
-          (data['allowNull'] == true && data['allowBlank'] != true && data['default'] == null),
+      allowNull:
+          !Constants.primitives.contains(type.toString().toLowerCase()) ||
+              (data['allowNull'] == true &&
+                  data['allowBlank'] != true &&
+                  data['default'] == null),
       defaultValue: data['default'],
       uiHeading: data['uiHeading'],
       isImage: data['image'] ?? false,
@@ -207,7 +210,8 @@ class BlueprintProperty {
   }
 
   String get djangoModelEntry {
-    if (['uuid', 'uid', 'created_at', 'updated_at', 'id'].contains(snakeCase(name))) {
+    if (['uuid', 'uid', 'created_at', 'updated_at', 'id']
+        .contains(snakeCase(name))) {
       return "";
     }
 
@@ -239,7 +243,8 @@ class BlueprintProperty {
         value = "True";
       } else if (defaultValueString == "false") {
         value = "False";
-      } else if (int.tryParse(defaultValueString) != null || double.tryParse(defaultValueString) != null) {
+      } else if (int.tryParse(defaultValueString) != null ||
+          double.tryParse(defaultValueString) != null) {
         value = defaultValueString;
       } else {
         value = '"$defaultValueString"';
@@ -254,7 +259,8 @@ class BlueprintProperty {
       kwargs.add(Kwarg("null", "True"));
     }
 
-    final kwargsString = kwargs.map((p) => "${p.key}=${p.value},").toList().join(' ');
+    final kwargsString =
+        kwargs.map((p) => "${p.key}=${p.value},").toList().join(' ');
     String params = args.join(", ");
 
     params = '$params, $kwargsString';

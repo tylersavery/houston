@@ -33,7 +33,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
           // items.add("import 'package:app/src/core/utils/user_utils.dart';");
           // items.add("import 'package:supabase_flutter/supabase_flutter.dart';");
         } else {
-          items.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+          items.add(
+              "import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
         }
       }
     }
@@ -65,7 +66,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
           // items.add("import 'package:app/src/core/utils/user_utils.dart';");
           // items.add("import 'package:supabase_flutter/supabase_flutter.dart';");
         } else {
-          items.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+          items.add(
+              "import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
         }
       }
     }
@@ -82,8 +84,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
         continue;
       }
 
-      if (!Constants.primitives.contains(p.type) && p.type.toLowerCase() != "profile") {
-        importStrings.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+      if (!Constants.primitives.contains(p.type) &&
+          p.type.toLowerCase() != "profile") {
+        importStrings.add(
+            "import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
       }
     }
 
@@ -97,7 +101,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
         continue;
       }
       if (Constants.formElementTypes.contains(property.type)) {
-        items.add("final ${camelCase(property.name)}Controller = TextEditingController();");
+        items.add(
+            "final ${camelCase(property.name)}Controller = TextEditingController();");
       }
     }
     return items;
@@ -160,15 +165,19 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       if (Constants.formElementTypes.contains(property.type)) {
         if (property.allowNull) {
           if (property.isStringish) {
-            items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)} ?? '';");
+            items.add(
+                "${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)} ?? '';");
           } else if (property.isNumeric) {
-            items.add("${camelCase(property.name)}Controller.text = (state.${camelCase(name)}.${camelCase(property.name)} ?? 0).toString();");
+            items.add(
+                "${camelCase(property.name)}Controller.text = (state.${camelCase(name)}.${camelCase(property.name)} ?? 0).toString();");
           }
         } else {
           if (property.isStringish) {
-            items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)};");
+            items.add(
+                "${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)};");
           } else if (property.isNumeric) {
-            items.add("${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)}.toString();");
+            items.add(
+                "${camelCase(property.name)}Controller.text = state.${camelCase(name)}.${camelCase(property.name)}.toString();");
           }
         }
       }
@@ -186,11 +195,14 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       }
       if (Constants.formElementTypes.contains(property.type)) {
         if (property.isStringish) {
-          items.add("${camelCase(property.name)}: ${camelCase(property.name)}Controller.text");
+          items.add(
+              "${camelCase(property.name)}: ${camelCase(property.name)}Controller.text");
         } else if (property.type == 'int') {
-          items.add("${camelCase(property.name)}: int.tryParse(${camelCase(property.name)}Controller.text) ?? 0");
+          items.add(
+              "${camelCase(property.name)}: int.tryParse(${camelCase(property.name)}Controller.text) ?? 0");
         } else if (property.type == 'double') {
-          items.add("${camelCase(property.name)}: double.tryParse(${camelCase(property.name)}Controller.text) ?? 0.0");
+          items.add(
+              "${camelCase(property.name)}: double.tryParse(${camelCase(property.name)}Controller.text) ?? 0.0");
         }
       }
     }
@@ -210,9 +222,12 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
         continue;
       }
 
-      if (!Constants.primitives.contains(p.type) && p.type.toLowerCase() != "profile") {
-        importStrings.add("import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
-        importStrings.add("import '../../../${snakeCase(p.type)}/presentation/widgets/${snakeCase(p.type)}_infinite_list_widget.dart';");
+      if (!Constants.primitives.contains(p.type) &&
+          p.type.toLowerCase() != "profile") {
+        importStrings.add(
+            "import '../../../${snakeCase(p.type)}/domain/models/${snakeCase(p.type)}_model.dart';");
+        importStrings.add(
+            "import '../../../${snakeCase(p.type)}/presentation/widgets/${snakeCase(p.type)}_infinite_list_widget.dart';");
         includeButton = true;
       }
       if (p.isImage) {
@@ -224,7 +239,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
     }
 
     if (includeImageUploader) {
-      importStrings.insert(0, "import '../../../asset/presentation/widgets/upload_image_widget.dart';");
+      importStrings.insert(0,
+          "import '../../../asset/presentation/widgets/upload_image_widget.dart';");
     }
 
     return importStrings;
@@ -274,7 +290,8 @@ Padding(
 """;
         items.add(value);
       } else if (property.type.toLowerCase() != "profile") {
-        final uiHeading = properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uid';
+        final uiHeading =
+            properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uid';
         final value = """
 ListTile(
                 contentPadding: EdgeInsets.zero,
@@ -349,7 +366,8 @@ ListTile(
       if (p.type == 'user') continue;
 
       if (!Constants.primitives.contains(p.type)) {
-        items.add("import '../../../${snakeCase(p.type)}/data/mappers/${snakeCase(p.type)}_mapper.dart';");
+        items.add(
+            "import '../../../${snakeCase(p.type)}/data/mappers/${snakeCase(p.type)}_mapper.dart';");
       }
     }
 
@@ -365,7 +383,8 @@ ListTile(
         items.add(
             "${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)} != null ? ${pascalCase(property.name)}Mapper.toModel(${camelCase(name)}DTO.${camelCase(property.name)}!) : null,");
       } else {
-        items.add("${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)},");
+        items.add(
+            "${camelCase(property.name)}: ${camelCase(name)}DTO.${camelCase(property.name)},");
       }
     }
 
@@ -379,12 +398,14 @@ ListTile(
 
       if (!Constants.primitives.contains(property.type)) {
         // if (Constants.serverBackend == ServerBackendOption.serverpod) {
-        items.add("${camelCase(property.name)}Id : ${camelCase(name)}.${camelCase(property.name)}?.id ?? 0,");
+        items.add(
+            "${camelCase(property.name)}Id : ${camelCase(name)}.${camelCase(property.name)}?.id ?? 0,");
         // }
         items.add(
             "${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)} != null ? ${pascalCase(property.name)}Mapper.toDto(${camelCase(name)}.${camelCase(property.name)}!) : null,");
       } else {
-        items.add("${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)},");
+        items.add(
+            "${camelCase(property.name)}: ${camelCase(name)}.${camelCase(property.name)},");
       }
     }
 
@@ -397,7 +418,8 @@ ListTile(
       if (p.type == 'user') continue;
 
       if (!Constants.primitives.contains(p.type)) {
-        importStrings.add("import '../../../${snakeCase(p.type)}/data/datasources/${snakeCase(p.type)}_datasource_supabase.dart';");
+        importStrings.add(
+            "import '../../../${snakeCase(p.type)}/data/datasources/${snakeCase(p.type)}_datasource_supabase.dart';");
       }
     }
 
@@ -410,7 +432,8 @@ ListTile(
       if (property.type == 'user') continue;
 
       if (!Constants.primitives.contains(property.type)) {
-        joins.add('${snakeCase(property.name)}!inner(\${${pascalCase(property.name)}DataSourceSupabaseImpl.defaultSelect})');
+        joins.add(
+            '${snakeCase(property.name)}!inner(\${${pascalCase(property.name)}DataSourceSupabaseImpl.defaultSelect})');
       }
     }
 
@@ -438,7 +461,8 @@ ListTile(
     for (final property in properties) {
       if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
-        params.add("${camelCase(property.name)}Uid: ${camelCase(property.name)}Uid");
+        params.add(
+            "${camelCase(property.name)}Uid: ${camelCase(property.name)}Uid");
       }
     }
 
@@ -450,7 +474,8 @@ ListTile(
     for (final property in properties) {
       if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
-        params.add("'${snakeCase(property.name)}': ${camelCase(property.name)}Uid");
+        params.add(
+            "'${snakeCase(property.name)}': ${camelCase(property.name)}Uid");
       }
     }
 
@@ -490,7 +515,8 @@ ListTile(
     for (final property in properties) {
       if (property.type == 'user') continue;
       if (!Constants.primitives.contains(property.type)) {
-        cases.add("""case ${pascalCase(name)}ListVariant.${camelCase(property.name)}:
+        cases.add(
+            """case ${pascalCase(name)}ListVariant.${camelCase(property.name)}:
         result = await ref.read(${camelCase(name)}RepositoryProvider).list(page: page, limit: limit, ${camelCase(property.name)}Uid: arg);
 """);
       }
@@ -502,10 +528,13 @@ ListTile(
   @override
   Map<String, dynamic> serialize() {
     return {
-      "serverBackendIsServerpod": Constants.serverBackend == ServerBackendOption.serverpod,
-      "serverBackendIsSupabase": Constants.serverBackend == ServerBackendOption.supabase,
+      "serverBackendIsServerpod":
+          Constants.serverBackend == ServerBackendOption.serverpod,
+      "serverBackendIsSupabase":
+          Constants.serverBackend == ServerBackendOption.supabase,
       'name': name,
-      'properties': properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
+      'properties':
+          properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
       'toJsonFunctions': toJsonFunctions,
       'formStateImports': formStateImports,
       'emptyParams': emptyParams,
