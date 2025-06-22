@@ -10,15 +10,16 @@ import '../../data/datasources/movie_datasource_django.dart';
 
 import '../../domain/datasources/movie_datasource.dart';
 
-final movieDataSourceProvider = Provider<MovieDataSource>(
-  (ref) {
-    switch (Constants.serverBackend) {
-      case ServerBackendOption.supabase:
-        return MovieDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
-      case ServerBackendOption.serverpod:
-        return MovieDataSourceServerpodImpl(ref.read(serverpodClientProvider));
-      case ServerBackendOption.django:
-        return MovieDataSourceDjangoImpl(ref.read(restClientProvider), ref.read(restSessionProvider.notifier));
-    }
-  },
-);
+final movieDataSourceProvider = Provider<MovieDataSource>((ref) {
+  switch (Constants.serverBackend) {
+    case ServerBackendOption.supabase:
+      return MovieDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+    case ServerBackendOption.serverpod:
+      return MovieDataSourceServerpodImpl(ref.read(serverpodClientProvider));
+    case ServerBackendOption.django:
+      return MovieDataSourceDjangoImpl(
+        ref.read(restClientProvider),
+        ref.read(restSessionProvider.notifier),
+      );
+  }
+});

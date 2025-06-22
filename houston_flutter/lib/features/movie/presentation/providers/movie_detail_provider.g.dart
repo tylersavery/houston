@@ -39,21 +39,15 @@ class MovieDetailFamily extends Family<AsyncValue<Movie>> {
   const MovieDetailFamily();
 
   /// See also [movieDetail].
-  MovieDetailProvider call(
-    int id,
-  ) {
-    return MovieDetailProvider(
-      id,
-    );
+  MovieDetailProvider call(int id) {
+    return MovieDetailProvider(id);
   }
 
   @override
   MovieDetailProvider getProviderOverride(
     covariant MovieDetailProvider provider,
   ) {
-    return call(
-      provider.id,
-    );
+    return call(provider.id);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -74,24 +68,19 @@ class MovieDetailFamily extends Family<AsyncValue<Movie>> {
 /// See also [movieDetail].
 class MovieDetailProvider extends AutoDisposeFutureProvider<Movie> {
   /// See also [movieDetail].
-  MovieDetailProvider(
-    int id,
-  ) : this._internal(
-          (ref) => movieDetail(
-            ref as MovieDetailRef,
-            id,
-          ),
-          from: movieDetailProvider,
-          name: r'movieDetailProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$movieDetailHash,
-          dependencies: MovieDetailFamily._dependencies,
-          allTransitiveDependencies:
-              MovieDetailFamily._allTransitiveDependencies,
-          id: id,
-        );
+  MovieDetailProvider(int id)
+    : this._internal(
+        (ref) => movieDetail(ref as MovieDetailRef, id),
+        from: movieDetailProvider,
+        name: r'movieDetailProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$movieDetailHash,
+        dependencies: MovieDetailFamily._dependencies,
+        allTransitiveDependencies: MovieDetailFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   MovieDetailProvider._internal(
     super._createNotifier, {
@@ -148,11 +137,13 @@ mixin MovieDetailRef on AutoDisposeFutureProviderRef<Movie> {
 }
 
 class _MovieDetailProviderElement
-    extends AutoDisposeFutureProviderElement<Movie> with MovieDetailRef {
+    extends AutoDisposeFutureProviderElement<Movie>
+    with MovieDetailRef {
   _MovieDetailProviderElement(super.provider);
 
   @override
   int get id => (origin as MovieDetailProvider).id;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

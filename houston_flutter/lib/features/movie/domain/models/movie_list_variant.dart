@@ -1,6 +1,1 @@
-enum MovieListVariant {
-  all,
-  isOwner,
-  
-  ;
-}
+enum MovieListVariant { all, isOwner }

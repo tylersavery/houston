@@ -39,21 +39,15 @@ class GameSystemDetailFamily extends Family<AsyncValue<GameSystem>> {
   const GameSystemDetailFamily();
 
   /// See also [gameSystemDetail].
-  GameSystemDetailProvider call(
-    int id,
-  ) {
-    return GameSystemDetailProvider(
-      id,
-    );
+  GameSystemDetailProvider call(int id) {
+    return GameSystemDetailProvider(id);
   }
 
   @override
   GameSystemDetailProvider getProviderOverride(
     covariant GameSystemDetailProvider provider,
   ) {
-    return call(
-      provider.id,
-    );
+    return call(provider.id);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -74,24 +68,20 @@ class GameSystemDetailFamily extends Family<AsyncValue<GameSystem>> {
 /// See also [gameSystemDetail].
 class GameSystemDetailProvider extends AutoDisposeFutureProvider<GameSystem> {
   /// See also [gameSystemDetail].
-  GameSystemDetailProvider(
-    int id,
-  ) : this._internal(
-          (ref) => gameSystemDetail(
-            ref as GameSystemDetailRef,
-            id,
-          ),
-          from: gameSystemDetailProvider,
-          name: r'gameSystemDetailProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$gameSystemDetailHash,
-          dependencies: GameSystemDetailFamily._dependencies,
-          allTransitiveDependencies:
-              GameSystemDetailFamily._allTransitiveDependencies,
-          id: id,
-        );
+  GameSystemDetailProvider(int id)
+    : this._internal(
+        (ref) => gameSystemDetail(ref as GameSystemDetailRef, id),
+        from: gameSystemDetailProvider,
+        name: r'gameSystemDetailProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$gameSystemDetailHash,
+        dependencies: GameSystemDetailFamily._dependencies,
+        allTransitiveDependencies:
+            GameSystemDetailFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   GameSystemDetailProvider._internal(
     super._createNotifier, {
@@ -155,5 +145,6 @@ class _GameSystemDetailProviderElement
   @override
   int get id => (origin as GameSystemDetailProvider).id;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

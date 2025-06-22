@@ -27,10 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      final result = await dataSource.login(
-        email: email,
-        password: password,
-      );
+      final result = await dataSource.login(email: email, password: password);
 
       return right(result);
     } on ServerException catch (e) {

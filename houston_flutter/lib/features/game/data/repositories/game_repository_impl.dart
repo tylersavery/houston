@@ -15,10 +15,16 @@ class GameRespositoryImpl implements GameRepository {
   Future<Either<Failure, PaginatedResponse<Game>>> list({
     required int page,
     required int limit,
-    String? gameSystemUid
+    String? gameSystemUid,
   }) async {
     try {
-      return right(await dataSource.list(page: page, limit: limit, gameSystemUid: gameSystemUid));
+      return right(
+        await dataSource.list(
+          page: page,
+          limit: limit,
+          gameSystemUid: gameSystemUid,
+        ),
+      );
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

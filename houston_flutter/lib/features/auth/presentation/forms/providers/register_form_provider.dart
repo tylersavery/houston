@@ -41,7 +41,9 @@ class RegisterFormProvider {
       return;
     }
 
-    ref.read(authProvider.notifier).register(
+    ref
+        .read(authProvider.notifier)
+        .register(
           email: emailController.text.trim(),
           username: usernameController.text.trim(),
           password: passwordController.text,

@@ -8,15 +8,12 @@ import '../widgets/game_form_widget.dart';
 
 class GameEditScreen extends BaseScreen {
   final int? gameId;
-  
+
   static String route([int? gameId]) => "/game/edit/${gameId ?? ':id'}";
-  
+
   static String routeNew() => "/game/new";
 
-  const GameEditScreen({
-    super.key,
-    this.gameId,
-  });
+  const GameEditScreen({super.key, this.gameId});
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {
@@ -47,10 +44,7 @@ class GameEditScreen extends BaseScreen {
   @override
   Widget body(BuildContext context, WidgetRef ref) {
     return const SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: GameFormWidget(),
-      ),
+      child: Padding(padding: EdgeInsets.all(8.0), child: GameFormWidget()),
     );
   }
 }

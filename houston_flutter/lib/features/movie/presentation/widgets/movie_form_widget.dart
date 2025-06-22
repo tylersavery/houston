@@ -24,26 +24,26 @@ class MovieFormWidget extends ConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(state.error!),
             ),
-            TextFormField(
-                controller: provider.titleController,
-                validator: provider.titleValidator,
-                decoration: const InputDecoration(label: Text("Title")),
-              ),
-TextFormField(
-                controller: provider.yearController,
-                validator: provider.yearValidator,
-                decoration: const InputDecoration(label: Text("Year")),
-              ),
-Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
-      child: UploadImageWidget(
-        url: state.movie.imageUrl,
-        label: "Image Url",
-        onComplete: (url) {
-          provider.setImageUrl(url);
-        },
-      ),
-    ),
+          TextFormField(
+            controller: provider.titleController,
+            validator: provider.titleValidator,
+            decoration: const InputDecoration(label: Text("Title")),
+          ),
+          TextFormField(
+            controller: provider.yearController,
+            validator: provider.yearValidator,
+            decoration: const InputDecoration(label: Text("Year")),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
+            child: UploadImageWidget(
+              url: state.movie.imageUrl,
+              label: "Image Url",
+              onComplete: (url) {
+                provider.setImageUrl(url);
+              },
+            ),
+          ),
 
           if (isEditing)
             Padding(

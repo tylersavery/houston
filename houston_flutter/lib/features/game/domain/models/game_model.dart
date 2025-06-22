@@ -8,7 +8,6 @@ part 'game_model.g.dart';
 
 int? gameSystemToJson(GameSystem? gameSystem) => gameSystem?.id;
 
-
 @freezed
 class Game with _$Game {
   const Game._();
@@ -16,19 +15,18 @@ class Game with _$Game {
   factory Game({
     @JsonKey(includeToJson: false) int? id,
     @JsonKey(includeToJson: false) required String uid,
-    @JsonKey(name: "game_system", toJson: gameSystemToJson) GameSystem? gameSystem,
+    @JsonKey(name: "game_system", toJson: gameSystemToJson)
+    GameSystem? gameSystem,
     required String name,
     required double price,
     required String description,
     required int players,
     @JsonKey(name: "image_url") required String imageUrl,
-    @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
-    
-    
+    @JsonKey(name: "created_at", includeToJson: false)
+    required DateTime createdAt,
   }) = _Game;
 
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);
-
 
   factory Game.empty() {
     return Game(
@@ -40,7 +38,6 @@ class Game with _$Game {
       players: 0,
       imageUrl: "",
       createdAt: DateTime.now(),
-      
     );
   }
 
@@ -50,7 +47,5 @@ class Game with _$Game {
 
   String get label {
     return name;
-    
   }
-
 }

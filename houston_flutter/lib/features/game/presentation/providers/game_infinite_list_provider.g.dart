@@ -33,10 +33,7 @@ abstract class _$GameInfiniteList extends BuildlessNotifier<PagingStatus> {
   late final GameListVariant variant;
   late final String? arg;
 
-  PagingStatus build(
-    GameListVariant variant, [
-    String? arg,
-  ]);
+  PagingStatus build(GameListVariant variant, [String? arg]);
 }
 
 /// See also [GameInfiniteList].
@@ -49,24 +46,15 @@ class GameInfiniteListFamily extends Family<PagingStatus> {
   const GameInfiniteListFamily();
 
   /// See also [GameInfiniteList].
-  GameInfiniteListProvider call(
-    GameListVariant variant, [
-    String? arg,
-  ]) {
-    return GameInfiniteListProvider(
-      variant,
-      arg,
-    );
+  GameInfiniteListProvider call(GameListVariant variant, [String? arg]) {
+    return GameInfiniteListProvider(variant, arg);
   }
 
   @override
   GameInfiniteListProvider getProviderOverride(
     covariant GameInfiniteListProvider provider,
   ) {
-    return call(
-      provider.variant,
-      provider.arg,
-    );
+    return call(provider.variant, provider.arg);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -88,25 +76,24 @@ class GameInfiniteListFamily extends Family<PagingStatus> {
 class GameInfiniteListProvider
     extends NotifierProviderImpl<GameInfiniteList, PagingStatus> {
   /// See also [GameInfiniteList].
-  GameInfiniteListProvider(
-    GameListVariant variant, [
-    String? arg,
-  ]) : this._internal(
-          () => GameInfiniteList()
-            ..variant = variant
-            ..arg = arg,
-          from: gameInfiniteListProvider,
-          name: r'gameInfiniteListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$gameInfiniteListHash,
-          dependencies: GameInfiniteListFamily._dependencies,
-          allTransitiveDependencies:
-              GameInfiniteListFamily._allTransitiveDependencies,
-          variant: variant,
-          arg: arg,
-        );
+  GameInfiniteListProvider(GameListVariant variant, [String? arg])
+    : this._internal(
+        () =>
+            GameInfiniteList()
+              ..variant = variant
+              ..arg = arg,
+        from: gameInfiniteListProvider,
+        name: r'gameInfiniteListProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$gameInfiniteListHash,
+        dependencies: GameInfiniteListFamily._dependencies,
+        allTransitiveDependencies:
+            GameInfiniteListFamily._allTransitiveDependencies,
+        variant: variant,
+        arg: arg,
+      );
 
   GameInfiniteListProvider._internal(
     super._createNotifier, {
@@ -123,13 +110,8 @@ class GameInfiniteListProvider
   final String? arg;
 
   @override
-  PagingStatus runNotifierBuild(
-    covariant GameInfiniteList notifier,
-  ) {
-    return notifier.build(
-      variant,
-      arg,
-    );
+  PagingStatus runNotifierBuild(covariant GameInfiniteList notifier) {
+    return notifier.build(variant, arg);
   }
 
   @override
@@ -137,9 +119,10 @@ class GameInfiniteListProvider
     return ProviderOverride(
       origin: this,
       override: GameInfiniteListProvider._internal(
-        () => create()
-          ..variant = variant
-          ..arg = arg,
+        () =>
+            create()
+              ..variant = variant
+              ..arg = arg,
         from: from,
         name: null,
         dependencies: null,
@@ -191,5 +174,6 @@ class _GameInfiniteListProviderElement
   @override
   String? get arg => (origin as GameInfiniteListProvider).arg;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

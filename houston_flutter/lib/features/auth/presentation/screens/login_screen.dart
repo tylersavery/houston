@@ -10,9 +10,6 @@ class LoginScreen extends BaseScreen {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: LoginForm(),
-    );
+    return const Padding(padding: EdgeInsets.all(8.0), child: LoginForm());
   }
 }

@@ -29,8 +29,9 @@ class GameSystemForm extends _$GameSystemForm {
       ValidationUtils.formValidatorNotEmpty(value, "Description");
 
   Future<void> load(int gameSystemId) async {
-    final result =
-        await ref.read(gameSystemRepositoryProvider).retrieve(gameSystemId);
+    final result = await ref
+        .read(gameSystemRepositoryProvider)
+        .retrieve(gameSystemId);
 
     result.fold(
       (failure) {
@@ -55,9 +56,7 @@ class GameSystemForm extends _$GameSystemForm {
   }
 
   void setImageUrl(String value) {
-    state = state.updateGameSystem(
-      state.gameSystem.copyWith(imageUrl: value),
-    );
+    state = state.updateGameSystem(state.gameSystem.copyWith(imageUrl: value));
   }
 
   Future<bool> submit() async {
@@ -74,8 +73,9 @@ class GameSystemForm extends _$GameSystemForm {
 
     state = state.loading();
 
-    final result =
-        await ref.read(gameSystemRepositoryProvider).save(gameSystem);
+    final result = await ref
+        .read(gameSystemRepositoryProvider)
+        .save(gameSystem);
 
     return result.fold(
       (failure) {
@@ -86,8 +86,11 @@ class GameSystemForm extends _$GameSystemForm {
         state = state.success(gameSystem);
         reset();
         ref
-            .read(gameSystemInfiniteListProvider(GameSystemListVariant.all)
-                .notifier)
+            .read(
+              gameSystemInfiniteListProvider(
+                GameSystemListVariant.all,
+              ).notifier,
+            )
             .refresh();
         if (gameSystem.id != null) {
           ref.invalidate(gameSystemDetailProvider(gameSystem.id!));
@@ -103,14 +106,17 @@ class GameSystemForm extends _$GameSystemForm {
           .read(gameSystemRepositoryProvider)
           .delete(state.gameSystem.id!);
 
-      return result.fold((failure) {
-        state = state.failure(failure.message);
-        return false;
-      }, (_) {
-        reset();
-        ref.invalidate(gameSystemInfiniteListProvider);
-        return true;
-      });
+      return result.fold(
+        (failure) {
+          state = state.failure(failure.message);
+          return false;
+        },
+        (_) {
+          reset();
+          ref.invalidate(gameSystemInfiniteListProvider);
+          return true;
+        },
+      );
     }
 
     return false;

@@ -56,20 +56,14 @@ class GameSystemPaginatedListFamily
     GameSystemListVariant variant, [
     String? arg,
   ]) {
-    return GameSystemPaginatedListProvider(
-      variant,
-      arg,
-    );
+    return GameSystemPaginatedListProvider(variant, arg);
   }
 
   @override
   GameSystemPaginatedListProvider getProviderOverride(
     covariant GameSystemPaginatedListProvider provider,
   ) {
-    return call(
-      provider.variant,
-      provider.arg,
-    );
+    return call(provider.variant, provider.arg);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -88,28 +82,31 @@ class GameSystemPaginatedListFamily
 }
 
 /// See also [GameSystemPaginatedList].
-class GameSystemPaginatedListProvider extends NotifierProviderImpl<
-    GameSystemPaginatedList, GameSystemPaginatedListState> {
+class GameSystemPaginatedListProvider
+    extends
+        NotifierProviderImpl<
+          GameSystemPaginatedList,
+          GameSystemPaginatedListState
+        > {
   /// See also [GameSystemPaginatedList].
-  GameSystemPaginatedListProvider(
-    GameSystemListVariant variant, [
-    String? arg,
-  ]) : this._internal(
-          () => GameSystemPaginatedList()
-            ..variant = variant
-            ..arg = arg,
-          from: gameSystemPaginatedListProvider,
-          name: r'gameSystemPaginatedListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$gameSystemPaginatedListHash,
-          dependencies: GameSystemPaginatedListFamily._dependencies,
-          allTransitiveDependencies:
-              GameSystemPaginatedListFamily._allTransitiveDependencies,
-          variant: variant,
-          arg: arg,
-        );
+  GameSystemPaginatedListProvider(GameSystemListVariant variant, [String? arg])
+    : this._internal(
+        () =>
+            GameSystemPaginatedList()
+              ..variant = variant
+              ..arg = arg,
+        from: gameSystemPaginatedListProvider,
+        name: r'gameSystemPaginatedListProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$gameSystemPaginatedListHash,
+        dependencies: GameSystemPaginatedListFamily._dependencies,
+        allTransitiveDependencies:
+            GameSystemPaginatedListFamily._allTransitiveDependencies,
+        variant: variant,
+        arg: arg,
+      );
 
   GameSystemPaginatedListProvider._internal(
     super._createNotifier, {
@@ -129,10 +126,7 @@ class GameSystemPaginatedListProvider extends NotifierProviderImpl<
   GameSystemPaginatedListState runNotifierBuild(
     covariant GameSystemPaginatedList notifier,
   ) {
-    return notifier.build(
-      variant,
-      arg,
-    );
+    return notifier.build(variant, arg);
   }
 
   @override
@@ -140,9 +134,10 @@ class GameSystemPaginatedListProvider extends NotifierProviderImpl<
     return ProviderOverride(
       origin: this,
       override: GameSystemPaginatedListProvider._internal(
-        () => create()
-          ..variant = variant
-          ..arg = arg,
+        () =>
+            create()
+              ..variant = variant
+              ..arg = arg,
         from: from,
         name: null,
         dependencies: null,
@@ -156,7 +151,7 @@ class GameSystemPaginatedListProvider extends NotifierProviderImpl<
 
   @override
   NotifierProviderElement<GameSystemPaginatedList, GameSystemPaginatedListState>
-      createElement() {
+  createElement() {
     return _GameSystemPaginatedListProviderElement(this);
   }
 
@@ -186,9 +181,13 @@ mixin GameSystemPaginatedListRef
   String? get arg;
 }
 
-class _GameSystemPaginatedListProviderElement extends NotifierProviderElement<
-    GameSystemPaginatedList,
-    GameSystemPaginatedListState> with GameSystemPaginatedListRef {
+class _GameSystemPaginatedListProviderElement
+    extends
+        NotifierProviderElement<
+          GameSystemPaginatedList,
+          GameSystemPaginatedListState
+        >
+    with GameSystemPaginatedListRef {
   _GameSystemPaginatedListProviderElement(super.provider);
 
   @override
@@ -197,5 +196,6 @@ class _GameSystemPaginatedListProviderElement extends NotifierProviderElement<
   @override
   String? get arg => (origin as GameSystemPaginatedListProvider).arg;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

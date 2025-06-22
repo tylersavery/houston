@@ -12,7 +12,8 @@ part of 'game_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Game _$GameFromJson(Map<String, dynamic> json) {
   return _Game.fromJson(json);
@@ -45,17 +46,18 @@ abstract class $GameCopyWith<$Res> {
   factory $GameCopyWith(Game value, $Res Function(Game) then) =
       _$GameCopyWithImpl<$Res, Game>;
   @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false) int? id,
-      @JsonKey(includeToJson: false) String uid,
-      @JsonKey(name: "game_system", toJson: gameSystemToJson)
-      GameSystem? gameSystem,
-      String name,
-      double price,
-      String description,
-      int players,
-      @JsonKey(name: "image_url") String imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt});
+  $Res call({
+    @JsonKey(includeToJson: false) int? id,
+    @JsonKey(includeToJson: false) String uid,
+    @JsonKey(name: "game_system", toJson: gameSystemToJson)
+    GameSystem? gameSystem,
+    String name,
+    double price,
+    String description,
+    int players,
+    @JsonKey(name: "image_url") String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt,
+  });
 
   $GameSystemCopyWith<$Res>? get gameSystem;
 }
@@ -83,44 +85,56 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
     Object? imageUrl = null,
     Object? createdAt = null,
   }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameSystem: freezed == gameSystem
-          ? _value.gameSystem
-          : gameSystem // ignore: cast_nullable_to_non_nullable
-              as GameSystem?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      players: null == players
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
-              as int,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                freezed == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            uid:
+                null == uid
+                    ? _value.uid
+                    : uid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            gameSystem:
+                freezed == gameSystem
+                    ? _value.gameSystem
+                    : gameSystem // ignore: cast_nullable_to_non_nullable
+                        as GameSystem?,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            price:
+                null == price
+                    ? _value.price
+                    : price // ignore: cast_nullable_to_non_nullable
+                        as double,
+            description:
+                null == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as String,
+            players:
+                null == players
+                    ? _value.players
+                    : players // ignore: cast_nullable_to_non_nullable
+                        as int,
+            imageUrl:
+                null == imageUrl
+                    ? _value.imageUrl
+                    : imageUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            createdAt:
+                null == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+          )
+          as $Val,
+    );
   }
 
   @override
@@ -139,21 +153,23 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
 /// @nodoc
 abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
   factory _$$GameImplCopyWith(
-          _$GameImpl value, $Res Function(_$GameImpl) then) =
-      __$$GameImplCopyWithImpl<$Res>;
+    _$GameImpl value,
+    $Res Function(_$GameImpl) then,
+  ) = __$$GameImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false) int? id,
-      @JsonKey(includeToJson: false) String uid,
-      @JsonKey(name: "game_system", toJson: gameSystemToJson)
-      GameSystem? gameSystem,
-      String name,
-      double price,
-      String description,
-      int players,
-      @JsonKey(name: "image_url") String imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt});
+  $Res call({
+    @JsonKey(includeToJson: false) int? id,
+    @JsonKey(includeToJson: false) String uid,
+    @JsonKey(name: "game_system", toJson: gameSystemToJson)
+    GameSystem? gameSystem,
+    String name,
+    double price,
+    String description,
+    int players,
+    @JsonKey(name: "image_url") String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt,
+  });
 
   @override
   $GameSystemCopyWith<$Res>? get gameSystem;
@@ -164,7 +180,7 @@ class __$$GameImplCopyWithImpl<$Res>
     extends _$GameCopyWithImpl<$Res, _$GameImpl>
     implements _$$GameImplCopyWith<$Res> {
   __$$GameImplCopyWithImpl(_$GameImpl _value, $Res Function(_$GameImpl) _then)
-      : super(_value, _then);
+    : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -179,62 +195,72 @@ class __$$GameImplCopyWithImpl<$Res>
     Object? imageUrl = null,
     Object? createdAt = null,
   }) {
-    return _then(_$GameImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      gameSystem: freezed == gameSystem
-          ? _value.gameSystem
-          : gameSystem // ignore: cast_nullable_to_non_nullable
-              as GameSystem?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      players: null == players
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
-              as int,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
+    return _then(
+      _$GameImpl(
+        id:
+            freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        uid:
+            null == uid
+                ? _value.uid
+                : uid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        gameSystem:
+            freezed == gameSystem
+                ? _value.gameSystem
+                : gameSystem // ignore: cast_nullable_to_non_nullable
+                    as GameSystem?,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        price:
+            null == price
+                ? _value.price
+                : price // ignore: cast_nullable_to_non_nullable
+                    as double,
+        description:
+            null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as String,
+        players:
+            null == players
+                ? _value.players
+                : players // ignore: cast_nullable_to_non_nullable
+                    as int,
+        imageUrl:
+            null == imageUrl
+                ? _value.imageUrl
+                : imageUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        createdAt:
+            null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$GameImpl extends _Game {
-  _$GameImpl(
-      {@JsonKey(includeToJson: false) this.id,
-      @JsonKey(includeToJson: false) required this.uid,
-      @JsonKey(name: "game_system", toJson: gameSystemToJson) this.gameSystem,
-      required this.name,
-      required this.price,
-      required this.description,
-      required this.players,
-      @JsonKey(name: "image_url") required this.imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false)
-      required this.createdAt})
-      : super._();
+  _$GameImpl({
+    @JsonKey(includeToJson: false) this.id,
+    @JsonKey(includeToJson: false) required this.uid,
+    @JsonKey(name: "game_system", toJson: gameSystemToJson) this.gameSystem,
+    required this.name,
+    required this.price,
+    required this.description,
+    required this.players,
+    @JsonKey(name: "image_url") required this.imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) required this.createdAt,
+  }) : super._();
 
   factory _$GameImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameImplFromJson(json);
@@ -290,8 +316,18 @@ class _$GameImpl extends _Game {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, uid, gameSystem, name, price,
-      description, players, imageUrl, createdAt);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    uid,
+    gameSystem,
+    name,
+    price,
+    description,
+    players,
+    imageUrl,
+    createdAt,
+  );
 
   @JsonKey(ignore: true)
   @override
@@ -301,25 +337,24 @@ class _$GameImpl extends _Game {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GameImplToJson(
-      this,
-    );
+    return _$$GameImplToJson(this);
   }
 }
 
 abstract class _Game extends Game {
-  factory _Game(
-      {@JsonKey(includeToJson: false) final int? id,
-      @JsonKey(includeToJson: false) required final String uid,
-      @JsonKey(name: "game_system", toJson: gameSystemToJson)
-      final GameSystem? gameSystem,
-      required final String name,
-      required final double price,
-      required final String description,
-      required final int players,
-      @JsonKey(name: "image_url") required final String imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false)
-      required final DateTime createdAt}) = _$GameImpl;
+  factory _Game({
+    @JsonKey(includeToJson: false) final int? id,
+    @JsonKey(includeToJson: false) required final String uid,
+    @JsonKey(name: "game_system", toJson: gameSystemToJson)
+    final GameSystem? gameSystem,
+    required final String name,
+    required final double price,
+    required final String description,
+    required final int players,
+    @JsonKey(name: "image_url") required final String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false)
+    required final DateTime createdAt,
+  }) = _$GameImpl;
   _Game._() : super._();
 
   factory _Game.fromJson(Map<String, dynamic> json) = _$GameImpl.fromJson;

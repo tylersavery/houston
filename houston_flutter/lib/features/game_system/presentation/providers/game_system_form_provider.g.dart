@@ -12,14 +12,15 @@ String _$gameSystemFormHash() => r'7ec07ef7b8b0472363d17673cc111ba878acbfbe';
 @ProviderFor(GameSystemForm)
 final gameSystemFormProvider =
     NotifierProvider<GameSystemForm, GameSystemFormState>.internal(
-  GameSystemForm.new,
-  name: r'gameSystemFormProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$gameSystemFormHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      GameSystemForm.new,
+      name: r'gameSystemFormProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$gameSystemFormHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$GameSystemForm = Notifier<GameSystemFormState>;
 // ignore_for_file: type=lint

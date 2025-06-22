@@ -6,14 +6,14 @@ import '../../data/datasources/game_system_datasource_serverpod.dart';
 import '../../data/datasources/game_system_datasource_supabase.dart';
 import '../../domain/datasources/game_system_datasource.dart';
 
-final gameSystemDataSourceProvider = Provider<GameSystemDataSource>(
-  (ref) {
-    switch (Constants.serverBackend) {
-      case ServerBackendOption.supabase:
-        return GameSystemDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
-      case ServerBackendOption.serverpod:
-      default:
-        return GameSystemDataSourceServerpodImpl(ref.read(serverpodClientProvider));
-    }
-  },
-);
+final gameSystemDataSourceProvider = Provider<GameSystemDataSource>((ref) {
+  switch (Constants.serverBackend) {
+    case ServerBackendOption.supabase:
+      return GameSystemDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+    case ServerBackendOption.serverpod:
+    default:
+      return GameSystemDataSourceServerpodImpl(
+        ref.read(serverpodClientProvider),
+      );
+  }
+});

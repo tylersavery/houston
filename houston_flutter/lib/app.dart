@@ -5,7 +5,8 @@ import 'core/router/app_router.dart';
 import 'features/auth/presentation/providers/auth_provider.dart';
 
 GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 class App extends ConsumerStatefulWidget {
   const App({super.key});

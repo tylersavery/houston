@@ -9,5 +9,7 @@ Future<Profile> profileDetail(ProfileDetailRef ref, int id) async {
   final result = await ref.read(profileRepositoryProvider).retrieve(id);
 
   return result.fold(
-      (failure) => throw Exception(failure), (profile) => profile);
+    (failure) => throw Exception(failure),
+    (profile) => profile,
+  );
 }

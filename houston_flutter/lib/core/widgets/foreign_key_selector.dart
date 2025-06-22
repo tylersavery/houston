@@ -16,12 +16,15 @@ class ForeignKeySelector<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final opts = options
-        .map((o) => DropdownMenuItem(
-              value: valueBuilder(o),
-              child: Text(labelBuilder(o)),
-            ))
-        .toList();
+    final opts =
+        options
+            .map(
+              (o) => DropdownMenuItem(
+                value: valueBuilder(o),
+                child: Text(labelBuilder(o)),
+              ),
+            )
+            .toList();
 
     return DropdownButton<int>(items: opts, onChanged: onChanged);
   }

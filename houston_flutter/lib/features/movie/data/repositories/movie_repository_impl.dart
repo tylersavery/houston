@@ -15,10 +15,9 @@ class MovieRespositoryImpl implements MovieRepository {
   Future<Either<Failure, PaginatedResponse<Movie>>> list({
     required int page,
     required int limit,
-    
   }) async {
     try {
-      return right(await dataSource.list(page: page, limit: limit, ));
+      return right(await dataSource.list(page: page, limit: limit));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

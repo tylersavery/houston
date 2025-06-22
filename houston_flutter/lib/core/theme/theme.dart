@@ -29,21 +29,14 @@ enum AppColorVariant {
   warning(_warningColor, _onWarningColor),
   danger(_dangerColor, _onDangerColor),
   light(_lightColor, _onLightColor),
-  dark(_darkColor, _onDarkColor),
-  ;
+  dark(_darkColor, _onDarkColor);
 
   final Color color;
   final Color onColor;
   const AppColorVariant(this.color, this.onColor);
 }
 
-enum AppSizeVariant {
-  xs,
-  sm,
-  md,
-  lg,
-  xl,
-}
+enum AppSizeVariant { xs, sm, md, lg, xl }
 
 extension CustomColorScheme on ColorScheme {
   Color get primary => _primaryColor;
@@ -91,16 +84,15 @@ extension CustomColorScheme on ColorScheme {
 class AppTheme {
   final ThemeData themeData;
 
-  const AppTheme({
-    required this.themeData,
-  });
+  const AppTheme({required this.themeData});
 
   factory AppTheme.light() {
     return AppTheme(
       themeData: ThemeData(
         useMaterial3: true,
-        dialogTheme:
-            const DialogThemeData(titleTextStyle: TextStyle(fontSize: 16)),
+        dialogTheme: const DialogThemeData(
+          titleTextStyle: TextStyle(fontSize: 16),
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: _primaryColor,
           brightness: Brightness.light,
@@ -113,8 +105,9 @@ class AppTheme {
     return AppTheme(
       themeData: ThemeData(
         useMaterial3: true,
-        dialogTheme:
-            const DialogThemeData(titleTextStyle: TextStyle(fontSize: 16)),
+        dialogTheme: const DialogThemeData(
+          titleTextStyle: TextStyle(fontSize: 16),
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: _primaryColor,
           brightness: Brightness.dark,

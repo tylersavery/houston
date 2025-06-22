@@ -39,21 +39,15 @@ class GameDetailFamily extends Family<AsyncValue<Game>> {
   const GameDetailFamily();
 
   /// See also [gameDetail].
-  GameDetailProvider call(
-    int id,
-  ) {
-    return GameDetailProvider(
-      id,
-    );
+  GameDetailProvider call(int id) {
+    return GameDetailProvider(id);
   }
 
   @override
   GameDetailProvider getProviderOverride(
     covariant GameDetailProvider provider,
   ) {
-    return call(
-      provider.id,
-    );
+    return call(provider.id);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -74,24 +68,19 @@ class GameDetailFamily extends Family<AsyncValue<Game>> {
 /// See also [gameDetail].
 class GameDetailProvider extends AutoDisposeFutureProvider<Game> {
   /// See also [gameDetail].
-  GameDetailProvider(
-    int id,
-  ) : this._internal(
-          (ref) => gameDetail(
-            ref as GameDetailRef,
-            id,
-          ),
-          from: gameDetailProvider,
-          name: r'gameDetailProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$gameDetailHash,
-          dependencies: GameDetailFamily._dependencies,
-          allTransitiveDependencies:
-              GameDetailFamily._allTransitiveDependencies,
-          id: id,
-        );
+  GameDetailProvider(int id)
+    : this._internal(
+        (ref) => gameDetail(ref as GameDetailRef, id),
+        from: gameDetailProvider,
+        name: r'gameDetailProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$gameDetailHash,
+        dependencies: GameDetailFamily._dependencies,
+        allTransitiveDependencies: GameDetailFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   GameDetailProvider._internal(
     super._createNotifier, {
@@ -154,5 +143,6 @@ class _GameDetailProviderElement extends AutoDisposeFutureProviderElement<Game>
   @override
   int get id => (origin as GameDetailProvider).id;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

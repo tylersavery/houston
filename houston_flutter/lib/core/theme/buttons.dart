@@ -35,47 +35,72 @@ class AppButton extends StatelessWidget {
     switch (variant) {
       case AppColorVariant.primary:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.primaryButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.primaryButtonBg,
           foregroundColor: Theme.of(context).colorScheme.primaryButtonFg,
           textStyle: TextStyle(
             fontSize: size == AppSizeVariant.lg && !isMobile ? 17 : null,
-            fontWeight: size == AppSizeVariant.lg && !isMobile ? FontWeight.w500 : null,
+            fontWeight:
+                size == AppSizeVariant.lg && !isMobile ? FontWeight.w500 : null,
           ),
         );
 
       case AppColorVariant.secondary:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.secondaryButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.secondaryButtonBg,
           foregroundColor: Theme.of(context).colorScheme.secondaryButtonFg,
         );
       case AppColorVariant.info:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.infoButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.infoButtonBg,
           foregroundColor: Theme.of(context).colorScheme.infoButtonFg,
         );
       case AppColorVariant.danger:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.dangerButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.dangerButtonBg,
           foregroundColor: Theme.of(context).colorScheme.dangerButtonFg,
         );
       case AppColorVariant.success:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.successButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.successButtonBg,
           foregroundColor: Theme.of(context).colorScheme.successButtonFg,
         );
       case AppColorVariant.warning:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.warningButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.warningButtonBg,
           foregroundColor: Theme.of(context).colorScheme.warningButtonFg,
         );
       case AppColorVariant.light:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.lightButtonBg,
+          backgroundColor:
+              disabled
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.lightButtonBg,
           foregroundColor: Theme.of(context).colorScheme.lightButtonFg,
         );
       case AppColorVariant.dark:
         return ElevatedButton.styleFrom(
-          backgroundColor: disabled || processing ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.lightButtonBg,
+          backgroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : Theme.of(context).colorScheme.lightButtonBg,
           foregroundColor: Theme.of(context).colorScheme.lightButtonFg,
         );
     }
@@ -125,35 +150,59 @@ class AppButton extends StatelessWidget {
     switch (variant) {
       case AppColorVariant.primary:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.primaryButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.primaryButtonBg,
         );
       case AppColorVariant.secondary:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.secondaryButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.secondaryButtonBg,
         );
       case AppColorVariant.info:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.infoButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.infoButtonBg,
         );
       case AppColorVariant.danger:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.dangerButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.dangerButtonBg,
         );
       case AppColorVariant.success:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.successButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.successButtonBg,
         );
       case AppColorVariant.warning:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.warningButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.warningButtonBg,
         );
       case AppColorVariant.light:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.lightButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.lightButtonBg,
         );
       case AppColorVariant.dark:
         return OutlinedButton.styleFrom(
-          foregroundColor: disabled || processing ? Theme.of(context).disabledColor : colorScheme.darkButtonBg,
+          foregroundColor:
+              disabled || processing
+                  ? Theme.of(context).disabledColor
+                  : colorScheme.darkButtonBg,
         );
     }
   }
@@ -216,19 +265,12 @@ class AppButton extends StatelessWidget {
           builder: (context) {
             if (icon != null) {
               return Wrap(
-                textDirection: iconTrails ? TextDirection.rtl : TextDirection.ltr,
+                textDirection:
+                    iconTrails ? TextDirection.rtl : TextDirection.ltr,
                 children: [
-                  Icon(
-                    icon,
-                    size: 16,
-                    color: _iconColor(context),
-                  ),
-                  const SizedBox(
-                    width: 6,
-                  ),
-                  Text(
-                    label,
-                  ),
+                  Icon(icon, size: 16, color: _iconColor(context)),
+                  const SizedBox(width: 6),
+                  Text(label),
                 ],
               );
             }
@@ -241,11 +283,9 @@ class AppButton extends StatelessWidget {
             width: 12,
             height: 12,
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                Colors.white38,
-              ),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white38),
             ),
-          )
+          ),
       ],
     );
   }

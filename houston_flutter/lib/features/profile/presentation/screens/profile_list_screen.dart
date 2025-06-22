@@ -22,7 +22,7 @@ class ProfileListScreen extends BaseScreen {
             context.push(ProfileEditScreen.routeNew());
           },
           icon: const Icon(Icons.add),
-        )
+        ),
       ],
     );
   }

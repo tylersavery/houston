@@ -3,8 +3,6 @@ import 'profile_datasource_provider.dart';
 import '../repositories/profile_repository.dart';
 import '../../data/repositories/profile_repository_impl.dart';
 
-final profileRepositoryProvider = Provider<ProfileRepository>(
-  (ref) {
-    return ProfileRespositoryImpl(ref.read(profileDataSourceProvider));
-  },
-);
+final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
+  return ProfileRespositoryImpl(ref.read(profileDataSourceProvider));
+});

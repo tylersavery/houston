@@ -2,11 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-enum ScreenSize {
-  sm,
-  md,
-  lg,
-}
+enum ScreenSize { sm, md, lg }
 
 class ScreenUtils {
   static const breakpointSm = 576.0;

@@ -15,7 +15,10 @@ final class AuthStateLoading extends AuthState {}
 final class AuthStateVerificationRequired extends AuthState {
   final String email;
   final String password;
-  const AuthStateVerificationRequired({required this.email, required this.password});
+  const AuthStateVerificationRequired({
+    required this.email,
+    required this.password,
+  });
 }
 
 final class AuthStateSuccess extends AuthState {

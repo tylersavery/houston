@@ -25,7 +25,8 @@ class AuthDataSourceSupabaseImpl implements AuthDataSource {
 
   Future<Profile> _fetchProfile(String userId) async {
     try {
-      final profileData = await client.from("profile").select("*").eq('uid', userId).single();
+      final profileData =
+          await client.from("profile").select("*").eq('uid', userId).single();
       return Profile.fromJson(profileData);
     } catch (e) {
       throw ServerException(e.toString());
@@ -65,12 +66,17 @@ class AuthDataSourceSupabaseImpl implements AuthDataSource {
   }
 
   @override
-  Future<bool> register({required String email, required String username, required String password}) async {
+  Future<bool> register({
+    required String email,
+    required String username,
+    required String password,
+  }) async {
     try {
       await client.auth.signUp(
         email: email,
         password: password,
-        emailRedirectTo: kIsWeb ? null : '${Env.supabaseDeeplinkProtocol}://login-callback/',
+        emailRedirectTo:
+            kIsWeb ? null : '${Env.supabaseDeeplinkProtocol}://login-callback/',
         data: {
           'username': username,
           'first_name': '',
@@ -86,7 +92,10 @@ class AuthDataSourceSupabaseImpl implements AuthDataSource {
   }
 
   @override
-  Future<User> confirmRegistration({required String email, required String verificationCode}) async {
+  Future<User> confirmRegistration({
+    required String email,
+    required String verificationCode,
+  }) async {
     try {
       final result = await client.auth.verifyOTP(
         token: verificationCode,

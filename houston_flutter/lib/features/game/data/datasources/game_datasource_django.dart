@@ -12,14 +12,17 @@ class GameDataSourceDjangoImpl implements GameDataSource {
   GameDataSourceDjangoImpl(this.client, this.session);
 
   @override
-  Future<PaginatedResponse<Game>> list({required int page, required int limit, String? gameSystemUid}) async {
+  Future<PaginatedResponse<Game>> list({
+    required int page,
+    required int limit,
+    String? gameSystemUid,
+  }) async {
     try {
-      final Map<String, dynamic> params = {
-        'game_system': gameSystemUid,
-      };
+      final Map<String, dynamic> params = {'game_system': gameSystemUid};
 
       final response = await client.get("/game/", orderBy: 'id', data: params);
-      final results = response['results'].map<Game>((json) => Game.fromJson(json)).toList();
+      final results =
+          response['results'].map<Game>((json) => Game.fromJson(json)).toList();
 
       return PaginatedResponse<Game>(
         status: 200,
@@ -48,7 +51,9 @@ class GameDataSourceDjangoImpl implements GameDataSource {
   Future<Game> save(Game game) async {
     try {
       if (game.exists) {
-        return Game.fromJson(await client.patch('/game/${game.id}/', data: game.toJson()));
+        return Game.fromJson(
+          await client.patch('/game/${game.id}/', data: game.toJson()),
+        );
       } else {
         return Game.fromJson(await client.post('/game/', data: game.toJson()));
       }

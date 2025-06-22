@@ -21,7 +21,9 @@ class MovieInfiniteListWidget extends BaseComponent {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(movieInfiniteListProvider(variant, variantArg).notifier);
+    final provider = ref.read(
+      movieInfiniteListProvider(variant, variantArg).notifier,
+    );
 
     return InfiniteListWidget<Movie>(
       pagingController: provider.pagingController,

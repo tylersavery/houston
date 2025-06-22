@@ -34,10 +34,7 @@ abstract class _$GamePaginatedList
   late final GameListVariant variant;
   late final String? arg;
 
-  GamePaginatedListState build(
-    GameListVariant variant, [
-    String? arg,
-  ]);
+  GamePaginatedListState build(GameListVariant variant, [String? arg]);
 }
 
 /// See also [GamePaginatedList].
@@ -50,24 +47,15 @@ class GamePaginatedListFamily extends Family<GamePaginatedListState> {
   const GamePaginatedListFamily();
 
   /// See also [GamePaginatedList].
-  GamePaginatedListProvider call(
-    GameListVariant variant, [
-    String? arg,
-  ]) {
-    return GamePaginatedListProvider(
-      variant,
-      arg,
-    );
+  GamePaginatedListProvider call(GameListVariant variant, [String? arg]) {
+    return GamePaginatedListProvider(variant, arg);
   }
 
   @override
   GamePaginatedListProvider getProviderOverride(
     covariant GamePaginatedListProvider provider,
   ) {
-    return call(
-      provider.variant,
-      provider.arg,
-    );
+    return call(provider.variant, provider.arg);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -89,25 +77,24 @@ class GamePaginatedListFamily extends Family<GamePaginatedListState> {
 class GamePaginatedListProvider
     extends NotifierProviderImpl<GamePaginatedList, GamePaginatedListState> {
   /// See also [GamePaginatedList].
-  GamePaginatedListProvider(
-    GameListVariant variant, [
-    String? arg,
-  ]) : this._internal(
-          () => GamePaginatedList()
-            ..variant = variant
-            ..arg = arg,
-          from: gamePaginatedListProvider,
-          name: r'gamePaginatedListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$gamePaginatedListHash,
-          dependencies: GamePaginatedListFamily._dependencies,
-          allTransitiveDependencies:
-              GamePaginatedListFamily._allTransitiveDependencies,
-          variant: variant,
-          arg: arg,
-        );
+  GamePaginatedListProvider(GameListVariant variant, [String? arg])
+    : this._internal(
+        () =>
+            GamePaginatedList()
+              ..variant = variant
+              ..arg = arg,
+        from: gamePaginatedListProvider,
+        name: r'gamePaginatedListProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$gamePaginatedListHash,
+        dependencies: GamePaginatedListFamily._dependencies,
+        allTransitiveDependencies:
+            GamePaginatedListFamily._allTransitiveDependencies,
+        variant: variant,
+        arg: arg,
+      );
 
   GamePaginatedListProvider._internal(
     super._createNotifier, {
@@ -127,10 +114,7 @@ class GamePaginatedListProvider
   GamePaginatedListState runNotifierBuild(
     covariant GamePaginatedList notifier,
   ) {
-    return notifier.build(
-      variant,
-      arg,
-    );
+    return notifier.build(variant, arg);
   }
 
   @override
@@ -138,9 +122,10 @@ class GamePaginatedListProvider
     return ProviderOverride(
       origin: this,
       override: GamePaginatedListProvider._internal(
-        () => create()
-          ..variant = variant
-          ..arg = arg,
+        () =>
+            create()
+              ..variant = variant
+              ..arg = arg,
         from: from,
         name: null,
         dependencies: null,
@@ -154,7 +139,7 @@ class GamePaginatedListProvider
 
   @override
   NotifierProviderElement<GamePaginatedList, GamePaginatedListState>
-      createElement() {
+  createElement() {
     return _GamePaginatedListProviderElement(this);
   }
 
@@ -193,5 +178,6 @@ class _GamePaginatedListProviderElement
   @override
   String? get arg => (origin as GamePaginatedListProvider).arg;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

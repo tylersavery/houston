@@ -2,11 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'movie_model.freezed.dart';
 part 'movie_model.g.dart';
-
-
 
 @freezed
 class Movie with _$Movie {
@@ -18,13 +15,11 @@ class Movie with _$Movie {
     required String title,
     required int year,
     @JsonKey(name: "image_url") required String imageUrl,
-    @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
-    
-    
+    @JsonKey(name: "created_at", includeToJson: false)
+    required DateTime createdAt,
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
-
 
   factory Movie.empty() {
     return Movie(
@@ -34,7 +29,6 @@ class Movie with _$Movie {
       year: 0,
       imageUrl: "",
       createdAt: DateTime.now(),
-      
     );
   }
 
@@ -44,7 +38,5 @@ class Movie with _$Movie {
 
   String get label {
     return title;
-    
   }
-
 }

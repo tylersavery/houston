@@ -12,7 +12,8 @@ part of 'movie_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 Movie _$MovieFromJson(Map<String, dynamic> json) {
   return _Movie.fromJson(json);
@@ -41,13 +42,14 @@ abstract class $MovieCopyWith<$Res> {
   factory $MovieCopyWith(Movie value, $Res Function(Movie) then) =
       _$MovieCopyWithImpl<$Res, Movie>;
   @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false) int? id,
-      @JsonKey(includeToJson: false) String uid,
-      String title,
-      int year,
-      @JsonKey(name: "image_url") String imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt});
+  $Res call({
+    @JsonKey(includeToJson: false) int? id,
+    @JsonKey(includeToJson: false) String uid,
+    String title,
+    int year,
+    @JsonKey(name: "image_url") String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt,
+  });
 }
 
 /// @nodoc
@@ -70,49 +72,60 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
     Object? imageUrl = null,
     Object? createdAt = null,
   }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      year: null == year
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                freezed == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int?,
+            uid:
+                null == uid
+                    ? _value.uid
+                    : uid // ignore: cast_nullable_to_non_nullable
+                        as String,
+            title:
+                null == title
+                    ? _value.title
+                    : title // ignore: cast_nullable_to_non_nullable
+                        as String,
+            year:
+                null == year
+                    ? _value.year
+                    : year // ignore: cast_nullable_to_non_nullable
+                        as int,
+            imageUrl:
+                null == imageUrl
+                    ? _value.imageUrl
+                    : imageUrl // ignore: cast_nullable_to_non_nullable
+                        as String,
+            createdAt:
+                null == createdAt
+                    ? _value.createdAt
+                    : createdAt // ignore: cast_nullable_to_non_nullable
+                        as DateTime,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$MovieImplCopyWith<$Res> implements $MovieCopyWith<$Res> {
   factory _$$MovieImplCopyWith(
-          _$MovieImpl value, $Res Function(_$MovieImpl) then) =
-      __$$MovieImplCopyWithImpl<$Res>;
+    _$MovieImpl value,
+    $Res Function(_$MovieImpl) then,
+  ) = __$$MovieImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false) int? id,
-      @JsonKey(includeToJson: false) String uid,
-      String title,
-      int year,
-      @JsonKey(name: "image_url") String imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt});
+  $Res call({
+    @JsonKey(includeToJson: false) int? id,
+    @JsonKey(includeToJson: false) String uid,
+    String title,
+    int year,
+    @JsonKey(name: "image_url") String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) DateTime createdAt,
+  });
 }
 
 /// @nodoc
@@ -120,8 +133,9 @@ class __$$MovieImplCopyWithImpl<$Res>
     extends _$MovieCopyWithImpl<$Res, _$MovieImpl>
     implements _$$MovieImplCopyWith<$Res> {
   __$$MovieImplCopyWithImpl(
-      _$MovieImpl _value, $Res Function(_$MovieImpl) _then)
-      : super(_value, _then);
+    _$MovieImpl _value,
+    $Res Function(_$MovieImpl) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -133,47 +147,54 @@ class __$$MovieImplCopyWithImpl<$Res>
     Object? imageUrl = null,
     Object? createdAt = null,
   }) {
-    return _then(_$MovieImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      year: null == year
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
+    return _then(
+      _$MovieImpl(
+        id:
+            freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int?,
+        uid:
+            null == uid
+                ? _value.uid
+                : uid // ignore: cast_nullable_to_non_nullable
+                    as String,
+        title:
+            null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                    as String,
+        year:
+            null == year
+                ? _value.year
+                : year // ignore: cast_nullable_to_non_nullable
+                    as int,
+        imageUrl:
+            null == imageUrl
+                ? _value.imageUrl
+                : imageUrl // ignore: cast_nullable_to_non_nullable
+                    as String,
+        createdAt:
+            null == createdAt
+                ? _value.createdAt
+                : createdAt // ignore: cast_nullable_to_non_nullable
+                    as DateTime,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MovieImpl extends _Movie {
-  _$MovieImpl(
-      {@JsonKey(includeToJson: false) this.id,
-      @JsonKey(includeToJson: false) required this.uid,
-      required this.title,
-      required this.year,
-      @JsonKey(name: "image_url") required this.imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false)
-      required this.createdAt})
-      : super._();
+  _$MovieImpl({
+    @JsonKey(includeToJson: false) this.id,
+    @JsonKey(includeToJson: false) required this.uid,
+    required this.title,
+    required this.year,
+    @JsonKey(name: "image_url") required this.imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false) required this.createdAt,
+  }) : super._();
 
   factory _$MovieImpl.fromJson(Map<String, dynamic> json) =>
       _$$MovieImplFromJson(json);
@@ -228,21 +249,20 @@ class _$MovieImpl extends _Movie {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MovieImplToJson(
-      this,
-    );
+    return _$$MovieImplToJson(this);
   }
 }
 
 abstract class _Movie extends Movie {
-  factory _Movie(
-      {@JsonKey(includeToJson: false) final int? id,
-      @JsonKey(includeToJson: false) required final String uid,
-      required final String title,
-      required final int year,
-      @JsonKey(name: "image_url") required final String imageUrl,
-      @JsonKey(name: "created_at", includeToJson: false)
-      required final DateTime createdAt}) = _$MovieImpl;
+  factory _Movie({
+    @JsonKey(includeToJson: false) final int? id,
+    @JsonKey(includeToJson: false) required final String uid,
+    required final String title,
+    required final int year,
+    @JsonKey(name: "image_url") required final String imageUrl,
+    @JsonKey(name: "created_at", includeToJson: false)
+    required final DateTime createdAt,
+  }) = _$MovieImpl;
   _Movie._() : super._();
 
   factory _Movie.fromJson(Map<String, dynamic> json) = _$MovieImpl.fromJson;

@@ -20,10 +20,12 @@ class GameSystemPaginatedListWidget extends BaseComponent {
 
   @override
   Widget body(BuildContext context, WidgetRef ref) {
-    final provider =
-        ref.read(gameSystemPaginatedListProvider(variant, variantArg).notifier);
-    final state =
-        ref.watch(gameSystemPaginatedListProvider(variant, variantArg));
+    final provider = ref.read(
+      gameSystemPaginatedListProvider(variant, variantArg).notifier,
+    );
+    final state = ref.watch(
+      gameSystemPaginatedListProvider(variant, variantArg),
+    );
 
     switch (state) {
       case GameSystemPaginatedListStateLoading():
@@ -47,35 +49,37 @@ class GameSystemPaginatedListWidget extends BaseComponent {
                   label: "Previous",
                   icon: Icons.chevron_left,
                   type: AppButtonType.Text,
-                  onPressed: state.data.page > 1
-                      ? () {
-                          provider.load(
+                  onPressed:
+                      state.data.page > 1
+                          ? () {
+                            provider.load(
                               page: state.data.page - 1,
-                              limit: state.data.limit);
-                        }
-                      : null,
+                              limit: state.data.limit,
+                            );
+                          }
+                          : null,
                 ),
                 AppButton(
                   label: "Next",
                   type: AppButtonType.Text,
                   icon: Icons.chevron_right,
                   iconTrails: true,
-                  onPressed: state.data.canLoadMore
-                      ? () {
-                          provider.load(
+                  onPressed:
+                      state.data.canLoadMore
+                          ? () {
+                            provider.load(
                               page: state.data.page + 1,
-                              limit: state.data.limit);
-                        }
-                      : null,
+                              limit: state.data.limit,
+                            );
+                          }
+                          : null,
                 ),
               ],
             ),
           ],
         );
       case GameSystemPaginatedListStateFailure():
-        return Center(
-          child: Text(state.error),
-        );
+        return Center(child: Text(state.error));
       default:
         return const SizedBox.shrink();
     }

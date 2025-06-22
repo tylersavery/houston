@@ -50,8 +50,9 @@ class GameSystemDataSourceServerpodImpl implements GameSystemDataSource {
   @override
   Future<GameSystem> save(GameSystem gameSystem) async {
     try {
-      final result =
-          await client.gameSystem.save(GameSystemMapper.toDto(gameSystem));
+      final result = await client.gameSystem.save(
+        GameSystemMapper.toDto(gameSystem),
+      );
       return GameSystemMapper.toModel(result);
     } catch (e) {
       throw ServerException(e.toString());

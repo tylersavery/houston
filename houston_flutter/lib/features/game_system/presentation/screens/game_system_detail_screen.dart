@@ -23,9 +23,7 @@ class GameSystemDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => AppBar(),
-      error: (error, __) => AppBar(
-        title: const Text("Error"),
-      ),
+      error: (error, __) => AppBar(title: const Text("Error")),
       data: (gameSystem) {
         return AppBar(
           title: Text(gameSystem.label),
@@ -53,15 +51,9 @@ class GameSystemDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => const Loader(),
-      error: (error, __) => Center(
-        child: Text(error.toString()),
-      ),
+      error: (error, __) => Center(child: Text(error.toString())),
       data: (gameSystem) {
-        return Center(
-          child: GameSystemDetailWidget(
-            gameSystem: gameSystem,
-          ),
-        );
+        return Center(child: GameSystemDetailWidget(gameSystem: gameSystem));
       },
     );
   }

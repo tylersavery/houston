@@ -13,17 +13,22 @@ class ProfilePaginatedList extends _$ProfilePaginatedList {
     return ProfilePaginatedListStateInitial();
   }
 
-  Future<void> load(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> load({
+    required int page,
+    int limit = Constants.defaultPaginationLimit,
+  }) async {
     state = ProfilePaginatedListStateLoading();
     final result = await ref
         .read(profileRepositoryProvider)
         .list(page: page, limit: limit);
 
-    result.fold((failure) {
-      state = ProfilePaginatedListStateFailure(error: failure.message);
-    }, (data) {
-      state = ProfilePaginatedListStateSuccess(data: data);
-    });
+    result.fold(
+      (failure) {
+        state = ProfilePaginatedListStateFailure(error: failure.message);
+      },
+      (data) {
+        state = ProfilePaginatedListStateSuccess(data: data);
+      },
+    );
   }
 }

@@ -17,12 +17,7 @@ class MainDrawer extends BaseComponent {
       backgroundColor: Theme.of(context).colorScheme.drawerBackground,
       child: Container(
         decoration: const BoxDecoration(
-          border: Border(
-            right: BorderSide(
-              color: Colors.white10,
-              width: 1,
-            ),
-          ),
+          border: Border(right: BorderSide(color: Colors.white10, width: 1)),
         ),
         child: SafeArea(
           child: Padding(

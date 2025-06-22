@@ -9,5 +9,7 @@ Future<GameSystem> gameSystemDetail(GameSystemDetailRef ref, int id) async {
   final result = await ref.read(gameSystemRepositoryProvider).retrieve(id);
 
   return result.fold(
-      (failure) => throw Exception(failure), (gameSystem) => gameSystem);
+    (failure) => throw Exception(failure),
+    (gameSystem) => gameSystem,
+  );
 }

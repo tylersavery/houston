@@ -14,7 +14,9 @@ part 'game_infinite_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class GameInfiniteList extends _$GameInfiniteList {
-  final PagingController<int, Game> pagingController = PagingController(firstPageKey: 1);
+  final PagingController<int, Game> pagingController = PagingController(
+    firstPageKey: 1,
+  );
 
   @override
   PagingStatus build(GameListVariant variant, [String? arg]) {
@@ -29,37 +31,41 @@ class GameInfiniteList extends _$GameInfiniteList {
     return PagingStatus.loadingFirstPage;
   }
 
-  Future<void> fetchPage({required int page, int limit = Constants.defaultPaginationLimit}) async {
-
-    
-
-    
+  Future<void> fetchPage({
+    required int page,
+    int limit = Constants.defaultPaginationLimit,
+  }) async {
     late final Either<Failure, PaginatedResponse<Game>> result;
 
     switch (variant) {
       case GameListVariant.gameSystem:
-        result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit, gameSystemUid: arg);
+        result = await ref
+            .read(gameRepositoryProvider)
+            .list(page: page, limit: limit, gameSystemUid: arg);
 
       default:
-        result = await ref.read(gameRepositoryProvider).list(page: page, limit: limit);
+        result = await ref
+            .read(gameRepositoryProvider)
+            .list(page: page, limit: limit);
     }
-    
 
+    result.fold(
+      (failure) {
+        pagingController.error = failure.message;
 
-    result.fold((failure) {
-      pagingController.error = failure.message;
-
-      Debugger.error(
-        "GamePaginatedListProvider Fetch Error",
-        failure.message,
-      );
-    }, (data) {
-      if (data.canLoadMore) {
-        pagingController.appendPage(data.results, page + 1);
-      } else {
-        pagingController.appendLastPage(data.results);
-      }
-    });
+        Debugger.error(
+          "GamePaginatedListProvider Fetch Error",
+          failure.message,
+        );
+      },
+      (data) {
+        if (data.canLoadMore) {
+          pagingController.appendPage(data.results, page + 1);
+        } else {
+          pagingController.appendLastPage(data.results);
+        }
+      },
+    );
   }
 
   void refresh() {

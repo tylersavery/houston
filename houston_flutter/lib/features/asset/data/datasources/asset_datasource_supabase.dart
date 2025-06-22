@@ -20,7 +20,9 @@ class AssetDataSourceSupabaseImpl implements AssetDataSource {
     final path = "${user.id}/${generateRandomString(8)}/${image.name}";
 
     final avatarFile = await image.readAsBytes();
-    final result = await client.storage.from(Env.supabaseBucketName).uploadBinary(
+    final result = await client.storage
+        .from(Env.supabaseBucketName)
+        .uploadBinary(
           path,
           avatarFile,
           fileOptions: const FileOptions(cacheControl: '3600', upsert: false),

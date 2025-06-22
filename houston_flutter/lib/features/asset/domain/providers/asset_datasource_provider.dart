@@ -6,14 +6,12 @@ import 'package:houston_flutter/features/asset/data/datasources/asset_datasource
 import 'package:houston_flutter/features/asset/domain/datasources/asset_datasource.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final assetDataSourceProvider = Provider<AssetDataSource>(
-  (ref) {
-    switch (Constants.serverBackend) {
-      case ServerBackendOption.supabase:
-        return AssetDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
-      case ServerBackendOption.serverpod:
-      default:
-        return AssetDataSourceServerpodImpl(ref.read(serverpodClientProvider));
-    }
-  },
-);
+final assetDataSourceProvider = Provider<AssetDataSource>((ref) {
+  switch (Constants.serverBackend) {
+    case ServerBackendOption.supabase:
+      return AssetDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+    case ServerBackendOption.serverpod:
+    default:
+      return AssetDataSourceServerpodImpl(ref.read(serverpodClientProvider));
+  }
+});

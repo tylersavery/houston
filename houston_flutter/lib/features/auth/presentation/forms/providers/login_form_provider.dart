@@ -32,10 +32,9 @@ class LoginFormProvider {
       return;
     }
 
-    ref.read(authProvider.notifier).login(
-          email: emailController.text,
-          password: passwordController.text,
-        );
+    ref
+        .read(authProvider.notifier)
+        .login(email: emailController.text, password: passwordController.text);
   }
 }
 

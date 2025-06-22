@@ -5,16 +5,24 @@ import '../mappers/game_mapper.dart';
 import '../../domain/datasources/game_datasource.dart';
 import '../../domain/models/game_model.dart';
 
-
 class GameDataSourceServerpodImpl implements GameDataSource {
   final Client client;
 
   const GameDataSourceServerpodImpl(this.client);
 
   @override
-  Future<PaginatedResponse<Game>> list({required int page, required int limit, String? gameSystemUid}) async {
+  Future<PaginatedResponse<Game>> list({
+    required int page,
+    required int limit,
+    String? gameSystemUid,
+  }) async {
     try {
-      final response = await client.game.list(page: page, limit: limit, orderBy: 'id', gameSystemUid: gameSystemUid);
+      final response = await client.game.list(
+        page: page,
+        limit: limit,
+        orderBy: 'id',
+        gameSystemUid: gameSystemUid,
+      );
       return PaginatedResponse<Game>(
         status: 200,
         page: response.page,
@@ -30,7 +38,6 @@ class GameDataSourceServerpodImpl implements GameDataSource {
 
   @override
   Future<Game> retrieve(int id) async {
-
     try {
       final result = await client.game.retrieve(id);
       if (result == null) {

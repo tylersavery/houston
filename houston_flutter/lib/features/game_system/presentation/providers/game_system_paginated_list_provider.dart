@@ -13,24 +13,31 @@ part 'game_system_paginated_list_provider.g.dart';
 @Riverpod(keepAlive: true)
 class GameSystemPaginatedList extends _$GameSystemPaginatedList {
   @override
-  GameSystemPaginatedListState build(GameSystemListVariant variant,
-      [String? arg]) {
+  GameSystemPaginatedListState build(
+    GameSystemListVariant variant, [
+    String? arg,
+  ]) {
     load(page: 1);
     return GameSystemPaginatedListStateInitial();
   }
 
-  Future<void> load(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> load({
+    required int page,
+    int limit = Constants.defaultPaginationLimit,
+  }) async {
     state = GameSystemPaginatedListStateLoading();
 
     final result = await ref
         .read(gameSystemRepositoryProvider)
         .list(page: page, limit: limit);
 
-    result.fold((failure) {
-      state = GameSystemPaginatedListStateFailure(error: failure.message);
-    }, (data) {
-      state = GameSystemPaginatedListStateSuccess(data: data);
-    });
+    result.fold(
+      (failure) {
+        state = GameSystemPaginatedListStateFailure(error: failure.message);
+      },
+      (data) {
+        state = GameSystemPaginatedListStateSuccess(data: data);
+      },
+    );
   }
 }

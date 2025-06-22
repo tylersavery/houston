@@ -1,11 +1,8 @@
 import 'package:logger/logger.dart';
 
 class Debugger {
-  static Logger _logger({int methodCount = 0}) => Logger(
-        printer: PrettyPrinter(
-          methodCount: methodCount,
-        ),
-      );
+  static Logger _logger({int methodCount = 0}) =>
+      Logger(printer: PrettyPrinter(methodCount: methodCount));
 
   static log(dynamic message) {
     _logger().i(message);

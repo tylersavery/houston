@@ -43,34 +43,25 @@ class RegisterForm extends ConsumerWidget {
             children: [
               const Text(
                 'Sign Up.',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 30),
               TextFormField(
                 controller: provider.emailController,
                 validator: provider.emailValidator,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                ),
+                decoration: const InputDecoration(hintText: 'Email'),
               ),
               const SizedBox(height: 30),
               TextFormField(
                 controller: provider.usernameController,
                 validator: provider.usernameValidator,
-                decoration: const InputDecoration(
-                  hintText: 'Username',
-                ),
+                decoration: const InputDecoration(hintText: 'Username'),
               ),
               const SizedBox(height: 15),
               TextFormField(
                 controller: provider.passwordController,
                 validator: provider.passwordValidator,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                ),
+                decoration: const InputDecoration(hintText: 'Password'),
                 obscureText: true,
               ),
               const SizedBox(height: 20),
@@ -90,10 +81,12 @@ class RegisterForm extends ConsumerWidget {
                     children: [
                       TextSpan(
                         text: 'Sign In',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.pink,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          color: Colors.pink,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),

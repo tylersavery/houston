@@ -25,26 +25,15 @@ class ProfileFormState {
   }
 
   factory ProfileFormState.initial() {
-    return ProfileFormState(
-      isLoading: false,
-      profile: initialProfile,
-    );
+    return ProfileFormState(isLoading: false, profile: initialProfile);
   }
 
   ProfileFormState loading() {
-    return ProfileFormState(
-      profile: profile,
-      isLoading: true,
-      error: null,
-    );
+    return ProfileFormState(profile: profile, isLoading: true, error: null);
   }
 
   ProfileFormState success(Profile profile) {
-    return ProfileFormState(
-      profile: profile,
-      isLoading: false,
-      error: null,
-    );
+    return ProfileFormState(profile: profile, isLoading: false, error: null);
   }
 
   ProfileFormState failure(String error) {
@@ -64,10 +53,6 @@ class ProfileFormState {
   }
 
   ProfileFormState clean() {
-    return ProfileFormState(
-      profile: profile,
-      isLoading: false,
-      error: null,
-    );
+    return ProfileFormState(profile: profile, isLoading: false, error: null);
   }
 }

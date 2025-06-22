@@ -19,7 +19,10 @@ class RestSession extends _$RestSession {
   }
 
   void setToken(String accessToken, String refreshToken) {
-    state = RestSessionStateActive(accessToken: accessToken, refreshToken: refreshToken);
+    state = RestSessionStateActive(
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    );
   }
 
   String? get accessToken {

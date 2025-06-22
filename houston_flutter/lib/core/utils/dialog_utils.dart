@@ -18,9 +18,7 @@ class InfoDialog {
       builder: (context) {
         return AlertDialog(
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(6.0),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
           title: Text(title),
           content: body != null ? Text(body) : content,
@@ -55,7 +53,9 @@ class ConfirmDialog {
       context: context,
       builder: (context) {
         return AlertDialog(
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+          ),
           title: Text(title),
           content: body != null ? Text(body) : content,
           actions: [
@@ -72,7 +72,10 @@ class ConfirmDialog {
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
-              variant: destructive ? AppColorVariant.danger : AppColorVariant.primary,
+              variant:
+                  destructive
+                      ? AppColorVariant.danger
+                      : AppColorVariant.primary,
               type: AppButtonType.Elevated,
             ),
           ],
@@ -101,16 +104,16 @@ class PromptDialog {
 
     final GlobalKey<FormState> formKey = GlobalKey();
 
-    final TextEditingController controller = TextEditingController(text: initialValue);
+    final TextEditingController controller = TextEditingController(
+      text: initialValue,
+    );
 
     return await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(6.0),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
           title: Text(title),
           content: Form(
@@ -131,9 +134,7 @@ class PromptDialog {
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white70,
-                      ),
+                      borderSide: BorderSide(color: Colors.white70),
                     ),
                   ),
                   validator: validator,
@@ -145,7 +146,9 @@ class PromptDialog {
                       label: "Copy",
                       icon: Icons.copy,
                       onPressed: () async {
-                        await Clipboard.setData(ClipboardData(text: initialValue));
+                        await Clipboard.setData(
+                          ClipboardData(text: initialValue),
+                        );
                       },
                       type: AppButtonType.Text,
                     ),
@@ -176,7 +179,10 @@ class PromptDialog {
 
                 Navigator.of(context).pop(value.isNotEmpty ? value : null);
               },
-              variant: destructive ? AppColorVariant.danger : AppColorVariant.primary,
+              variant:
+                  destructive
+                      ? AppColorVariant.danger
+                      : AppColorVariant.primary,
               type: AppButtonType.Elevated,
             ),
           ],

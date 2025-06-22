@@ -14,10 +14,7 @@ class ProfileEditScreen extends BaseScreen {
 
   static String routeNew() => "/profile/new";
 
-  const ProfileEditScreen({
-    super.key,
-    this.profileId,
-  });
+  const ProfileEditScreen({super.key, this.profileId});
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {
@@ -48,10 +45,7 @@ class ProfileEditScreen extends BaseScreen {
   @override
   Widget body(BuildContext context, WidgetRef ref) {
     return const SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: ProfileFormWidget(),
-      ),
+      child: Padding(padding: EdgeInsets.all(8.0), child: ProfileFormWidget()),
     );
   }
 }

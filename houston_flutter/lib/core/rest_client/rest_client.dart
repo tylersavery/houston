@@ -6,12 +6,7 @@ import 'package:houston_flutter/config/env.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 
-enum HttpMethod {
-  get,
-  post,
-  patch,
-  delete,
-}
+enum HttpMethod { get, post, patch, delete }
 
 class RestClient {
   final RestSession session;
@@ -29,7 +24,7 @@ class RestClient {
         HttpHeaders.acceptHeader: "application/json",
         ...withAuth && session.accessToken != null
             ? {HttpHeaders.authorizationHeader: "Bearer ${session.accessToken}"}
-            : {}
+            : {},
       },
     );
   }
@@ -53,24 +48,21 @@ class RestClient {
       late Response<dynamic> response;
       switch (method) {
         case HttpMethod.get:
-          response = await Dio(_options(withAuth: withAuth)).get(
-            cleanPath ? _cleanPath(path) : path,
-            queryParameters: data,
-          );
+          response = await Dio(
+            _options(withAuth: withAuth),
+          ).get(cleanPath ? _cleanPath(path) : path, queryParameters: data);
         case HttpMethod.post:
-          response = await Dio(_options(withAuth: withAuth)).post(
-            cleanPath ? _cleanPath(path) : path,
-            data: data,
-          );
+          response = await Dio(
+            _options(withAuth: withAuth),
+          ).post(cleanPath ? _cleanPath(path) : path, data: data);
         case HttpMethod.patch:
-          response = await Dio(_options(withAuth: withAuth)).patch(
-            cleanPath ? _cleanPath(path) : path,
-            data: data,
-          );
+          response = await Dio(
+            _options(withAuth: withAuth),
+          ).patch(cleanPath ? _cleanPath(path) : path, data: data);
         case HttpMethod.delete:
-          await Dio(_options(withAuth: withAuth)).delete(
-            cleanPath ? _cleanPath(path) : path,
-          );
+          await Dio(
+            _options(withAuth: withAuth),
+          ).delete(cleanPath ? _cleanPath(path) : path);
           return {};
       }
 

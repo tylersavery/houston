@@ -6,8 +6,9 @@ import 'screens/profile_list_screen.dart';
 
 class ProfileRoutes {
   static const String namespace = "/profile";
-  static final shellNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "Profile Shell");
+  static final shellNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: "Profile Shell",
+  );
 
   static StatefulShellBranch branch = StatefulShellBranch(
     navigatorKey: shellNavigatorKey,
@@ -22,15 +23,17 @@ class ProfileRoutes {
       ),
       GoRoute(
         path: ProfileEditScreen.route(),
-        builder: (context, state) => ProfileEditScreen(
-          profileId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
+        builder:
+            (context, state) => ProfileEditScreen(
+              profileId: int.parse(state.pathParameters['id'] ?? '0'),
+            ),
       ),
       GoRoute(
         path: ProfileDetailScreen.route(),
-        builder: (context, state) => ProfileDetailScreen(
-          profileId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
+        builder:
+            (context, state) => ProfileDetailScreen(
+              profileId: int.parse(state.pathParameters['id'] ?? '0'),
+            ),
       ),
     ],
   );

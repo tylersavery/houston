@@ -14,8 +14,9 @@ part 'game_system_infinite_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class GameSystemInfiniteList extends _$GameSystemInfiniteList {
-  final PagingController<int, GameSystem> pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, GameSystem> pagingController = PagingController(
+    firstPageKey: 1,
+  );
 
   @override
   PagingStatus build(GameSystemListVariant variant, [String? arg]) {
@@ -30,26 +31,31 @@ class GameSystemInfiniteList extends _$GameSystemInfiniteList {
     return PagingStatus.loadingFirstPage;
   }
 
-  Future<void> fetchPage(
-      {required int page, int limit = Constants.defaultPaginationLimit}) async {
+  Future<void> fetchPage({
+    required int page,
+    int limit = Constants.defaultPaginationLimit,
+  }) async {
     final result = await ref
         .read(gameSystemRepositoryProvider)
         .list(page: page, limit: limit);
 
-    result.fold((failure) {
-      pagingController.error = failure.message;
+    result.fold(
+      (failure) {
+        pagingController.error = failure.message;
 
-      Debugger.error(
-        "GameSystemPaginatedListProvider Fetch Error",
-        failure.message,
-      );
-    }, (data) {
-      if (data.canLoadMore) {
-        pagingController.appendPage(data.results, page + 1);
-      } else {
-        pagingController.appendLastPage(data.results);
-      }
-    });
+        Debugger.error(
+          "GameSystemPaginatedListProvider Fetch Error",
+          failure.message,
+        );
+      },
+      (data) {
+        if (data.canLoadMore) {
+          pagingController.appendPage(data.results, page + 1);
+        } else {
+          pagingController.appendLastPage(data.results);
+        }
+      },
+    );
   }
 
   void refresh() {

@@ -41,15 +41,12 @@ GoRouter router(RouterRef ref) {
           MovieRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],
-      )
-    ],
-    errorPageBuilder: (context, state) => const MaterialPage(
-      child: Scaffold(
-        body: Center(
-          child: Text('404 Page Not Found'),
-        ),
       ),
-    ),
+    ],
+    errorPageBuilder:
+        (context, state) => const MaterialPage(
+          child: Scaffold(body: Center(child: Text('404 Page Not Found'))),
+        ),
     redirect: (context, state) {
       final userState = ref.read(currentUserProvider);
 

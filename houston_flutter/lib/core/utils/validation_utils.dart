@@ -1,10 +1,13 @@
 class ValidationUtils {
   static bool isValidEmail(String email) {
-    return RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$').hasMatch(email);
+    return RegExp(
+      r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$',
+    ).hasMatch(email);
   }
 
   static bool isValidUrl(String url) {
-    var urlPattern = r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
+    var urlPattern =
+        r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
     return RegExp(urlPattern, caseSensitive: false).hasMatch(url);
   }
 

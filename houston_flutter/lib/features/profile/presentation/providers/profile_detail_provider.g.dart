@@ -39,21 +39,15 @@ class ProfileDetailFamily extends Family<AsyncValue<Profile>> {
   const ProfileDetailFamily();
 
   /// See also [profileDetail].
-  ProfileDetailProvider call(
-    int id,
-  ) {
-    return ProfileDetailProvider(
-      id,
-    );
+  ProfileDetailProvider call(int id) {
+    return ProfileDetailProvider(id);
   }
 
   @override
   ProfileDetailProvider getProviderOverride(
     covariant ProfileDetailProvider provider,
   ) {
-    return call(
-      provider.id,
-    );
+    return call(provider.id);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -74,24 +68,20 @@ class ProfileDetailFamily extends Family<AsyncValue<Profile>> {
 /// See also [profileDetail].
 class ProfileDetailProvider extends AutoDisposeFutureProvider<Profile> {
   /// See also [profileDetail].
-  ProfileDetailProvider(
-    int id,
-  ) : this._internal(
-          (ref) => profileDetail(
-            ref as ProfileDetailRef,
-            id,
-          ),
-          from: profileDetailProvider,
-          name: r'profileDetailProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$profileDetailHash,
-          dependencies: ProfileDetailFamily._dependencies,
-          allTransitiveDependencies:
-              ProfileDetailFamily._allTransitiveDependencies,
-          id: id,
-        );
+  ProfileDetailProvider(int id)
+    : this._internal(
+        (ref) => profileDetail(ref as ProfileDetailRef, id),
+        from: profileDetailProvider,
+        name: r'profileDetailProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$profileDetailHash,
+        dependencies: ProfileDetailFamily._dependencies,
+        allTransitiveDependencies:
+            ProfileDetailFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   ProfileDetailProvider._internal(
     super._createNotifier, {
@@ -148,11 +138,13 @@ mixin ProfileDetailRef on AutoDisposeFutureProviderRef<Profile> {
 }
 
 class _ProfileDetailProviderElement
-    extends AutoDisposeFutureProviderElement<Profile> with ProfileDetailRef {
+    extends AutoDisposeFutureProviderElement<Profile>
+    with ProfileDetailRef {
   _ProfileDetailProviderElement(super.provider);
 
   @override
   int get id => (origin as ProfileDetailProvider).id;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

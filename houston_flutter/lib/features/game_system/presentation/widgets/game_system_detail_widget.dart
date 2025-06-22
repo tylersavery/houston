@@ -6,10 +6,7 @@ import '../../../game/presentation/widgets/game_infinite_list_widget.dart';
 
 class GameSystemDetailWidget extends StatelessWidget {
   final GameSystem gameSystem;
-  const GameSystemDetailWidget({
-    super.key,
-    required this.gameSystem,
-  });
+  const GameSystemDetailWidget({super.key, required this.gameSystem});
 
   @override
   Widget build(BuildContext context) {

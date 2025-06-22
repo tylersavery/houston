@@ -28,13 +28,8 @@ class EmptyPlaceholder extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (leading != null) leading!,
-            const SizedBox(
-              height: 32,
-            ),
-            Icon(
-              icon ?? Icons.new_releases,
-              size: 46,
-            ),
+            const SizedBox(height: 32),
+            Icon(icon ?? Icons.new_releases, size: 46),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -46,7 +41,7 @@ class EmptyPlaceholder extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            if (trailing != null) trailing!
+            if (trailing != null) trailing!,
           ],
         ),
       ),

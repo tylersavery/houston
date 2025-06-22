@@ -2,11 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'game_system_model.freezed.dart';
 part 'game_system_model.g.dart';
-
-
 
 @freezed
 class GameSystem with _$GameSystem {
@@ -19,12 +16,12 @@ class GameSystem with _$GameSystem {
     required double price,
     required String description,
     @JsonKey(name: "image_url") required String imageUrl,
-    @JsonKey(name: "created_at", includeToJson: false) required DateTime createdAt,
-    
+    @JsonKey(name: "created_at", includeToJson: false)
+    required DateTime createdAt,
   }) = _GameSystem;
 
-  factory GameSystem.fromJson(Map<String, dynamic> json) => _$GameSystemFromJson(json);
-
+  factory GameSystem.fromJson(Map<String, dynamic> json) =>
+      _$GameSystemFromJson(json);
 
   factory GameSystem.empty() {
     return GameSystem(
@@ -35,7 +32,6 @@ class GameSystem with _$GameSystem {
       description: "",
       imageUrl: "",
       createdAt: DateTime.now(),
-      
     );
   }
 
@@ -45,7 +41,5 @@ class GameSystem with _$GameSystem {
 
   String get label {
     return name;
-    
   }
-
 }

@@ -10,17 +10,18 @@ import 'package:houston_flutter/features/auth/data/datasources/auth_datasource_s
 import 'package:houston_flutter/features/auth/domain/datasources/auth_data_source.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final authDataSourceProvider = Provider<AuthDataSource>(
-  (ref) {
-    final s = ref.read(restSessionProvider.notifier);
+final authDataSourceProvider = Provider<AuthDataSource>((ref) {
+  final s = ref.read(restSessionProvider.notifier);
 
-    return AuthDataSourceDjangoImpl(ref.read(restClientProvider), ref.read(restSessionProvider.notifier));
+  return AuthDataSourceDjangoImpl(
+    ref.read(restClientProvider),
+    ref.read(restSessionProvider.notifier),
+  );
 
-    // switch (Constants.serverBackend) {
-    //   case ServerBackendOption.supabase:
-    //     return AuthDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
-    //   case ServerBackendOption.serverpod:
-    //     return AuthDataSourceServerpodImpl(ref.read(serverpodClientProvider), ref.read(serverpodSessionManagerProvider));
-    // }
-  },
-);
+  // switch (Constants.serverBackend) {
+  //   case ServerBackendOption.supabase:
+  //     return AuthDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+  //   case ServerBackendOption.serverpod:
+  //     return AuthDataSourceServerpodImpl(ref.read(serverpodClientProvider), ref.read(serverpodSessionManagerProvider));
+  // }
+});

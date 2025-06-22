@@ -6,8 +6,9 @@ import 'screens/game_system_list_screen.dart';
 
 class GameSystemRoutes {
   static const String namespace = "/game-system";
-  static final shellNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "GameSystem Shell");
+  static final shellNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: "GameSystem Shell",
+  );
 
   static StatefulShellBranch branch = StatefulShellBranch(
     navigatorKey: shellNavigatorKey,
@@ -22,15 +23,17 @@ class GameSystemRoutes {
       ),
       GoRoute(
         path: GameSystemEditScreen.route(),
-        builder: (context, state) => GameSystemEditScreen(
-          gameSystemId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
+        builder:
+            (context, state) => GameSystemEditScreen(
+              gameSystemId: int.parse(state.pathParameters['id'] ?? '0'),
+            ),
       ),
       GoRoute(
         path: GameSystemDetailScreen.route(),
-        builder: (context, state) => GameSystemDetailScreen(
-          gameSystemId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
+        builder:
+            (context, state) => GameSystemDetailScreen(
+              gameSystemId: int.parse(state.pathParameters['id'] ?? '0'),
+            ),
       ),
     ],
   );

@@ -23,9 +23,7 @@ class ProfileDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => AppBar(),
-      error: (error, __) => AppBar(
-        title: const Text("Error"),
-      ),
+      error: (error, __) => AppBar(title: const Text("Error")),
       data: (profile) {
         return AppBar(
           title: Text(profile.label),
@@ -51,15 +49,9 @@ class ProfileDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => const Loader(),
-      error: (error, __) => Center(
-        child: Text(error.toString()),
-      ),
+      error: (error, __) => Center(child: Text(error.toString())),
       data: (profile) {
-        return Center(
-          child: ProfileDetailWidget(
-            profile: profile,
-          ),
-        );
+        return Center(child: ProfileDetailWidget(profile: profile));
       },
     );
   }

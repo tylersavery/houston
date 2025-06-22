@@ -27,12 +27,7 @@ class UploadImageWidget extends ConsumerWidget {
           children: [
             Text(label),
             if (url.isNotEmpty)
-              Image.network(
-                url,
-                width: 50,
-                height: 50,
-                fit: BoxFit.contain,
-              ),
+              Image.network(url, width: 50, height: 50, fit: BoxFit.contain),
           ],
         ),
         Row(
@@ -41,24 +36,31 @@ class UploadImageWidget extends ConsumerWidget {
             ElevatedButton(
               onPressed: () async {
                 final picker = ImagePicker();
-                final image = await picker.pickImage(source: ImageSource.gallery);
+                final image = await picker.pickImage(
+                  source: ImageSource.gallery,
+                );
 
                 if (image != null) {
                   if (context.mounted) {
-                    final result = await ref.read(assetRepositoryProvider).uploadImage(image: image);
+                    final result = await ref
+                        .read(assetRepositoryProvider)
+                        .uploadImage(image: image);
 
-                    result.fold((failure) {
-                      Toast.message(context, failure.message);
-                    }, (url) {
-                      onComplete(url);
-                    });
+                    result.fold(
+                      (failure) {
+                        Toast.message(context, failure.message);
+                      },
+                      (url) {
+                        onComplete(url);
+                      },
+                    );
                   }
                 }
               },
               child: Text(url.isEmpty ? "Upload" : "Replace"),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

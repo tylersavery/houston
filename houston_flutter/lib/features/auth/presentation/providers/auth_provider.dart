@@ -44,15 +44,20 @@ class Auth extends _$Auth {
   Future<void> login({required String email, required String password}) async {
     state = AuthStateLoading();
 
-    final result = await ref.read(authRepositoryProvider).loginWithEmailPassword(email: email, password: password);
+    final result = await ref
+        .read(authRepositoryProvider)
+        .loginWithEmailPassword(email: email, password: password);
 
-    result.fold((failure) {
-      state = AuthStateFailure(failure.message);
-    }, (user) {
-      ref.read(currentUserProvider.notifier).updateUser(user);
+    result.fold(
+      (failure) {
+        state = AuthStateFailure(failure.message);
+      },
+      (user) {
+        ref.read(currentUserProvider.notifier).updateUser(user);
 
-      state = AuthStateSuccess(user);
-    });
+        state = AuthStateSuccess(user);
+      },
+    );
   }
 
   Future<void> register({
@@ -61,56 +66,78 @@ class Auth extends _$Auth {
     required String username,
   }) async {
     state = AuthStateLoading();
-    final result = await ref.read(authRepositoryProvider).registerWithEmailPassword(
+    final result = await ref
+        .read(authRepositoryProvider)
+        .registerWithEmailPassword(
           email: email,
           password: password,
           username: username,
         );
 
-    result.fold((failure) {
-      state = AuthStateFailure(failure.message);
-    }, (success) async {
-      if (success) {
-        if (Constants.serverBackend == ServerBackendOption.supabase && !Constants.supabaseSignupRequiresConfirmation) {
-          final loginResult = await ref.read(authRepositoryProvider).loginWithEmailPassword(
-                email: email,
-                password: password,
-              );
+    result.fold(
+      (failure) {
+        state = AuthStateFailure(failure.message);
+      },
+      (success) async {
+        if (success) {
+          if (Constants.serverBackend == ServerBackendOption.supabase &&
+              !Constants.supabaseSignupRequiresConfirmation) {
+            final loginResult = await ref
+                .read(authRepositoryProvider)
+                .loginWithEmailPassword(email: email, password: password);
 
-          loginResult.fold((failure) {
-            state = AuthStateFailure(failure.message);
-          }, (user) {
-            ref.read(currentUserProvider.notifier).updateUser(user);
-            state = AuthStateSuccess(user);
-          });
+            loginResult.fold(
+              (failure) {
+                state = AuthStateFailure(failure.message);
+              },
+              (user) {
+                ref.read(currentUserProvider.notifier).updateUser(user);
+                state = AuthStateSuccess(user);
+              },
+            );
+          } else {
+            state = AuthStateVerificationRequired(
+              email: email,
+              password: password,
+            );
+          }
         } else {
-          state = AuthStateVerificationRequired(email: email, password: password);
+          state = const AuthStateFailure("Registration Error.");
         }
-      } else {
-        state = const AuthStateFailure("Registration Error.");
-      }
-    });
+      },
+    );
   }
 
-  Future<void> confirmRegistration({required String email, required String password, required String verificationCode}) async {
+  Future<void> confirmRegistration({
+    required String email,
+    required String password,
+    required String verificationCode,
+  }) async {
     state = AuthStateLoading();
 
-    final confirmationResult = await ref.read(authRepositoryProvider).confirmRegistration(email: email, verificationCode: verificationCode);
+    final confirmationResult = await ref
+        .read(authRepositoryProvider)
+        .confirmRegistration(email: email, verificationCode: verificationCode);
 
-    await confirmationResult.fold((failure) {
-      state = AuthStateFailure(failure.message);
-    }, (r) async {
-      final loginResult = await ref.read(authRepositoryProvider).loginWithEmailPassword(
-            email: email,
-            password: password,
-          );
-      loginResult.fold((failure) {
+    await confirmationResult.fold(
+      (failure) {
         state = AuthStateFailure(failure.message);
-      }, (user) {
-        ref.read(currentUserProvider.notifier).updateUser(user);
-        state = AuthStateSuccess(user);
-      });
-    });
+      },
+      (r) async {
+        final loginResult = await ref
+            .read(authRepositoryProvider)
+            .loginWithEmailPassword(email: email, password: password);
+        loginResult.fold(
+          (failure) {
+            state = AuthStateFailure(failure.message);
+          },
+          (user) {
+            ref.read(currentUserProvider.notifier).updateUser(user);
+            state = AuthStateSuccess(user);
+          },
+        );
+      },
+    );
   }
 
   Future<void> logout() async {
@@ -118,12 +145,15 @@ class Auth extends _$Auth {
 
     final result = await ref.read(authRepositoryProvider).logout();
 
-    result.fold((failure) {
-      state = AuthStateFailure(failure.message);
-    }, (_) {
-      ref.read(currentUserProvider.notifier).logout();
+    result.fold(
+      (failure) {
+        state = AuthStateFailure(failure.message);
+      },
+      (_) {
+        ref.read(currentUserProvider.notifier).logout();
 
-      state = AuthStateInitial();
-    });
+        state = AuthStateInitial();
+      },
+    );
   }
 }

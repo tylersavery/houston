@@ -33,7 +33,9 @@ class AssetDataSourceServerpodImpl implements AssetDataSource {
       throw const ServerException("Upload failed");
     }
 
-    final Map<String, dynamic> decodedDescription = jsonDecode(uploadDescription);
+    final Map<String, dynamic> decodedDescription = jsonDecode(
+      uploadDescription,
+    );
 
     if (!decodedDescription.containsKey('url')) {
       throw const ServerException("No Upload URL");

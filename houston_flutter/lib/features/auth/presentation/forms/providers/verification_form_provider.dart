@@ -23,7 +23,9 @@ class VerificationFormProvider {
       return;
     }
 
-    ref.read(authProvider.notifier).confirmRegistration(
+    ref
+        .read(authProvider.notifier)
+        .confirmRegistration(
           email: email,
           verificationCode: verificationCodeController.text,
           password: password,
@@ -31,6 +33,8 @@ class VerificationFormProvider {
   }
 }
 
-final verificationFormProvider = Provider.autoDispose<VerificationFormProvider>((ref) {
-  return VerificationFormProvider(ref);
-});
+final verificationFormProvider = Provider.autoDispose<VerificationFormProvider>(
+  (ref) {
+    return VerificationFormProvider(ref);
+  },
+);

@@ -12,13 +12,15 @@ String _$restSessionHash() => r'f3633ea701d97787a3079cbb40b208b313f15778';
 @ProviderFor(RestSession)
 final restSessionProvider =
     NotifierProvider<RestSession, RestSessionState>.internal(
-  RestSession.new,
-  name: r'restSessionProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$restSessionHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      RestSession.new,
+      name: r'restSessionProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$restSessionHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$RestSession = Notifier<RestSessionState>;
 // ignore_for_file: type=lint

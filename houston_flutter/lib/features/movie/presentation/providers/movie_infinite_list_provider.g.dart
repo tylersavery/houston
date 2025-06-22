@@ -33,10 +33,7 @@ abstract class _$MovieInfiniteList extends BuildlessNotifier<PagingStatus> {
   late final MovieListVariant variant;
   late final String? arg;
 
-  PagingStatus build(
-    MovieListVariant variant, [
-    String? arg,
-  ]);
+  PagingStatus build(MovieListVariant variant, [String? arg]);
 }
 
 /// See also [MovieInfiniteList].
@@ -49,24 +46,15 @@ class MovieInfiniteListFamily extends Family<PagingStatus> {
   const MovieInfiniteListFamily();
 
   /// See also [MovieInfiniteList].
-  MovieInfiniteListProvider call(
-    MovieListVariant variant, [
-    String? arg,
-  ]) {
-    return MovieInfiniteListProvider(
-      variant,
-      arg,
-    );
+  MovieInfiniteListProvider call(MovieListVariant variant, [String? arg]) {
+    return MovieInfiniteListProvider(variant, arg);
   }
 
   @override
   MovieInfiniteListProvider getProviderOverride(
     covariant MovieInfiniteListProvider provider,
   ) {
-    return call(
-      provider.variant,
-      provider.arg,
-    );
+    return call(provider.variant, provider.arg);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -88,25 +76,24 @@ class MovieInfiniteListFamily extends Family<PagingStatus> {
 class MovieInfiniteListProvider
     extends NotifierProviderImpl<MovieInfiniteList, PagingStatus> {
   /// See also [MovieInfiniteList].
-  MovieInfiniteListProvider(
-    MovieListVariant variant, [
-    String? arg,
-  ]) : this._internal(
-          () => MovieInfiniteList()
-            ..variant = variant
-            ..arg = arg,
-          from: movieInfiniteListProvider,
-          name: r'movieInfiniteListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$movieInfiniteListHash,
-          dependencies: MovieInfiniteListFamily._dependencies,
-          allTransitiveDependencies:
-              MovieInfiniteListFamily._allTransitiveDependencies,
-          variant: variant,
-          arg: arg,
-        );
+  MovieInfiniteListProvider(MovieListVariant variant, [String? arg])
+    : this._internal(
+        () =>
+            MovieInfiniteList()
+              ..variant = variant
+              ..arg = arg,
+        from: movieInfiniteListProvider,
+        name: r'movieInfiniteListProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$movieInfiniteListHash,
+        dependencies: MovieInfiniteListFamily._dependencies,
+        allTransitiveDependencies:
+            MovieInfiniteListFamily._allTransitiveDependencies,
+        variant: variant,
+        arg: arg,
+      );
 
   MovieInfiniteListProvider._internal(
     super._createNotifier, {
@@ -123,13 +110,8 @@ class MovieInfiniteListProvider
   final String? arg;
 
   @override
-  PagingStatus runNotifierBuild(
-    covariant MovieInfiniteList notifier,
-  ) {
-    return notifier.build(
-      variant,
-      arg,
-    );
+  PagingStatus runNotifierBuild(covariant MovieInfiniteList notifier) {
+    return notifier.build(variant, arg);
   }
 
   @override
@@ -137,9 +119,10 @@ class MovieInfiniteListProvider
     return ProviderOverride(
       origin: this,
       override: MovieInfiniteListProvider._internal(
-        () => create()
-          ..variant = variant
-          ..arg = arg,
+        () =>
+            create()
+              ..variant = variant
+              ..arg = arg,
         from: from,
         name: null,
         dependencies: null,
@@ -191,5 +174,6 @@ class _MovieInfiniteListProviderElement
   @override
   String? get arg => (origin as MovieInfiniteListProvider).arg;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

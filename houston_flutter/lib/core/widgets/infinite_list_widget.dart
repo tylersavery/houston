@@ -38,7 +38,11 @@ class InfiniteListWidget<T> extends StatelessWidget {
         pagingController: pagingController,
         builderDelegate: PagedChildBuilderDelegate<T>(
           itemBuilder: itemBuilder,
-          noItemsFoundIndicatorBuilder: (_) => emptyWidget != null ? emptyWidget! : EmptyPlaceholder(title: emptyText),
+          noItemsFoundIndicatorBuilder:
+              (_) =>
+                  emptyWidget != null
+                      ? emptyWidget!
+                      : EmptyPlaceholder(title: emptyText),
         ),
       ),
     );

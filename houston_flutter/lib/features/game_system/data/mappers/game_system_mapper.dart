@@ -1,7 +1,6 @@
 import 'package:houston_client/houston_client.dart';
 import 'package:houston_flutter/features/game_system/domain/models/game_system_model.dart';
 
-
 class GameSystemMapper {
   static GameSystem toModel(GameSystemDTO gameSystemDTO) {
     return GameSystem(
@@ -12,7 +11,6 @@ class GameSystemMapper {
       description: gameSystemDTO.description,
       imageUrl: gameSystemDTO.imageUrl,
       createdAt: gameSystemDTO.createdAt,
-      
     );
   }
 
@@ -25,7 +23,6 @@ class GameSystemMapper {
       description: gameSystem.description,
       imageUrl: gameSystem.imageUrl,
       createdAt: gameSystem.createdAt,
-      
     );
   }
 

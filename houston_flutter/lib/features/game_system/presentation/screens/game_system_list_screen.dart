@@ -22,7 +22,7 @@ class GameSystemListScreen extends BaseScreen {
             context.push(GameSystemEditScreen.routeNew());
           },
           icon: const Icon(Icons.add),
-        )
+        ),
       ],
     );
   }

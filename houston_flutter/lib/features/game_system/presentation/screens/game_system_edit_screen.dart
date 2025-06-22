@@ -14,10 +14,7 @@ class GameSystemEditScreen extends BaseScreen {
 
   static String routeNew() => "/game-system/new";
 
-  const GameSystemEditScreen({
-    super.key,
-    this.gameSystemId,
-  });
+  const GameSystemEditScreen({super.key, this.gameSystemId});
 
   @override
   AppBar? appBar(BuildContext context, WidgetRef ref) {

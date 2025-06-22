@@ -11,9 +11,10 @@ import '../widgets/game_detail_widget.dart';
 
 class GameDetailScreen extends BaseScreen {
   final int gameId;
-  
-  static String route([int? gameId]) => "${GameListScreen.route()}/${gameId ?? ':id'}";
-  
+
+  static String route([int? gameId]) =>
+      "${GameListScreen.route()}/${gameId ?? ':id'}";
+
   const GameDetailScreen({super.key, required this.gameId});
 
   @override
@@ -22,9 +23,7 @@ class GameDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => AppBar(),
-      error: (error, __) => AppBar(
-        title: const Text("Error"),
-      ),
+      error: (error, __) => AppBar(title: const Text("Error")),
       data: (game) {
         return AppBar(
           title: Text(game.label),
@@ -50,15 +49,9 @@ class GameDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => const Loader(),
-      error: (error, __) => Center(
-        child: Text(error.toString()),
-      ),
+      error: (error, __) => Center(child: Text(error.toString())),
       data: (game) {
-        return Center(
-          child: GameDetailWidget(
-            game: game,
-          ),
-        );
+        return Center(child: GameDetailWidget(game: game));
       },
     );
   }

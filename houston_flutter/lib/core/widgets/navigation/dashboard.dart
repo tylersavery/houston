@@ -12,28 +12,19 @@ class Dashboard extends BaseComponent {
   Widget body(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        Expanded(
-          child: navigationShell,
-        ),
+        Expanded(child: navigationShell),
         NavigationBar(
           selectedIndex: navigationShell.currentIndex,
           onDestinationSelected: (index) {
-            navigationShell.goBranch(index,
-                initialLocation: index == navigationShell.currentIndex);
+            navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            );
           },
           destinations: const [
-            NavigationDestination(
-              label: "Game",
-              icon: Icon(Icons.star),
-            ),
-            NavigationDestination(
-              label: "GameSystem",
-              icon: Icon(Icons.star),
-            ),
-            NavigationDestination(
-              label: "Movie",
-              icon: Icon(Icons.star),
-            ),
+            NavigationDestination(label: "Game", icon: Icon(Icons.star)),
+            NavigationDestination(label: "GameSystem", icon: Icon(Icons.star)),
+            NavigationDestination(label: "Movie", icon: Icon(Icons.star)),
             //::HOUSTON_INSERT_TAB::
           ],
         ),
@@ -49,14 +40,16 @@ class Dashboard extends BaseComponent {
         children: [
           Column(
             children: [
-              Builder(builder: (context) {
-                return IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  icon: const Icon(Icons.menu),
-                );
-              }),
+              Builder(
+                builder: (context) {
+                  return IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: const Icon(Icons.menu),
+                  );
+                },
+              ),
               Expanded(
                 child: NavigationRail(
                   selectedIndex: navigationShell.currentIndex,
@@ -77,15 +70,17 @@ class Dashboard extends BaseComponent {
                     //::HOUSTON_INSERT_NAV::
                   ],
                   onDestinationSelected: (index) {
-                    navigationShell.goBranch(index,
-                        initialLocation: index == navigationShell.currentIndex);
+                    navigationShell.goBranch(
+                      index,
+                      initialLocation: index == navigationShell.currentIndex,
+                    );
                   },
                 ),
               ),
             ],
           ),
           const VerticalDivider(),
-          Expanded(child: navigationShell)
+          Expanded(child: navigationShell),
         ],
       ),
     );

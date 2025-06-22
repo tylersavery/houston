@@ -6,7 +6,9 @@ import 'screens/movie_list_screen.dart';
 
 class MovieRoutes {
   static const String namespace = "/movie";
-  static final shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "Movie Shell");
+  static final shellNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: "Movie Shell",
+  );
 
   static StatefulShellBranch branch = StatefulShellBranch(
     navigatorKey: shellNavigatorKey,
@@ -21,15 +23,17 @@ class MovieRoutes {
       ),
       GoRoute(
         path: MovieEditScreen.route(),
-        builder: (context, state) => MovieEditScreen(
-          movieId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
+        builder:
+            (context, state) => MovieEditScreen(
+              movieId: int.parse(state.pathParameters['id'] ?? '0'),
+            ),
       ),
       GoRoute(
         path: MovieDetailScreen.route(),
-        builder: (context, state) => MovieDetailScreen(
-          movieId: int.parse(state.pathParameters['id'] ?? '0'),
-        ),
+        builder:
+            (context, state) => MovieDetailScreen(
+              movieId: int.parse(state.pathParameters['id'] ?? '0'),
+            ),
       ),
     ],
   );

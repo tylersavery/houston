@@ -11,9 +11,10 @@ import '../widgets/movie_detail_widget.dart';
 
 class MovieDetailScreen extends BaseScreen {
   final int movieId;
-  
-  static String route([int? movieId]) => "${MovieListScreen.route()}/${movieId ?? ':id'}";
-  
+
+  static String route([int? movieId]) =>
+      "${MovieListScreen.route()}/${movieId ?? ':id'}";
+
   const MovieDetailScreen({super.key, required this.movieId});
 
   @override
@@ -22,9 +23,7 @@ class MovieDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => AppBar(),
-      error: (error, __) => AppBar(
-        title: const Text("Error"),
-      ),
+      error: (error, __) => AppBar(title: const Text("Error")),
       data: (movie) {
         return AppBar(
           title: Text(movie.label),
@@ -50,15 +49,9 @@ class MovieDetailScreen extends BaseScreen {
 
     return data.when(
       loading: () => const Loader(),
-      error: (error, __) => Center(
-        child: Text(error.toString()),
-      ),
+      error: (error, __) => Center(child: Text(error.toString())),
       data: (movie) {
-        return Center(
-          child: MovieDetailWidget(
-            movie: movie,
-          ),
-        );
+        return Center(child: MovieDetailWidget(movie: movie));
       },
     );
   }

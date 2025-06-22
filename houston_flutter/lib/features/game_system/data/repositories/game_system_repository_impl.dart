@@ -15,10 +15,9 @@ class GameSystemRespositoryImpl implements GameSystemRepository {
   Future<Either<Failure, PaginatedResponse<GameSystem>>> list({
     required int page,
     required int limit,
-    
   }) async {
     try {
-      return right(await dataSource.list(page: page, limit: limit, ));
+      return right(await dataSource.list(page: page, limit: limit));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

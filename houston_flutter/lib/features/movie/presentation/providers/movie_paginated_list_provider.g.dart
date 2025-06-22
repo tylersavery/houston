@@ -35,10 +35,7 @@ abstract class _$MoviePaginatedList
   late final MovieListVariant variant;
   late final String? arg;
 
-  MoviePaginatedListState build(
-    MovieListVariant variant, [
-    String? arg,
-  ]);
+  MoviePaginatedListState build(MovieListVariant variant, [String? arg]);
 }
 
 /// See also [MoviePaginatedList].
@@ -51,24 +48,15 @@ class MoviePaginatedListFamily extends Family<MoviePaginatedListState> {
   const MoviePaginatedListFamily();
 
   /// See also [MoviePaginatedList].
-  MoviePaginatedListProvider call(
-    MovieListVariant variant, [
-    String? arg,
-  ]) {
-    return MoviePaginatedListProvider(
-      variant,
-      arg,
-    );
+  MoviePaginatedListProvider call(MovieListVariant variant, [String? arg]) {
+    return MoviePaginatedListProvider(variant, arg);
   }
 
   @override
   MoviePaginatedListProvider getProviderOverride(
     covariant MoviePaginatedListProvider provider,
   ) {
-    return call(
-      provider.variant,
-      provider.arg,
-    );
+    return call(provider.variant, provider.arg);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -90,25 +78,24 @@ class MoviePaginatedListFamily extends Family<MoviePaginatedListState> {
 class MoviePaginatedListProvider
     extends NotifierProviderImpl<MoviePaginatedList, MoviePaginatedListState> {
   /// See also [MoviePaginatedList].
-  MoviePaginatedListProvider(
-    MovieListVariant variant, [
-    String? arg,
-  ]) : this._internal(
-          () => MoviePaginatedList()
-            ..variant = variant
-            ..arg = arg,
-          from: moviePaginatedListProvider,
-          name: r'moviePaginatedListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$moviePaginatedListHash,
-          dependencies: MoviePaginatedListFamily._dependencies,
-          allTransitiveDependencies:
-              MoviePaginatedListFamily._allTransitiveDependencies,
-          variant: variant,
-          arg: arg,
-        );
+  MoviePaginatedListProvider(MovieListVariant variant, [String? arg])
+    : this._internal(
+        () =>
+            MoviePaginatedList()
+              ..variant = variant
+              ..arg = arg,
+        from: moviePaginatedListProvider,
+        name: r'moviePaginatedListProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$moviePaginatedListHash,
+        dependencies: MoviePaginatedListFamily._dependencies,
+        allTransitiveDependencies:
+            MoviePaginatedListFamily._allTransitiveDependencies,
+        variant: variant,
+        arg: arg,
+      );
 
   MoviePaginatedListProvider._internal(
     super._createNotifier, {
@@ -128,10 +115,7 @@ class MoviePaginatedListProvider
   MoviePaginatedListState runNotifierBuild(
     covariant MoviePaginatedList notifier,
   ) {
-    return notifier.build(
-      variant,
-      arg,
-    );
+    return notifier.build(variant, arg);
   }
 
   @override
@@ -139,9 +123,10 @@ class MoviePaginatedListProvider
     return ProviderOverride(
       origin: this,
       override: MoviePaginatedListProvider._internal(
-        () => create()
-          ..variant = variant
-          ..arg = arg,
+        () =>
+            create()
+              ..variant = variant
+              ..arg = arg,
         from: from,
         name: null,
         dependencies: null,
@@ -155,7 +140,7 @@ class MoviePaginatedListProvider
 
   @override
   NotifierProviderElement<MoviePaginatedList, MoviePaginatedListState>
-      createElement() {
+  createElement() {
     return _MoviePaginatedListProviderElement(this);
   }
 
@@ -195,5 +180,6 @@ class _MoviePaginatedListProviderElement
   @override
   String? get arg => (origin as MoviePaginatedListProvider).arg;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

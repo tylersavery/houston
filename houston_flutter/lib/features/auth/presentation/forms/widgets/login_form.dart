@@ -42,31 +42,22 @@ class LoginForm extends ConsumerWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     state.message,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    ),
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
               const Text(
                 'Sign In.',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 30),
               TextFormField(
                 controller: provider.emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                ),
+                decoration: const InputDecoration(hintText: 'Email'),
               ),
               const SizedBox(height: 15),
               TextFormField(
                 controller: provider.passwordController,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                ),
+                decoration: const InputDecoration(hintText: 'Password'),
                 obscureText: true,
               ),
               const SizedBox(height: 20),
@@ -86,10 +77,12 @@ class LoginForm extends ConsumerWidget {
                     children: [
                       TextSpan(
                         text: 'Sign Up',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.pink,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          color: Colors.pink,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),

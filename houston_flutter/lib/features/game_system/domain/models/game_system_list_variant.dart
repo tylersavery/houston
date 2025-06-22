@@ -1,6 +1,1 @@
-enum GameSystemListVariant {
-  all,
-  isOwner,
-  
-  ;
-}
+enum GameSystemListVariant { all, isOwner }

@@ -12,13 +12,15 @@ String _$profileFormHash() => r'3d910dada701a7475fa05e2005c8d729016db925';
 @ProviderFor(ProfileForm)
 final profileFormProvider =
     NotifierProvider<ProfileForm, ProfileFormState>.internal(
-  ProfileForm.new,
-  name: r'profileFormProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$profileFormHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      ProfileForm.new,
+      name: r'profileFormProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$profileFormHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$ProfileForm = Notifier<ProfileFormState>;
 // ignore_for_file: type=lint

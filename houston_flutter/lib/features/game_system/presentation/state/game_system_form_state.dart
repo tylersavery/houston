@@ -24,10 +24,7 @@ class GameSystemFormState {
   }
 
   factory GameSystemFormState.initial() {
-    return GameSystemFormState(
-      isLoading: false,
-      gameSystem: initialGameSystem,
-    );
+    return GameSystemFormState(isLoading: false, gameSystem: initialGameSystem);
   }
 
   GameSystemFormState loading() {

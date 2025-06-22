@@ -7,6 +7,6 @@ part 'movie_detail_provider.g.dart';
 @riverpod
 Future<Movie> movieDetail(MovieDetailRef ref, int id) async {
   final result = await ref.read(movieRepositoryProvider).retrieve(id);
-  
+
   return result.fold((failure) => throw Exception(failure), (movie) => movie);
 }

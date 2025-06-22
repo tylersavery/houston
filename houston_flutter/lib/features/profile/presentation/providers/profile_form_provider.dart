@@ -26,8 +26,9 @@ class ProfileForm extends _$ProfileForm {
       ValidationUtils.formValidatorNotEmpty(value, "Username");
 
   Future<void> load(int profileId) async {
-    final result =
-        await ref.read(profileRepositoryProvider).retrieve(profileId);
+    final result = await ref
+        .read(profileRepositoryProvider)
+        .retrieve(profileId);
 
     result.fold(
       (failure) {
@@ -90,17 +91,21 @@ class ProfileForm extends _$ProfileForm {
 
   Future<bool> delete() async {
     if (state.profile.id != null) {
-      final result =
-          await ref.read(profileRepositoryProvider).delete(state.profile.id!);
+      final result = await ref
+          .read(profileRepositoryProvider)
+          .delete(state.profile.id!);
 
-      return result.fold((failure) {
-        state = state.failure(failure.message);
-        return false;
-      }, (_) {
-        reset();
-        ref.invalidate(profileInfiniteListProvider);
-        return true;
-      });
+      return result.fold(
+        (failure) {
+          state = state.failure(failure.message);
+          return false;
+        },
+        (_) {
+          reset();
+          ref.invalidate(profileInfiniteListProvider);
+          return true;
+        },
+      );
     }
 
     return false;

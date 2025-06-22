@@ -43,17 +43,12 @@ class VerificationForm extends ConsumerWidget {
             children: [
               const Text(
                 'Confirm Email.',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               const Text(
                 'Check your email for a verification code!',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
+                style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 30),
               TextFormField(
@@ -74,7 +69,9 @@ class VerificationForm extends ConsumerWidget {
               GestureDetector(
                 onTap: () {
                   //TODO: Implement verification code resend
-                  Debugger.warning("Resending verification code not implemented");
+                  Debugger.warning(
+                    "Resending verification code not implemented",
+                  );
                 },
                 child: RichText(
                   text: TextSpan(
@@ -83,10 +80,12 @@ class VerificationForm extends ConsumerWidget {
                     children: [
                       TextSpan(
                         text: 'Resend',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.pink,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          color: Colors.pink,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),

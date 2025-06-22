@@ -22,7 +22,7 @@ class MovieListScreen extends BaseScreen {
             context.push(MovieEditScreen.routeNew());
           },
           icon: const Icon(Icons.add),
-        )
+        ),
       ],
     );
   }

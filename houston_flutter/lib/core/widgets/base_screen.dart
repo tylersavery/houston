@@ -18,12 +18,16 @@ abstract class BaseScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: ScreenUtils.size(context) == ScreenSize.lg
-          ? appBarLg(context, ref)
-          : ScreenUtils.size(context) == ScreenSize.md
+      appBar:
+          ScreenUtils.size(context) == ScreenSize.lg
+              ? appBarLg(context, ref)
+              : ScreenUtils.size(context) == ScreenSize.md
               ? appBarMd(context, ref)
               : appBar(context, ref),
-      drawer: includeMainDrawer && ScreenUtils.atMost(context, ScreenSize.sm) ? const MainDrawer() : null,
+      drawer:
+          includeMainDrawer && ScreenUtils.atMost(context, ScreenSize.sm)
+              ? const MainDrawer()
+              : null,
       floatingActionButton: floatingActionButton(context, ref),
       bottomNavigationBar: bottomNavigationBar(context, ref),
       body: Padding(
@@ -59,7 +63,10 @@ abstract class BaseScreen extends ConsumerWidget {
     return appBarMd(context, ref);
   }
 
-  FloatingActionButton? floatingActionButton(BuildContext context, WidgetRef ref) {
+  FloatingActionButton? floatingActionButton(
+    BuildContext context,
+    WidgetRef ref,
+  ) {
     return null;
   }
 

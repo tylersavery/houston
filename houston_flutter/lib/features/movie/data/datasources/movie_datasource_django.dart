@@ -20,7 +20,10 @@ class MovieDataSourceDjangoImpl implements MovieDataSource {
       final Map<String, dynamic> params = {};
 
       final response = await client.get("/movie/", orderBy: 'id', data: params);
-      final results = response['results'].map<Movie>((json) => Movie.fromJson(json)).toList();
+      final results =
+          response['results']
+              .map<Movie>((json) => Movie.fromJson(json))
+              .toList();
 
       return PaginatedResponse<Movie>(
         status: 200,
@@ -49,9 +52,13 @@ class MovieDataSourceDjangoImpl implements MovieDataSource {
   Future<Movie> save(Movie movie) async {
     try {
       if (movie.exists) {
-        return Movie.fromJson(await client.patch('/movie/${movie.id}/', data: movie.toJson()));
+        return Movie.fromJson(
+          await client.patch('/movie/${movie.id}/', data: movie.toJson()),
+        );
       } else {
-        return Movie.fromJson(await client.post('/movie/', data: movie.toJson()));
+        return Movie.fromJson(
+          await client.post('/movie/', data: movie.toJson()),
+        );
       }
     } catch (e) {
       throw ServerException(e.toString());

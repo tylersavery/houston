@@ -29,13 +29,20 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
   }
 
   @override
-  Future<bool> register({required String email, required String username, required String password}) {
+  Future<bool> register({
+    required String email,
+    required String username,
+    required String password,
+  }) {
     // TODO: implement register
     throw UnimplementedError();
   }
 
   @override
-  Future<User> confirmRegistration({required String email, required String verificationCode}) {
+  Future<User> confirmRegistration({
+    required String email,
+    required String verificationCode,
+  }) {
     // TODO: implement confirmRegistration
     throw UnimplementedError();
   }
@@ -45,10 +52,7 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
     try {
       final result = await client.post(
         '/auth/token/',
-        data: {
-          'email': email,
-          'password': password,
-        },
+        data: {'email': email, 'password': password},
       );
 
       final accessToken = result['access'];
