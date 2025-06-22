@@ -1,107 +1,48 @@
 # Houston Service
 
-### Setup
+Here's how to get up and running!
 
-- [ ] [Create environment](#create-environment)
-- [ ] [Docker Services (Optional)](#docker-services-optional)
-- [ ] [Configure environment](#configure-environment)
-- [ ] [Update database](#update-database)
-- [ ] [Run application](#run-application)
 
-#### Create Environment
+#### Create `.env`
 
-Create Python virtual environment and install dependencies
+Copy the example and tweak values if needed:
 
-```
-python3 -m venv venv
-source venv/bin/activate
-make install
-```
-
-#### Docker Services
-
-You can run necessary services with Docker; db (postgres), cache (redis), and broker (rabbitmq).
-
-```
-docker compose -p houston_django up -d
-```
-
-#### Configure Environment
-
-Create `.env` file in the project root and configure required variables. See [configuration](#configuration).
-
-```
+```bash
 cp .env.example .env
 ```
 
-*WARNING*: The provided configuration is intended for local development only.
 
-```
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/postgres
-REDIS_URL=redis://localhost:6379
-AMQP_URL=amqp://rabbitmq:rabbitmq@localhost:5672
-```
+#### Setup local venv (optional)
 
-These are the other required .env variables:
-```
-AUTH_JWT_SIGNING_KEY=
-AUTH_TOKEN_SECRET=
-AWS_ACCESS_KEY_ID=
-AWS_DEFAULT_REGION=
-AWS_SECRET_ACCESS_KEY=
-AWS_STORAGE_BUCKET_NAME=
-SECRET_KEY=
-TWILIO_ACCOUNT_SID=
-TWILIO_AUTH_TOKEN=
-TWILIO_FROM_NUMBER=
-```
-For your local environment, you will probably want these set as so:
-```
-SECURE_SSL_REDIRECT=False
-DEBUG=True
-```
+You can either use the `Dev Containers` vs code extension to work directly in docker OR just mirror docker's pythong environment with your local virtual environment. For the former, simply run:
 
-
-With the services running you can view the RabbitMQ dashboard @ [http://localhost:15672](http://localhost:15672).
-
-
-#### Update Database
-
-Sync database with project.
-
-```
-python manage.py migrate
-```
-
-#### Configure Database
-
-Import fixtures.
-
-```
-python manage.py loaddata admin/fixtures/theme.json
-```
-
-Create superuser.
-```
-python manage.py createsuperuser
-```
-
-
-#### Run Application
-
-Run Django development server
-
-```
+```bash
+python3 -m venv venv
 source venv/bin/activate
-make run
+pip install -r requirements.txt
 ```
 
-Run Celery worker queue
 
+#### Build & Run Services
+
+```bash
+make build
+make up
 ```
-source venv/bin/activate
-make worker
+
+
+#### Run initial setup
+
+```bash
+make migrate
+make createsuperuser
 ```
+
+#### Load the admin theme data
+```bash
+make admin_theme_load
+```
+
 
 ## Configuration
 

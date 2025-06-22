@@ -1,14 +1,6 @@
 from project.settings.environment import ENV
 
-# AMQP
-# https://www.amqp.org
-
-AMQP_URL = ENV.str("AMQP_URL")
-
-# Celery
-# http://docs.celeryproject.org/en/latest/
-
-CELERY_BROKER_URL = AMQP_URL
+CELERY_BROKER_URL = ENV.str("BROKER_URL")
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_BACKEND = None
 CELERY_RESULT_SERIALIZER = "json"
@@ -19,3 +11,5 @@ CELERY_TASK_ANNOTATIONS = {
     }
 }
 CELERY_TASK_SERIALIZER = "json"
+
+PROCESS_TASKS_ASYNC = ENV.bool("PROCESS_TASKS_ASYNC", True)
