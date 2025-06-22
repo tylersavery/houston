@@ -21,8 +21,8 @@ class GameSystemEndpoint extends Endpoint {
                 case 'createdAt':
                   return t.createdAt;
                 case 'price':
-	return t.price;
-                
+                  return t.price;
+
                 default:
                   return t.id;
               }
@@ -46,7 +46,8 @@ class GameSystemEndpoint extends Endpoint {
 
   Future<GameSystemDTO> save(Session session, GameSystemDTO gameSystem) async {
     if (gameSystem.id != null) {
-      final existingGameSystem = await GameSystemDTO.db.findById(session, gameSystem.id!);
+      final existingGameSystem =
+          await GameSystemDTO.db.findById(session, gameSystem.id!);
 
       if (existingGameSystem != null) {
         return await GameSystemDTO.db.updateRow(
@@ -67,7 +68,8 @@ class GameSystemEndpoint extends Endpoint {
   }
 
   Future<void> delete(Session session, int id) async {
-    await GameSystemDTO.db.deleteWhere(session, where: (row) => row.id.equals(id));
+    await GameSystemDTO.db
+        .deleteWhere(session, where: (row) => row.id.equals(id));
   }
 
   Future<String> _uniqueUid(Session session) async {
@@ -75,7 +77,9 @@ class GameSystemEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await GameSystemDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await GameSystemDTO.db
+              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+          null;
       if (unique) {
         return uid;
       }

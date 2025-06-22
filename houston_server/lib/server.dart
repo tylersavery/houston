@@ -3,7 +3,8 @@ import 'package:serverpod/serverpod.dart';
 
 import 'package:houston_server/src/web/routes/root.dart';
 import 'package:serverpod_auth_server/module.dart' as auth;
-import 'package:serverpod_cloud_storage_s3/serverpod_cloud_storage_s3.dart' as s3;
+import 'package:serverpod_cloud_storage_s3/serverpod_cloud_storage_s3.dart'
+    as s3;
 
 import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';
@@ -32,7 +33,8 @@ void run(List<String> args) async {
     '/*',
   );
 
-  auth.AuthConfig.set(auth.AuthConfig(sendValidationEmail: (session, email, validationCode) async {
+  auth.AuthConfig.set(auth.AuthConfig(
+      sendValidationEmail: (session, email, validationCode) async {
     // Send your validation email here.
     print("Email Validation Code: $validationCode");
     return true;
@@ -74,7 +76,9 @@ Future<String> _uniqueProfileUid(Session session) async {
 
   while (true) {
     uid = generateRandomString(8);
-    final unique = (await ProfileDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+    final unique = (await ProfileDTO.db
+            .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+        null;
     if (unique) {
       return uid;
     }

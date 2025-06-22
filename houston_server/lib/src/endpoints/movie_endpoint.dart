@@ -8,7 +8,6 @@ class MovieEndpoint extends Endpoint {
     required int page,
     required int limit,
     String? orderBy,
-    
   }) async {
     final count = await MovieDTO.db.count(session);
 
@@ -21,15 +20,13 @@ class MovieEndpoint extends Endpoint {
               switch (orderBy.replaceAll("-", "")) {
                 case 'createdAt':
                   return t.createdAt;
-                
+
                 default:
                   return t.id;
               }
             }
           : null,
       orderDescending: orderBy != null ? orderBy.contains('-') : false,
-      
-      
     );
 
     return MovieDTOList(
@@ -42,12 +39,18 @@ class MovieEndpoint extends Endpoint {
   }
 
   Future<MovieDTO?> retrieve(Session session, int id) async {
-    return await MovieDTO.db.findById(session, id, );
+    return await MovieDTO.db.findById(
+      session,
+      id,
+    );
   }
 
   Future<MovieDTO> save(Session session, MovieDTO movie) async {
     if (movie.id != null) {
-      final existingMovie = await MovieDTO.db.findById(session, movie.id!,);
+      final existingMovie = await MovieDTO.db.findById(
+        session,
+        movie.id!,
+      );
 
       if (existingMovie != null) {
         return await MovieDTO.db.updateRow(
@@ -78,7 +81,9 @@ class MovieEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await MovieDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await MovieDTO.db
+              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+          null;
       if (unique) {
         return uid;
       }

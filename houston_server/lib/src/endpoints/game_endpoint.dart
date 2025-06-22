@@ -3,7 +3,11 @@ import 'package:houston_server/src/generated/protocol.dart';
 import 'package:houston_server/src/utils/strings.dart';
 
 class GameEndpoint extends Endpoint {
-  Future<GameDTOList> list(Session session, {required int page, required int limit, String? orderBy, String? gameSystemUid}) async {
+  Future<GameDTOList> list(Session session,
+      {required int page,
+      required int limit,
+      String? orderBy,
+      String? gameSystemUid}) async {
     final count = await GameDTO.db.count(session);
 
     final results = await GameDTO.db.find(
@@ -96,7 +100,9 @@ class GameEndpoint extends Endpoint {
 
     while (true) {
       uid = generateRandomString(8);
-      final unique = (await GameDTO.db.findFirstRow(session, where: (row) => row.uid.equals(uid))) == null;
+      final unique = (await GameDTO.db
+              .findFirstRow(session, where: (row) => row.uid.equals(uid))) ==
+          null;
       if (unique) {
         return uid;
       }

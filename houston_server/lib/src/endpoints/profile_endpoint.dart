@@ -42,7 +42,8 @@ class ProfileEndpoint extends Endpoint {
   }
 
   Future<ProfileDTO?> retrieveByUserId(Session session, int userId) async {
-    return await ProfileDTO.db.findFirstRow(session, where: (row) => row.userId.equals(userId));
+    return await ProfileDTO.db
+        .findFirstRow(session, where: (row) => row.userId.equals(userId));
   }
 
   Future<ProfileDTO> save(Session session, ProfileDTO profile) async {
