@@ -1,4 +1,5 @@
 import 'package:houston_flutter/config/constants.dart';
+import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 import 'package:houston_flutter/features/auth/domain/providers/auth_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/providers/current_user_provider.dart';
@@ -22,11 +23,9 @@ class Auth extends _$Auth {
       await ref.read(serverpodSessionManagerProvider).initialize();
     }
 
-    //TODO: remove this (handle django)
-    await Future.delayed(Duration(milliseconds: 100));
-    state = AuthStateInitial();
-
-    return;
+    if (Constants.serverBackend == ServerBackendOption.django) {
+      await ref.read(restSessionProvider.notifier).initialize();
+    }
 
     final result = await ref.read(authRepositoryProvider).currentUser();
 

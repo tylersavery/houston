@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:houston_flutter/features/game/presentation/screens/game_list_screen.dart';
+import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import '../../../../../core/utils/debugger_utils.dart';
 import '../../../../../core/widgets/loader.dart';
 import '../../../../../core/utils/toast_utils.dart';
@@ -22,7 +22,7 @@ class VerificationForm extends ConsumerWidget {
         Toast.message(context, next.message);
       }
       if (next is AuthStateSuccess) {
-        context.go(GameListScreen.route());
+        context.go(MovieListScreen.route());
       }
     });
 

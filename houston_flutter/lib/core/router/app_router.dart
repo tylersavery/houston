@@ -1,8 +1,7 @@
 import 'package:houston_flutter/features/movie/presentation/movie_routes.dart';
-import 'package:houston_flutter/features/game_system/presentation/game_system_routes.dart';
-import 'package:houston_flutter/features/game/presentation/game_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../app.dart';
 import '../providers/current_user_provider.dart';
@@ -17,7 +16,7 @@ part 'app_router.g.dart';
 GoRouter router(RouterRef ref) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: LoginScreen.route(),
+    initialLocation: MovieListScreen.route(),
     routes: [
       GoRoute(
         path: LoginScreen.route(),
@@ -36,8 +35,6 @@ GoRouter router(RouterRef ref) {
           return Dashboard(navigationShell: navigationShell);
         },
         branches: [
-          GameRoutes.branch,
-          GameSystemRoutes.branch,
           MovieRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],

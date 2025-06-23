@@ -68,7 +68,7 @@ class MovieDataSourceSupabaseImpl implements MovieDataSource {
             await client
                 .from("movie")
                 .update(movie.toJson())
-                .match({"id": movie.id})
+                .match({"id": movie.id!})
                 .select(defaultSelect)
                 .single();
         return Movie.fromJson(result);

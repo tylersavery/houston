@@ -68,7 +68,7 @@ class ProfileDataSourceSupabaseImpl implements ProfileDataSource {
             await client
                 .from("profile")
                 .update(profile.toJson())
-                .match({"id": profile.id})
+                .match({"id": profile.id!})
                 .select(defaultSelect)
                 .single();
         return Profile.fromJson(result);

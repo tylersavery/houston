@@ -40,6 +40,9 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_dotenv: ^5.1.0
   dio: ^5.4.3+1
+  sembast: ^3.8.5+1
+  sembast_web: ^2.4.2
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   build_runner: ^2.4.9

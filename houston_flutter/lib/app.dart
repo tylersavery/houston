@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_flutter/core/models/rest_session_state.dart';
+import 'package:houston_flutter/core/providers/rest_session_provider.dart';
+import 'package:houston_flutter/features/auth/presentation/providers/auth_state.dart';
 import 'core/providers/current_user_provider.dart';
 import 'core/router/app_router.dart';
 import 'features/auth/presentation/providers/auth_provider.dart';
@@ -21,6 +24,7 @@ class _AppState extends ConsumerState<App> {
   @override
   void initState() {
     ref.read(authProvider);
+
     super.initState();
   }
 

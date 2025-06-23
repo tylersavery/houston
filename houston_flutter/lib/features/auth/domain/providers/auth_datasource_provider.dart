@@ -3,6 +3,7 @@ import 'package:houston_flutter/core/providers/rest_client_provider.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 import 'package:houston_flutter/core/providers/serverpod_client_provider.dart';
 import 'package:houston_flutter/core/providers/session_manager_provider.dart';
+import 'package:houston_flutter/core/providers/storage_provider.dart';
 import 'package:houston_flutter/core/providers/supabase_client_provider.dart';
 import 'package:houston_flutter/features/auth/data/datasources/auth_datasource_django.dart';
 import 'package:houston_flutter/features/auth/data/datasources/auth_datasource_serverpod.dart';
@@ -16,6 +17,7 @@ final authDataSourceProvider = Provider<AuthDataSource>((ref) {
   return AuthDataSourceDjangoImpl(
     ref.read(restClientProvider),
     ref.read(restSessionProvider.notifier),
+    ref.read(storageProvider),
   );
 
   // switch (Constants.serverBackend) {
