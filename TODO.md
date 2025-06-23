@@ -31,6 +31,13 @@ DONE
 [x] profile model stuff
 
 
+Next Tasks
+
+[ ] queryset error in scaffold generation (ALL__QUERYSET)
+
+[ ] generating image upload widget scaffold code (see food.yaml)
+
+
 Big Tasks
 
 [x] Django
@@ -49,6 +56,8 @@ Medium Tasks
 
 
 Minor Tasks
+
+
 
 [ ] docs for blueprint config / examples
 
