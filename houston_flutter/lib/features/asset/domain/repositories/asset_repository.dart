@@ -1,7 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:fpdart/fpdart.dart';
-import 'package:image_picker/image_picker.dart';
-import '../../../../core/error/failures.dart';
+import 'package:houston_flutter/core/error/failures.dart';
 
 abstract interface class AssetRepository {
-  Future<Either<Failure, String>> uploadImage({required XFile image});
+  Future<Either<Failure, String>> upload({
+    required String contentType,
+    required String filename,
+    required Uint8List bytes,
+  });
 }

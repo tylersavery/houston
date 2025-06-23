@@ -1,7 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:houston_flutter/config/env.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/utils/string_utils.dart';
-import 'package:houston_flutter/features/asset/domain/datasources/asset_datasource.dart';
+import 'package:houston_flutter/features/asset/domain/datasources/asset_data_source.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -10,21 +12,24 @@ class AssetDataSourceSupabaseImpl implements AssetDataSource {
   const AssetDataSourceSupabaseImpl(this.client);
 
   @override
-  Future<String> uploadImage(XFile image) async {
+  Future<String> upload({
+    required String contentType,
+    required String filename,
+    required Uint8List bytes,
+  }) async {
     final user = client.auth.currentUser;
 
     if (user == null) {
       throw const ServerException("User is not authenticated.");
     }
 
-    final path = "${user.id}/${generateRandomString(8)}/${image.name}";
+    final path = "${user.id}/${generateRandomString(8)}/$filename";
 
-    final avatarFile = await image.readAsBytes();
     final result = await client.storage
         .from(Env.supabaseBucketName)
         .uploadBinary(
           path,
-          avatarFile,
+          bytes,
           fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
         );
 

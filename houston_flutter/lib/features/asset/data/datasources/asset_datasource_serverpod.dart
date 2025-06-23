@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
-import 'package:houston_flutter/features/asset/domain/datasources/asset_datasource.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:houston_flutter/features/asset/domain/datasources/asset_data_source.dart';
 import 'package:houston_client/houston_client.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/utils/string_utils.dart';
@@ -12,8 +12,12 @@ class AssetDataSourceServerpodImpl implements AssetDataSource {
   const AssetDataSourceServerpodImpl(this.client);
 
   @override
-  Future<String> uploadImage(XFile image) async {
-    final name = "${generateRandomString(16)}.${image.path.split('.').last}";
+  Future<String> upload({
+    required String contentType,
+    required String filename,
+    required Uint8List bytes,
+  }) async {
+    final name = "${generateRandomString(16)}.${filename.split('.').last}";
 
     final uploadDescription = await client.asset.getUploadDescription(name);
 
@@ -23,10 +27,7 @@ class AssetDataSourceServerpodImpl implements AssetDataSource {
 
     final uploader = FileUploader(uploadDescription);
 
-    final stream = image.openRead();
-    final length = (await image.readAsBytes()).length;
-
-    await uploader.upload(stream, length);
+    await uploader.uploadByteData(ByteData.view(bytes.buffer));
 
     final success = await client.asset.verifyUpload(name);
     if (!success) {

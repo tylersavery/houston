@@ -36,7 +36,7 @@ class MovieFormWidget extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
-            child: UploadImageWidget(
+            child: ImageUploadWidget(
               url: state.movie.imageUrl,
               label: "Image Url",
               onComplete: (url) {
