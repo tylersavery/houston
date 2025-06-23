@@ -40,7 +40,7 @@ Big Tasks
 
 Medium Tasks
 
-[ ] images for django
+[x] images for django
 
 [ ] profile management
 
