@@ -1,9 +1,16 @@
 import random
 import string
+import secrets
+from django.utils.text import slugify
 
 
 def get_random_string(characters, length):
     return "".join(random.choice(characters) for _ in range(length))
+
+
+def generate_token(length=16):
+    chars = string.ascii_letters + string.digits
+    return "".join(secrets.choice(chars) for _ in range(length))
 
 
 def get_random_slug(length):
@@ -42,3 +49,10 @@ def split_name(name):
         last_name = " ".join(parts[1:])
 
     return first_name, last_name
+
+
+def slugify_with_slash(value: str) -> str:
+    value = value.replace("/", "__slash__")
+    value = value.replace(".", "__period__")
+    slugified = slugify(value)
+    return slugified.replace("__slash__", "/").replace("__period__", ".")

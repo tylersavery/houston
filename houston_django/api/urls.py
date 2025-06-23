@@ -1,6 +1,7 @@
 from django.urls import include, path
 
 urlpatterns = [
+    path("asset/", include("api.asset.urls")),
     path("auth/", include("api.auth.urls")),
     # path("asset/", include("api.asset.urls")),
     path("post/", include("api.post.urls")),

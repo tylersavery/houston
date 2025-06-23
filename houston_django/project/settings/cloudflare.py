@@ -1,0 +1,5 @@
+from project.settings.environment import ENV
+
+
+CLOUDFLARE_ACCOUNT_ID = ENV.str("CLOUDFLARE_ACCOUNT_ID", None)
+CLOUDFLARE_PUBLIC_BASE_URL = ENV.str("CLOUDFLARE_PUBLIC_BASE_URL", None)

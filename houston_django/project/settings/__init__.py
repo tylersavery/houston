@@ -5,6 +5,7 @@ from .apps import *
 from .auth import *
 from .aws import *
 from .cache import *
+from .cloudflare import *
 from .cors import *
 from .database import *
 from .develop import *
