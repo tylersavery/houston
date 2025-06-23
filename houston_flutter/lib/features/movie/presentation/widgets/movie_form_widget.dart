@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../asset/presentation/widgets/upload_image_widget.dart';
+import '../../../asset/presentation/widgets/image_upload_widget.dart';
 
 import '../providers/movie_form_provider.dart';
 
@@ -37,10 +37,13 @@ class MovieFormWidget extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
             child: ImageUploadWidget(
-              url: state.movie.imageUrl,
-              label: "Image Url",
-              onComplete: (url) {
+              currentUrl: state.movie.imageUrl,
+              title: "Image Url",
+              onChange: (url) {
                 provider.setImageUrl(url);
+              },
+              onRemove: () {
+                provider.setImageUrl("");
               },
             ),
           ),

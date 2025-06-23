@@ -40,6 +40,8 @@ Big Tasks
 
 Medium Tasks
 
+[ ] images for django
+
 [ ] profile management
 
 [ ] additonal auth (password reset etc)

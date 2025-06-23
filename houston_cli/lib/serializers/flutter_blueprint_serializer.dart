@@ -240,7 +240,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
 
     if (includeImageUploader) {
       importStrings.insert(0,
-          "import '../../../asset/presentation/widgets/upload_image_widget.dart';");
+          "import '../../../asset/presentation/widgets/image_upload_widget.dart';");
     }
 
     return importStrings;
@@ -279,11 +279,14 @@ TextFormField(
         final value = """
 Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
-      child: UploadImageWidget(
-        url: state.${camelCase(name)}.${property.name},
-        label: "${titleCase(property.name)}",
-        onComplete: (url) {
+      child: ImageUploadWidget(
+        currentUrl: state.${camelCase(name)}.${property.name},
+        title: "${titleCase(property.name)}",
+        onChange: (url) {
           provider.setImageUrl(url);
+        },
+        onRemove: () {
+          provider.setImageUrl("");
         },
       ),
     ),
