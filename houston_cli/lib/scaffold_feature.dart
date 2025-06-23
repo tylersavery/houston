@@ -161,12 +161,12 @@ Future<void> scaffoldFeature({
       final djangoModuleTarget =
           mason.DirectoryGeneratorTarget(Directory(modulePath));
 
-      final djangoModuleeSerializer = DjangoBlueprintSerializer(
+      final djangoModuleSerializer = DjangoBlueprintSerializer(
           blueprint: blueprint, appName: snakeCase(module));
 
       await djangoModuleGenerator.generate(
         djangoModuleTarget,
-        vars: djangoModuleeSerializer.serialize(),
+        vars: djangoModuleSerializer.serialize(),
       );
 
       print(white("Registering new app in project/settings.apps.py"));

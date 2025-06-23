@@ -10,6 +10,10 @@ abstract class BlueprintSerializer {
     return blueprint.name;
   }
 
+  String get namePlural {
+    return blueprint.namePlural;
+  }
+
   List<BlueprintProperty> get properties {
     return blueprint.properties;
   }

@@ -58,6 +58,7 @@ class DjangoBlueprintSerializer extends BlueprintSerializer {
   Map<String, dynamic> serialize() {
     return {
       'name': name,
+      'namePlural': namePlural,
       'appName': appName,
       'properties':
           properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),
