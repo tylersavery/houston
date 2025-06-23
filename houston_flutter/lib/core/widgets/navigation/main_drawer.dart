@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:houston_flutter/core/providers/current_user_provider.dart';
+import 'package:houston_flutter/features/profile/presentation/screens/profile_detail_screen.dart';
 import '../../theme/theme.dart';
 import '../base_component.dart';
 import '../../../features/auth/presentation/providers/auth_provider.dart';
@@ -45,6 +46,7 @@ class MainDrawer extends BaseComponent {
                             leading: const Icon(Icons.person),
                             onTap: () {
                               Navigator.of(context).pop();
+
                               //TODO: hook up to profile route when ready
                             },
                           ),

@@ -33,7 +33,7 @@ DONE
 
 Big Tasks
 
-[ ] Django
+[x] Django
 
 [ ] Docs
 
@@ -58,5 +58,5 @@ Minor Tasks
 
 [ ] routes get from namespace (rather than hardcoding string)
 
-[ ] double check delete invalidate / redirect
+[x] double check delete invalidate / redirect
  

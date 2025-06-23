@@ -92,7 +92,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Form extends _${{#pascalCase}}{{name
         return false;
       }, (_) {
         reset();
-        ref.invalidate({{#camelCase}}{{name}}{{/camelCase}}InfiniteListProvider);
+        ref.ready({{#camelCase}}{{name}}{{/camelCase}}InfiniteListProvider({{#pascalCase}}{{name}}{{/pascalCase}}ListVariant.all).notifier).refresh();
         return true;
       });
     }

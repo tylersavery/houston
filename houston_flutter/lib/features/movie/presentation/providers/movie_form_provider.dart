@@ -100,7 +100,9 @@ class MovieForm extends _$MovieForm {
         },
         (_) {
           reset();
-          ref.invalidate(movieInfiniteListProvider);
+          ref
+              .read(movieInfiniteListProvider(MovieListVariant.all).notifier)
+              .refresh();
           return true;
         },
       );
