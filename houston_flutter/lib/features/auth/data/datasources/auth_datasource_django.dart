@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 import 'package:houston_flutter/core/providers/storage_provider.dart';
 import 'package:houston_flutter/core/rest_client/rest_client.dart';
 import 'package:houston_flutter/features/auth/domain/datasources/auth_data_source.dart';
+import 'package:houston_flutter/features/auth/domain/models/session_token.dart';
 import 'package:houston_flutter/features/auth/domain/models/user_model.dart';
 
 class AuthDataSourceDjangoImpl implements AuthDataSource {
@@ -16,11 +15,10 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
 
   @override
   Future<User?> currentUser() async {
-    if (session.accessToken == null) {
+    if (session.token == null) {
       return null;
     }
 
-    //TODO: check for expiry etc (or via interceptor)
     try {
       final result = await client.get('/user/me');
 
@@ -81,17 +79,9 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
         data: {'email': email, 'password': password},
       );
 
-      final String? accessToken = result['access'];
-      final String? refreshToken = result['refresh'];
+      final token = SessionToken.fromJson(result);
 
-      if (accessToken == null || refreshToken == null) {
-        throw const ServerException("Access/Refresh token is null");
-      }
-
-      session.setToken(accessToken, refreshToken);
-
-      await storage.setString(StorageKey.authAccessToken, accessToken);
-      await storage.setString(StorageKey.authRefreshToken, refreshToken);
+      session.setToken(token);
 
       final user = await currentUser();
 

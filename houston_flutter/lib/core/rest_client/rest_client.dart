@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:houston_flutter/config/env.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
+import 'package:houston_flutter/core/utils/debugger_utils.dart';
+import 'package:houston_flutter/features/auth/domain/models/session_token.dart';
 
 enum HttpMethod { get, post, patch, delete }
 
@@ -15,16 +17,12 @@ class RestClient {
 
   String get type => kIsWeb ? 'web' : 'app';
 
-  BaseOptions _options({bool withAuth = true}) {
-    if (withAuth && session.accessToken != null) {}
+  BaseOptions get _options {
     return BaseOptions(
       baseUrl: Env.apiBaseUrl,
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
         HttpHeaders.acceptHeader: "application/json",
-        ...withAuth && session.accessToken != null
-            ? {HttpHeaders.authorizationHeader: "Bearer ${session.accessToken}"}
-            : {},
       },
     );
   }
@@ -37,6 +35,35 @@ class RestClient {
     return path;
   }
 
+  _authInterceptor({bool withAuth = true}) {
+    return InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        if (withAuth && session.token != null) {
+          String accessToken = session.token!.access;
+
+          if (session.token!.accessIsExpired) {
+            final dio = Dio(_options);
+            final result = await dio.post(
+              "/auth/token/refresh/",
+              data: {'refresh': session.token!.refresh},
+            );
+            final newToken = SessionToken.fromJson(result.data);
+            accessToken = newToken.access;
+
+            session.setToken(newToken);
+          }
+
+          options.headers['Authorization'] = 'Bearer $accessToken';
+        }
+        return handler.next(options);
+      },
+      onError: (DioException e, handler) async {
+        Debugger.error("Dio Exception intercepted", e);
+        return handler.next(e);
+      },
+    );
+  }
+
   Future<Map<String, dynamic>> _handle({
     required HttpMethod method,
     required String path,
@@ -46,29 +73,47 @@ class RestClient {
   }) async {
     try {
       late Response<dynamic> response;
+
+      final dio = Dio(_options);
+      dio.interceptors.add(_authInterceptor(withAuth: withAuth));
+
       switch (method) {
         case HttpMethod.get:
-          response = await Dio(
-            _options(withAuth: withAuth),
-          ).get(cleanPath ? _cleanPath(path) : path, queryParameters: data);
+          response = await dio.get(
+            cleanPath ? _cleanPath(path) : path,
+            queryParameters: data,
+          );
         case HttpMethod.post:
-          response = await Dio(
-            _options(withAuth: withAuth),
-          ).post(cleanPath ? _cleanPath(path) : path, data: data);
+          response = await dio.post(
+            cleanPath ? _cleanPath(path) : path,
+            data: data,
+          );
         case HttpMethod.patch:
-          response = await Dio(
-            _options(withAuth: withAuth),
-          ).patch(cleanPath ? _cleanPath(path) : path, data: data);
+          response = await dio.patch(
+            cleanPath ? _cleanPath(path) : path,
+            data: data,
+          );
         case HttpMethod.delete:
-          await Dio(
-            _options(withAuth: withAuth),
-          ).delete(cleanPath ? _cleanPath(path) : path);
+          await dio.delete(cleanPath ? _cleanPath(path) : path);
           return {};
       }
 
       return response.data;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        print('HTTP Error: ${e.response?.statusCode}');
+        print('Response data: ${e.response?.data}');
+
+        throw ServerException(
+          "${e.response?.statusCode} Error: ${e.response?.data}",
+        );
+      } else {
+        print('Error message!!!: ${e.message}');
+        throw const ServerException("Error: An unknown problem occurred");
+      }
     } catch (e) {
-      throw ServerException(e.toString());
+      print(e);
+      throw const ServerException("Error: An unknown problem occurred");
     }
   }
 

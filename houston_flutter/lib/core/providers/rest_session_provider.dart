@@ -1,5 +1,8 @@
 import 'package:houston_flutter/core/models/rest_session_state.dart';
 import 'package:houston_flutter/core/providers/storage_provider.dart';
+import 'package:houston_flutter/features/auth/domain/models/session_token.dart';
+import 'package:houston_flutter/features/auth/domain/providers/auth_datasource_provider.dart';
+import 'package:houston_flutter/features/auth/presentation/providers/auth_provider.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
@@ -27,6 +30,12 @@ class RestSession extends _$RestSession {
       return;
     }
 
+    final token = SessionToken(
+      access: storedAccessToken,
+      refresh: storedRefreshToken,
+    );
+
+    //TODO: handle expired tokens and such
     // if (isTokenExpired(storedAccessToken)) {
     //   if (isTokenExpired(storedRefreshToken)) {
     //     ref.read(storageProvider).removeString(StorageKey.authAccessToken);
@@ -40,27 +49,37 @@ class RestSession extends _$RestSession {
     //   return;
     // }
 
-    setToken(storedAccessToken, storedRefreshToken);
+    setToken(token);
+
+    try {
+      await ref.read(authDataSourceProvider).currentUser();
+    } catch (e) {
+      state = RestSessionStateInitial();
+    }
   }
 
   bool isTokenExpired(String token) {
     return JwtDecoder.isExpired(token);
   }
 
-  void setToken(String accessToken, String refreshToken) {
-    state = RestSessionStateActive(
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    );
+  void setToken(SessionToken token) {
+    state = RestSessionStateActive(token: token);
+
+    ref
+        .read(storageProvider)
+        .setString(StorageKey.authAccessToken, token.access);
+    ref
+        .read(storageProvider)
+        .setString(StorageKey.authRefreshToken, token.refresh);
   }
 
   void clearToken() {
     state = RestSessionStateInitial();
   }
 
-  String? get accessToken {
+  SessionToken? get token {
     if (state is RestSessionStateActive) {
-      return (state as RestSessionStateActive).accessToken;
+      return (state as RestSessionStateActive).token;
     }
     return null;
   }
