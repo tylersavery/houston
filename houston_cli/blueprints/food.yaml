@@ -18,3 +18,4 @@ properties:
     type: url
     image: true
     allowBlank: true
+    imagePreview: true

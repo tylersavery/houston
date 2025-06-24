@@ -22,6 +22,11 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DetailWidget extends StatelessWidget
       mainAxisSize: MainAxisSize.min,
       children: [
         Text({{#camelCase}}{{name}}{{/camelCase}}.label),
+        {{#imagePreview}}if ({{#camelCase}}{{name}}{{/camelCase}}.{{.}}.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Image.network({{#camelCase}}{{name}}{{/camelCase}}.{{.}}, height: 200),
+          ),{{/imagePreview}}
         Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),
         {{#uiDescription}}Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),{{/uiDescription}}
         {{#relationshipChildren}}

@@ -14,6 +14,7 @@ class BlueprintProperty {
   final bool allowNull;
   final int? uiHeading;
   final bool uiDescription;
+  final bool imagePreview;
   final bool isImage;
   final bool orderable;
 
@@ -28,6 +29,7 @@ class BlueprintProperty {
     this.defaultValue,
     this.uiHeading,
     this.uiDescription = false,
+    this.imagePreview = false,
     this.orderable = false,
   });
 
@@ -52,6 +54,7 @@ class BlueprintProperty {
       uiHeading: data['uiHeading'],
       isImage: data['image'] ?? false,
       uiDescription: data['uiDescription'] == true,
+      imagePreview: data['imagePreview'] == true,
       orderable: data['orderable'] == true,
     );
   }

@@ -19,9 +19,11 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}ListTileWidget extends StatelessWidg
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+         {{#imagePreview}}leading: {{#camelCase}}{{name}}{{/camelCase}}.{{.}}.isNotEmpty ? Image.network({{#camelCase}}{{name}}{{/camelCase}}.{{.}}, width: 32, height: 32, fit: BoxFit.contain,) : Container(width: 32, height: 32, color: Colors.white24,),{{/imagePreview}}
         {{#uiHeading1}}title: Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),{{/uiHeading1}}
         {{^uiHeading1}}title: Text({{#camelCase}}{{name}}{{/camelCase}}.label),{{/uiHeading1}}
         {{#uiHeading2}}subtitle: Text({{#camelCase}}{{name}}{{/camelCase}}.{{.}}),{{/uiHeading2}}
+
         onTap: () {
           if (onPressed != null) {
             onPressed!({{#camelCase}}{{name}}{{/camelCase}});

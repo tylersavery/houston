@@ -195,7 +195,7 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
         continue;
       }
       if (Constants.formElementTypes.contains(property.type)) {
-        if (property.isStringish) {
+        if (property.isStringish && property.type != 'url') {
           items.add(
               "${camelCase(property.name)}: ${camelCase(property.name)}Controller.text");
         } else if (property.type == 'int') {
@@ -364,6 +364,15 @@ ListTile(
 
   String? get uiDescription {
     final property = properties.firstWhereOrNull((p) => p.uiDescription);
+
+    if (property != null) {
+      return _uiPropertyFormatted(property);
+    }
+    return null;
+  }
+
+  String? get imagePreview {
+    final property = properties.firstWhereOrNull((p) => p.imagePreview);
 
     if (property != null) {
       return _uiPropertyFormatted(property);
@@ -562,6 +571,7 @@ ListTile(
       'uiHeading1': uiHeading1 ?? false,
       'uiHeading2': uiHeading2 ?? false,
       'uiDescription': uiDescription ?? false,
+      'imagePreview': imagePreview ?? false,
       'mapperImports': mapperImports,
       'dtoToModelFields': dtoToModelFields,
       'modelToDtoFields': modelToDtoFields,
