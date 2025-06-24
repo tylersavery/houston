@@ -37,7 +37,7 @@ Next Tasks
 
 [x] generating image upload widget scaffold code (see food.yaml)
 
-[ ] resend verification code
+[x] resend verification code
 
 [ ] sending emails (email confirmation/password reset)
 
@@ -61,6 +61,10 @@ Medium Tasks
 
 [x] password reset
 
+[ ] unique usernames (django)
+
+[ ] username validation api
+
 
 
 Minor Tasks
@@ -68,6 +72,8 @@ Minor Tasks
 
 
 [ ] docs for blueprint config / examples
+
+[ ]remove django OTP?
 
 [ ] validate blueprint (auto gen fields aren't used)
 

@@ -68,11 +68,18 @@ class VerificationForm extends ConsumerWidget {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {
-                  //TODO: Implement verification code resend
-                  Debugger.warning(
-                    "Resending verification code not implemented",
-                  );
+                onTap: () async {
+                  final success = await ref
+                      .read(authProvider.notifier)
+                      .resendEmailVerificationCode(email: state.email);
+
+                  if (context.mounted) {
+                    if (success) {
+                      Toast.message(context, "Verification code sent!");
+                    } else {
+                      Toast.error(context, "A problem ocurred");
+                    }
+                  }
                 },
                 child: RichText(
                   text: TextSpan(

@@ -30,4 +30,8 @@ abstract interface class AuthRepository {
     required String verificationCode,
     required String newPassword,
   });
+
+  Future<Either<Failure, void>> resendEmailVerificationCode({
+    required String email,
+  });
 }

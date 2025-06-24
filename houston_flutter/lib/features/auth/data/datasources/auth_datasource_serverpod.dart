@@ -187,4 +187,10 @@ class AuthDataSourceServerpodImpl implements AuthDataSource {
     // TODO: implement completePasswordReset
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> resendEmailVerificationCode({required String email}) {
+    // TODO: implement resendEmailVerificationCode
+    throw UnimplementedError();
+  }
 }

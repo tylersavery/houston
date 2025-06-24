@@ -25,4 +25,6 @@ abstract interface class AuthDataSource {
     required String verificationCode,
     required String newPassword,
   });
+
+  Future<void> resendEmailVerificationCode({required String email});
 }

@@ -6,6 +6,7 @@ from api.auth.email.serializers import (
     EmailAvailableSerializer,
     EmailValidateSerializer,
     ConfirmEmailSerializer,
+    RsendEmailVerificationSerializer,
 )
 from api.permissions import AllowAny
 from project.utils.email import is_email_available
@@ -58,3 +59,25 @@ class ConfirmEmailView(GenericAPIView):
         user.save()
 
         return Response({"confirmed": True}, status.HTTP_200_OK)
+
+
+class ResendEmailVerificationCode(GenericAPIView):
+
+    permission_classes = [AllowAny]
+    serializer_class = RsendEmailVerificationSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        email = serializer.validated_data.get("email")
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({}, status.HTTP_204_NO_CONTENT)
+
+        # TODO: send this code in an email
+        print(user.email_confirmation_code)
+
+        return Response({}, status.HTTP_204_NO_CONTENT)

@@ -12,3 +12,7 @@ class EmailValidateSerializer(serializers.Serializer):
 class ConfirmEmailSerializer(serializers.Serializer):
     email = serializers.EmailField()
     verification_code = serializers.CharField()
+
+
+class RsendEmailVerificationSerializer(serializers.Serializer):
+    email = serializers.EmailField()

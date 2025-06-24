@@ -64,6 +64,38 @@ class CompletePasswordResetForm extends ConsumerWidget {
                 child: const Text("Submit"),
               ),
               const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () async {
+                  final success = await ref
+                      .read(authProvider.notifier)
+                      .resendEmailVerificationCode(email: state.email);
+
+                  if (context.mounted) {
+                    if (success) {
+                      Toast.message(context, "Verification code sent!");
+                    } else {
+                      Toast.error(context, "A problem ocurred");
+                    }
+                  }
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: "Didn't receive a code? ",
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: [
+                      TextSpan(
+                        text: 'Resend',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          color: Colors.pink,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         );

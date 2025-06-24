@@ -113,4 +113,17 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> resendEmailVerificationCode({
+    required String email,
+  }) async {
+    try {
+      await dataSource.resendEmailVerificationCode(email: email);
+
+      return right(null);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
 }

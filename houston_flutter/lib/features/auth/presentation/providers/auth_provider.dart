@@ -194,4 +194,19 @@ class Auth extends _$Auth {
       },
     );
   }
+
+  Future<bool> resendEmailVerificationCode({required String email}) async {
+    final result = await ref
+        .read(authRepositoryProvider)
+        .resendEmailVerificationCode(email: email);
+
+    return result.fold(
+      (failure) {
+        return false;
+      },
+      (_) {
+        return true;
+      },
+    );
+  }
 }

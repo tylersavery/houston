@@ -143,4 +143,16 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
       throw ServerException(e.toString());
     }
   }
+
+  @override
+  Future<void> resendEmailVerificationCode({required String email}) async {
+    try {
+      await client.post(
+        "/auth/email/send-verification-code/",
+        data: {'email': email},
+      );
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
 }
