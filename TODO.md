@@ -58,6 +58,10 @@ Medium Tasks
 
 [ ] additonal auth (password reset etc)
 
+[x] register
+
+[x] password reset
+
 
 
 Minor Tasks
@@ -76,3 +80,9 @@ Minor Tasks
 
 [x] double check delete invalidate / redirect
  
+
+
+
+Future Tasks (non Django)
+[ ] password reset serverpod
+[ ] password reset supabase
