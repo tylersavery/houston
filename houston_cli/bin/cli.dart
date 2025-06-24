@@ -5,14 +5,14 @@ import 'package:houston_cli/scaffold_feature.dart';
 Future<void> main(List<String> args) async {
   scaffoldFeature(
     name: "food",
-    generateServer: true,
+    generateServer: false,
     generateFlutter: true,
-    generateMigrations: true,
+    generateMigrations: false,
     runMigrations: false,
-    updateRoutes: true,
-    updateNavigation: true,
-    runPostGenerator: true,
-    runPostFormatter: true,
+    updateRoutes: false,
+    updateNavigation: false,
+    runPostGenerator: false,
+    runPostFormatter: false,
   );
 
   return;

@@ -136,7 +136,8 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
         continue;
       }
 
-      if (!Constants.formElementTypes.contains(property.type)) {
+      if (!Constants.formElementTypes.contains(property.type) ||
+          property.type == "url") {
         if (property.name == 'createdAt' || property.name == 'updatedAt') {
           continue;
         }
@@ -255,8 +256,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       }
 
       if (Constants.formElementTypes.contains(property.type)) {
-        final value = property.type == 'text'
-            ? """
+        late String value;
+        switch (property.type) {
+          case "text":
+            value = """
 TextFormField(
                 controller: provider.${camelCase(property.name)}Controller,
                 ${!property.allowBlank && !property.allowNull ? 'validator: provider.${camelCase(property.name)}Validator,' : ''}
@@ -264,19 +267,10 @@ TextFormField(
                 minLines: 3,
                 maxLines: 3,
               ),
-"""
-            : """
-TextFormField(
-                controller: provider.${camelCase(property.name)}Controller,
-                ${!property.allowBlank && !property.allowNull ? 'validator: provider.${camelCase(property.name)}Validator,' : ''}
-                decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
-              ),
 """;
-        items.add(value);
-      } else if (property.type.toLowerCase() == "datetime") {
-        //TODO: handle if needed
-      } else if (property.isImage) {
-        final value = """
+            break;
+          case "url":
+            value = """
 Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
       child: ImageUploadWidget(
@@ -291,7 +285,23 @@ Padding(
       ),
     ),
 """;
+            break;
+          case "char":
+          case "int":
+          case "double":
+          default:
+            value = """
+TextFormField(
+                controller: provider.${camelCase(property.name)}Controller,
+                ${!property.allowBlank && !property.allowNull ? 'validator: provider.${camelCase(property.name)}Validator,' : ''}
+                decoration: const InputDecoration(label: Text("${titleCase(property.name)}")),
+              ),
+""";
+        }
+
         items.add(value);
+      } else if (property.type.toLowerCase() == "datetime") {
+        //TODO: handle if needed
       } else if (property.type.toLowerCase() != "profile") {
         final uiHeading =
             properties.firstWhereOrNull((p) => p.uiHeading == 1)?.name ?? 'uid';
