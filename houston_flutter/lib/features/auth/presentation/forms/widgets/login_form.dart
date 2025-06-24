@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:houston_flutter/core/theme/buttons.dart';
+import 'package:houston_flutter/features/auth/presentation/screens/request_password_reset_screen.dart';
 import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import '../../../../../core/widgets/loader.dart';
 import '../../../../../core/utils/toast_utils.dart';
@@ -59,6 +61,17 @@ class LoginForm extends ConsumerWidget {
                 controller: provider.passwordController,
                 decoration: const InputDecoration(hintText: 'Password'),
                 obscureText: true,
+              ),
+              const SizedBox(height: 20),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: AppButton(
+                  label: "Forgot Password",
+                  type: AppButtonType.Text,
+                  onPressed: () {
+                    context.push(RequestPasswordResetScreen.route());
+                  },
+                ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(

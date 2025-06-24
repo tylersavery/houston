@@ -155,4 +155,43 @@ class Auth extends _$Auth {
       },
     );
   }
+
+  Future<void> requestPasswordReset({required String email}) async {
+    final result = await ref
+        .read(authRepositoryProvider)
+        .requestPasswordReset(email: email);
+
+    result.fold(
+      (failure) {
+        state = AuthStateFailure(failure.message);
+      },
+      (_) {
+        state = AuthStatePasswordResetRequested(email: email);
+      },
+    );
+  }
+
+  Future<void> completePasswordReset({
+    required String email,
+    required String verificationCode,
+    required String newPassword,
+  }) async {
+    final result = await ref
+        .read(authRepositoryProvider)
+        .completePasswordReset(
+          email: email,
+          verificationCode: verificationCode,
+          newPassword: newPassword,
+        );
+
+    result.fold(
+      (failure) {
+        state = AuthStateFailure(failure.message);
+      },
+      (user) {
+        ref.read(currentUserProvider.notifier).updateUser(user);
+        state = AuthStateSuccess(user);
+      },
+    );
+  }
 }

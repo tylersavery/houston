@@ -38,6 +38,10 @@ Next Tasks
 
 [ ] generating image upload widget scaffold code (see food.yaml)
 
+[ ] resend verification code
+
+[ ] sending emails (email confirmation/password reset)
+
 
 Big Tasks
 

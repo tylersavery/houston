@@ -119,4 +119,20 @@ class AuthDataSourceSupabaseImpl implements AuthDataSource {
   Future<void> logout() async {
     await client.auth.signOut();
   }
+
+  @override
+  Future<void> requestPasswordReset({required String email}) {
+    // TODO: implement requestPasswordReset
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User> completePasswordReset({
+    required String email,
+    required String verificationCode,
+    required String newPassword,
+  }) {
+    // TODO: implement completePasswordReset
+    throw UnimplementedError();
+  }
 }

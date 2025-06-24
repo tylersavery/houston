@@ -1,3 +1,5 @@
+import 'package:houston_flutter/features/auth/presentation/screens/complete_password_reset_screen.dart';
+import 'package:houston_flutter/features/auth/presentation/screens/request_password_reset_screen.dart';
 import 'package:houston_flutter/features/movie/presentation/movie_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +32,14 @@ GoRouter router(RouterRef ref) {
         path: VerificationScreen.route(),
         builder: (context, state) => const VerificationScreen(),
       ),
+      GoRoute(
+        path: RequestPasswordResetScreen.route(),
+        builder: (context, state) => const RequestPasswordResetScreen(),
+      ),
+      GoRoute(
+        path: CompletePasswordResetScreen.route(),
+        builder: (context, state) => const CompletePasswordResetScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return Dashboard(navigationShell: navigationShell);
@@ -51,6 +61,8 @@ GoRouter router(RouterRef ref) {
         LoginScreen.route(),
         RegisterScreen.route(),
         VerificationScreen.route(),
+        RequestPasswordResetScreen.route(),
+        CompletePasswordResetScreen.route(),
       ];
 
       if (!publicRoutes.contains(state.matchedLocation)) {

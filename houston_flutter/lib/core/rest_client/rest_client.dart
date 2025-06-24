@@ -98,7 +98,7 @@ class RestClient {
           return {};
       }
 
-      return response.data;
+      return response.data ?? {};
     } on DioException catch (e) {
       if (e.response != null) {
         print('HTTP Error: ${e.response?.statusCode}');

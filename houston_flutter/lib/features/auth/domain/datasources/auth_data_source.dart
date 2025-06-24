@@ -17,4 +17,12 @@ abstract interface class AuthDataSource {
   Future<User> login({required String email, required String password});
 
   Future<void> logout();
+
+  Future<void> requestPasswordReset({required String email});
+
+  Future<User> completePasswordReset({
+    required String email,
+    required String verificationCode,
+    required String newPassword,
+  });
 }

@@ -14,6 +14,7 @@ class RegisterAccountSerializer(serializers.ModelSerializer):
 
         user = User.objects.create_user(**validated_data)
 
+        # TODO: send this code in an email
         print(user.email_confirmation_code)
 
         return user

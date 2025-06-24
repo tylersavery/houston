@@ -100,4 +100,47 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
     await storage.removeString(StorageKey.authRefreshToken);
     session.clearToken();
   }
+
+  @override
+  Future<void> requestPasswordReset({required String email}) async {
+    try {
+      await client.post(
+        "/auth/password/reset/request/",
+        data: {'email': email},
+      );
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<User> completePasswordReset({
+    required String email,
+    required String verificationCode,
+    required String newPassword,
+  }) async {
+    try {
+      final result = await client.post(
+        "/auth/password/reset/complete/",
+        data: {
+          'email': email,
+          'verification_code': verificationCode,
+          'new_password': newPassword,
+        },
+      );
+
+      final token = SessionToken.fromJson(result);
+
+      session.setToken(token);
+
+      final user = await currentUser();
+
+      if (user == null) {
+        throw const ServerException("Could not fetch user");
+      }
+      return user;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
 }

@@ -30,3 +30,8 @@ final class AuthStateFailure extends AuthState {
   final String message;
   const AuthStateFailure(this.message);
 }
+
+final class AuthStatePasswordResetRequested extends AuthState {
+  final String email;
+  const AuthStatePasswordResetRequested({required this.email});
+}

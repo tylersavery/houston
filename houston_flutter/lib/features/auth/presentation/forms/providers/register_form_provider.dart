@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:houston_flutter/core/utils/validation_utils.dart';
 import '../../providers/auth_provider.dart';
 
 class RegisterFormProvider {
@@ -12,13 +13,8 @@ class RegisterFormProvider {
   final passwordController = TextEditingController(text: "younotry");
   final formKey = GlobalKey<FormState>();
 
-  String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Email Required";
-    }
-
-    return null;
-  }
+  String? emailValidator(String? value) =>
+      ValidationUtils.formValidatorEmail(value);
 
   String? usernameValidator(String? value) {
     if (value == null || value.isEmpty) {
