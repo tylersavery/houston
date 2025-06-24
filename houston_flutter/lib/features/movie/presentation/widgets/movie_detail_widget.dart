@@ -9,7 +9,15 @@ class MovieDetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [Text(movie.label), Text(movie.year.toString())],
+      children: [
+        Text(movie.label, style: Theme.of(context).textTheme.bodyLarge),
+        if (movie.imageUrl.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Image.network(movie.imageUrl, height: 200),
+          ),
+        Text(movie.year.toString()),
+      ],
     );
   }
 }

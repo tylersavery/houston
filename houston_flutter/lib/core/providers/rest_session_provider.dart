@@ -54,6 +54,10 @@ class RestSession extends _$RestSession {
     );
   }
 
+  void clearToken() {
+    state = RestSessionStateInitial();
+  }
+
   String? get accessToken {
     if (state is RestSessionStateActive) {
       return (state as RestSessionStateActive).accessToken;

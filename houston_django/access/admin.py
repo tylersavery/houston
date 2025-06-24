@@ -27,7 +27,15 @@ class UserAdmin(OverridesMixin, BaseUserAdmin):
 
     autocomplete_fields = []
     search_fields = ["number", "name", "email"]
-    readonly_fields = ["id", "uuid", "user_id", "is_setup", "created_at", "updated_at"]
+    readonly_fields = [
+        "id",
+        "uuid",
+        "user_id",
+        "is_setup",
+        "created_at",
+        "updated_at",
+        "email_confirmation_code",
+    ]
 
     list_display = [
         "email",
@@ -98,6 +106,8 @@ class UserAdmin(OverridesMixin, BaseUserAdmin):
                     "is_setup",
                     "is_active",
                     "is_admin",
+                    "email_confirmation_code",
+                    "email_is_confirmed",
                     "password",
                 ]
             },

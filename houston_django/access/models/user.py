@@ -11,7 +11,7 @@ from project.validators import TypeValidator
 
 from project.fields import CIEmailField
 from project.models import AbstractModel
-from project.utils.string import split_name, get_random_string
+from project.utils.string import generate_random_digits, split_name, get_random_string
 from project.utils.uuid import get_uuid
 
 
@@ -92,6 +92,9 @@ class User(AbstractModel, AbstractBaseUser):
     )
 
     bio = models.TextField(blank=True)
+
+    email_confirmation_code = models.CharField(default=generate_random_digits)
+    email_is_confirmed = models.BooleanField(default=False)
 
     last_login = None
 

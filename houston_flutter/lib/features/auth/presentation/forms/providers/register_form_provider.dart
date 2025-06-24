@@ -7,9 +7,9 @@ class RegisterFormProvider {
 
   RegisterFormProvider(this.ref);
 
-  final emailController = TextEditingController();
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: "tyler2@tylersavery.com");
+  final usernameController = TextEditingController(text: "tyler");
+  final passwordController = TextEditingController(text: "younotry");
   final formKey = GlobalKey<FormState>();
 
   String? emailValidator(String? value) {

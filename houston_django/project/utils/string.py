@@ -8,6 +8,10 @@ def get_random_string(characters, length):
     return "".join(random.choice(characters) for _ in range(length))
 
 
+def generate_random_digits(length=6):
+    return "".join(random.choices(string.digits, k=length))
+
+
 def generate_token(length=16):
     chars = string.ascii_letters + string.digits
     return "".join(secrets.choice(chars) for _ in range(length))

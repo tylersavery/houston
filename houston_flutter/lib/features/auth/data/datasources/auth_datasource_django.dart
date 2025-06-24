@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 import 'package:houston_flutter/core/providers/storage_provider.dart';
@@ -35,18 +37,40 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
     required String email,
     required String username,
     required String password,
-  }) {
-    // TODO: implement register
-    throw UnimplementedError();
+  }) async {
+    try {
+      await client.post(
+        "/auth/register/",
+        data: {'email': email, 'username': username, 'password': password},
+      );
+
+      await login(email: email, password: password);
+
+      return true;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override
   Future<User> confirmRegistration({
     required String email,
     required String verificationCode,
-  }) {
-    // TODO: implement confirmRegistration
-    throw UnimplementedError();
+  }) async {
+    try {
+      await client.post(
+        "/auth/email/confirm/",
+        data: {'email': email, 'verification_code': verificationCode},
+      );
+
+      final user = await currentUser();
+      if (user != null) {
+        return user;
+      }
+      throw const ServerException("User data retrieval failed");
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override
@@ -81,8 +105,9 @@ class AuthDataSourceDjangoImpl implements AuthDataSource {
   }
 
   @override
-  Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<void> logout() async {
+    await storage.removeString(StorageKey.authAccessToken);
+    await storage.removeString(StorageKey.authRefreshToken);
+    session.clearToken();
   }
 }

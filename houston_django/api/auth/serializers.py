@@ -14,6 +14,8 @@ class RegisterAccountSerializer(serializers.ModelSerializer):
 
         user = User.objects.create_user(**validated_data)
 
+        print(user.email_confirmation_code)
+
         return user
 
     def to_representation(self, instance):
@@ -25,7 +27,5 @@ class RegisterAccountSerializer(serializers.ModelSerializer):
         fields = [
             "email",
             "password",
-            "number",
             "username",
-            "name",
         ]
