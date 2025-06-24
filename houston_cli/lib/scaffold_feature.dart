@@ -233,8 +233,9 @@ Future<void> scaffoldFeature({
 
     if (generateMigrations == true) {
       print(white("Generating Django Migrations"));
-      final args = "manage.py makemigrations".split(" ");
-      final result = await Process.run("./venv/bin/python", args,
+      final args =
+          "compose exec web python manage.py makemigrations".split(" ");
+      final result = await Process.run("docker", args,
           workingDirectory: FileUtils.djangoRootDir);
 
       print(yellow(result.stdout));

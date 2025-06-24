@@ -88,7 +88,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}DataSourceSupabaseImpl implements {{
         final result = await client.from("{{#snakeCase}}{{name}}{{/snakeCase}}").insert({{#camelCase}}{{name}}{{/camelCase}}.toJson()).select(defaultSelect).single();
         return {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(result);
       } else {
-        final result = await client.from("{{#snakeCase}}{{name}}{{/snakeCase}}").update({{#camelCase}}{{name}}{{/camelCase}}.toJson()).match({"id": {{#camelCase}}{{name}}{{/camelCase}}.id}).select(defaultSelect).single();
+        final result = await client.from("{{#snakeCase}}{{name}}{{/snakeCase}}").update({{#camelCase}}{{name}}{{/camelCase}}.toJson()).match({"id": {{#camelCase}}{{name}}{{/camelCase}}.id!}).select(defaultSelect).single();
         return {{#pascalCase}}{{name}}{{/pascalCase}}.fromJson(result);
       }
     } catch (e) {

@@ -1,25 +1,20 @@
 name: food
 properties:
-  -
-    name: name
+  - name: name
     type: char
     maxLength: 100
     uiHeading: 1
-  - 
-    name: price
+  - name: price
     type: double
     uiHeading: 2
     orderable: true
-  -
-    name: description
+  - name: description
     type: text
     uiDescription: true
-  -
-    name: calories
+  - name: calories
     type: int
     orderable: true
-  -
-    name: imageUrl
+  - name: imageUrl
     type: url
     image: true
-  
+    allowBlank: true
