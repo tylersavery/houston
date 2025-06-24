@@ -1,6 +1,7 @@
 from project.settings.environment import ENV
 
 EMAIL_ENABLED = ENV.bool("EMAIL_ENABLED", default=False)
+EMAIL_DEBUG_MODE = ENV.bool("EMAIL_DEBUG_MODE", default=False)
 EMAIL_FROM = ENV.str("EMAIL_FROM")
 DEFAULT_FROM_EMAIL = EMAIL_FROM
 EMAIL_HOST = ENV.str("EMAIL_HOST")

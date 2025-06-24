@@ -11,6 +11,7 @@ from api.auth.email.serializers import (
 from api.permissions import AllowAny
 from project.utils.email import is_email_available
 from access.models import User
+from connect.email.tasks import send_email_confirmation_code
 
 
 class EmailAvailableView(GenericAPIView):
@@ -77,7 +78,6 @@ class ResendEmailVerificationCode(GenericAPIView):
         except User.DoesNotExist:
             return Response({}, status.HTTP_204_NO_CONTENT)
 
-        # TODO: send this code in an email
-        print(user.email_confirmation_code)
+        send_email_confirmation_code.apply_async(args=[user.pk])
 
         return Response({}, status.HTTP_204_NO_CONTENT)

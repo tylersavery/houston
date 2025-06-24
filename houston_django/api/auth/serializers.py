@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from api.user.serializers import UserSerializer
 from access.models import User
+from connect.email.tasks import send_email_confirmation_code
 
 
 class RegisterAccountSerializer(serializers.ModelSerializer):
@@ -14,8 +15,7 @@ class RegisterAccountSerializer(serializers.ModelSerializer):
 
         user = User.objects.create_user(**validated_data)
 
-        # TODO: send this code in an email
-        print(user.email_confirmation_code)
+        send_email_confirmation_code.apply_async(args=[user.pk])
 
         return user
 

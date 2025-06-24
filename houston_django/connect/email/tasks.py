@@ -5,10 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from project.celery import app
 from .client import send_email
-from access.models import OneTimePassword
-
-
-User = get_user_model()
+from access.models import OneTimePassword, User
 
 
 def build_context(**context):
@@ -33,5 +30,19 @@ def send_otp_email(user_pk: int):
     context = build_context(user=user, data={"code": otp.code})
 
     body = render_to_string("email/otp.html", context)
+
+    send_email(subject, body, user.email)
+
+
+@app.task()
+def send_email_confirmation_code(user_pk: int):
+    try:
+        user = User.objects.get(pk=user_pk)
+    except User.DoesNotExist:
+        return
+
+    subject = _("Verification Code")
+    context = build_context(user=user, data={"code": user.email_confirmation_code})
+    body = render_to_string("email/email_confirmation_code.html", context)
 
     send_email(subject, body, user.email)

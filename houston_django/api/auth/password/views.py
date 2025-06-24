@@ -11,6 +11,7 @@ from api.auth.password.serializers import (
     RequestPasswordResetSerializer,
 )
 from access.models import User
+from connect.email.tasks import send_email_confirmation_code
 
 
 class RequestPasswordResetView(GenericAPIView):
@@ -32,8 +33,7 @@ class RequestPasswordResetView(GenericAPIView):
         user.email_confirmation_code = generate_random_digits()
         user.save()
 
-        # TODO: send this in code an email
-        print(user.email_confirmation_code)
+        send_email_confirmation_code.apply_async(args=[user.pk])
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
