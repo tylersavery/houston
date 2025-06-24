@@ -56,7 +56,7 @@ Medium Tasks
 
 [ ] profile management
 
-[ ] additonal auth (password reset etc)
+[x] additonal auth (password reset etc)
 
 [x] register
 
