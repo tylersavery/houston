@@ -33,10 +33,9 @@ DONE
 
 Next Tasks
 
-[ ] queryset error in scaffold generation (ALL__QUERYSET)
--- TEST ^^^
+[x] queryset error in scaffold generation (ALL__QUERYSET)
 
-[ ] generating image upload widget scaffold code (see food.yaml)
+[x] generating image upload widget scaffold code (see food.yaml)
 
 [ ] resend verification code
 
