@@ -191,6 +191,5 @@ class FileUtils {
     }
 
     await sourceFile.copy(destinationPath);
-    print('Copied file to $destinationPath');
   }
 }
