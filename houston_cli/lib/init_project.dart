@@ -62,17 +62,34 @@ Future<void> initProject() async {
 }
 
 Future<void> handleBackendOption(int backendIndex) async {
+  final flutterFeatureBasePath =
+      "${FileUtils.bricksDir}/flutter_feature/__brick__";
+
   late String datasourceProviderName;
+
+  final List<String> filesToDelete = [];
 
   switch (backendIndex) {
     case 0: // "Django":
       datasourceProviderName = "flutter_datasource_provider_django.dart";
+      filesToDelete.add(
+          "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
+      filesToDelete.add(
+          "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
       break;
     case 1: // "Serverpod":
       datasourceProviderName = "flutter_datasource_provider_serverpod.dart";
+      filesToDelete.add(
+          "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
+      filesToDelete.add(
+          "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
       break;
     case 2: // "Supabase":
       datasourceProviderName = "flutter_datasource_provider_supabase.dart";
+      filesToDelete.add(
+          "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
+      filesToDelete.add(
+          "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
       break;
     case 3: // "Generate All":
       datasourceProviderName = "flutter_datasource_provider_all.dart";
@@ -81,6 +98,7 @@ Future<void> handleBackendOption(int backendIndex) async {
 
   await FileUtils.copyFileOverwrite(
       "${FileUtils.bricksDir}/dynamic_bricks/$datasourceProviderName",
-      "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart");
-  print("Done!");
+      "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart");
+
+  FileUtils.deleteFiles(filesToDelete);
 }

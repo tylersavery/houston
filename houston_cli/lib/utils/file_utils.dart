@@ -174,7 +174,7 @@ class FileUtils {
       }
     }
 
-    await source.delete(); // remove the original empty dir
+    await source.delete();
   }
 
   static Future<void> copyFileOverwrite(
@@ -191,5 +191,18 @@ class FileUtils {
     }
 
     await sourceFile.copy(destinationPath);
+  }
+
+  static void deleteFile(String sourcePath) {
+    final file = File(sourcePath);
+    if (file.existsSync()) {
+      file.deleteSync();
+    }
+  }
+
+  static void deleteFiles(List<String> sourcePaths) {
+    for (final sourcePath in sourcePaths) {
+      deleteFile(sourcePath);
+    }
   }
 }
