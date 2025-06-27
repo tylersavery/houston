@@ -1,8 +1,11 @@
+import 'package:houston_cli/config.dart';
 import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/models/blueprint_property.dart';
 import 'package:houston_cli/serializers/blueprint_serializer.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:collection/collection.dart';
+
+final config = HoustonConfig.getConfig();
 
 class FlutterBlueprintSerializer extends BlueprintSerializer {
   const FlutterBlueprintSerializer({required super.blueprint});
@@ -551,9 +554,8 @@ ListTile(
   Map<String, dynamic> serialize() {
     return {
       "serverBackendIsServerpod":
-          Constants.serverBackend == ServerBackendOption.serverpod,
-      "serverBackendIsSupabase":
-          Constants.serverBackend == ServerBackendOption.supabase,
+          config.backend == ServerBackendOption.serverpod,
+      "serverBackendIsSupabase": config.backend == ServerBackendOption.supabase,
       'name': name,
       'properties':
           properties.map<Map<String, dynamic>>((p) => p.serialize()).toList(),

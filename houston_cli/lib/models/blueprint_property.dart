@@ -1,8 +1,11 @@
 import 'package:dcli/dcli.dart';
+import 'package:houston_cli/config.dart';
 import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/models/kwarg.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:yaml/yaml.dart';
+
+final config = HoustonConfig.getConfig();
 
 class BlueprintProperty {
   final String name;
@@ -80,7 +83,7 @@ class BlueprintProperty {
   }
 
   List<Map<String, dynamic>> get _modelAnnotations {
-    if (Constants.serverBackend == ServerBackendOption.serverpod) {
+    if (config.backend == ServerBackendOption.serverpod) {
       return [];
     }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
+import 'package:houston_cli/config.dart';
 import 'package:houston_cli/constants.dart';
 import 'package:houston_cli/serializers/django_blueprint_serializer.dart';
 import 'package:houston_cli/serializers/flutter_blueprint_serializer.dart';
@@ -10,6 +11,8 @@ import 'package:houston_cli/serializers/supabase_blueprint_serializer.dart';
 import 'package:houston_cli/utils/file_utils.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 import 'package:mason/mason.dart' as mason;
+
+final config = HoustonConfig.getConfig();
 
 Future<void> scaffoldFeature({
   String? name,
@@ -25,8 +28,8 @@ Future<void> scaffoldFeature({
   name ??= ask("Feature Name:", required: true);
   generateServer ??= confirm("Generate Server Code?", defaultValue: true);
 
-  if (Constants.serverBackend == ServerBackendOption.serverpod ||
-      Constants.serverBackend == ServerBackendOption.django) {
+  if (config.backend == ServerBackendOption.serverpod ||
+      config.backend == ServerBackendOption.django) {
     generateMigrations ??=
         confirm("Generate DB Migrations", defaultValue: true);
     runMigrations ??= confirm("Run DB Migrations", defaultValue: true);

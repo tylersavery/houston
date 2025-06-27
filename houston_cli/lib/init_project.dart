@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io' as io;
 
 import 'package:dcli/dcli.dart';
+import 'package:houston_cli/config.dart';
 import 'package:houston_cli/utils/file_utils.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 
@@ -18,6 +19,16 @@ String? getProjectName() {
 }
 
 Future<void> initProject() async {
+  final config = HoustonConfig.getConfigOrNull();
+
+  if (config != null) {
+    print(red("Project already initialized"));
+    final shouldContinue = confirm("Reinitialize anyways?");
+    if (!shouldContinue) {
+      return;
+    }
+  }
+
   String? projectName;
 
   while (projectName == null) {

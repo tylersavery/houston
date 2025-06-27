@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io' as io;
 import 'package:dcli/dcli.dart';
+import 'package:houston_cli/config.dart';
 import 'package:houston_cli/init_project.dart';
 import 'package:houston_cli/scaffold_feature.dart';
 import 'package:houston_cli/utils/string_utils.dart';
 
 Future<void> main(List<String> args) async {
+  final config = HoustonConfig.getConfigOrNull();
+
   // scaffoldFeature(
   //   name: "food",
   //   generateServer: false,
