@@ -84,16 +84,16 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_serverpod.dart");
+          "${FileUtils.flutterDir}/lib/features/asset/data/datasources/asset_datasource_serverpod.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_supabase.dart");
+          "${FileUtils.flutterDir}/lib/features/asset/data/datasources/asset_datasource_supabase.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_serverpod.dart");
+          "${FileUtils.flutterDir}/lib/features/auth/data/datasources/auth_datasource_serverpod.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_supabase.dart");
+          "${FileUtils.flutterDir}/lib/features/auth/data/datasources/auth_datasource_supabase.dart");
 
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
@@ -107,16 +107,16 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_django.dart");
+          "${FileUtils.flutterDir}/lib/features/asset/data/datasources/asset_datasource_django.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_supabase.dart");
+          "${FileUtils.flutterDir}/lib/features/asset/data/datasources/asset_datasource_supabase.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_django.dart");
+          "${FileUtils.flutterDir}/lib/features/auth/data/datasources/auth_datasource_django.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_supabase.dart");
+          "${FileUtils.flutterDir}/lib/features/auth/data/datasources/auth_datasource_supabase.dart");
       break;
     case ServerBackendOption.supabase: // "Supabase":
       datasourceProviderName = "flutter_datasource_provider_supabase.dart";
@@ -128,14 +128,14 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_django.dart");
+          "${FileUtils.flutterDir}/lib/features/asset/data/datasources/asset_datasource_django.dart");
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_serverpod.dart");
+          "${FileUtils.flutterDir}/lib/features/asset/data/datasources/asset_datasource_serverpod.dart");
 
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_django.dart");
+          "${FileUtils.flutterDir}/lib/features/auth/data/datasources/auth_datasource_django.dart");
       filesToDelete.add(
-          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_serverpod.dart");
+          "${FileUtils.flutterDir}/lib/features/auth/data/datasources/auth_datasource_serverpod.dart");
 
       break;
     case ServerBackendOption.all: // "Generate All":
