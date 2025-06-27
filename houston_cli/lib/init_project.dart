@@ -68,6 +68,7 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
 
   late String datasourceProviderName;
   late String assetDatasourceProviderName;
+  late String authDatasourceProviderName;
 
   final List<String> filesToDelete = [];
 
@@ -75,20 +76,31 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
     case ServerBackendOption.django: // "Django":
       datasourceProviderName = "flutter_datasource_provider_django.dart";
       assetDatasourceProviderName = "asset_datasource_provider_django.dart";
+      authDatasourceProviderName = "auth_datasource_provider_django.dart";
+
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
       filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_serverpod.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_supabase.dart");
+
+      filesToDelete.add(
           "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_serverpod.dart");
 
       filesToDelete.add(
           "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_supabase.dart");
+
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
       datasourceProviderName = "flutter_datasource_provider_serverpod.dart";
       assetDatasourceProviderName = "asset_datasource_provider_serverpod.dart";
+      authDatasourceProviderName = "auth_datasource_provider_serverpod.dart";
+
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
       filesToDelete.add(
@@ -99,10 +111,18 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
 
       filesToDelete.add(
           "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_supabase.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_django.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_supabase.dart");
       break;
     case ServerBackendOption.supabase: // "Supabase":
       datasourceProviderName = "flutter_datasource_provider_supabase.dart";
       assetDatasourceProviderName = "asset_datasource_provider_supabase.dart";
+      authDatasourceProviderName = "auth_datasource_provider_supabase.dart";
+
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
       filesToDelete.add(
@@ -112,10 +132,16 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       filesToDelete.add(
           "${FileUtils.flutterDir}/lib/features/asset/data/asset_datasource_serverpod.dart");
 
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_django.dart");
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_serverpod.dart");
+
       break;
     case ServerBackendOption.all: // "Generate All":
       datasourceProviderName = "flutter_datasource_provider_all.dart";
       assetDatasourceProviderName = "asset_datasource_provider_all.dart";
+      authDatasourceProviderName = "auth_datasource_provider_all.dart";
       break;
   }
 
@@ -126,6 +152,10 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
   await FileUtils.copyFileOverwrite(
       "${FileUtils.cliDir}/flutter_files/asset/$assetDatasourceProviderName",
       "${FileUtils.flutterDir}/lib/features/asset/domain/providers/asset_datasource_provider.dart");
+
+  await FileUtils.copyFileOverwrite(
+      "${FileUtils.cliDir}/flutter_files/auth/$authDatasourceProviderName",
+      "${FileUtils.flutterDir}/lib/features/auth/domain/providers/auth_datasource_provider.dart");
 
   FileUtils.deleteFiles(filesToDelete);
 }
