@@ -39,14 +39,16 @@ Future<void> initProject() async {
 
   final backendResult = menu<ServerBackendOption>(
       "What backend option would you like to use",
-      options: backendOptions);
+      options: backendOptions,
+      format: (v) => v.label);
 
   final uiOptions = FrontendUiOption.values;
 
   final uiResult = menu<FrontendUiOption>(
       "What UI library would you like to use?",
       options: uiOptions,
-      defaultOption: uiOptions.first);
+      defaultOption: uiOptions.first,
+      format: (v) => v.label);
 
   final configData = {
     'name': projectName,

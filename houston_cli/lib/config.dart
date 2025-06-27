@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:houston_cli/utils/file_utils.dart';
 
 enum ServerBackendOption {
-  serverpod(0, "Serverpod"),
-  supabase(1, "Supabase"),
-  django(2, "Django"),
+  django(0, "Django"),
+  serverpod(1, "Serverpod"),
+  supabase(2, "Supabase"),
   all(3, "All"),
   ;
 
