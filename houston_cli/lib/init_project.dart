@@ -72,6 +72,7 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
   late String profileDatasourceProviderName;
 
   final List<String> filesToDelete = [];
+  final List<String> directoriesToDelete = [];
 
   switch (backendIndex) {
     case ServerBackendOption.django: // "Django":
@@ -92,6 +93,10 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_supabase.dart");
       }
+
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_client/");
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_server/");
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_supabase/");
 
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
@@ -114,6 +119,9 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_supabase.dart");
       }
 
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_django/");
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_supabase/");
+
       break;
     case ServerBackendOption.supabase: // "Supabase":
       datasourceProviderName = "flutter_datasource_provider_supabase.dart";
@@ -134,6 +142,10 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_serverpod.dart");
       }
+
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_client/");
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_server/");
+      directoriesToDelete.add("${FileUtils.houstonRoot}/houston_django/");
 
       break;
     case ServerBackendOption.all: // "Generate All":

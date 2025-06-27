@@ -205,4 +205,11 @@ class FileUtils {
       deleteFile(sourcePath);
     }
   }
+
+  static void deleteFolder(String sourcePath) {
+    final directory = Directory(sourcePath);
+    if (directory.existsSync()) {
+      directory.deleteSync(recursive: true);
+    }
+  }
 }

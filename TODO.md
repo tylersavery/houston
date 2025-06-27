@@ -39,6 +39,8 @@ Next Tasks
 
 [x] resend verification code
 
+[x] stripping out unused backends
+
 [ ] sending emails (email confirmation/password reset)
 
 
