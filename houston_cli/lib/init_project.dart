@@ -123,7 +123,7 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
           "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/data/mappers");
 
       fileContentsToDelete[
-          '${FileUtils.flutterDir}/lib/features/auth/presentation/auth_provider.dart'] = [
+          '${FileUtils.flutterDir}/lib/features/auth/presentation/providers/auth_provider.dart'] = [
         """import '../../../../core/providers/session_manager_provider.dart';""",
         """await ref.read(serverpodSessionManagerProvider).initialize();"""
       ];
@@ -175,7 +175,7 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_supabase/");
 
       fileContentsToDelete[
-          '${FileUtils.flutterDir}/lib/features/auth/presentation/auth_provider.dart'] = [
+          '${FileUtils.flutterDir}/lib/features/auth/presentation/providers/auth_provider.dart'] = [
         """import 'package:houston_flutter/core/providers/rest_session_provider.dart';""",
         """await ref.read(restSessionProvider.notifier).initialize();"""
       ];
@@ -227,7 +227,7 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
           "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/data/mappers");
 
       fileContentsToDelete[
-          '${FileUtils.flutterDir}/lib/features/auth/presentation/auth_provider.dart'] = [
+          '${FileUtils.flutterDir}/lib/features/auth/presentation/providers/auth_provider.dart'] = [
         """import '../../../../core/providers/session_manager_provider.dart';""",
         """import '../../../../core/providers/session_manager_provider.dart';""",
         """await ref.read(serverpodSessionManagerProvider).initialize();""",
