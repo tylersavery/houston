@@ -75,6 +75,19 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
   final List<String> directoriesToDelete = [];
   final Map<String, List<String>> fileContentsToDelete = {};
 
+  filesToDelete.add(
+      "${FileUtils.flutterDir}/lib/core/providers/rest_client_provider.dart");
+  filesToDelete.add(
+      "${FileUtils.flutterDir}/lib/core/providers/rest_session_provider.dart");
+
+  filesToDelete.add(
+      "${FileUtils.flutterDir}/lib/core/providers/serverpod_client_provider.dart");
+  filesToDelete.add(
+      "${FileUtils.flutterDir}/lib/core/providers/session_manager_provider.dart");
+
+  filesToDelete.add(
+      "${FileUtils.flutterDir}/lib/core/providers/supabase_client_provider.dart");
+
   switch (backendOption) {
     case ServerBackendOption.django: // "Django":
       datasourceProviderName = "flutter_datasource_provider_django.dart";
@@ -87,9 +100,9 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
-      filesToDelete.add(
+      filesToDelete.remove(
           "${FileUtils.flutterDir}/lib/core/providers/rest_client_provider.dart");
-      filesToDelete.add(
+      filesToDelete.remove(
           "${FileUtils.flutterDir}/lib/core/providers/rest_session_provider.dart");
 
       for (final feature in ['auth', 'asset', 'profile']) {
@@ -137,9 +150,9 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
-      filesToDelete.add(
+      filesToDelete.remove(
           "${FileUtils.flutterDir}/lib/core/providers/serverpod_client_provider.dart");
-      filesToDelete.add(
+      filesToDelete.remove(
           "${FileUtils.flutterDir}/lib/core/providers/session_manager_provider.dart");
 
       for (final feature in ['auth', 'asset', 'profile']) {
@@ -177,7 +190,7 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
 
-      filesToDelete.add(
+      filesToDelete.remove(
           "${FileUtils.flutterDir}/lib/core/providers/supabase_client_provider.dart");
 
       for (final feature in ['auth', 'asset', 'profile']) {
