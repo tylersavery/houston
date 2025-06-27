@@ -223,4 +223,8 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       "${FileUtils.flutterDir}/lib/features/profile/domain/providers/profile_datasource_provider.dart");
 
   FileUtils.deleteFiles(filesToDelete);
+
+  for (final dir in directoriesToDelete) {
+    FileUtils.deleteDirectory(dir);
+  }
 }
