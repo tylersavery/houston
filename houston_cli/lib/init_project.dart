@@ -67,39 +67,65 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       "${FileUtils.bricksDir}/flutter_feature/__brick__";
 
   late String datasourceProviderName;
+  late String assetDatasourceProviderName;
 
   final List<String> filesToDelete = [];
 
   switch (backendIndex) {
     case ServerBackendOption.django: // "Django":
       datasourceProviderName = "flutter_datasource_provider_django.dart";
+      assetDatasourceProviderName = "asset_datasource_provider_django.dart";
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_serverpod.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_supabase.dart");
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
       datasourceProviderName = "flutter_datasource_provider_serverpod.dart";
+      assetDatasourceProviderName = "asset_datasource_provider_serverpod.dart";
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_django.dart");
+
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_supabase.dart");
       break;
     case ServerBackendOption.supabase: // "Supabase":
       datasourceProviderName = "flutter_datasource_provider_supabase.dart";
+      assetDatasourceProviderName = "asset_datasource_provider_supabase.dart";
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_django.dart");
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/features/auth/data/auth_datasource_serverpod.dart");
+
       break;
     case ServerBackendOption.all: // "Generate All":
       datasourceProviderName = "flutter_datasource_provider_all.dart";
+      assetDatasourceProviderName = "asset_datasource_provider_all.dart";
       break;
   }
 
   await FileUtils.copyFileOverwrite(
       "${FileUtils.bricksDir}/dynamic_bricks/$datasourceProviderName",
       "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart");
+
+  await FileUtils.copyFileOverwrite(
+      "${FileUtils.cliDir}/flutter_files/$assetDatasourceProviderName",
+      "${FileUtils.flutterDir}/lib/features/auth/domain/providers/auth_datasource_provider.dart");
 
   FileUtils.deleteFiles(filesToDelete);
 }
