@@ -177,13 +177,10 @@ class FileUtils {
     await source.delete(); // remove the original empty dir
   }
 
-  static Future<void> moveFileOverwrite(
+  static Future<void> copyFileOverwrite(
       String sourcePath, String destinationPath) async {
     final sourceFile = File(sourcePath);
     final destinationFile = File(destinationPath);
-
-    print("Source: $sourceFile");
-    print("destinationFile: $destinationFile");
 
     if (!await sourceFile.exists()) {
       throw Exception('Source file does not exist: $sourcePath');
@@ -193,7 +190,7 @@ class FileUtils {
       await destinationFile.delete();
     }
 
-    await sourceFile.rename(destinationPath);
-    print('Moved file to $destinationPath');
+    await sourceFile.copy(destinationPath);
+    print('Copied file to $destinationPath');
   }
 }

@@ -79,7 +79,7 @@ Future<void> handleBackendOption(int backendIndex) async {
       break;
   }
 
-  await FileUtils.moveFileOverwrite(
+  await FileUtils.copyFileOverwrite(
       "${FileUtils.bricksDir}/dynamic_bricks/$datasourceProviderName",
       "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart");
   print("Done!");
