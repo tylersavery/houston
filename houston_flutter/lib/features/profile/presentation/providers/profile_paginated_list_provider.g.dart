@@ -13,16 +13,15 @@ String _$profilePaginatedListHash() =>
 @ProviderFor(ProfilePaginatedList)
 final profilePaginatedListProvider =
     NotifierProvider<ProfilePaginatedList, ProfilePaginatedListState>.internal(
-      ProfilePaginatedList.new,
-      name: r'profilePaginatedListProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$profilePaginatedListHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  ProfilePaginatedList.new,
+  name: r'profilePaginatedListProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$profilePaginatedListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$ProfilePaginatedList = Notifier<ProfilePaginatedListState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

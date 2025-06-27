@@ -16,6 +16,7 @@ class MovieSerializer(serializers.ModelSerializer):
             "year",
             "image_url",
             "created_at",
+            
         ]
 
         read_only_fields = [
@@ -23,4 +24,5 @@ class MovieSerializer(serializers.ModelSerializer):
             "uid",
             "created_at",
             "owner",
+            
         ]

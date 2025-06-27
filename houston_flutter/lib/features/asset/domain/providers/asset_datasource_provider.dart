@@ -3,8 +3,6 @@ import 'package:houston_flutter/features/asset/data/datasources/asset_datasource
 import 'package:houston_flutter/features/asset/domain/datasources/asset_data_source.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final assetDataSourceProvider = Provider<AssetDataSource>(
-  (ref) {
-    return AssetDataSourceDjangoImpl(ref.read(restClientProvider));
-  },
-);
+final assetDataSourceProvider = Provider<AssetDataSource>((ref) {
+  return AssetDataSourceDjangoImpl(ref.read(restClientProvider));
+});

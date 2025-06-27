@@ -1,3 +1,3 @@
 from content.models import Movie
 
-ALL__QUERYSET = Movie.objects.all()
+ALL_MOVIES_QUERYSET = Movie.objects.all()

@@ -8,13 +8,13 @@ from rest_framework.mixins import (
 )
 
 from api.movie.filters import MovieFilter
-from api.movie.querysets import ALL__QUERYSET
+from api.movie.querysets import ALL_MOVIES_QUERYSET
 from api.movie.serializers import MovieSerializer
 from api.permissions import IsAuthenticated, IsOwnerOrReadOnly
 
 
 class MovieAPIView(GenericAPIView):
-    queryset = ALL__QUERYSET
+    queryset = ALL_MOVIES_QUERYSET
     serializer_class = MovieSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     filterset_class = MovieFilter

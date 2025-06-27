@@ -1,3 +1,4 @@
+import '../../features/movie/presentation/movie_routes.dart';
 import 'package:houston_flutter/features/auth/presentation/screens/complete_password_reset_screen.dart';
 import 'package:houston_flutter/features/auth/presentation/screens/request_password_reset_screen.dart';
 import 'package:houston_flutter/features/movie/presentation/movie_routes.dart';
