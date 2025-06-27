@@ -124,7 +124,7 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart");
 
   await FileUtils.copyFileOverwrite(
-      "${FileUtils.cliDir}/flutter_files/$assetDatasourceProviderName",
+      "${FileUtils.cliDir}/flutter_files/asset/$assetDatasourceProviderName",
       "${FileUtils.flutterDir}/lib/features/asset/domain/providers/asset_datasource_provider.dart");
 
   FileUtils.deleteFiles(filesToDelete);
