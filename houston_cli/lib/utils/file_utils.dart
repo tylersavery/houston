@@ -206,7 +206,7 @@ class FileUtils {
     }
   }
 
-  static void deleteFolder(String sourcePath) {
+  static void deleteDirectory(String sourcePath) {
     final directory = Directory(sourcePath);
     if (directory.existsSync()) {
       directory.deleteSync(recursive: true);
