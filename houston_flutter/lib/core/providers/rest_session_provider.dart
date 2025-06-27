@@ -2,10 +2,8 @@ import 'package:houston_flutter/core/models/rest_session_state.dart';
 import 'package:houston_flutter/core/providers/storage_provider.dart';
 import 'package:houston_flutter/features/auth/domain/models/session_token.dart';
 import 'package:houston_flutter/features/auth/domain/providers/auth_datasource_provider.dart';
-import 'package:houston_flutter/features/auth/presentation/providers/auth_provider.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 
 part 'rest_session_provider.g.dart';
 
