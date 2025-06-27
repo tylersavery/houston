@@ -62,7 +62,7 @@ Future<void> initProject() async {
   await handleBackendOption(backendResult);
 }
 
-Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
+Future<void> handleBackendOption(ServerBackendOption backendOption) async {
   final flutterFeatureBasePath =
       "${FileUtils.bricksDir}/flutter_feature/__brick__";
 
@@ -73,8 +73,9 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
 
   final List<String> filesToDelete = [];
   final List<String> directoriesToDelete = [];
+  final Map<String, List<String>> fileContentsToDelete = {};
 
-  switch (backendIndex) {
+  switch (backendOption) {
     case ServerBackendOption.django: // "Django":
       datasourceProviderName = "flutter_datasource_provider_django.dart";
       assetDatasourceProviderName = "asset_datasource_provider_django.dart";
@@ -86,17 +87,34 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/core/providers/rest_client_provider.dart");
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/core/providers/rest_session_provider.dart");
+
       for (final feature in ['auth', 'asset', 'profile']) {
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_serverpod.dart");
 
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_supabase.dart");
+        directoriesToDelete
+            .add("${FileUtils.flutterDir}/lib/features/$feature/data/mappers");
       }
 
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_client/");
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_server/");
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_supabase/");
+
+      directoriesToDelete.add(
+          "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/data/mappers");
+
+      fileContentsToDelete['features/auth/presentation/auth_provider.dart'] = [
+        """import '../../../../core/providers/session_manager_provider.dart';""",
+        """if (Constants.serverBackend == ServerBackendOption.serverpod) {
+      await ref.read(serverpodSessionManagerProvider).initialize();
+    }"""
+      ];
 
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
@@ -111,6 +129,11 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
 
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/core/providers/serverpod_client_provider.dart");
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/core/providers/session_manager_provider.dart");
+
       for (final feature in ['auth', 'asset', 'profile']) {
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_django.dart");
@@ -121,6 +144,13 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
 
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_django/");
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_supabase/");
+
+      fileContentsToDelete['features/auth/presentation/auth_provider.dart'] = [
+        """import 'package:houston_flutter/core/providers/rest_session_provider.dart';""",
+        """ if (Constants.serverBackend == ServerBackendOption.django) {
+      await ref.read(restSessionProvider.notifier).initialize();
+    }"""
+      ];
 
       break;
     case ServerBackendOption.supabase: // "Supabase":
@@ -135,17 +165,36 @@ Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
 
+      filesToDelete.add(
+          "${FileUtils.flutterDir}/lib/core/providers/supabase_client_provider.dart");
+
       for (final feature in ['auth', 'asset', 'profile']) {
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_django.dart");
 
         filesToDelete.add(
             "${FileUtils.flutterDir}/lib/features/$feature/data/datasources/${feature}_datasource_serverpod.dart");
+
+        directoriesToDelete
+            .add("${FileUtils.flutterDir}/lib/features/$feature/data/mappers");
       }
 
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_client/");
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_server/");
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_django/");
+      directoriesToDelete.add(
+          "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/data/mappers");
+
+      fileContentsToDelete['features/auth/presentation/auth_provider.dart'] = [
+        """import '../../../../core/providers/session_manager_provider.dart';""",
+        """import '../../../../core/providers/session_manager_provider.dart';""",
+        """if (Constants.serverBackend == ServerBackendOption.serverpod) {
+      await ref.read(serverpodSessionManagerProvider).initialize();
+    }""",
+        """if (Constants.serverBackend == ServerBackendOption.django) {
+      await ref.read(restSessionProvider.notifier).initialize();
+    }"""
+      ];
 
       break;
     case ServerBackendOption.all: // "Generate All":
