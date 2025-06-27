@@ -58,7 +58,7 @@ Future<void> initProject() async {
   final configFile = io.File('houston.config.json');
   await configFile.writeAsString(jsonEncode(configData));
 
-  handleBackendOption(backendIndex);
+  await handleBackendOption(backendIndex);
 }
 
 Future<void> handleBackendOption(int backendIndex) async {
@@ -79,7 +79,8 @@ Future<void> handleBackendOption(int backendIndex) async {
       break;
   }
 
-  FileUtils.moveFileOverwrite(
+  await FileUtils.moveFileOverwrite(
       "${FileUtils.bricksDir}/dynamic_bricks/$datasourceProviderName",
       "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/domain/providers/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_provider.dart");
+  print("Done!");
 }

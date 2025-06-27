@@ -182,6 +182,9 @@ class FileUtils {
     final sourceFile = File(sourcePath);
     final destinationFile = File(destinationPath);
 
+    print("Source: $sourceFile");
+    print("destinationFile: $destinationFile");
+
     if (!await sourceFile.exists()) {
       throw Exception('Source file does not exist: $sourcePath');
     }
