@@ -12,8 +12,19 @@ import 'package:houston_flutter/features/profile/domain/datasources/profile_data
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final profileDataSourceProvider = Provider<ProfileDataSource>((ref) {
-  return ProfileDataSourceServerpodImpl(
-    ref.read(serverpodClientProvider),
-    ref.read(serverpodSessionManagerProvider),
-  );
+  switch (Constants.serverBackend) {
+    case ServerBackendOption.supabase:
+      return ProfileDataSourceSupabaseImpl(ref.read(supabaseClientProvider));
+    case ServerBackendOption.serverpod:
+      return ProfileDataSourceServerpodImpl(
+        ref.read(serverpodClientProvider),
+        ref.read(serverpodSessionManagerProvider),
+      );
+    case ServerBackendOption.django:
+      return ProfileDataSourceDjangoImpl(
+        ref.read(restClientProvider),
+        ref.read(restSessionProvider.notifier),
+        ref.read(storageProvider),
+      );
+  }
 });

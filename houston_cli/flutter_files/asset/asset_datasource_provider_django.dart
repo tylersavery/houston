@@ -1,8 +1,14 @@
 import 'package:houston_flutter/core/providers/rest_client_provider.dart';
+import 'package:houston_flutter/core/providers/rest_session_provider.dart';
+import 'package:houston_flutter/core/providers/storage_provider.dart';
 import 'package:houston_flutter/features/asset/data/datasources/asset_datasource_django.dart';
 import 'package:houston_flutter/features/asset/domain/datasources/asset_data_source.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 final assetDataSourceProvider = Provider<AssetDataSource>((ref) {
-  return AssetDataSourceDjangoImpl(ref.read(restClientProvider));
+  return AssetDataSourceDjangoImpl(
+    ref.read(restClientProvider),
+    ref.read(restSessionProvider.notifier),
+    ref.read(storageProvider),
+  );
 });
