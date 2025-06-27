@@ -1,7 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import '../../domain/datasources/profile_datasource.dart';
+import '../../domain/datasources/profile_data_source.dart';
 import '../../domain/models/profile_model.dart';
 
 class ProfileDataSourceSupabaseImpl implements ProfileDataSource {

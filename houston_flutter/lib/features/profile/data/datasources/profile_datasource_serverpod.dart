@@ -2,7 +2,7 @@ import 'package:houston_client/houston_client.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
 import '../../../../core/error/exceptions.dart';
 import '../mappers/profile_mapper.dart';
-import '../../domain/datasources/profile_datasource.dart';
+import '../../domain/datasources/profile_data_source.dart';
 import '../../domain/models/profile_model.dart';
 
 class ProfileDataSourceServerpodImpl implements ProfileDataSource {

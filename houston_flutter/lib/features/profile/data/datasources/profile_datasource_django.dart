@@ -2,14 +2,14 @@ import 'package:houston_flutter/core/error/exceptions.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
 import 'package:houston_flutter/core/providers/rest_session_provider.dart';
 import 'package:houston_flutter/core/rest_client/rest_client.dart';
-import '../../domain/datasources/profile_datasource.dart';
+import '../../domain/datasources/profile_data_source.dart';
 import '../../domain/models/profile_model.dart';
 
-class MovieDataSourceDjangoImpl implements ProfileDataSource {
+class ProfileDataSourceDjangoImpl implements ProfileDataSource {
   final RestClient client;
   final RestSession session;
 
-  MovieDataSourceDjangoImpl(this.client, this.session);
+  ProfileDataSourceDjangoImpl(this.client, this.session);
 
   @override
   Future<PaginatedResponse<Profile>> list({
@@ -57,11 +57,11 @@ class MovieDataSourceDjangoImpl implements ProfileDataSource {
     try {
       if (profile.exists) {
         return Profile.fromJson(
-          await client.patch('/movie/${profile.id}/', data: profile.toJson()),
+          await client.patch('/profile/${profile.id}/', data: profile.toJson()),
         );
       } else {
         return Profile.fromJson(
-          await client.post('/movie/', data: profile.toJson()),
+          await client.post('/profile/', data: profile.toJson()),
         );
       }
     } catch (e) {
@@ -72,7 +72,7 @@ class MovieDataSourceDjangoImpl implements ProfileDataSource {
   @override
   Future<void> delete(int id) async {
     try {
-      await client.delete("/movie/$id/");
+      await client.delete("/profile/$id/");
     } catch (e) {
       throw ServerException(e.toString());
     }

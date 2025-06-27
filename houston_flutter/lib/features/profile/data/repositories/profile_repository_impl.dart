@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:houston_flutter/core/models/paginated_response.dart';
-import '../../domain/datasources/profile_datasource.dart';
+import '../../domain/datasources/profile_data_source.dart';
 import '../../domain/models/profile_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';

@@ -4,7 +4,7 @@ import 'package:houston_flutter/core/providers/serverpod_client_provider.dart';
 import 'package:houston_flutter/core/providers/supabase_client_provider.dart';
 import '../../data/datasources/profile_datasource_serverpod.dart';
 import '../../data/datasources/profile_datasource_supabase.dart';
-import '../../domain/datasources/profile_datasource.dart';
+import '../datasources/profile_data_source.dart';
 
 final profileDataSourceProvider = Provider<ProfileDataSource>((ref) {
   switch (Constants.serverBackend) {
