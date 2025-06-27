@@ -4,25 +4,28 @@ import 'dart:io';
 import 'package:houston_cli/utils/file_utils.dart';
 
 enum ServerBackendOption {
-  serverpod(0),
-  supabase(1),
-  django(2),
-  all(3),
+  serverpod(0, "Serverpod"),
+  supabase(1, "Supabase"),
+  django(2, "Django"),
+  all(3, "All"),
   ;
 
   final int value;
-  const ServerBackendOption(this.value);
+  final String label;
+  const ServerBackendOption(this.value, this.label);
 }
 
 enum FrontendUiOption {
-  material(0),
-  cupertino(1),
-  shadcn(2),
-  forui(3),
+  material(0, "Material"),
+  cupertino(1, "Cupertino"),
+  shadcn(2, "Shadcn"),
+  forui(3, "Forui"),
   ;
 
   final int value;
-  const FrontendUiOption(this.value);
+  final String label;
+
+  const FrontendUiOption(this.value, this.label);
 }
 
 class HoustonConfig {

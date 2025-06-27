@@ -35,44 +35,32 @@ Future<void> initProject() async {
     projectName = getProjectName();
   }
 
-  final backendOptions = ["Django", "Serverpod", "Supabase", "Generate All"];
+  final backendOptions = ServerBackendOption.values;
 
-  final backendResult = menu("What backend option would you like to use",
+  final backendResult = menu<ServerBackendOption>(
+      "What backend option would you like to use",
       options: backendOptions);
-  final backendIndex = backendOptions.indexOf(backendResult);
 
-  final uiOptions = ["Material", "Cupertino", "Shadcn", "Forui"];
+  final uiOptions = FrontendUiOption.values;
 
-  final uiResult = menu("What UI library would you like to use?",
-      options: uiOptions, defaultOption: uiOptions.first);
-  final uiIndex = uiOptions.indexOf(uiResult);
-
-  //Handle Init
-
-  switch (uiIndex) {
-    case 0: // "Material":
-      break;
-    case 1: // "Cupertino":
-      break;
-    case 2: // "Shadcn":
-      break;
-    case 3: // "Forui":
-      break;
-  }
+  final uiResult = menu<FrontendUiOption>(
+      "What UI library would you like to use?",
+      options: uiOptions,
+      defaultOption: uiOptions.first);
 
   final configData = {
     'name': projectName,
-    'backend': backendIndex,
-    'ui': uiIndex,
+    'backend': backendResult.value,
+    'ui': uiResult.value,
   };
 
   final configFile = io.File('houston.config.json');
   await configFile.writeAsString(jsonEncode(configData));
 
-  await handleBackendOption(backendIndex);
+  await handleBackendOption(backendResult);
 }
 
-Future<void> handleBackendOption(int backendIndex) async {
+Future<void> handleBackendOption(ServerBackendOption backendIndex) async {
   final flutterFeatureBasePath =
       "${FileUtils.bricksDir}/flutter_feature/__brick__";
 
@@ -81,28 +69,28 @@ Future<void> handleBackendOption(int backendIndex) async {
   final List<String> filesToDelete = [];
 
   switch (backendIndex) {
-    case 0: // "Django":
+    case ServerBackendOption.django: // "Django":
       datasourceProviderName = "flutter_datasource_provider_django.dart";
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
       break;
-    case 1: // "Serverpod":
+    case ServerBackendOption.serverpod: // "Serverpod":
       datasourceProviderName = "flutter_datasource_provider_serverpod.dart";
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_supabase.dart");
       break;
-    case 2: // "Supabase":
+    case ServerBackendOption.supabase: // "Supabase":
       datasourceProviderName = "flutter_datasource_provider_supabase.dart";
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_serverpod.dart");
       filesToDelete.add(
           "$flutterFeatureBasePath/{{#snakeCase}}{{name}}{{/snakeCase}}/data/datasources/{{#snakeCase}}{{name}}{{/snakeCase}}_datasource_django.dart");
       break;
-    case 3: // "Generate All":
+    case ServerBackendOption.all: // "Generate All":
       datasourceProviderName = "flutter_datasource_provider_all.dart";
       break;
   }
