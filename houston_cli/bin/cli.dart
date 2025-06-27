@@ -1,21 +1,26 @@
+import 'dart:convert';
 import 'dart:io' as io;
 import 'package:dcli/dcli.dart';
+import 'package:houston_cli/init_project.dart';
 import 'package:houston_cli/scaffold_feature.dart';
+import 'package:houston_cli/utils/string_utils.dart';
 
 Future<void> main(List<String> args) async {
-  scaffoldFeature(
-    name: "food",
-    generateServer: false,
-    generateFlutter: true,
-    generateMigrations: false,
-    runMigrations: false,
-    updateRoutes: false,
-    updateNavigation: false,
-    runPostGenerator: false,
-    runPostFormatter: false,
-  );
+  // scaffoldFeature(
+  //   name: "food",
+  //   generateServer: false,
+  //   generateFlutter: true,
+  //   generateMigrations: false,
+  //   runMigrations: false,
+  //   updateRoutes: false,
+  //   updateNavigation: false,
+  //   runPostGenerator: false,
+  //   runPostFormatter: false,
+  // );
 
-  return;
+  // return;
+
+  print(blue("Welcome to Houston! Type help to see the list of commands."));
   for (;;) {
     final line = ask('${green('houston')}${blue('::')}');
     if (line.isNotEmpty) {
@@ -30,9 +35,13 @@ Future<void> evaluate(String command) async {
     case 'help':
       await showHelp();
       break;
+    case 'init':
+      await initProject();
+      break;
     case 'scaffold':
       await scaffoldFeature();
       break;
+
     case 'exit':
       print(white("Chat soon!"));
       io.exit(0);

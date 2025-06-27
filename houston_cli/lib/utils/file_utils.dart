@@ -157,4 +157,40 @@ class FileUtils {
   static Future<bool> directoryExists(String path) async {
     return Directory(path).exists();
   }
+
+  static Future<void> moveDirectory(
+      Directory source, Directory destination) async {
+    if (!await destination.exists()) {
+      await destination.create(recursive: true);
+    }
+
+    await for (final entity in source.list(recursive: false)) {
+      final newPath = '${destination.path}/${entity.uri.pathSegments.last}';
+      if (entity is File) {
+        await entity.copy(newPath);
+        await entity.delete();
+      } else if (entity is Directory) {
+        await moveDirectory(entity, Directory(newPath));
+      }
+    }
+
+    await source.delete(); // remove the original empty dir
+  }
+
+  static Future<void> moveFileOverwrite(
+      String sourcePath, String destinationPath) async {
+    final sourceFile = File(sourcePath);
+    final destinationFile = File(destinationPath);
+
+    if (!await sourceFile.exists()) {
+      throw Exception('Source file does not exist: $sourcePath');
+    }
+
+    if (await destinationFile.exists()) {
+      await destinationFile.delete();
+    }
+
+    await sourceFile.rename(destinationPath);
+    print('Moved file to $destinationPath');
+  }
 }
