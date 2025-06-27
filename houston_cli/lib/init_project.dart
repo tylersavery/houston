@@ -116,6 +116,14 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
     }"""
       ];
 
+      fileContentsToDelete['${FileUtils.flutterDir}/pubspec.yaml'] = [
+        """houston_client:
+    path: ../houston_client""",
+        """serverpod_flutter: 2.8.0""",
+        """serverpod_auth_shared_flutter: 2.8.0""",
+        """supabase_flutter: ^2.5.2"""
+      ];
+
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
       datasourceProviderName = "flutter_datasource_provider_serverpod.dart";
@@ -150,6 +158,10 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
         """ if (Constants.serverBackend == ServerBackendOption.django) {
       await ref.read(restSessionProvider.notifier).initialize();
     }"""
+      ];
+
+      fileContentsToDelete['${FileUtils.flutterDir}/pubspec.yaml'] = [
+        """supabase_flutter: ^2.5.2"""
       ];
 
       break;
@@ -196,6 +208,13 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
     }"""
       ];
 
+      fileContentsToDelete['${FileUtils.flutterDir}/pubspec.yaml'] = [
+        """houston_client:
+    path: ../houston_client""",
+        """serverpod_flutter: 2.8.0""",
+        """serverpod_auth_shared_flutter: 2.8.0""",
+      ];
+
       break;
     case ServerBackendOption.all: // "Generate All":
       datasourceProviderName = "flutter_datasource_provider_all.dart";
@@ -226,5 +245,23 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
 
   for (final dir in directoriesToDelete) {
     FileUtils.deleteDirectory(dir);
+  }
+
+  for (final entry in fileContentsToDelete.entries) {
+    final filePath = entry.key;
+    final targets = entry.value;
+
+    final file = io.File(filePath);
+    if (!await file.exists()) {
+      continue;
+    }
+
+    String content = await file.readAsString();
+
+    for (final target in targets) {
+      content = content.replaceAll(target, '');
+    }
+
+    await file.writeAsString(content);
   }
 }
