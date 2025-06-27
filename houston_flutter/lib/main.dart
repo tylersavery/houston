@@ -16,13 +16,11 @@ void main() async {
     overrides: [storageProvider.overrideWithValue(storageService)],
   );
 
-  if (Constants.serverBackend == ServerBackendOption.supabase) {
-    await Supabase.initialize(
-      url: "https://${Env.supabaseProject}.supabase.co",
-      anonKey: Env.supabaseAnonKey,
-      debug: Env.debug,
-    );
-  }
+  await Supabase.initialize(
+    url: "https://${Env.supabaseProject}.supabase.co",
+    anonKey: Env.supabaseAnonKey,
+    debug: Env.debug,
+  );
 
   runApp(UncontrolledProviderScope(container: container, child: const App()));
 }

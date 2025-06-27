@@ -122,11 +122,10 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       directoriesToDelete.add(
           "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/data/mappers");
 
-      fileContentsToDelete['features/auth/presentation/auth_provider.dart'] = [
+      fileContentsToDelete[
+          '${FileUtils.flutterDir}/lib/features/auth/presentation/auth_provider.dart'] = [
         """import '../../../../core/providers/session_manager_provider.dart';""",
-        """if (Constants.serverBackend == ServerBackendOption.serverpod) {
-      await ref.read(serverpodSessionManagerProvider).initialize();
-    }"""
+        """await ref.read(serverpodSessionManagerProvider).initialize();"""
       ];
 
       fileContentsToDelete['${FileUtils.flutterDir}/pubspec.yaml'] = [
@@ -135,6 +134,15 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
         """serverpod_flutter: 2.8.0""",
         """serverpod_auth_shared_flutter: 2.8.0""",
         """supabase_flutter: ^2.5.2"""
+      ];
+
+      fileContentsToDelete['${FileUtils.flutterDir}/lib/main.dart'] = [
+        """await Supabase.initialize(
+    url: "https://\${Env.supabaseProject}.supabase.co",
+    anonKey: Env.supabaseAnonKey,
+    debug: Env.debug,
+  );""",
+        "import 'package:supabase_flutter/supabase_flutter.dart';"
       ];
 
       break;
@@ -166,15 +174,23 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_django/");
       directoriesToDelete.add("${FileUtils.houstonRoot}/houston_supabase/");
 
-      fileContentsToDelete['features/auth/presentation/auth_provider.dart'] = [
+      fileContentsToDelete[
+          '${FileUtils.flutterDir}/lib/features/auth/presentation/auth_provider.dart'] = [
         """import 'package:houston_flutter/core/providers/rest_session_provider.dart';""",
-        """ if (Constants.serverBackend == ServerBackendOption.django) {
-      await ref.read(restSessionProvider.notifier).initialize();
-    }"""
+        """await ref.read(restSessionProvider.notifier).initialize();"""
       ];
 
       fileContentsToDelete['${FileUtils.flutterDir}/pubspec.yaml'] = [
         """supabase_flutter: ^2.5.2"""
+      ];
+
+      fileContentsToDelete['${FileUtils.flutterDir}/lib/main.dart'] = [
+        """await Supabase.initialize(
+    url: "https://\${Env.supabaseProject}.supabase.co",
+    anonKey: Env.supabaseAnonKey,
+    debug: Env.debug,
+  );""",
+        "import 'package:supabase_flutter/supabase_flutter.dart';"
       ];
 
       break;
@@ -210,15 +226,12 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
       directoriesToDelete.add(
           "${FileUtils.bricksDir}/flutter_feature/__brick__/{{#snakeCase}}{{name}}{{/snakeCase}}/data/mappers");
 
-      fileContentsToDelete['features/auth/presentation/auth_provider.dart'] = [
+      fileContentsToDelete[
+          '${FileUtils.flutterDir}/lib/features/auth/presentation/auth_provider.dart'] = [
         """import '../../../../core/providers/session_manager_provider.dart';""",
         """import '../../../../core/providers/session_manager_provider.dart';""",
-        """if (Constants.serverBackend == ServerBackendOption.serverpod) {
-      await ref.read(serverpodSessionManagerProvider).initialize();
-    }""",
-        """if (Constants.serverBackend == ServerBackendOption.django) {
-      await ref.read(restSessionProvider.notifier).initialize();
-    }"""
+        """await ref.read(serverpodSessionManagerProvider).initialize();""",
+        """await ref.read(restSessionProvider.notifier).initialize();"""
       ];
 
       fileContentsToDelete['${FileUtils.flutterDir}/pubspec.yaml'] = [
