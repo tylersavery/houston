@@ -145,6 +145,13 @@ Future<void> handleBackendOption(ServerBackendOption backendOption) async {
         "import 'package:supabase_flutter/supabase_flutter.dart';"
       ];
 
+      final envPath = "${FileUtils.djangoRootDir}/.env";
+      final envFile = io.File(envPath);
+
+      if (!envFile.existsSync()) {
+        io.File("${FileUtils.djangoRootDir}/.env.example").copy(envPath);
+      }
+
       break;
     case ServerBackendOption.serverpod: // "Serverpod":
       datasourceProviderName = "flutter_datasource_provider_serverpod.dart";
