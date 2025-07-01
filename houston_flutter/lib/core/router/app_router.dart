@@ -3,6 +3,7 @@ import 'package:houston_flutter/features/auth/presentation/screens/complete_pass
 import 'package:houston_flutter/features/auth/presentation/screens/request_password_reset_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:houston_flutter/features/styleguide/styleguide_routes.dart';
 import 'package:houston_flutter/features/styleguide/styleguide_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../app.dart';
@@ -48,6 +49,7 @@ GoRouter router(Ref ref) {
           return Dashboard(navigationShell: navigationShell);
         },
         branches: [
+          StyleguideRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],
       ),

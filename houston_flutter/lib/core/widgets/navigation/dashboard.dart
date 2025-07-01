@@ -22,8 +22,8 @@ class Dashboard extends BaseComponent {
             );
           },
           destinations: const [
-            NavigationDestination(label: "Movie", icon: Icon(Icons.star)),
-            NavigationDestination(label: "Movie", icon: Icon(Icons.star)),
+            NavigationDestination(label: "Styleguide", icon: Icon(Icons.star)),
+            NavigationDestination(label: "Styleguide", icon: Icon(Icons.star)),
             //::HOUSTON_INSERT_TAB::
           ],
         ),
@@ -55,7 +55,7 @@ class Dashboard extends BaseComponent {
                   labelType: NavigationRailLabelType.all,
                   destinations: const [
                     NavigationRailDestination(
-                      label: Text("Movie"),
+                      label: Text("Styleguide"),
                       icon: Icon(Icons.star),
                     ),
 
