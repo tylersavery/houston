@@ -1,17 +1,14 @@
 name: movie
 properties:
-  -
-    name: title
+  - name: title
     type: char
     maxLength: 100
     uiHeading: 1
-  - 
-    name: year
+  - name: year
     type: int
     uiHeading: 2
-  -
-    name: imageUrl
+  - name: imageUrl
     type: url
     image: true
     allowBlank: true
-  
+    imagePreview: true
