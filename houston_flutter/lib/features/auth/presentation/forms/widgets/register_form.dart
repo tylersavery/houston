@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
+import 'package:houston_flutter/core/router/app_router.dart';
 import '../../../../../core/widgets/loader.dart';
 import '../../../../../core/utils/toast_utils.dart';
 import '../../screens/login_screen.dart';
@@ -23,7 +23,7 @@ class RegisterForm extends ConsumerWidget {
         Toast.message(context, next.message);
       }
       if (next is AuthStateSuccess) {
-        context.go(MovieListScreen.route());
+        context.go(DEFAULT_ROUTE);
       }
 
       if (next is AuthStateVerificationRequired) {

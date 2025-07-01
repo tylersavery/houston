@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:houston_flutter/core/router/app_router.dart';
 import 'package:houston_flutter/features/auth/presentation/forms/providers/complete_password_reset_form_provider.dart';
-import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import '../../../../../core/utils/toast_utils.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/auth_state.dart';
@@ -20,7 +20,7 @@ class CompletePasswordResetForm extends ConsumerWidget {
         Toast.message(context, next.message);
       }
       if (next is AuthStateSuccess) {
-        context.go(MovieListScreen.route());
+        context.go(DEFAULT_ROUTE);
       }
     });
 

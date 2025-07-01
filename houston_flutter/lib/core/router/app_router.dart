@@ -1,10 +1,9 @@
-import '../../features/movie/presentation/movie_routes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:houston_flutter/features/auth/presentation/screens/complete_password_reset_screen.dart';
 import 'package:houston_flutter/features/auth/presentation/screens/request_password_reset_screen.dart';
-import 'package:houston_flutter/features/movie/presentation/movie_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
+import 'package:houston_flutter/features/styleguide/styleguide_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../app.dart';
 import '../providers/current_user_provider.dart';
@@ -15,11 +14,14 @@ import '../../features/auth/presentation/screens/verification_screen.dart';
 
 part 'app_router.g.dart';
 
+// ignore: non_constant_identifier_names
+final DEFAULT_ROUTE = StyleguideScreen.route();
+
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(Ref ref) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: MovieListScreen.route(),
+    initialLocation: DEFAULT_ROUTE,
     routes: [
       GoRoute(
         path: LoginScreen.route(),
@@ -46,7 +48,6 @@ GoRouter router(RouterRef ref) {
           return Dashboard(navigationShell: navigationShell);
         },
         branches: [
-          MovieRoutes.branch,
           //::HOUSTON_INSERT_ROUTE::
         ],
       ),
@@ -64,6 +65,7 @@ GoRouter router(RouterRef ref) {
         VerificationScreen.route(),
         RequestPasswordResetScreen.route(),
         CompletePasswordResetScreen.route(),
+        StyleguideScreen.route(),
       ];
 
       if (!publicRoutes.contains(state.matchedLocation)) {

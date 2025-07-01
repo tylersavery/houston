@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:houston_flutter/core/router/app_router.dart';
 import 'package:houston_flutter/core/theme/buttons.dart';
 import 'package:houston_flutter/features/auth/presentation/screens/request_password_reset_screen.dart';
-import 'package:houston_flutter/features/movie/presentation/screens/movie_list_screen.dart';
 import '../../../../../core/widgets/loader.dart';
 import '../../../../../core/utils/toast_utils.dart';
 import '../../screens/register_screen.dart';
@@ -21,7 +21,7 @@ class LoginForm extends ConsumerWidget {
 
     ref.listen(authProvider, (previous, next) {
       if (previous is AuthStateSuccess || next is AuthStateSuccess) {
-        context.go(MovieListScreen.route());
+        context.go(DEFAULT_ROUTE);
       }
 
       if (next is AuthStateFailure) {
