@@ -1,106 +1,80 @@
-# Houston Service
+COMPOSE_PROJECT_NAME=my_project
 
-Here's how to get up and running!
+# ---- Docker Helpers ----
+build:
+	docker compose build
+
+up:
+	docker compose -p ${COMPOSE_PROJECT_NAME} up --detach
+
+down:
+	docker compose -p ${COMPOSE_PROJECT_NAME} down
+
+restart:
+	docker compose -p ${COMPOSE_PROJECT_NAME} down && docker compose up --detach
+
+bash:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web bash
+
+wipe:
+	@read -p "⚠️  This will stop and remove all containers and volumes. Continue? (y/N) " CONFIRM; \
+	if [ "$$CONFIRM" = "y" ] || [ "$$CONFIRM" = "Y" ]; then \
+		docker compose down -v; \
+	else \
+		echo "❌ Cancelled."; \
+	fi
+	
+
+# ---- Django Management ----
+
+manage:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py $(filter-out $@,$(MAKECMDGOALS))
+
+%:
+	@:
+
+migrate:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py migrate
+
+makemigrations:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py makemigrations
+
+shell:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py shell
+
+createsuperuser:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py createsuperuser
+
+collectstatic:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py collectstatic --noinput
+
+# ---- Dev Server (inside container) ----
+dev:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py runserver 0.0.0.0:8000
 
 
-#### Create `.env`
+# ---- Celery ----
+celery:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web celery -A config worker --loglevel=info
 
-Copy the example and tweak values if needed:
+# ---- Logs ----
+logs:
+	docker compose -p ${COMPOSE_PROJECT_NAME} logs -f web
 
-```bash
-cp .env.example .env
-```
+logs-celery:
+	docker compose -p ${COMPOSE_PROJECT_NAME} logs -f web | grep celery
 
-
-#### Setup local venv (optional)
-
-You can either use the `Dev Containers` vs code extension to work directly in docker OR just mirror docker's pythong environment with your local virtual environment. For the former, simply run:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
+# ---- Testing ----
+test:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py test
 
 
-#### Build & Run Services
+# ---- Admin ----
+admin_theme_dump:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py dumpdata admin_interface.Theme --indent 4 -o admin/fixtures/admin_interface_theme.json 
 
-> Be sure to update the `COMPOSE_PROJECT_NAME` variable at the top of your `Makefile`
-
-```bash
-make build
-make up
-```
-
-> You made need to update your commands in your Makefile to use the correct container names that docker has determined (ie `web` => `web-1`)
+admin_theme_load:
+	docker compose -p ${COMPOSE_PROJECT_NAME} exec web python manage.py loaddata ./admin/fixtures/admin_interface_theme.json
 
 
-#### Run initial setup
-
-```bash
-make migrate
-make createsuperuser
-```
-
-#### Load the admin theme data
-```bash
-make admin_theme_load
-```
-
-
-## Configuration
-
-| Module                | Variable                                     | Type          | Default                               |
-| --------------------- | -------------------------------------------- | ------------- | ------------------------------------- |
-| Access                | ALLOWED_HOSTS                                | list(str)     | ["*"]                                 |
-| Access                | MAINTENANCE_MODE                             | bool          | False                                 |
-| Admin                 | ADMIN_ENABLED                                | bool          | True                                  |
-| Admin                 | ADMIN_URL_PATH                               | str           | "manage/"                             |
-| Admin                 | ADMIN_ACE_THEME                              | str           | chrome                                |
-| Admin                 | ADMIN_THEME_EDITABLE                         | bool          | False                                 |
-| API                   | API_ENABLED                                  | bool          | True                                  |
-| API                   | API_THROTTLE_ENABLED                         | bool          | True                                  |
-| API                   | API_DEFAULT_PAGE_SIZE                        | int           | 10                                    |
-| API                   | API_MAX_PAGE_SIZE                            | int           | 100                                   |
-| API                   | API_THROTTLE_RATE_ANON                       | str           | "60/min"                              |
-| API                   | API_THROTTLE_RATE_USER                       | str           | "60/min"                              |
-| API                   | API_THROTTLE_RATE_OTP                        | str           | "1/min"                               |
-| Auth                  | AUTH_PASSWORD_MIN_LENGTH                     | int           | 8                                     |
-| Auth                  | AUTH_JWT_ACCESS_TOKEN_TIMEOUT                | int           | 86400 (1 day)                         |
-| Auth                  | AUTH_JWT_REFRESH_TOKEN_TIMEOUT               | int           | 604800 (1 week)                       |
-| Auth                  | AUTH_JWT_SIGNING_KEY                         | str           |                                       |
-| Auth                  | AUTH_TOKEN_SECRET                            | str           |                                       |
-| Auth                  | AUTH_TOKEN_TIMEOUT                           | int           | 259200 (3 days)                       |
-| Auth                  | AUTH_OTP_TIMEOUT                             | int           | 60 (1 minute)                         |
-| AWS                   | AWS_ACCESS_KEY_ID                            | str           |                                       |
-| AWS                   | AWS_DEFAULT_REGION                           | str           |                                       |
-| AWS                   | AWS_SECRET_ACCESS_KEY                        | str           |                                       |
-| AWS                   | AWS_STORAGE_BUCKET_NAME                      | str           |                                       |
-| Cache                 | REDIS_URL                                    | str           |                                       |
-| Cache                 | CACHE_ENABLED                                | bool          | True                                  |
-| Cache                 | CACHE_KEY_PREFIX                             | str           | ""                                    |
-| Cache                 | CACHE_TIMEOUT_DEFAULT                        | int           | 300 (5 minutes)                       |
-| Cache                 | CACHE_TIMEOUT_LONG                           | int           | 3600 (1 hour)                         |
-| Cache                 | CACHE_TIMEOUT_SHORT                          | int           | 10 (10 seconds)                       |
-| Cache                 | CACHE_VERSION                                | int           | 1                                     |
-| CORS                  | CORS_ALLOW_ALL_ORIGINS                       | bool          | False                                 |
-| CORS                  | CORS_ALLOW_HEADERS                           | list(str)     | corsheaders.defaults.default_headers  |
-| CORS                  | CORS_ALLOW_METHODS                           | list(str)     | corsheaders.defaults.default_methods  |
-| CORS                  | CORS_ALLOWED_ORIGIN_REGEXES                  | list(str)     | []                                    |
-| CORS                  | CORS_ALLOWED_ORIGINS                         | list(str)     | []                                    |
-| CORS                  | CORS_URLS_REGEX                              | str           | "r'^.*$'"                             |
-| Database              | DATABASE_URL                                 | str           |                                       |
-| Develop               | DEBUG                                        | bool          | False                                 |
-| Environment           | ENVIRONMENT                                  | str           | "undefined"                            |
-| i18n                  | LANGUAGE_CODE                                | str           | "en"                                  |
-| i18n                  | TIME_ZONE                                    | str           | "UTC"                                 |
-| Logging               | SENTRY_DNS                                   | str           | None                                  |
-| Logging               | SENTRY_TRACES_SAMPLE_RATE                    | float          | 1.0                                   |
-| Security              | SECRET_KEY                                   | str           |                                       |
-| Security              | SECURE_SSL_REDIRECT                          | bool          | True                                  |
-| Twilio                | TWILIO_ACCOUNT_SID                           | str           |                                       |
-| Twilio                | TWILIO_AUTH_TOKEN                            | str           |                                       |
-| Twilio                | TWILIO_FROM_NUMBER                           | str           |                                       |
-| Worker                | AMQP_URL                                     | str           |                                       |
-| Worker                | CELERY_MAX_RETRIES                           | int           | 3                                     |
-| Worker                | CELERY_RETRY_BACKOFF                         | bool          | True                                  |
+	
