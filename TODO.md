@@ -43,6 +43,12 @@ Next Tasks
 
 [ ] sending emails (email confirmation/password reset)
 
+[ ] handle bool types for forms
+
+[ ] django add __str__ automatically
+
+[ ] django config admin list view
+
 
 Big Tasks
 

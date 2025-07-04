@@ -205,11 +205,15 @@ class BlueprintProperty {
       case "bitpack_file":
         return 'models.URLField';
       case "boolean":
+      case "bool":
         return 'models.BooleanField';
       case "int":
         return 'models.IntegerField';
       case "double":
         return 'models.DecimalField';
+      case "datetime":
+      case "date":
+        return 'models.DateTimeField';
       default:
         return "models.ForeignKey";
     }
@@ -273,6 +277,10 @@ class BlueprintProperty {
 
     if (Constants.primitives.contains(type)) {
       return '''${snakeCase(name)} = $_djangoVariableType($params)''';
+    }
+
+    if (type == "bool") {
+      return '''${snakeCase(name)} = models.BooleanField($params)''';
     }
 
     return '''${snakeCase(name)} = models.ForeignKey($params)''';

@@ -103,6 +103,10 @@ class FlutterBlueprintSerializer extends BlueprintSerializer {
       if (Constants.hiddenFields.contains(property.name)) {
         continue;
       }
+      if (property.type == "bool") {
+        //TODO: handle booleans
+        continue;
+      }
       if (Constants.formElementTypes.contains(property.type)) {
         items.add(
             "final ${camelCase(property.name)}Controller = TextEditingController();");
@@ -277,13 +281,13 @@ TextFormField(
 Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
       child: ImageUploadWidget(
-        currentUrl: state.${camelCase(name)}.${property.name},
+        currentUrl: state.${camelCase(name)}.${camelCase(property.name)},
         title: "${titleCase(property.name)}",
         onChange: (url) {
-          provider.setImageUrl(url);
+          provider.set${pascalCase(property.name)}(url);
         },
         onRemove: () {
-          provider.setImageUrl("");
+          provider.set${pascalCase(property.name)}("");
         },
       ),
     ),
